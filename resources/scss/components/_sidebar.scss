@@ -1,0 +1,18 @@
+
+.sidebar{
+  background-color: $background-light;
+  padding: 25px;
+  color: $black;
+  border-radius: $b-radius;
+  &__title{
+    text-align: center;
+    margin:16px 0;
+    padding-bottom: 14px;
+  }
+  .product{
+    margin: 0 auto 16px;
+    padding: 0;
+    border: 2px solid $primary;
+    width: 100%;
+  }
+}

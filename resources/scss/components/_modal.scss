@@ -1,0 +1,99 @@
+/*
+ * Modal component styling
+ */
+
+.modal-wrapper{
+	position: absolute;
+	height: 100vh;
+	z-index: $modalZ - 1;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(28, 28, 26, 0.9);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.modal{
+	width: 600px;
+	background-color: $background-light;
+	border-radius: $b-radius;
+	position: relative;
+	z-index: $modalZ;
+	overflow: hidden;
+	&__header{
+		padding: 40px;
+		text-align: center;
+	}
+	&__body{
+		padding: 40px;
+	}
+	&__footer{
+		display: flex;
+		justify-content: space-between;
+		color: #ffffff;
+		text-align: center;
+		cursor: pointer;
+	}
+	&__action-first{
+		background-color: $primary;
+		padding: 20px;
+		width: 100%;
+	}
+	&__action-second{
+		background-color: $nue;
+		padding: 20px;
+		width: 100%;
+
+	}
+	&__close{
+		max-width: 48px;
+		cursor: pointer;
+		position: absolute;
+		right: 20px;
+		top: 20px;
+		svg{
+			width: 100%;
+			height: 100%;
+			g{
+				fill: $danger;
+				transition: fill 0.2s ease-in-out;
+
+			}
+		}
+		&:hover{
+			g{
+				fill: $hover;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 1199px){
+	.modal{
+
+	}
+
+}
+
+
+@media only screen and (max-width: 991px){
+	.modal{
+
+	}
+}
+
+	
+@media only screen and (max-width: 767px){
+	.modal{
+
+	}
+}
+
+
+@media only screen and (max-width: 575px){
+	.modal{
+
+	}
+}

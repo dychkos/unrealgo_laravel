@@ -1,0 +1,160 @@
+/*
+ * Basket section styling
+ */
+
+.order{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	color: $black;
+	margin-bottom: 24px;
+	background-color: #fff;
+	padding: 16px;
+	border-radius: $b-radius;
+	&__image{
+		width: 150px;
+		height: 90px;
+		filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+		img{
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			border-radius: 20px;
+
+		}
+	}
+	&__actions{
+		display: flex;
+		align-items: center;
+		flex-basis: auto !important;
+	}
+	&__action{
+		width: 36px;
+		cursor: pointer;
+		margin-left: 14px;
+		svg{
+			width: 100%;
+			height: 100%;
+			stroke: $primary;
+		}
+	}
+	&__remove{
+		max-width: 48px;
+		cursor: pointer;
+		svg{
+			width: 100%;
+			height: 100%;
+			g{
+				fill: $danger;
+				transition: fill 0.2s ease-in-out;
+
+			}
+		}
+		&:hover{
+			g{
+				fill: $hover;
+			}
+		}
+	}
+	&__title{
+		text-align: center;
+		max-width: 200px;
+	}
+
+	&__count{
+		border-radius: 50%;
+		width: 40px;
+		height: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #ffffff;
+		background-color: $primary;
+		box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+		margin-left: 14px;
+
+	}
+	&:last-child{
+		margin-bottom: 0;
+	}
+
+}
+
+.make-order{
+	&__card{
+		border-radius: $b-radius;
+		background-color: #fff;
+		padding: 24px;
+		color: $black;
+	}
+	&__title{
+		margin-bottom: 16px;
+	}
+	&__item{
+		margin-bottom: 16px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	&__submit{
+		margin-top: 24px;
+	}
+
+}
+
+@media only screen and (max-width: 1199px){
+	.order{
+		&__title{
+			display: none;
+		}
+
+	}
+
+}
+
+
+@media only screen and (max-width: 991px){
+	.order{
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 30px;
+		&>div{
+			flex-basis: 100%;
+
+		}
+		&__title{
+			display: block;
+			max-width: 100%;
+		}
+		&__action{
+			margin-left: 10px;
+		}
+		&__price{
+			order: 1;
+			text-align: center;
+		}
+		&__image{
+			height: 130px;
+		}
+	}
+	.make-order{
+		&__submit{
+			width: 100%;
+		}
+	}
+}
+
+	
+@media only screen and (max-width: 767px){
+	.example{
+
+	}
+}
+
+
+@media only screen and (max-width: 575px){
+	.order{
+	}
+}

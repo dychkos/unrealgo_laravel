@@ -1,0 +1,41 @@
+//LOGO STYLING
+.logo{
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  cursor: pointer;
+  &__image{
+    width: 42px;
+    margin-right: 12px;
+    transition: all 0.4s ease;
+    svg{
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      path{
+        fill: #fff;
+      }
+    }
+  }
+  &.invert{
+    svg{
+      path{
+        fill: #191a29;
+      }
+    }
+  }
+  &__text{
+    text-transform: uppercase;
+  }
+}
+//LOGO STYLING ENDS
+
+@media only screen and (max-width: 991px){
+  .logo{
+    margin: 0 auto;
+    &__image{
+      margin: 0 auto;
+    }
+  }
+
+}

@@ -1,0 +1,46 @@
+.product{
+  background-color: #fff;
+  color: $black;
+  max-width: 250px;
+  border-radius: 25px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  &_secondary{
+    border: 1px solid $primary;
+    //filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  }
+  &__wrapper{
+    padding: 20px;
+    background-color: $background-light;
+    text-align: center;
+    position: relative;
+  }
+  &__image{
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  }
+  &__body{
+    padding: 25px 20px 20px 20px;
+  }
+  &__prices{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__price{
+    color: $primary;
+  }
+  &__discount{
+    color: $danger;
+    text-decoration: line-through;
+  }
+  &__title{
+    margin-top: 6px;
+  }
+  &__like{
+    position: absolute;
+    right: 10px;
+  }
+  &:hover{
+    transform:rotateX(3deg) rotateY(7deg);
+  }
+}

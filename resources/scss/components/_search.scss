@@ -1,0 +1,120 @@
+//SEARCH STYLING
+.search{
+  padding: 0;
+  z-index: 4;
+  &__wrapper{
+    width: 60px;
+    height: 60px;
+    position: relative;
+    background-color: $background-light;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: width 0.3s ease-in-out;
+  }
+  &__input{
+    input{
+      padding: 0;
+
+    }
+  }
+  &_white{
+    svg{
+      width: 36px;
+      height: 36px;
+      path{
+        stroke: $white;
+      }
+    }
+  }
+  &.open{
+    padding: 0 20px;
+    height: 60px;
+    width: 320px;
+    display: flex;
+    border-radius: 20px;
+    align-items: center;
+    background-color: $background-light;
+    transition: all, 0.3s ease-in-out;
+    transition-property: background-color, padding,width;
+    .search__input{
+      display: block;
+    }
+    svg{
+      margin-right: 10px;
+      path{
+        stroke: $black;
+      }
+    }
+
+  }
+  &__input{
+    display: none;
+    width: 100%;
+    transition: opacity 0.3s ease-in-out;
+    input{
+      border: none;
+      background-color: $background-light;
+      color:$black;
+      padding-top: 4px;
+      width: 80%;
+      &::placeholder{
+        color: $gray;
+      }
+    }
+
+  }
+  &__results{
+    display: none;
+    position: absolute;
+    background-color: $background-light;
+    color: $black;
+    padding: 15px 20px;
+    border-radius: 20px;
+    top: 65px;
+    left: 0;
+    width: 100%;
+    box-shadow: $drop-shadow;
+  }
+  &__title{
+    color: $primary;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  &__link{
+    margin-bottom: 8px;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+  &__loader{
+    height: 60px;
+    width: 60px;
+  }
+  &__row{
+    margin-bottom: 10px;
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+}
+
+.search[data-desktop]{
+  padding: 18px;
+}
+
+@media only screen and (max-width: 991px){
+  .search {
+    &.open{
+      position: absolute;
+      width: 100%;
+      height: 50px;
+      top: 0;
+      left: 0;
+      border-radius: 30px;
+    }
+  }
+}
+//SEARCH STYLING ENDS

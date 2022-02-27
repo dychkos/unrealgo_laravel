@@ -1,0 +1,36 @@
+//QUICK NAv STYLING
+.quick-nav{
+  display: flex;
+  overflow-x: auto;
+  &__item{
+    padding-bottom: 6px;
+    border-bottom: 3px solid $black;
+    cursor: pointer;
+    padding-right: 20px;
+    padding-left: 20px;
+    transition-property: border-bottom-color, color;
+    transition-duration: 0.4s;
+    white-space: nowrap;
+    &:hover{
+      color: $hover;
+      border-bottom-color: $hover;
+    }
+    &_active{
+      color: $primary;
+      padding-right: 70px;
+      border-bottom: 3px solid $primary;
+    }
+    &_disabled{
+      color: $gray;
+      border-bottom-color: $gray;
+      &:hover{
+        color: $gray;
+        border-bottom-color: $gray;
+      }
+    }
+    &:last-child{
+    }
+  }
+
+}
+//QUICK NAv STYLING ENDS

@@ -1,0 +1,70 @@
+/*BURGER STYLING*/
+.burger {
+  display: none;
+  position: relative;
+  margin-left: auto;
+  z-index: 5;
+  width: 50px;
+  height: 50px;
+  align-items: center;
+  transition-duration: 0.3s;
+
+}
+/*BURGER STYLING ends*/
+
+@media only screen and (max-width: 991px) {
+  .burger {
+    display: flex;
+
+    .icon {
+      transition-duration: 0.5s;
+      position: absolute;
+      height: 3px;
+      width: 36px;
+      background-color: #fff;
+    }
+
+    .icon:before {
+      transition-duration: 0.5s;
+      position: absolute;
+      width: 36px;
+      height: 3px;
+      background-color: #fff;
+      content: "";
+      top: -12px;
+    }
+
+    .icon:after {
+      transition-duration: 0.5s;
+      position: absolute;
+      width: 36px;
+      height: 3px;
+      background-color: #fff;
+      content: "";
+      top: 12px;
+    }
+
+    &.open {
+      .icon {
+        background-color: transparent;
+        transition-duration: 0.5s;
+
+        &:before {
+          background-color: $background-dark;
+          width: 30px;
+          transform: rotateZ(45deg) scaleX(1.25) translate(4px, 12px);
+        }
+
+        &:after {
+          background-color: $background-dark;
+          width: 30px;
+          transform: rotateZ(-45deg) scaleX(1.25) translate(4px, -12px);
+        }
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

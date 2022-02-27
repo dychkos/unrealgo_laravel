@@ -1,0 +1,36 @@
+//USER-DROPDOWN STYLING
+.user-dropdown{
+  background-color: #fff;
+  color: $black;
+  cursor: pointer;
+  border-radius: 30px;
+  padding: 10px;
+  box-shadow: $drop-shadow;
+  z-index: $defaultZ+1;
+
+    &.open{
+    .user-dropdown__body{
+      display: block;
+    }
+  }
+  &__preview{
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+  }
+  &__image{
+    margin-left: 5px;
+  }
+  &__body{
+    display: none;
+    padding: 10px 20px;
+  }
+  &__item{
+    margin-bottom: 12px;
+
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+}
+//USER-DROPDOWN ENDs

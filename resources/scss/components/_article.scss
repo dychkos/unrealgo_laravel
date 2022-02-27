@@ -1,0 +1,88 @@
+//ARTICLES STYLING
+.large-article{
+  position: relative;
+  padding: 25px;
+  border-radius: 20px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: all 0.2s ease;
+  &__card{
+    background-color: #fff;
+    width: 60%;
+    max-width: 300px;
+    color:$black;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow:2px 7px 14px  rgba(34, 60, 80, 0.14);;
+
+  }
+  &__header{
+    display: flex;
+    justify-content: space-between;
+  }
+  &__title{
+    margin-bottom: 7px;
+  }
+  &__content{
+    margin-top: 18px;
+    margin-bottom: 6px;
+  }
+  &__footer{
+    padding-top: 18px;
+    border-top: 1px solid #dadada;
+    display: flex;
+    justify-content: space-between;
+  }
+  &:hover{
+
+    transform: scale(1.01);
+  }
+
+
+
+}
+
+.article{
+  color: $black;
+  background: linear-gradient(325.08deg, #ECECEC 14.83%, #FFFFFF 52.42%);
+  border-radius: 25px;
+  padding: 20px;
+  position: relative;
+  max-width: 300px;
+  height: 100%;
+  transition:transform 0.2s ease;
+  &__tag{
+    position: absolute;
+    right: 0;
+  }
+  &__content{
+    padding-top: 40px;
+    border-bottom: 1px solid #dadada;
+    padding-bottom: 8px;
+  }
+  &__title{
+    margin-bottom: 6px;
+  }
+  &:hover{
+    transform:scale(1.02);
+  }
+}
+//ARTICLES STYLING ENDs
+
+@media only screen and (max-width: 991px){
+  .article{
+    max-width: 100%;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .large-article {
+    background: none !important;
+    padding: 0;
+
+    &__card {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+}

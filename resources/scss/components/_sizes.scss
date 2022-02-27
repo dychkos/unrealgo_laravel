@@ -1,0 +1,36 @@
+//SIZES STYLING
+.sizes{
+  &__text{
+    color: $primary;
+
+  }
+  &__block{
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  &__item{
+    padding: 12px 18px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    font-size: 24px;
+    .hide{
+      -webkit-appearance: none;
+    }
+    &:hover,&_chosen{
+      background-color: $primary;
+      border-radius: $b-radius;
+      color: $white;
+      box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
+    }
+    &_none{
+      opacity: 0.7;
+      background-color: $gray;
+      border-radius: $b-radius;
+      color: $white;
+    }
+  }
+}
+//SIZES STYLING ENDS

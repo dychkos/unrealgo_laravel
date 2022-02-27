@@ -1,0 +1,92 @@
+/*
+ * Liked Page styling
+ */
+
+.liked-page{
+	&__body{
+		background-color: #fff;
+		color: $black;
+		padding: 20px;
+		border-radius: $b-radius;
+		.product{
+			padding: 0;
+		}
+	}
+	&__header{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 40px;
+	}
+	&__actions{
+		display: flex;
+		justify-content: space-between;
+	}
+	&__price{
+		& .price{
+			font-family: Rubik-Bold;
+		}
+	}
+	&__liked{
+		display: flex;
+		justify-content: center;
+		gap: 20px;
+	}
+	&__recommended{
+		padding-top: 40px;
+		margin-top: 30px;
+		border-top: 1px solid $light-gray;
+	}
+	&__subtitle{
+		margin-bottom: 20px;
+	}
+	&__clear-liked{
+		&:hover{
+			text-decoration: underline;
+		}
+	}
+
+
+}
+
+@media only screen and (max-width: 1199px){
+	.liked-page{
+
+	}
+
+}
+
+
+@media only screen and (max-width: 991px){
+	.liked-page{
+		&__header{
+			display: block;
+		}
+		&__price{
+			margin-bottom: 20px;
+		}
+	}
+}
+
+	
+@media only screen and (max-width: 767px){
+	.liked-page{
+		&__body{
+			padding: 12px;
+		}
+		&__actions{
+			margin-top: 10px;
+			display: block;
+			& > div{
+				width: 100%;
+			}
+		}
+	}
+}
+
+
+@media only screen and (max-width: 575px){
+	.liked-page{
+
+	}
+}

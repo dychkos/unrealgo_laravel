@@ -1,0 +1,136 @@
+/*
+ * Typography stylesheet
+ */
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6{
+	color:inherit;
+	margin: 0;
+	font-style: normal;
+	font-weight: normal;
+}
+
+
+h1, h2, h3, h4, h5,
+.h1, .h2, .h3, .h4, .h5{
+	//text-transform: uppercase;
+}
+
+/* H1 Desk */
+h1, .h1{
+	font-size: 32px;
+	line-height: 42px;
+    font-family: Rubik-Bold;
+    font-weight: bold;
+}
+
+/* H2 Desk */
+h2, .h2{
+	font-size: 28px;
+	line-height: 30px;
+    letter-spacing: 0.10em;
+    font-family: Rubik-Light;
+
+}
+
+/* H3 Desk */
+h3, .h3{
+	font-size: 24px;
+	line-height: 26px;
+    font-family: Rubik-Bold;
+
+}
+
+/* H4 Desk */
+h4, .h4{
+	font-size: 18px;
+	line-height: 24px;
+    font-family: Rubik-Bold;
+}
+
+/* H5 Desk */
+h5, .h5{
+	font-size: 18px;
+	line-height: 22px;
+    font-family: Rubik-Regular;
+}
+
+
+/* H6 Desk */
+h6, .h6{
+  font-size: 18px;
+  line-height: 20px;
+  font-family: Rubik-Bold;
+}
+
+/* Paragraph Desk */
+p, .p {
+  font-size: 16px;
+  line-height:28px;
+  font-family: Rubik-Regular;
+}
+
+.p-light{
+  font-size: 14px;
+}
+
+@media only screen and (max-width: 1199px) {
+}
+
+
+@media only screen and (max-width: 991px){
+  /* H1 Tablet */
+  h1, .h1{
+    font-size: 28px;
+    line-height: 30px;
+
+  }
+
+  /* H2 Tablet */
+  h2, .h2{
+    font-size: 24px;
+    line-height: 26px;
+  }
+
+
+          /* H3 and H5 Tablet */
+  h3, .h3,
+  h4, h4{
+    font-size: 20px;
+    line-height: 22px;
+
+  }
+
+
+}
+
+@media only screen and (max-width: 767px){
+  /* H1 Mobile */
+  h1, .h1{
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+
+  /* H2 Mobile */
+  h2, .h2{
+    font-size: 22px;
+    line-height: 20px;
+  }
+
+
+  /* H3 and H5 Mobile */
+  h3, .h3,
+  h4, h4{
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+
+          /* H4 Mobile */
+  h6, .h6{
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+}

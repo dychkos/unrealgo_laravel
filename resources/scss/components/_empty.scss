@@ -1,0 +1,15 @@
+//TAG STYLING
+.empty{
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  &__image{
+    margin-bottom: 20px;
+  }
+  &__title{
+    margin-bottom: 50px;
+  }
+}
+//TAG STYLING ENDS
