@@ -1218,6 +1218,7 @@ select option, .select option {
 .order-final__button {
   display: flex;
   justify-content: end;
+  color: #FFF;
 }
 
 @media only screen and (max-width: 991px) {

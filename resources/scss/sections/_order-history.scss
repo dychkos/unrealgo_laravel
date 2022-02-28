@@ -30,7 +30,7 @@
 	&__info{
 		display: flex;
 		flex-direction: column;
-		
+
 	}
 	&__body{
 		margin-top: 40px;
@@ -64,6 +64,7 @@
 	&__button{
 		display: flex;
 		justify-content: end;
+        color: #FFF;
 	}
 
 
@@ -85,7 +86,7 @@
 	}
 }
 
-	
+
 @media only screen and (max-width: 767px){
 	.order-final{
 		text-align: center;
