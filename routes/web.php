@@ -29,7 +29,7 @@ Route::get('/store/{id}',[StoreController::class,'show'])->name("store.show");
 
 Route::redirect('/user','/user/profile');
 Route::get('/user/profile',[UserController::class,'profile'])->name("user.profile");
-Route::post('/user/profile',[UserController::class,'profile'])->name("user.update");
+Route::post('/user/profile',[UserController::class,'update'])->name("user.update");
 Route::get('/user/liked',[UserController::class,'liked'])->name("user.liked");
 Route::get('/user/order-history',[UserController::class,'orderHistory'])->name("user.order-history");
 Route::get('/user/basket',[UserController::class,'basket'])->name("user.basket");

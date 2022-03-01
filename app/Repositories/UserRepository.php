@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserRepository
 {
@@ -20,6 +21,10 @@ class UserRepository
 
         if (!empty($userData['role_id'])){
             $user->role_id = $userData['role_id'];
+        }
+
+        if (!empty($userData['password'])){
+            $user->password = Hash::make($userData['password']);
         }
 
         if(!empty($userData["image"])){

@@ -59,7 +59,7 @@
                                   {{\Illuminate\Support\Facades\Auth::user()->name}}
                                 </span>
                                 <div class="user-dropdown__image">
-                                    <img src="{{asset("app/img/user-icon.png")}}" alt="user icon">
+                                    <img src="{{isset($user->image) ? $user->image->filename : asset('app/img/avatar-default.png')}}" alt="user icon">
                                 </div>
                             </div>
                             <div class="user-dropdown__body">

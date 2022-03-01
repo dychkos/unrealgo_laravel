@@ -34,18 +34,36 @@ class UserController extends Controller
     {
         $image_url = [];
 
-        if($file = $request->file('image')){
-            $image_url = Helper::upload_image(array($file),"users");
+        if($file = $request->file('image')) {
+            $image_url = Helper::upload_image(array($file));
         }
 
-        $updatedUser = array(
+        $processed = $this->addOnlyExists($request->all());
+
+        $updatedUser = array_merge($processed,array(
             'id' => Auth::user()->id,
-            'name' => $request->input('name'),
             'image' => $image_url,
-        );
+        ));
 
         $result = $userService->update($updatedUser);
 
         return redirect()->back()->with('message', 'Личные данные успешно изменены!');
     }
+
+    private function addOnlyExists($requestData){
+        $processed = [];
+        foreach ($requestData as $key => $value){
+            if($value){
+                $processed = $this->array_push_assoc($processed,$key,$value);
+            }
+        }
+        return $processed;
+
+    }
+
+    private function array_push_assoc($array, $key, $value) {
+        $array[$key] = $value;
+        return $array;
+    }
+
 }

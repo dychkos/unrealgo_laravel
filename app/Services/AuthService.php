@@ -26,7 +26,7 @@ class AuthService {
         $authRepository = $this->authRepository;
 
         $validatedUser = Validator::make($userData,[
-            'name' => ["required","string","max:25"],
+            'name' => ["required","string","max:20"],
             'role_id' => ["nullable","integer"],
             'email' => [
                 'required',
@@ -38,7 +38,6 @@ class AuthService {
                 },
             ],
             'password' => 'min:6|required',
-            //'confirm_password' => ['min:6','required']
         ])->validate();
 
         return $authRepository->register($validatedUser);

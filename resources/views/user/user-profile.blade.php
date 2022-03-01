@@ -25,7 +25,7 @@
                         <label for="edit-photo" class="input-group__label p-light">Фото профиля</label>
                         <div class="edit-photo">
                             <div class="edit-photo__preview">
-                                <img src="{{asset('app/img/profile.jpg')}}" id="photo-preview" alt="Profile">
+                                <img src="{{isset($user->image) ? $user->image->filename : asset('app/img/avatar-default.png')}}" id="photo-preview" alt="Profile">
                             </div>
                             <div class="edit-photo__edit">
                                 <div class="form-input input-group__input" >
@@ -61,7 +61,7 @@
                             <input
                                 type="text"
                                 id="edit-phone"
-                                value="{{$user->phone || ""}}"
+                                value="{{$user->phone ?? ""}}"
                                 name="phone"
                                 class="{{$errors->has('phone') ? 'required' : '' }}"
                             />
@@ -77,7 +77,7 @@
                             <input
                                 type="text"
                                 id="edit-email"
-                                value="{{$user->email || ""}}"
+                                value="{{$user->email ?? ""}}"
                                 name="email"
                                 class="{{$errors->has('email') ? 'required' : '' }}"
                             />
@@ -121,7 +121,12 @@
                 </div>
                 <div class="row">
                     <div class="user-profile__input-group confirm col col-md-6">
-                        <input id="confirm" name="notification" type="checkbox" checked>
+                        <input
+                            id="confirm"
+                            name="notification"
+                            type="checkbox" {{$user->notification ? 'checked' : ''}}
+                            value="{{$user->notification ? '1' : '0'}}"
+                        />
                         <label for="confirm" class="p-light">
                             Получать уведомления на почту
                         </label>

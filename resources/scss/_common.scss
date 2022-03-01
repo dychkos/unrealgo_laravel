@@ -170,7 +170,10 @@ a.link{
 
 .success-message{
     color: $success;
-    margin: 4px 0;
+    padding: 14px 20px;
+    background-color: #fff;
+    border-radius: $b-radius;
+    margin: 20px 0;
 }
 
 .up{
