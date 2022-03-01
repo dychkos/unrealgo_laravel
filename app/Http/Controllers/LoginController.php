@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use AuthService;
+use App\Services\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -13,14 +13,14 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function login(AuthService $authService, Request $request): \Illuminate\Http\RedirectResponse
     {
-        try {
-            $authService->login($request->all());
-            $request->session()->regenerate();
-        }catch (ValidationException $exception){
-            return back();
-        }
+        $authService->login($request->all());
+        $request->session()->regenerate();
+
         return redirect()->route('home');
     }
 
@@ -32,7 +32,7 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('home');
     }
 
 

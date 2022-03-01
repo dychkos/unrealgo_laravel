@@ -2,23 +2,50 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
+use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function profile(Request $request) {
-        return view('user.user-profile');
+    public function profile(Request $request)
+    {
+        $user = Auth::user();
+        return view('user.user-profile',compact('user'));
     }
 
-    public function liked(Request $request) {
+    public function liked(Request $request)
+    {
         return view('user.liked');
     }
 
-    public function orderHistory(Request $request) {
+    public function orderHistory(Request $request)
+    {
         return view('user.order-history');
     }
 
-    public function basket(Request $request) {
+    public function basket(Request $request)
+    {
         return view('user.basket');
+    }
+
+    public function update(UserService $userService, Request $request)
+    {
+        $image_url = [];
+
+        if($file = $request->file('image')){
+            $image_url = Helper::upload_image(array($file),"users");
+        }
+
+        $updatedUser = array(
+            'id' => Auth::user()->id,
+            'name' => $request->input('name'),
+            'image' => $image_url,
+        );
+
+        $result = $userService->update($updatedUser);
+
+        return redirect()->back()->with('message', 'Личные данные успешно изменены!');
     }
 }

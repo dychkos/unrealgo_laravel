@@ -4,19 +4,40 @@
     <div class="auth auth_login">
         <div class="auth__title h2">Войти</div>
         <div class="auth__body">
-            <form class="auth__form auth-form">
+            <form action="{{route('login.login')}}" method="POST" class="auth__form auth-form">
+                @csrf
+
+                @error("email")
+                <div class="required_alert">{{$message}}</div>
+                @enderror
                 <div class="auth-form__item form-input">
-                    <input type="email" placeholder="Email">
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        name="email"
+                        class="{{$errors->has('email') ? 'required' : '' }}"
+                        value="{{ old('email') }}"
+                    />
                 </div>
+
+                @error("password")
+                <div class="required_alert">{{$message}}</div>
+                @enderror
                 <div class="auth-form__item form-input">
-                    <input type="password" placeholder="Пароль">
+                    <input
+                        type="password"
+                        placeholder="Пароль"
+                        name="password"
+                        class="{{$errors->has('password') ? 'required' : '' }}"
+                        value="{{ old('email') }}"
+                    />
                 </div>
                 <div class="auth-form__item row">
-                    <div class="auth-form__submit btn btn_primary h4">
+                    <button type="submit" class="auth-form__submit btn btn_primary h4">
                         Войти
-                    </div>
-                    <div class="auth-form__link h5">
-                        Ещё нет аккаунта ? <a class="link" href="register.blade.php">Зарегистироваться</a>
+                    </button>
+                    <div class="auth-form__link h5 mt-3">
+                        Ещё нет аккаунта ? <a class="link" href="{{route('register.index')}}">Зарегистироваться</a>
                     </div>
                 </div>
             </form>

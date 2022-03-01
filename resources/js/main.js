@@ -96,19 +96,22 @@ searchInput.addEventListener('input',(event)=>{
 	}
 })
 
-userDropdown.addEventListener("click",()=>{
-	userDropdown.classList.toggle("open");
+if(userDropdown) {
+    userDropdown.addEventListener("click",()=>{
+        userDropdown.classList.toggle("open");
 
-	let hider = new Hider(".user-dropdown",()=>{
-		$(".user-dropdown").removeClass("open");
-	});
+        let hider = new Hider(".user-dropdown",()=>{
+            $(".user-dropdown").removeClass("open");
+        });
 
-	if(userDropdown.classList.contains("open")){
-		document.addEventListener('mouseup',hider.hide);
-	}else{
-		document.removeEventListener('mouseup',hider.hide);
-	}
-})
+        if(userDropdown.classList.contains("open")){
+            document.addEventListener('mouseup',hider.hide);
+        }else{
+            document.removeEventListener('mouseup',hider.hide);
+        }
+    })
+}
+
 
 //Additional
 function toggleMobileMenu(burger){

@@ -4,7 +4,8 @@
     <section class="user-profile">
         <div class="user-profile__title page-title h1">Информация пользователя</div>
         <div class="user-profile__body card">
-            <div class="user-profile__content">
+            <form action="{{route('user.update')}}" method="POST" class="user-profile__content" enctype="multipart/form-data">
+                @csrf
                 <div class="user-profile__remove">
                           <span class="p">
                               Удалить аккаунт
@@ -14,12 +15,17 @@
                     </svg>
 
                 </div>
+                @if(session()->has('message'))
+                    <div class="success-message">
+                        {{session()->get('message')}}
+                    </div>
+                @endif
                 <div class="row">
                     <div class="user-profile__input-group col-12 col-md-6">
                         <label for="edit-photo" class="input-group__label p-light">Фото профиля</label>
                         <div class="edit-photo">
                             <div class="edit-photo__preview">
-                                <img src="{{asset('app/img/profile.jpg')}}" alt="Profile">
+                                <img src="{{asset('app/img/profile.jpg')}}" id="photo-preview" alt="Profile">
                             </div>
                             <div class="edit-photo__edit">
                                 <div class="form-input input-group__input" >
@@ -35,7 +41,16 @@
                     <div class="user-profile__input-group input-group col-12 col-md-6">
                         <label for="edit-name" class="input-group__label p-light">Имя пользователя</label>
                         <div class="form-input input-group__input" >
-                            <input type="text" id="edit-name" value="Sergey Dychko">
+                            <input
+                                type="text"
+                                id="edit-name"
+                                value="{{$user->name}}"
+                                name="name"
+                                class="{{$errors->has('name') ? 'required' : '' }}"
+                            />
+                            @error("name")
+                            <div class="required_alert">{{$message}}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -43,13 +58,32 @@
                     <div class="user-profile__input-group input-group col-12 col-md-6">
                         <label for="edit-phone" class="input-group__label p-light">Номер телефона</label>
                         <div class="form-input input-group__input" >
-                            <input type="text" id="edit-phone" value="+380 95 083 95 81">
+                            <input
+                                type="text"
+                                id="edit-phone"
+                                value="{{$user->phone || ""}}"
+                                name="phone"
+                                class="{{$errors->has('phone') ? 'required' : '' }}"
+                            />
+                            @error("phone")
+                            <div class="required_alert">{{$message}}</div>
+                            @enderror
                         </div>
+
                     </div>
                     <div class="user-profile__input-group input-group col-12 col-md-6">
                         <label for="edit-email" class="input-group__label p-light">Email</label>
                         <div class="form-input input-group__input">
-                            <input type="text" id="edit-email" value="dychkosergey@gmail.com">
+                            <input
+                                type="text"
+                                id="edit-email"
+                                value="{{$user->email || ""}}"
+                                name="email"
+                                class="{{$errors->has('email') ? 'required' : '' }}"
+                            />
+                            @error("email")
+                            <div class="required_alert">{{$message}}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -57,19 +91,37 @@
                     <div class="user-profile__input-group input-group col-12 col-md-6">
                         <label for="edit-password" class="input-group__label p-light">Пароль</label>
                         <div class="form-input input-group__input" >
-                            <input type="password" id="edit-password" value="">
+                            <input
+                                type="password"
+                                id="edit-password"
+                                value=""
+                                name="password"
+                                class="{{$errors->has('password') ? 'required' : '' }}"
+                            />
+                            @error("password")
+                            <div class="required_alert">{{$message}}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="user-profile__input-group input-group col-12 col-md-6">
                         <label for="confirm-password" class="input-group__label p-light">Подтверждения пароля</label>
                         <div class="form-input input-group__input">
-                            <input type="password" id="confirm-password" value="">
+                            <input
+                                type="password"
+                                id="confirm-password"
+                                value=""
+                                name="confirm-password"
+                                class="{{$errors->has('confirm-password') ? 'required' : '' }}"
+                            />
+                            @error("confirm-password")
+                            <div class="required_alert">{{$message}}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="user-profile__input-group confirm col col-md-6">
-                        <input id="confirm" name="radio-group" type="checkbox" checked>
+                        <input id="confirm" name="notification" type="checkbox" checked>
                         <label for="confirm" class="p-light">
                             Получать уведомления на почту
                         </label>
@@ -77,12 +129,12 @@
                 </div>
                 <div class="row">
                     <div class="user-profile__input-group coд">
-                        <button class="user-profile__btn btn btn_primary h4">
+                        <button type="submit" class="user-profile__btn btn btn_primary h4">
                             Сохранить изменения
                         </button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </section>
 @endsection
@@ -91,5 +143,6 @@
     @push('js')
         <script src="{{asset('app/js/Hider.js')}}"></script>
         <script src="{{asset('app/js/main.js')}}"></script>
+        <script src="{{asset('app/js/user-profile.js')}}"></script>
     @endpush
 @endonce

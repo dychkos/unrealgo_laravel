@@ -29,9 +29,13 @@ Route::get('/store/{id}',[StoreController::class,'show'])->name("store.show");
 
 Route::redirect('/user','/user/profile');
 Route::get('/user/profile',[UserController::class,'profile'])->name("user.profile");
+Route::post('/user/profile',[UserController::class,'profile'])->name("user.update");
 Route::get('/user/liked',[UserController::class,'liked'])->name("user.liked");
 Route::get('/user/order-history',[UserController::class,'orderHistory'])->name("user.order-history");
 Route::get('/user/basket',[UserController::class,'basket'])->name("user.basket");
 
 Route::get('/login',[LoginController::class,'index'])->name("login.index");
+Route::get('/logout',[LoginController::class,'logout'])->name("logout");
+Route::post('/login',[LoginController::class,'login'])->name("login.login");
 Route::get('/register',[RegisterController::class,'index'])->name("register.index");
+Route::post('/register',[RegisterController::class,'register'])->name("register.register");

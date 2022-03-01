@@ -53,17 +53,11 @@
                         <a href="#" class="h4 link">Магазин</a>
                     </div>
                     @if( \Illuminate\Support\Facades\Auth::check())
-                    <a href="{{route('login')}}">
-                        <button class="btn btn_primary h4">
-                            Войти
-                        </button>
-                    </a>
-                    @else
                         <div class="user-dropdown">
                             <div class="user-dropdown__preview">
-                                    <span class="user-dropdown__name h4">
-                                 Sergey Dychko
-                             </span>
+                                <span class="user-dropdown__name h4">
+                                  {{\Illuminate\Support\Facades\Auth::user()->name}}
+                                </span>
                                 <div class="user-dropdown__image">
                                     <img src="{{asset("app/img/user-icon.png")}}" alt="user icon">
                                 </div>
@@ -83,13 +77,19 @@
                                 </div>
                                 <div class="user-dropdown__item">
                                <span class="h5">
-                                   <a href="#" class="link link_danger">
+                                   <a href="{{route('logout')}}" class="link link_danger">
                                        Выйти
                                    </a>
                                </span>
                                 </div>
                             </div>
                         </div>
+                     @else
+                        <a href="{{route('login.index')}}">
+                            <button class="btn btn_primary h4">
+                                Войти
+                            </button>
+                        </a>
                     @endif
 
                 </div>

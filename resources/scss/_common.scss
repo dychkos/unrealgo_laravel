@@ -163,7 +163,14 @@ a.link{
 	color: $danger !important;
 	&_alert{
 		color: $danger;
+        font-size: 14px;
+        margin-bottom: 4px;
 	}
+}
+
+.success-message{
+    color: $success;
+    margin: 4px 0;
 }
 
 .up{

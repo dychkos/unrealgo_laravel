@@ -1,5 +1,9 @@
 <?php
 
+
+namespace App\Services;
+
+use App\Repositories\AuthRepository;
 use Illuminate\Support\Facades\Validator;
 
 class AuthService {
@@ -34,7 +38,7 @@ class AuthService {
                 },
             ],
             'password' => 'min:6|required',
-            'confirm_password' => ['min:6','required']
+            //'confirm_password' => ['min:6','required']
         ])->validate();
 
         return $authRepository->register($validatedUser);

@@ -509,6 +509,13 @@ a.link:hover {
 }
 .required_alert {
   color: #A84F43;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.success-message {
+  color: #20d020;
+  margin: 4px 0;
 }
 
 .up {

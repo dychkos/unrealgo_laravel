@@ -7,16 +7,46 @@
             <div class="auth__image col-6">
                 <img src="{{asset('app/img/auth.png')}}" alt="Auth">
             </div>
-            <form class="auth__form auth-form col-12 col-md-8 col-xl-6">
+            <form action="{{route('register.register')}}" method="POST" class="auth__form auth-form col-12 col-md-8 col-xl-6">
+                @csrf
+
+                @error("name")
+                <div class="required_alert">{{$message}}</div>
+                @enderror
                 <div class="auth-form__item form-input">
-                    <input type="text" placeholder="Имя">
+                    <input
+                        type="text"
+                        placeholder="Имя"
+                        name="name"
+                        class="{{$errors->has('name') ? 'required' : '' }}"
+                        value="{{ old('name') }}"
+                    />
                 </div>
+
+                @error("email")
+                <div class="required_alert">{{$message}}</div>
+                @enderror
                 <div class="auth-form__item form-input">
-                    <input type="email" placeholder="Email">
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        name="email"
+                        class="{{$errors->has('email') ? 'required' : '' }}"
+                        value="{{ old('email') }}"
+                    />
                 </div>
+
+                @error("password")
+                <div class="required_alert">{{$message}}</div>
+                @enderror
                 <div class="auth-form__item form-input">
-                    <input type="password" placeholder="Пароль">
+                    <input type="password"
+                           placeholder="Пароль"
+                           name="password"
+                           class="{{$errors->has('password') ? 'required' : '' }}"
+                    />
                 </div>
+
                 <div class="auth-form__item confirm">
                     <input id="confirm" name="radio-group" type="checkbox" checked>
                     <label for="confirm" class="p-light">
@@ -24,11 +54,11 @@
                     </label>
                 </div>
                 <div class="auth-form__item row">
-                    <div class="auth-form__submit btn btn_primary h4">
+                    <button type="submit" class="auth-form__submit btn btn_primary h4">
                         Зарегистрироваться
-                    </div>
+                    </button>
                     <div class="auth-form__link h5">
-                        Уже есть аккаунт ? <a class="link" href="login.blade.php">Войти</a>
+                        Уже есть аккаунт ? <a class="link" href="{{route('login.index')}}">Войти</a>
                     </div>
                 </div>
             </form>
