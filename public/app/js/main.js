@@ -79,7 +79,7 @@ search.addEventListener('click',()=>{
 	let hider = new Hider("search__wrapper",()=>{
 		$(".search").removeClass("open");
 		$(".burger").removeClass("open").attr("action","");
-		$(".search__wrapper").css("width","60px");
+		$(".search__wrapper").css("width","50px");
 		$(".search__results").hide();
 	})
 
@@ -105,24 +105,27 @@ searchInput.addEventListener('input',(event)=>{
 	}
 })
 
-userDropdown.addEventListener("click",()=>{
-	userDropdown.classList.toggle("open");
+if(!isMobile){
+    userDropdown.addEventListener("click",()=>{
+        userDropdown.classList.toggle("open");
 
-	let hider = new Hider(".user-dropdown",()=>{
-		$(".user-dropdown").removeClass("open");
-	});
+        let hider = new Hider(".user-dropdown",()=>{
+            $(".user-dropdown").removeClass("open");
+        });
 
-	if(userDropdown.classList.contains("open")){
-		document.addEventListener('mouseup',hider.hide);
-	}else{
-		document.removeEventListener('mouseup',hider.hide);
-	}
-})
+        if(userDropdown.classList.contains("open")){
+            document.addEventListener('mouseup',hider.hide);
+        }else{
+            document.removeEventListener('mouseup',hider.hide);
+        }
+    })
+}
+
 
 //Additional
 function toggleMobileMenu(burger){
 	let action = $(burger).attr("action");
-	if(action==="search"){
+	if(action === "search"){
 		$(".search").removeClass("open");
 		searchResults.style.display = "none";
 		$(burger).removeClass("open").attr("action",'');

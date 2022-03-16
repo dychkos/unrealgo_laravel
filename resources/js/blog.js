@@ -4,6 +4,7 @@
 
 let sort = document.querySelector('.sort');
 let navigation = document.querySelector('.navigation__active');
+let navigationItems = document.querySelectorAll('.navigation__item');
 
 
 /*
@@ -25,18 +26,25 @@ sort.addEventListener('click',()=>{
     }
 
 })
-navigation.addEventListener("click",()=>{
+
+if(isMobile) {
     let navBody = document.querySelector(".navigation__body");
 
-    let hider = new Hider(".navigation__active",()=>{
-        $(".navigation__body").removeClass("active");
-    });
+    navigation.addEventListener("click",() => {
 
-    if(navBody.classList.contains("active")){
-        navBody.classList.remove("active");
-        document.removeEventListener('mouseup',hider.hide);
-    }else{
-        navBody.classList.add("active");
-        document.addEventListener('mouseup',hider.hide);
-    }
-})
+        let hider = new Hider(".navigation__active",() => {
+            $(".navigation__body").removeClass("active");
+        });
+
+        if(navBody.classList.contains("active")){
+            navBody.classList.remove("active");
+            document.removeEventListener('mouseup',hider.hide);
+        }else{
+            navBody.classList.add("active");
+            document.addEventListener('mouseup',hider.hide);
+        }
+    })
+
+
+
+}

@@ -44,7 +44,7 @@
             </div>
             <div class="sort__body">
                 <div class="sort__hide hide h5">Сортировать по</div>
-                <div class="sort__item h5 {{$sortBy !== "" ? "sort__item_active" : ""}}">
+                <div class="sort__item h5 {{isset($sortBy) &&  $sortBy !== "" ? "sort__item_active" : ""}}">
                     <a href="{{route(\Illuminate\Support\Facades\Route::currentRouteName())}}">
                         дате
                     </a>
