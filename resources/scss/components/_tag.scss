@@ -4,8 +4,10 @@
   text-align: center;
   color: white;
   letter-spacing: 0.3em;
-  white-space: nowrap;
   padding: 4px 12px;
+  display: flex;
+  flex: 0 1;
+  width: max-content;
   text-transform: uppercase;
 }
 //TAG STYLING ENDS

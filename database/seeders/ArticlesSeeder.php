@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Article;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -50,5 +51,6 @@ class ArticlesSeeder extends Seeder
             'short_description' => "Объясните, почему все кругом выгорают? Вся лента забита контентом про выгорание, все друзья выгорели, все молодежные издания запустили курсы и подкасты про выгорание.",
             'description' => "Объясните, почему все кругом выгорают? Вся лента забита контентом про выгорание, все друзья выгорели, все молодежные издания запустили курсы и подкасты про выгорание.",
         ]);
+
     }
 }

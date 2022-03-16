@@ -7,7 +7,7 @@ class Hider {
         this.action = action;
     }
 
-    hide=(event)=>{
+    hide = (event) => {
         let div = $(this.element);
         if (!div.is(event.target) // если клик был не по нашему блоку
             && div.has(event.target).length === 0) { // и не по его дочерним элементам

@@ -44,13 +44,13 @@
             </div>
             <div class="sort__body">
                 <div class="sort__hide hide h5">Сортировать по</div>
-                <div class="sort__item h5 {{!isset($sortBy) ? "sort__item_active" : ""}}">
+                <div class="sort__item h5 {{$sortBy !== "" ? "sort__item_active" : ""}}">
                     <a href="{{route(\Illuminate\Support\Facades\Route::currentRouteName())}}">
                         дате
                     </a>
                 </div>
                 <div class="sort__item h5 {{isset($sortBy) &&  $sortBy === "popular" ? "sort__item_active" : ""}}">
-                    <a href="{{route(\Illuminate\Support\Facades\Route::currentRouteName(), "popular")}}">
+                    <a href="{{route(\Illuminate\Support\Facades\Route::currentRouteName(), ["sort" => "popular"])}}">
                         популярности
                     </a>
                 </div>
@@ -82,7 +82,7 @@
                                 <div class="large-article__content">
                                     <div class="large-article__title h4">{{$article->title}}</div>
                                     <div class="large-article__text p">
-                                        {{$article->short_description}}
+                                        {{\Illuminate\Support\Str::limit($article->short_description, 200, $end='...')}}
                                     </div>
                                 </div>
                                 <div class="large-article__footer">
@@ -115,23 +115,8 @@
             @endforeach
         </div>
     </div>
-    {{$articles->links()}}
-    <div class="pages-navigator">
-        <div class="pages-navigator__item pages-navigator__item_first">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#191a29" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
-            </svg>
-        </div>
-        <div class="pages-navigator__item">1</div>
-        <div class="pages-navigator__item pages-navigator__item_active">2</div>
-        <div class="pages-navigator__item">...</div>
-        <div class="pages-navigator__item">4</div>
-        <div class="pages-navigator__item pages-navigator__item_last">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#191a29" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-                <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
-            </svg>
-        </div>
-    </div>
+
+    {{ $articles->links('includes.pagination') }}
 @endsection
 
 @once

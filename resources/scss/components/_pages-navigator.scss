@@ -3,7 +3,15 @@
   margin: 40px 0;
   justify-content: center;
   gap: 8px;
-    &__item{
+  align-items: center;
+  li{
+    list-style-type: none;
+      &:disabled{
+          opacity: 0.7;
+          pointer-events: none;
+      }
+  }
+    &__item {
       padding: 8px 18px;
       font-size: 22px;
       color: $black;
@@ -17,7 +25,9 @@
       &_active{
           background-color: inherit;
           color: #fff;
+          border: 2px solid $background-light;
       }
+
   }
 }
 

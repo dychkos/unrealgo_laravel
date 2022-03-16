@@ -5,22 +5,32 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Filters\ArticleFilter;
 
 class ArticleController extends Controller
 {
-    public function index(Request $request, $sortBy = "")
+    public function index(Request $request)
     {
         $categories = Category::all();
+        $sortBy = "";
 
-        $articles = Article::paginate(2);
+       if($request->has("sort")) {
+           $sortBy = "popular";
+           $articles = Article::orderBy("views", "desc")->paginate(5);
+       }else{
+           $articles = Article::paginate(5);
+       }
 
-        return view('articles.index', compact("categories", "articles"));
+
+        return view('articles.index', compact("categories", "articles", "sortBy"));
     }
 
 
     public function show($category_slug, $article_slug)
     {
         $article = Article::where("slug", $article_slug)->first();
+
+
         $categories = Category::all();
 
         return view('articles.show', compact('article', 'categories'));
@@ -31,7 +41,7 @@ class ArticleController extends Controller
 
         $activeCategory = Category::where('slug', $categorySlug)->first();
 
-        $articles = Article::where('category_id', $activeCategory->id)->get();
+        $articles = Article::where('category_id', $activeCategory->id)->paginate(2);
 
         $categories = Category::all();
 

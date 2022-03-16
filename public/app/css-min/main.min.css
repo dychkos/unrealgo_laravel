@@ -1676,6 +1676,7 @@ select option, .select option {
   background-size: cover;
   background-repeat: no-repeat;
   transition: all 0.2s ease;
+  height: 440px;
 }
 .large-article__card {
   background-color: #fff;
@@ -1753,8 +1754,12 @@ select option, .select option {
   text-align: center;
   color: white;
   letter-spacing: 0.3em;
-  white-space: nowrap;
   padding: 4px 12px;
+  display: flex;
+  flex: 0 1;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
   text-transform: uppercase;
 }
 
@@ -1942,9 +1947,6 @@ select option, .select option {
 }
 .navigation__item:last-child {
   margin-right: 0;
-}
-.navigation__item:hover {
-  color: #A5A815;
 }
 
 @media only screen and (max-width: 991px) {
@@ -2636,6 +2638,14 @@ select option, .select option {
   margin: 40px 0;
   justify-content: center;
   gap: 8px;
+  align-items: center;
+}
+.pages-navigator li {
+  list-style-type: none;
+}
+.pages-navigator li:disabled {
+  opacity: 0.7;
+  pointer-events: none;
 }
 .pages-navigator__item {
   padding: 8px 18px;
@@ -2652,4 +2662,5 @@ select option, .select option {
 .pages-navigator__item_active {
   background-color: inherit;
   color: #fff;
+  border: 2px solid #ececec;
 }
