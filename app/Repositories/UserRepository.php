@@ -24,7 +24,7 @@ class UserRepository
         }
 
         if (!empty($userData['password'])){
-            $user->password = Hash::make($userData['password']);
+            $userData['password'] = Hash::make($userData['password']);
         }
 
         if(!empty($userData["image"])){
@@ -35,6 +35,13 @@ class UserRepository
         }
 
         $user->update($userData);
+
         return $user->fresh();
+    }
+
+    public function delete($userID)
+    {
+        $user = $this->user;
+        return $user->destroy($userID);
     }
 }

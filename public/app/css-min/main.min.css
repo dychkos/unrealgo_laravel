@@ -519,6 +519,7 @@ a.link:hover {
   background-color: #fff;
   border-radius: 20px;
   margin: 20px 0;
+  transition: height 0.4s ease;
 }
 
 .up {
@@ -1325,12 +1326,16 @@ select option, .select option {
   top: 0;
   right: 20px;
   display: flex;
+  flex-direction: column-reverse;
+}
+.user-profile__remove-body {
+  display: flex;
   align-items: center;
   gap: 10px;
   color: #A84F43;
   cursor: pointer;
 }
-.user-profile__remove:hover {
+.user-profile__remove-body:hover {
   text-decoration: underline;
 }
 .user-profile__content {
@@ -1647,6 +1652,7 @@ select option, .select option {
   height: 40px;
 }
 .user-dropdown__image img {
+  border-radius: 50%;
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
@@ -1747,6 +1753,7 @@ select option, .select option {
   text-align: center;
   color: white;
   letter-spacing: 0.3em;
+  white-space: nowrap;
   padding: 4px 12px;
   text-transform: uppercase;
 }
@@ -1869,6 +1876,9 @@ select option, .select option {
   cursor: pointer;
   transition: color 0.3s ease;
 }
+.sort__item_active {
+  color: #A5A815;
+}
 .sort__item:hover {
   color: #A5A815;
 }
@@ -1917,7 +1927,7 @@ select option, .select option {
   padding: 9px 15px;
   border-radius: 20px;
   margin-right: 12px;
-  color: #fff;
+  color: #fff !important;
 }
 .navigation__active svg {
   display: none;
@@ -1926,6 +1936,9 @@ select option, .select option {
   padding: 9px 15px;
   transition: color 0.3s ease;
   margin-right: 12px;
+}
+.navigation__item svg {
+  display: none;
 }
 .navigation__item:last-child {
   margin-right: 0;
@@ -2208,8 +2221,8 @@ select option, .select option {
 }
 .photos__previews .photos__slide img {
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  width: 180px;
-  height: 100px;
+  width: 100%;
+  height: 120px;
   border-radius: 20px;
   margin-bottom: 25px;
   cursor: pointer;
@@ -2265,6 +2278,9 @@ select option, .select option {
     width: 100%;
     height: 300px !important;
   }
+  .photos__previews .photos__slide img:hover {
+    border: none;
+  }
 
   .swiper-pagination {
     bottom: 0 !important;
@@ -2319,6 +2335,7 @@ select option, .select option {
   transition-property: border-bottom-color, color;
   transition-duration: 0.4s;
   white-space: nowrap;
+  transition: padding-right 0.4s ease;
 }
 .quick-nav__item:hover {
   color: #bec237;
@@ -2367,6 +2384,20 @@ select option, .select option {
 .comment__header {
   display: flex;
   color: #191a29;
+}
+.comment__header-icon {
+  width: 45px;
+  height: 45px;
+}
+.comment__header-icon img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.comment__answered {
+  color: #626FC0;
 }
 .comment__text {
   margin-top: 5px;
@@ -2598,4 +2629,27 @@ select option, .select option {
 }
 .edit-photo__edit:hover {
   opacity: 1;
+}
+
+.pages-navigator {
+  display: flex;
+  margin: 40px 0;
+  justify-content: center;
+  gap: 8px;
+}
+.pages-navigator__item {
+  padding: 8px 18px;
+  font-size: 22px;
+  color: #191a29;
+  border-radius: 20px;
+  background-color: #ececec;
+  cursor: pointer;
+  transition: opacity 0.4s ease-in-out;
+}
+.pages-navigator__item:hover {
+  opacity: 0.8;
+}
+.pages-navigator__item_active {
+  background-color: inherit;
+  color: #fff;
 }

@@ -15,6 +15,15 @@ let up = document.querySelector('.up');
 let blogNav = document.querySelectorAll('.blog-nav__category');
 
 
+let successMessages = document.querySelectorAll('.success-message');
+
+if(successMessages) {
+    setTimeout(() => {
+        $(successMessages).each()
+    },5000);
+
+}
+
 let sliderOptions  = {
 	slidesPerView: 1,
 	spaceBetween: 10,
@@ -137,7 +146,7 @@ function toggleMobileMenu(burger){
 
 }
 
-function hideSidebarNav(){
+function hideSidebarNav() {
 	blogNav.forEach(nav=>{
 		if(nav.classList.contains("open")){
 			nav.classList.remove("open");

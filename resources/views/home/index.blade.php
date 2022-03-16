@@ -8,21 +8,28 @@
         <div class="blog-pr__body">
             <div class="row g-5">
                 <div class="col-12 col-lg-6">
-                    <div class="large-article" style="background-image: url({{asset('app/img/article.png')}})">
-                        <a href="../articles/show.blade.php">
+                    <div class="large-article"
+                         style="background-image: url({{$popular->image
+                        ? asset($popular->image->filename)
+                        : asset('app/img/article-error.jpg')}})"
+                    >
+                        <a href="{{route("articles.show", [$popular->category->slug, $popular->slug])}}">
                             <div class="large-article__card">
                                 <div class="large-article__header">
                                     <div class="large-article__tag tag">
-                                        УСПЕХ
+                                        {{$popular->category->value}}
                                     </div>
                                     <div class="large-article__date p-light">
-                                        08.08.2021
+                                        {{$popular->created_at
+                                            ? $popular->created_at->diffForHumans()
+                                            : "12.01.2002"
+                                            }}
                                     </div>
                                 </div>
                                 <div class="large-article__content">
-                                    <div class="large-article__title h4">Какое либо название статьи</div>
+                                    <div class="large-article__title h4">{{$popular->title}}</div>
                                     <div class="large-article__text p">
-                                        Что можно сказать об идее интерактивной таблицы Менделеева? Идея очень хорошая, но первый блин бывает комом.
+                                        {{$popular->short_description}}
                                     </div>
                                 </div>
                                 <div class="large-article__footer">
@@ -44,7 +51,7 @@
                                             </svg>
                                         </div>
                                         <div class="with-icon__body h5">
-                                            12,908
+                                            {{$popular->views}}
                                         </div>
                                     </div>
                                 </div>
@@ -55,36 +62,25 @@
                 <div class="col-12 col-lg-6">
                     <div class="row g-3">
                         <div class="h4">Рекомендуемое</div>
+                        @foreach($randomArticles as $article)
                         <div class="col-12 col-sm-6">
                             <div class="article">
-                                <div class="article__tag tag">
-                                    СПОРТ
-                                </div>
-                                <div class="article__content">
-                                    <div class="article__title h4">
-                                        Как уронить космическую станцию
+                                <a href="{{route('articles.show', [$article->category->slug, $article->slug])}}">
+                                    <div class="article__tag tag">
+                                        {{$article->category->value}}
                                     </div>
-                                    <div class="article__text p">
-                                        читаем с выражением первую страницу учебника по орбитальной механике, выясняем где у Солнца его смертельные лазеры
+                                    <div class="article__content">
+                                        <div class="article__title h4">
+                                            {{$article->title}}
+                                        </div>
+                                        <div class="article__text p">
+                                            {{$article->short_description}}
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-6">
-                            <div class="article">
-                                <div class="article__tag tag">
-                                    СПОРТ
-                                </div>
-                                <div class="article__content">
-                                    <div class="article__title h4">
-                                        Как уронить космическую станцию
-                                    </div>
-                                    <div class="article__text p">
-                                        читаем с выражением первую страницу учебника по орбитальной механике, выясняем где у Солнца его смертельные лазеры. И ещё немного текста, я думаю ещё чучуть
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 

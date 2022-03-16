@@ -1,4 +1,4 @@
-<div class="modal-wrapper d-none">
+<div class="modal-wrapper" style="display: none">
     <div class="modal">
         <div class="modal__close">
             <svg  style="enable-background:new 0 0 512 512;" version="1.1"

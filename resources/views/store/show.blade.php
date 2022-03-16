@@ -2,28 +2,28 @@
 
 @section('content')
     <div class="product-page pt-4">
-        <div class="product-page__header row">
+        <div class="product-page__header row g-3">
             <div class="product-page__photos col-12 col-lg-6">
                 <div class="photos">
                     <div class="photos__previews" id="photosSwiper">
                         <div id="swiper-wrapper" >
                             <div class="photos__slide">
-                                <img src="{{asset('app/img/product-big.png')}}" class="photos__previews_chosen" alt="Product">
+                                <img src="{{asset('app/img/product-big.png')}}" data-photo class="photos__previews_chosen" alt="Product">
                             </div>
                             <div class="photos__slide">
-                                <img src="{{asset('app/img/product-big.png')}}" alt="Product">
+                                <img src="{{asset('app/img/banner.png')}}" data-photo alt="Product">
                             </div>
                             <div class="photos__slide">
-                                <img src="{{asset('app/img/product-big.png')}}" alt="Product">
+                                <img src="{{asset('app/img/tshirt.png')}}" data-photo alt="Product">
                             </div>
                             <div class="photos__slide">
-                                <img src="{{asset('app/img/product-big.png')}}" alt="Product">
+                                <img src="{{asset('app/img/product-big.png')}}" data-photo alt="Product">
                             </div>
                         </div>
                         <div class="swiper-pagination"></div>
                     </div>
                     <div class="photos__big swiper-slide">
-                        <img src="{{asset('app/img/product-big.png')}}" alt="Product">
+                        <img src="{{asset('app/img/product-big.png')}}" id="main-photo" alt="Product">
                     </div>
                 </div>
             </div>
@@ -61,8 +61,8 @@
                     </div>
                 </div>
                 <div class="product-page__links">
-                    <a href="#description" class="product-page__link h5">Описание</a>
-                    <a href="#feedback" class="product-page__link h5">Отзывы</a>
+                    <a href="#description" class="product-page__link h5" data-nav="description">Описание</a>
+                    <a href="#feedbacks" class="product-page__link h5" data-nav="feedbacks">Отзывы</a>
                 </div>
                 <div class="product-page__main">
                     <h2 class="product-page__price h2">
@@ -86,10 +86,10 @@
         </div>
         <div class="product-page__content">
             <div class="product-page__quick-nav quick-nav">
-                <div class="quick-nav__item quick-nav__item_active">Описание</div>
-                <div class="quick-nav__item">Отзывы</div>
+                <div class="quick-nav__item quick-nav__item_active" data-nav="description">Описание</div>
+                <div class="quick-nav__item" data-nav="feedbacks">Отзывы</div>
             </div>
-            <div class="product-page__description">
+            <div class="product-page__description nav-active" id="description">
                 <h3 class="h3">
                     Почему он используется?
                 </h3>
@@ -130,7 +130,7 @@
                 </h3>
                 <p class="p">Оплата при получении</p>
             </div>
-            <div class="product-page__comments-block comments-block">
+            <div class="product-page__comments-block comments-block" id="feedbacks" style="display: none">
                 <div class="comments-block__header">
                     <div class="comments-block__title h3">Отзывы</div>
                     <div class="comments-block__count with-icon">
@@ -309,5 +309,7 @@
     @push('js')
         <script src="{{asset('app/js/Hider.js')}}"></script>
         <script src="{{asset('app/js/main.js')}}"></script>
+        <script src="{{asset('app/js/libs/PhotoPreviews.js')}}"></script>
+        <script src="{{asset('app/js/product.js')}}"></script>
     @endpush
 @endonce

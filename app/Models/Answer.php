@@ -9,7 +9,13 @@ class Answer extends Model
 {
     use HasFactory;
 
-    public function author(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    protected $fillable = [
+        'message',
+        'user_id',
+        'comment_id',
+    ];
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -18,6 +24,11 @@ class Answer extends Model
     public function comment(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Comment::class);
+    }
+
+    public function likes()
+    {
+        return $this->morphMany(Like::class, "like");
     }
 
 }

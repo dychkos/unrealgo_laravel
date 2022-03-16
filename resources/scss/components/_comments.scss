@@ -4,6 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
   }
   &__title{
     color: $primary;
@@ -29,6 +30,19 @@
   &__header{
     display: flex;
     color: $black;
+    &-icon{
+      width: 45px;
+      height: 45px;
+      img{
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+    }
+  }
+  &__answered{
+      color: #626FC0;
   }
   &__text{
     margin-top: 5px;

@@ -1,15 +1,21 @@
 @extends('layouts.base')
 
 @section('content')
+    <script>
+        let likeUrl = "{{route('comment.like')}}";
+        let csrfToken = "{{ csrf_token() }}";
+    </script>
     <div class="row g-4 pt-4">
         <div class="col-12 col-lg-9">
             <div class="big-article">
                 <div class="big-article__preview-image">
-                    <img src="{{asset('app/img/article.png' )}}" alt="Article">
+                    <img src="{{$article->image
+                        ? asset($article->image->filename)
+                        : asset('app/img/article-error.jpg')}}" alt="Article">
                 </div>
                 <div class="big-article__header">
                     <div class="big-article__title h3">
-                        Крутое название статьи на очень крутую тему
+                        {{$article->title}}
                     </div>
                     <div class="big-article__info d-flex">
                         <div class="big-article__info-item with-icon col-5 col-sm-3 order-1 ">
@@ -17,11 +23,14 @@
                                 <svg xmlns="http://www.w3.org/2000/svg"  width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                             </div>
                             <div class="with-icon__body p-light">
-                                08.08.2003
+                                {{$article->created_at
+                                             ? $article->created_at->diffForHumans()
+                                             : "12.01.2002"
+                               }}
                             </div>
                         </div>
                         <div class="big-article__info-item tag col-12 col-sm-3 order-0 order-sm-1">
-                            СПОРТ
+                            {{$article->category->value}}
                         </div>
                         <div class="big-article__info-item with-icon col-5 col-sm-3 order-3">
                             <div class="with-icon__icon pt-1">
@@ -31,31 +40,14 @@
                                 </svg>
                             </div>
                             <div class="with-icon__body p-light">
-                                12,908
+                                {{$article->views}}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="big-article__body">
                     <div class="big-article__content">
-                        <p class="p">
-                            Что можно сказать об идее интерактивной таблицы Менделеева? Идея очень хорошая, но первый блин бывает комом.
-
-                            Прежде всего: я написал и опубликовал много хим. статей на английском и мне не трудно понять фразу “Mercury is one of the few elements that is liquid at room temperature”, а школьник, который только начал изучать химию может испытать затруднения. В поиске Гугла есть выбор языка. Почему здесь отказались от этой опции? (Или, может, я не нашел?)
-
-                            Далее ИМХО в одной фразе всей инфы по элементу не уместить – предложите переход на Вики или на Гугл поиск. В Вики статьи на каждый элемент. И, что важно, ссылки на авторитетные источники. В Гугле ссылки на все источники. Может быть ссылка на источник, где сказано, что поскольку ртуть жидкая, то Земля — плоская. В Вики такую ссылку не допустят. При этом ничего плохого не хочу сказать про Гугл — у ищущих могут быть разные цели, и кому-то нужно найти абсурдные заявления. — Хочет человек в своей статье привести такие примеры абсурда.
-
-                            И еще: химики хорошо ориентируются в таблице Менделеева и знают символы элементов. А школьники не очень хорошо. Поэтому нужен поиск по алфавиту названий элементов. При этом нужно обеспечить поиск и по не принятым названиям – нпр., элемент “Сергений”. Но, конечно, поиск и по символам элементов нужен.
-
-                            Для школьника будет полезно по запросу выделить металлы, щелочные металлы, галогены, инертные газы и т.д.
-
-                            И школьнику и проф. химику будет полезен калькулятор: нажал на клетку таблицы, и в регистре атомный вес элемента, еще лучше, если калькулятор будет считать молекулярные веса по формулам — нпр., H2SO4.
-
-                            Отдельные ссылки нужны на историю открытия периодического закона (таблица – это только иллюстрация) и на его развитие. До Менделеева было много попыток. Но устройство атомов не знали, как и Менделеев.
-
-                            Думаю, что если опросить школьников и химиков, то они сделают похожие предложения.
-                            При этом хочу отметить, что никаких претензий к статье у меня нет. Мы все используем Google, и новый инструмент Google — важная информация. Может спецы Google не прочтут эту статью, но надеюсь, что они получат похожие отзывы и поправят свой инструмент. И он станет очень полезным. Хозяйку не ругают за первый блин, который комом, а хвалют остальные блины.
-                        </p>
+                        {!! $article->description !!}
                     </div>
                     <div class="big-article__comments-block comments-block">
                         <div class="comments-block__header">
@@ -67,166 +59,142 @@
                                     </svg>
                                 </div>
                                 <div class="with-icon__body p-light">
-                                    908
+                                    {{$article->comments
+                                        ? $article->comments()->get()->count()
+                                        : "0"
+                                    }}
                                 </div>
                             </div>
                         </div>
-                        <div class="comments-block__empty p">
-                            Комменарии остутсвуют. <a href="#" class="link">Оставьте первый.</a>
-                        </div>
-                        <div class="comments-block__comments comments">
-                            <div class="comment">
-                                <div class="comment__header with-icon">
-                                    <div class="with-icon__icon">
-                                        <img src="{{asset('app/img/user-icon.png')}}" alt="user">
-                                    </div>
-                                    <div class="with-icon__body d-flex flex-column flex-column">
-                                        <div class="h6">username</div>
-                                        <div class="p-light">30 минут назад</div>
-                                    </div>
-                                </div>
-                                <div class="comment__text p">
-                                    Windows XP была построена на базе того же ядра Windows NT, что и Windows 2000
-                                </div>
-                                <div class="comment__footer">
-                                    <div class="comment__action p-light">
-                                        3 Нравится
-                                    </div>
-                                    <div class="comment__action ellipse p-light">
-                                        Ответить
-                                    </div>
-                                </div>
-                                <div class="comment__answer answer">
-                                    <div class="comment__header with-icon">
-                                        <div class="with-icon__icon">
-                                            <img src="{{asset('app/img/user-icon.png')}}" alt="user">
+                        @if($article->comments()->first() == null)
+                            <div class="comments-block__empty p">
+                                Комменарии остутсвуют. <a
+                                    @if(\Illuminate\Support\Facades\Auth::check())
+                                    href="#add-comment"
+                                    @else
+                                    href="{{route('login.login')}}"
+                                    @endif
+                                    class="link to-add-comment">Оставьте первый.</a>
+                            </div>
+                        @else
+                            <div class="comments-block__comments comments">
+                                @foreach($article->comments as $comment)
+                                    <div class="comment">
+                                        <div class="comment__header with-icon">
+                                            <div class="comment__header-icon with-icon__icon">
+                                                <img src="{{isset($comment->user->image)
+                                                ? asset($comment->user->image->filename)
+                                                : asset('app/img/avatar-default.png')}}"
+                                                 alt="user icon"
+                                                />
+                                            </div>
+                                            <div class="with-icon__body d-flex flex-column flex-column">
+                                                <div class="h6">{{$comment->user->name}}</div>
+                                                <div class="p-light">{{$comment->user->created_at->diffForHumans()}}</div>
+                                            </div>
                                         </div>
-                                        <div class="with-icon__body d-flex flex-column">
-                                            <div class="h6">username</div>
-                                            <div class="p-light">30 минут назад</div>
-                                        </div>
-                                    </div>
-                                    <div class="comment__text p">
-                                        Windows XP была построена на базе того же ядра Windows NT, что и Windows 2000
-                                    </div>
-                                    <div class="comment__footer">
-                                        <div class="comment__action p-light">
-                                            3 Нравится
-                                        </div>
-                                        <div class="comment__action ellipse p-light">
-                                            Ответить
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="comment__answer answer">
-                                    <div class="comment__header with-icon">
-                                        <div class="with-icon__icon">
-                                            <img src="{{asset('app/img/user-icon.png')}}" alt="user">
-                                        </div>
-                                        <div class="with-icon__body d-flex flex-column">
-                                            <div class="h6">username</div>
-                                            <div class="p-light">30 минут назад</div>
-                                        </div>
-                                    </div>
-                                    <div class="comment__text p">
-                                        Windows XP была построена на базе того же ядра Windows NT, что и Windows 2000
-                                    </div>
-                                    <div class="comment__footer">
-                                        <div class="comment__action p-light">
-                                            3 Нравится
-                                        </div>
-                                        <div class="comment__action ellipse p-light">
-                                            Ответить
-                                        </div>
-                                    </div>
-                                </div>
 
-                            </div>
-                            <div class="comment">
-                                <div class="comment__header with-icon">
-                                    <div class="with-icon__icon">
-                                        <img src="{{asset('app/img/user-icon.png')}}" alt="user">
-                                    </div>
-                                    <div class="with-icon__body d-flex flex-column">
-                                        <div class="h6">username</div>
-                                        <div class="p-light">30 минут назад</div>
-                                    </div>
-                                </div>
-                                <div class="comment__text p">
-                                    Windows XP была построена на базе того же ядра Windows NT, что и Windows 2000
-                                </div>
-                                <div class="comment__footer">
-                                    <div class="comment__action p-light">
-                                        3 Нравится
-                                    </div>
-                                    <div class="comment__action ellipse p-light">
-                                        Ответить
-                                    </div>
-                                </div>
-                                <div class="comment__answer answer">
-                                    <div class="comment__header with-icon">
-                                        <div class="with-icon__icon">
-                                            <img src="{{asset('app/img/user-icon.png')}}" alt="user">
+                                        <div class="comment__text p">
+                                           {{$comment->message}}
                                         </div>
-                                        <div class="with-icon__body d-flex flex-column">
-                                            <div class="h6">username</div>
-                                            <div class="p-light">30 минут назад</div>
+                                        <div class="comment__footer">
+                                            <div class="comment__action p-light likeable" data-like="comment">
+                                                {{$comment->likes()->first() == null
+                                                ? "0"
+                                                : $comment->likes()->get()->count()}} Нравится
+                                            </div>
+                                            <a class="comment__action ellipse p-light to-add-comment"
+                                               href="#add-comment"
+                                               data-answerfor="{{$comment->user->name}}"
+                                               data-comment="{{$comment->id}}">
+                                                Ответить
+                                            </a>
                                         </div>
+                                        @if($comment->answers()->first() !== null)
+                                            @foreach($comment->answers as $answer)
+                                                <div class="comment__answer answer">
+                                                    <div class="comment__header with-icon">
+                                                        <div class="comment__header-icon with-icon__icon">
+                                                            <img src="{{isset($answer->user->image)
+                                                        ? asset($answer->user->image->filename)
+                                                        : asset('app/img/avatar-default.png')}}"
+                                                                 alt="user icon"
+                                                            />
+                                                        </div>
+                                                        <div class="with-icon__body d-flex flex-column">
+                                                            <div class="h6">{{$answer->user->name}}</div>
+                                                            <div class="p-light">{{$comment->user->created_at->diffForHumans()}}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="comment__text p">
+                                                        {{$answer->message}}
+                                                    </div>
+                                                    <div class="comment__footer">
+                                                        <div class="comment__action p-light likeable" data-like="answer">
+                                                            {{$answer->likes()->first() == null
+                                                              ? "0"
+                                                              : $answer->likes()->get()->count()}} Нравится
+                                                        </div>
+                                                        <div class="comment__action ellipse p-light to-add-comment"
+                                                             data-comment="{{$comment->id}}"
+                                                             data-answerfor="{{$answer->user->name}}"
+                                                        >
+                                                            Ответить
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @endif
                                     </div>
-                                    <div class="comment__text p">
-                                        Windows XP была построена на базе того же ядра Windows NT, что и Windows 2000
-                                    </div>
-                                    <div class="comment__footer">
-                                        <div class="comment__action p-light">
-                                            3 Нравится
-                                        </div>
-                                        <div class="comment__action ellipse p-light">
-                                            Ответить
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="comment">
-                                <div class="comment__header with-icon">
-                                    <div class="with-icon__icon">
-                                        <img src="{{asset('app/img/user-icon.png')}}" alt="user">
-                                    </div>
-                                    <div class="with-icon__body d-flex flex-column">
-                                        <div class="h6">username</div>
-                                        <div class="p-light">30 минут назад</div>
-                                    </div>
-                                </div>
-                                <div class="comment__text p">
-                                    Windows XP была построена на базе того же ядра Windows NT, что и Windows 2000
-                                </div>
-                                <div class="comment__footer">
-                                    <div class="comment__action p-light">
-                                        3 Нравится
-                                    </div>
-                                    <div class="comment__action ellipse p-light">
-                                        Ответить
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <form class="comments-block__add-comment add-comment">
-                            <div class="add-comment__title h3">
-                                Напишите комментарий
-                            </div>
-                            <div class="add-comment__name form-input">
-                                <input class="required" type="text" placeholder="Введите имя">
-                            </div>
-                            <div class="add-comment__body form-input">
-                                <textarea class="required" placeholder="Введите текст" rows="4"></textarea>
-                            </div>
 
-                            <div class="required_alert p">
-                                Заполните необходимые поля
+                                @endforeach
                             </div>
+                        @endif
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
 
-                            <button class="add-comment__btn btn btn_primary h4">
-                                Оставить отзыв
-                            </button>
+                        <form
+                            class="comments-block__add-comment add-comment"
+                            id="add-comment"
+                            method="POST"
+                            action="{{route('comment.store', $article->id)}}"
+                        >
+                            @csrf
+                            @if(\Illuminate\Support\Facades\Auth::check())
+                                <div class="add-comment__title h3">
+                                    Напишите комментарий
+                                </div>
+                                <input type="hidden" value="0" name="answer_for" data-answerFor="" id="answer_for">
+                                <input type="hidden" value="{{$article->id}}" name="article_id" id="article_id">
+
+                                {{--                            <div class="add-comment__name form-input">--}}
+                                {{--                                <input class="required" type="text" placeholder="Введите имя">--}}
+                                {{--                            </div>--}}
+                                <div class="add-comment__body form-input">
+                                <textarea
+                                    class="{{$errors->has('message') ? 'required' : '' }}"
+                                    placeholder="Введите текст"
+                                    name="message"
+                                    rows="4"></textarea>
+                                </div>
+                                @error("message")
+                                <div class="required_alert p">
+                                    {{$message}}
+                                </div>
+                                @enderror
+
+                                <button class="add-comment__btn btn btn_primary h4">
+                                    Оставить отзыв
+                                </button>
+                            @endif
+
                         </form>
                     </div>
                 </div>
@@ -236,233 +204,42 @@
             <div class="sidebar">
                 <div class="sidebar__title h2">Навигация</div>
                 <div class="sidebar__blog-nav blog-nav row ">
-                    <div class="blog-nav__category">
-                        <div class="blog-nav__main with-icon">
-                            <div class="with-icon__icon">
-                                <svg width="12px" height="7px" viewBox="0 0 12 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
-                                    <title>keyboard_arrow_up</title>
-                                    <desc>Created with Sketch.</desc>
-                                    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <g id="Rounded" transform="translate(-718.000000, -2466.000000)">
-                                            <g id="Hardware" transform="translate(100.000000, 2404.000000)">
-                                                <g id="-Round-/-Hardware-/-keyboard_arrow_up" transform="translate(612.000000, 54.000000)">
-                                                    <g>
-                                                        <rect id="Rectangle-Copy-106" x="0" y="0" width="24" height="24"></rect>
-                                                        <path d="M8.12,14.71 L12,10.83 L15.88,14.71 C16.27,15.1 16.9,15.1 17.29,14.71 C17.68,14.32 17.68,13.69 17.29,13.3 L12.7,8.71 C12.31,8.32 11.68,8.32 11.29,8.71 L6.7,13.3 C6.31,13.69 6.31,14.32 6.7,14.71 C7.09,15.09 7.73,15.1 8.12,14.71 Z" id="🔹-Icon-Color" fill="#1D1D1D"></path>
+                    @foreach($categories as $category)
+                        <div class="blog-nav__category">
+                            <div class="blog-nav__main with-icon">
+                                <div class="with-icon__icon">
+                                    <svg width="12px" height="7px" viewBox="0 0 12 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+                                        <title>keyboard_arrow_up</title>
+                                        <desc>Created with Sketch.</desc>
+                                        <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <g id="Rounded" transform="translate(-718.000000, -2466.000000)">
+                                                <g id="Hardware" transform="translate(100.000000, 2404.000000)">
+                                                    <g id="-Round-/-Hardware-/-keyboard_arrow_up" transform="translate(612.000000, 54.000000)">
+                                                        <g>
+                                                            <rect id="Rectangle-Copy-106" x="0" y="0" width="24" height="24"></rect>
+                                                            <path d="M8.12,14.71 L12,10.83 L15.88,14.71 C16.27,15.1 16.9,15.1 17.29,14.71 C17.68,14.32 17.68,13.69 17.29,13.3 L12.7,8.71 C12.31,8.32 11.68,8.32 11.29,8.71 L6.7,13.3 C6.31,13.69 6.31,14.32 6.7,14.71 C7.09,15.09 7.73,15.1 8.12,14.71 Z" id="🔹-Icon-Color" fill="#1D1D1D"></path>
+                                                        </g>
                                                     </g>
                                                 </g>
                                             </g>
                                         </g>
-                                    </g>
-                                </svg>
+                                    </svg>
+                                </div>
+                                <div class="with-icon__body h4">
+                                    {{$category->value}}
+                                </div>
                             </div>
-                            <div class="with-icon__body h4">
-                                Категория
-                            </div>
-                        </div>
-                        <div class="blog-nav__sub-categories">
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5 ">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5 chosen">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                        </div>
-                    </div>
-                    <div class="blog-nav__category">
-                        <div class="blog-nav__main with-icon">
-                            <div class="with-icon__icon">
-                                <svg width="12px" height="7px" viewBox="0 0 12 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
-                                    <title>keyboard_arrow_up</title>
-                                    <desc>Created with Sketch.</desc>
-                                    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <g id="Rounded" transform="translate(-718.000000, -2466.000000)">
-                                            <g id="Hardware" transform="translate(100.000000, 2404.000000)">
-                                                <g id="-Round-/-Hardware-/-keyboard_arrow_up" transform="translate(612.000000, 54.000000)">
-                                                    <g>
-                                                        <rect id="Rectangle-Copy-106" x="0" y="0" width="24" height="24"></rect>
-                                                        <path d="M8.12,14.71 L12,10.83 L15.88,14.71 C16.27,15.1 16.9,15.1 17.29,14.71 C17.68,14.32 17.68,13.69 17.29,13.3 L12.7,8.71 C12.31,8.32 11.68,8.32 11.29,8.71 L6.7,13.3 C6.31,13.69 6.31,14.32 6.7,14.71 C7.09,15.09 7.73,15.1 8.12,14.71 Z" id="🔹-Icon-Color" fill="#1D1D1D"></path>
-                                                    </g>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </svg>
-                            </div>
-                            <div class="with-icon__body h4">
-                                Категория
-                            </div>
-                        </div>
-                        <div class="blog-nav__sub-categories">
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                        </div>
-                    </div>
-                    <div class="blog-nav__category">
-                        <div class="blog-nav__main with-icon">
-                            <div class="with-icon__icon">
-                                <svg width="12px" height="7px" viewBox="0 0 12 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
-                                    <title>keyboard_arrow_up</title>
-                                    <desc>Created with Sketch.</desc>
-                                    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <g id="Rounded" transform="translate(-718.000000, -2466.000000)">
-                                            <g id="Hardware" transform="translate(100.000000, 2404.000000)">
-                                                <g id="-Round-/-Hardware-/-keyboard_arrow_up" transform="translate(612.000000, 54.000000)">
-                                                    <g>
-                                                        <rect id="Rectangle-Copy-106" x="0" y="0" width="24" height="24"></rect>
-                                                        <path d="M8.12,14.71 L12,10.83 L15.88,14.71 C16.27,15.1 16.9,15.1 17.29,14.71 C17.68,14.32 17.68,13.69 17.29,13.3 L12.7,8.71 C12.31,8.32 11.68,8.32 11.29,8.71 L6.7,13.3 C6.31,13.69 6.31,14.32 6.7,14.71 C7.09,15.09 7.73,15.1 8.12,14.71 Z" id="🔹-Icon-Color" fill="#1D1D1D"></path>
-                                                    </g>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </svg>
-                            </div>
-                            <div class="with-icon__body h4">
-                                Категория
-                            </div>
-                        </div>
-                        <div class="blog-nav__sub-categories">
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                        </div>
-                    </div>
-                    <div class="blog-nav__category">
-                        <div class="blog-nav__main with-icon">
-                            <div class="with-icon__icon">
-                                <svg width="12px" height="7px" viewBox="0 0 12 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
-                                    <title>keyboard_arrow_up</title>
-                                    <desc>Created with Sketch.</desc>
-                                    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <g id="Rounded" transform="translate(-718.000000, -2466.000000)">
-                                            <g id="Hardware" transform="translate(100.000000, 2404.000000)">
-                                                <g id="-Round-/-Hardware-/-keyboard_arrow_up" transform="translate(612.000000, 54.000000)">
-                                                    <g>
-                                                        <rect id="Rectangle-Copy-106" x="0" y="0" width="24" height="24"></rect>
-                                                        <path d="M8.12,14.71 L12,10.83 L15.88,14.71 C16.27,15.1 16.9,15.1 17.29,14.71 C17.68,14.32 17.68,13.69 17.29,13.3 L12.7,8.71 C12.31,8.32 11.68,8.32 11.29,8.71 L6.7,13.3 C6.31,13.69 6.31,14.32 6.7,14.71 C7.09,15.09 7.73,15.1 8.12,14.71 Z" id="🔹-Icon-Color" fill="#1D1D1D"></path>
-                                                    </g>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </svg>
-                            </div>
-                            <div class="with-icon__body h4">
-                                Категория
-                            </div>
-                        </div>
-                        <div class="blog-nav__sub-categories">
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5 ">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                            <div class="blog-nav__sub h5">
-                                Подкатегория
-                            </div>
-                        </div>
-                    </div>
+                            <div class="blog-nav__sub-categories">
+                                @foreach(App\Models\Article::where('category_id', $category->id)->get() as $sub_article)
+                                    <div class="blog-nav__sub h5 {{$article->id === $sub_article->id ? "chosen" : ""}}">
+                                        <a href="{{route("articles.show", [$sub_article->category->slug, $sub_article->slug])}}">{{$sub_article->title}}</a>
+                                    </div>
+                                @endforeach
 
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
                 <div class="sidebar__title h2">Акции</div>
                 <div class="sidebar__products row row-cols-1 row-cols-sm-2 row-cols-lg-1 g-3">

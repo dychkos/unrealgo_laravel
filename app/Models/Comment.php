@@ -10,10 +10,24 @@ class Comment extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'message',
+        'user_id'
+    ];
+
     public function answers() : HasMany
     {
         return $this->hasMany(Answer::class);
     }
 
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function likes()
+    {
+        return $this->morphMany(Like::class, "like");
+    }
 
 }

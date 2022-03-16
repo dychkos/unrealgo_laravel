@@ -17,7 +17,14 @@ return new class extends Migration
             $table->id();
             $table->string('message');
             $table->morphs('comment');
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')->cascadeOnDelete();
+
             $table->timestamps();
+
         });
     }
 

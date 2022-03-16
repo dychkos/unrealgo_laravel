@@ -21,7 +21,7 @@
     padding: 9px 15px;
     border-radius: 20px;
     margin-right: 12px;
-    color: #fff;
+    color: #fff !important;
     svg{
       display: none;
     }
@@ -32,6 +32,9 @@
     padding: 9px 15px;
     transition: color 0.3s ease;
     margin-right: 12px;
+    svg{
+        display: none;
+    }
     &:last-child{
       margin-right: 0;
     }

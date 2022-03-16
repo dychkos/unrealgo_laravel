@@ -13,13 +13,36 @@
             </div>
             <div class="footer__col col order-1 order-sm-0 order-lg-1">
                 <div class="footer__title h4">Ваш аккаунт</div>
-                <div class="footer__link p">Войти</div>
-                <div class="footer__link p">Регистрация</div>
+                @if(\Illuminate\Support\Facades\Auth::check())
+                    <div class="footer__link">
+                        <a class="p" href="{{route('user.basket')}}">Корзина</a>
+                    </div>
+                    <div class="footer__link">
+                        <a class="p" href="{{route('user.liked')}}">Избранное</a>
+                    </div>
+                    <div class="footer__link">
+                        <a class="p" href="{{route('user.order-history')}}">Мои заказы</a>
+                    </div>
+                    <div class="footer__link">
+                        <a class="p" href="{{route('user.profile')}}">Профиль</a>
+                    </div>
+                @else
+                    <div class="footer__link">
+                        <a class="p" href="{{route('login.login')}}">Войти</a>
+                    </div>
+                    <div class="footer__link">
+                        <a class="p" href="{{route('register.register')}}">Регистрация</a>
+                    </div>
+                @endif
             </div>
             <div class="footer__col col order-2 order-sm-2 order-lg-2">
                 <div class="footer__title h4">Разделы</div>
-                <div class="footer__link p">Блог</div>
-                <div class="footer__link p">Магазин</div>
+                <div class="footer__link">
+                    <a class="p" href="{{route('articles.index')}}" >Блог</a>
+                </div>
+                <div class="footer__link">
+                    <a class="p" href="{{route('store.index')}}">Магазин</a>
+                </div>
                 <div class="footer__link p">О нас</div>
             </div>
             <div class="footer__col col order-3 order-sm-3 order-lg-3">

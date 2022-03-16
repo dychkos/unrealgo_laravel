@@ -6,7 +6,7 @@
     </div>
     <div class="banner mb-5">
         <div class="banner__background photo">
-            <img src="../../../../../Store/Devs/unrgo_template/app/img/banner.png" alt="Banner">
+            <img src="{{asset("app/img/banner.png")}}" alt="Banner">
         </div>
         <div class="banner__card">
             <div class="banner__title">Встречай новую коллекцию</div>

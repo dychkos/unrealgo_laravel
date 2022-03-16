@@ -10,18 +10,24 @@
 	&__input-group{
 		margin-top: 20px;
 	}
+
 	&__remove{
 		position: absolute;
 		top: 0;
 		right: 20px;
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		color: $danger;
-		cursor: pointer;
-		&:hover{
-			text-decoration: underline;
-		}
+	    display: flex;
+        flex-direction: column-reverse;
+        &-body{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: $danger;
+            cursor: pointer;
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+
 	}
 	&__content{
 		color: $black;
@@ -48,7 +54,7 @@
 	}
 }
 
-	
+
 @media only screen and (max-width: 767px){
 	.user-profile{
 		&__btn{

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ControllerHelper;
 use App\Helpers\Helper;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -38,32 +39,33 @@ class UserController extends Controller
             $image_url = Helper::upload_image(array($file));
         }
 
-        $processed = $this->addOnlyExists($request->all());
+        $processed = ControllerHelper::addOnlyExists($request->all());
+
+        $processed['notification'] = array_key_exists("notification", $processed);
 
         $updatedUser = array_merge($processed,array(
             'id' => Auth::user()->id,
             'image' => $image_url,
         ));
 
-        $result = $userService->update($updatedUser);
+        $userService->update($updatedUser);
 
         return redirect()->back()->with('message', 'Личные данные успешно изменены!');
     }
 
-    private function addOnlyExists($requestData){
-        $processed = [];
-        foreach ($requestData as $key => $value){
-            if($value){
-                $processed = $this->array_push_assoc($processed,$key,$value);
-            }
-        }
-        return $processed;
+    public function delete(UserService $userService, $request) {
+        $userID = $request->input('id');
 
+        $userService->delete($userID);
+
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('home');
     }
 
-    private function array_push_assoc($array, $key, $value) {
-        $array[$key] = $value;
-        return $array;
-    }
 
 }

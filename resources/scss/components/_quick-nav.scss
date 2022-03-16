@@ -11,6 +11,7 @@
     transition-property: border-bottom-color, color;
     transition-duration: 0.4s;
     white-space: nowrap;
+      transition: padding-right 0.4s ease;
     &:hover{
       color: $hover;
       border-bottom-color: $hover;

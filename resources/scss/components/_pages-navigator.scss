@@ -1,0 +1,23 @@
+.pages-navigator{
+  display: flex;
+  margin: 40px 0;
+  justify-content: center;
+  gap: 8px;
+    &__item{
+      padding: 8px 18px;
+      font-size: 22px;
+      color: $black;
+      border-radius: $b-radius;
+      background-color: $background-light;
+      cursor: pointer;
+      transition: opacity 0.4s ease-in-out;
+      &:hover{
+          opacity: 0.8;
+      }
+      &_active{
+          background-color: inherit;
+          color: #fff;
+      }
+  }
+}
+

@@ -43,6 +43,9 @@
     {{--  BACKGROUND  --}}
     @include("includes.background")
 
+    {{--  MODAL  --}}
+    @include("includes.modal")
+
 </body>
     @stack('js')
 </html>

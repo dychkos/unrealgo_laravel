@@ -20,6 +20,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
+        'notification',
+        'status ',
         'password',
     ];
 
@@ -45,4 +48,15 @@ class User extends Authenticatable
     public function role(){
         return $this->belongsTo(Role::class);
     }
+
+    public function image(): \Illuminate\Database\Eloquent\Relations\MorphOne
+    {
+        return $this->morphOne(Image::class, 'image');
+    }
+
+    public function isAdmin():bool
+    {
+        return $this->role->value == "admin";
+    }
+
 }

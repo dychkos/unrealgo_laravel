@@ -52,6 +52,12 @@ class AuthRepository
         return $user->whereEmail($email)->count() > 0;
     }
 
+    public function checkPhoneExists($phone): bool
+    {
+        $user = new $this->user;
+        return $user->wherePhone($phone)->count() > 0;
+    }
+
     public function delete($user_id){
         $user = new $this->user;
         return $user->destroy($user_id);

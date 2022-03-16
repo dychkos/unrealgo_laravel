@@ -1,7 +1,15 @@
 let editPhotoNode = document.querySelector('#edit-photo');
 let photoPreview = document.querySelector('#photo-preview');
+let removeUserBtn = document.querySelector('#open-modal');
 
 editPhotoNode.addEventListener('change', readURL);
+
+let modal = new Modal(removeUserBtn, ".modal-wrapper" , true);
+modal
+    .setTitle("Вы уверены ?")
+    .setDescription('<p class="p" style="text-align: center"> Ваш аккаунт будет полностью удалён из системы </p>')
+    .setActionYES(deleteAccount)
+    .init();
 
 function readURL(input){
     let fileInput = input.target;
@@ -18,3 +26,13 @@ function readURL(input){
         $(photoPreview).attr('src', '/app/img/profile.jpg');
     }
 }
+
+console.log('urlDelete',urlDelete);
+
+function deleteAccount() {
+    fetch(urlDelete,{
+        method: "delete"
+    })
+}
+
+

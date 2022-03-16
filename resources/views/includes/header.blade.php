@@ -1,3 +1,5 @@
+@php($user = \Illuminate\Support\Facades\Auth::user())
+
 <header class="header" id="header">
     <div id="top"></div>
     <div class="container">
@@ -47,19 +49,22 @@
                         </div>
                     </div>
                     <div class="header__link">
-                        <a href="{{asset(route('articles.index'))}}" class="h4 link">Блог</a>
+                        <a href="{{route('articles.index')}}" class="h4 link">Блог</a>
                     </div>
                     <div class="header__link">
-                        <a href="#" class="h4 link">Магазин</a>
+                        <a href="{{route("store.index")}}" class="h4 link">Магазин</a>
                     </div>
                     @if( \Illuminate\Support\Facades\Auth::check())
                         <div class="user-dropdown">
                             <div class="user-dropdown__preview">
                                 <span class="user-dropdown__name h4">
-                                  {{\Illuminate\Support\Facades\Auth::user()->name}}
+                                  {{$user->name}}
                                 </span>
                                 <div class="user-dropdown__image">
-                                    <img src="{{isset($user->image) ? $user->image->filename : asset('app/img/avatar-default.png')}}" alt="user icon">
+                                    <img src="{{isset($user->image)
+                                    ? asset($user->image->filename)
+                                    : asset('app/img/avatar-default.png')}}"
+                                         alt="user icon" />
                                 </div>
                             </div>
                             <div class="user-dropdown__body">
@@ -126,17 +131,29 @@
                 <div class="header-mobile__body">
                     <div class="header-mobile__items">
                         <div class="header-mobile__link">
-                            <a href="#">Блог</a>
+                            <a href="{{route('articles.index')}}">Блог</a>
                         </div>
                         <div class="header-mobile__link">
-                            <a href="#">Магазин</a>
+                            <a href="{{route('store.index')}}">Магазин</a>
                         </div>
-                        <div class="header-mobile__link">
-                            <a href="#">Профиль</a>
-                        </div>
-                        <div class="header-mobile__link">
-                            <a href="#">Выйти</a>
-                        </div>
+                        @if(\Illuminate\Support\Facades\Auth::check())
+                            <div class="header-mobile__link">
+                                <a href="{{route('user.basket')}}">Корзина</a>
+                            </div>
+                            <div class="header-mobile__link">
+                                <a href="{{route('user.liked')}}">Избранное</a>
+                            </div>
+                            <div class="header-mobile__link">
+                                <a href="{{route('user.order-history')}}">Мои заказы</a>
+                            </div>
+                            <div class="header-mobile__link">
+                                <a href="#{{route('user.profile')}}">Профиль</a>
+                            </div>
+                            <div class="header-mobile__link">
+                                <a href="{{route('logout')}}">Выйти</a>
+                            </div>
+                        @endif
+
                     </div>
                 </div>
                 <div class="header-mobile__social social">

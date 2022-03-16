@@ -28,6 +28,9 @@
     margin-bottom: 12px;
     cursor: pointer;
     transition: color 0.3s ease;
+    &_active{
+        color: $primary;
+    }
     &:hover{
       color: $primary;
     }

@@ -16,11 +16,11 @@ class Article extends Model
 
     public function comments(): \Illuminate\Database\Eloquent\Relations\morphMany
     {
-        return $this->morphMany(Comment::class, 'comments');
+        return $this->morphMany(Comment::class, 'comment');
     }
 
     public function category() {
-        return $this->hasOne(Category::class);
+        return $this->belongsTo(Category::class);
     }
 
 }

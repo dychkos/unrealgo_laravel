@@ -16,12 +16,20 @@ return new class extends Migration
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
             $table->string('message');
-            $table->timestamps();
+
+            $table->unsignedBigInteger('comment_id');
+            $table->foreign('comment_id')
+                ->references('id')
+                ->on('comments');
+
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
+
+            $table->timestamps();
+
 
         });
     }
