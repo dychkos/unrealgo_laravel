@@ -29,7 +29,7 @@
                                 <div class="large-article__content">
                                     <div class="large-article__title h4">{{$popular->title}}</div>
                                     <div class="large-article__text p">
-                                        {{$popular->short_description}}
+                                        {{$popular->description}}
                                     </div>
                                 </div>
                                 <div class="large-article__footer">
@@ -74,7 +74,7 @@
                                             {{$article->title}}
                                         </div>
                                         <div class="article__text p">
-                                            {{$article->short_description}}
+                                            {{$article->description}}
                                         </div>
                                     </div>
                                 </a>

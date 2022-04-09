@@ -47,7 +47,7 @@
                 </div>
                 <div class="big-article__body">
                     <div class="big-article__content">
-                        {!! $article->description !!}
+                        {!! $article->body !!}
                     </div>
                     <div class="big-article__comments-block comments-block">
                         <div class="comments-block__header">
@@ -78,7 +78,7 @@
                             </div>
                         @else
                             <div class="comments-block__comments comments">
-                                @foreach($article->comments as $comment)
+                                @foreach($article->comments()->whereNull("answered_to")->get() as $comment)
                                     <div class="comment">
                                         <div class="comment__header with-icon">
                                             <div class="comment__header-icon with-icon__icon">
@@ -95,7 +95,7 @@
                                         </div>
 
                                         <div class="comment__text p">
-                                           {{$comment->message}}
+                                           {{$comment->body}}
                                         </div>
                                         <div class="comment__footer">
                                             <div class="comment__action p-light likeable" data-like="comment">
@@ -110,8 +110,8 @@
                                                 Ответить
                                             </a>
                                         </div>
-                                        @if($comment->answers()->first() !== null)
-                                            @foreach($comment->answers as $answer)
+                                        @if($article->comments()->where("answered_to", $comment->id)->first() !== null)
+                                            @foreach($article->comments()->where("answered_to", $comment->id)->get() as $answer)
                                                 <div class="comment__answer answer">
                                                     <div class="comment__header with-icon">
                                                         <div class="comment__header-icon with-icon__icon">
@@ -127,7 +127,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="comment__text p">
-                                                        {{$answer->message}}
+                                                        {{$answer->body}}
                                                     </div>
                                                     <div class="comment__footer">
                                                         <div class="comment__action p-light likeable" data-like="answer">
@@ -171,7 +171,7 @@
                                 <div class="add-comment__title h3">
                                     Напишите комментарий
                                 </div>
-                                <input type="hidden" value="0" name="answer_for" data-answerFor="" id="answer_for">
+                                <input type="hidden" value="0" name="answered_to" data-answerFor="" id="answer_for">
                                 <input type="hidden" value="{{$article->id}}" name="article_id" id="article_id">
 
                                 {{--                            <div class="add-comment__name form-input">--}}
@@ -179,12 +179,12 @@
                                 {{--                            </div>--}}
                                 <div class="add-comment__body form-input">
                                 <textarea
-                                    class="{{$errors->has('message') ? 'required' : '' }}"
+                                    class="{{$errors->has('body') ? 'required' : '' }}"
                                     placeholder="Введите текст"
-                                    name="message"
+                                    name="body"
                                     rows="4"></textarea>
                                 </div>
-                                @error("message")
+                                @error("body")
                                 <div class="required_alert p">
                                     {{$message}}
                                 </div>

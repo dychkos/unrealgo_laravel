@@ -33,14 +33,9 @@ addAnswerButtons.forEach(button => {
 
 likesBtn.forEach(likeBtn => {
     likeBtn.addEventListener('click', () => {
-        let isAnswer = likeBtn.dataset.like === "answer";
-
         let modelID = likeBtn.nextElementSibling.dataset.comment;
-
-        console.log('click', modelID);
-
         let formData = new FormData();
-        isAnswer && formData.append("isAnswer", "true");
+
         formData.append("_token", csrfToken);
         formData.append("model", modelID);
 

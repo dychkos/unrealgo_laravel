@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('slug');
-            $table->string('title');
-            $table->string('short_description');
-            $table->longText('description');
 
+            $table->string('title');
+            $table->string('description');
+            $table->longText('body');
             $table->integer('views');
 
             $table->unsignedBigInteger('category_id');

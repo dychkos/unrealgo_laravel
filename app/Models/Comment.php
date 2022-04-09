@@ -11,8 +11,9 @@ class Comment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'message',
-        'user_id'
+        'body',
+        'user_id',
+        'answered_to'
     ];
 
     public function answers() : HasMany
