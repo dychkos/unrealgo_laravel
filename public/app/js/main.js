@@ -3,14 +3,19 @@ const isMobile = getComputedStyle(document.querySelector('.header-mobile')).disp
 
 //Common Nodes
 let btnBurger = document.querySelector('.burger');
+
 let search = isMobile
 	? document.querySelector('.search[data-mobile]')
 	: document.querySelector('.search[data-desktop]')  ;
 let searchWrapper = document.querySelector('.search__wrapper');
 let searchInput = search.querySelector('.search__input');
 let searchResults = search.querySelector('.search__results');
+
 let logo = document.querySelector(".header-mobile__col .logo");
+
 let userDropdown = document.querySelector('.user-dropdown');
+let triggerUserDropdown = document.querySelector('.user-dropdown__preview');
+
 let up = document.querySelector('.up');
 let blogNav = document.querySelectorAll('.blog-nav__category');
 
@@ -106,7 +111,8 @@ searchInput.addEventListener('input',(event)=>{
 })
 
 if(!isMobile){
-    userDropdown.addEventListener("click",()=>{
+    triggerUserDropdown.addEventListener("click",()=>{
+        console.log('here')
         userDropdown.classList.toggle("open");
 
         let hider = new Hider(".user-dropdown",()=>{

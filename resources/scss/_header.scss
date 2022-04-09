@@ -1,7 +1,6 @@
 .header{
 	color: $white;
 	margin-top: 30px;
-	height: 60px;
 	&-mobile{
 		display: none;
 		margin-top: 16px;
@@ -113,7 +112,7 @@
 	}
 }
 
-	
+
 @media only screen and (max-width: 767px){
 	.header{
 

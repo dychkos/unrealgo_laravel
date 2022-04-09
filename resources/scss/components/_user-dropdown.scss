@@ -1,19 +1,18 @@
 //USER-DROPDOWN STYLING
 .user-dropdown{
+  max-height: 0;
   background-color: #fff;
   color: $black;
   cursor: pointer;
-  border-radius: 30px;
-  padding: 10px;
-  box-shadow: $drop-shadow;
-  z-index: $defaultZ+1;
-
-    &.open{
-    .user-dropdown__body{
-      display: block;
-    }
+  margin: 24px 0;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  &.open{
+    opacity: 1;
+    max-height: 50px;
   }
   &__preview{
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,15 +31,13 @@
       }
   }
   &__body{
-    display: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 10px 20px;
   }
   &__item{
-    margin-bottom: 12px;
-
-    &:last-child{
-      margin-bottom: 0;
-    }
+    color: $black;
   }
 }
 //USER-DROPDOWN ENDs
