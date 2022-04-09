@@ -68,206 +68,36 @@
             <div class="slider">
                 <div class="swiper new-swiper">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="product-list__item product">
-                                <div class="product__wrapper">
-                                    <div class="product__image">
-                                        <img src="../../../../../Store/Devs/unrgo_template/app/img/test.png" alt="Product">
-                                    </div>
-                                    <div class="product__like like">
-                                        <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </div>
+                        @foreach($new as $product)
+                            <div class="swiper-slide">
+                                <div class="product-list__item product">
+                                    <div class="product__wrapper">
+                                        <div class="product__image">
+                                            <img src="{{$product->images->first()
+                                            ? asset($product->images->first()->filename)
+                                            : asset("app/img/test.png")}}" alt="Product">
+                                        </div>
+                                        <div class="product__like like">
+                                            <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
 
-                                </div>
-                                <div class="product__body">
-                                    <div class="product__prices">
-                                        <div class="product__price h3">1 340 ₽</div>
-                                        <div class="product__discount h6">5 340 ₽</div>
                                     </div>
-                                    <div class="product__title h5">
-                                        Ежедневник фирмаГ
-                                        planner
+                                    <div class="product__body">
+                                        <div class="product__prices">
+                                            <div class="product__price h3">{{$product->currentPrice()}} ₽</div>
+                                            @if(isset($product->offer))
+                                                <div class="product__discount h6">{{$product->price}}₽</div>
+                                            @endif
+                                        </div>
+                                        <div class="product__title h5">
+                                            {{$product->title}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="product-list__item product">
-                                <div class="product__wrapper">
-                                    <div class="product__image">
-                                        <img src="../../../../../Store/Devs/unrgo_template/app/img/test.png" alt="Product">
-                                    </div>
-                                    <div class="product__like like">
-                                        <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div class="product__body">
-                                    <div class="product__prices">
-                                        <div class="product__price h3">1 340 ₽</div>
-                                        <div class="product__discount h6">5 340 ₽</div>
-                                    </div>
-                                    <div class="product__title h5">
-                                        Ежедневник фирмаГ
-                                        planner
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="product-list__item product">
-                                <div class="product__wrapper">
-                                    <div class="product__image">
-                                        <img src="../../../../../Store/Devs/unrgo_template/app/img/test.png" alt="Product">
-                                    </div>
-                                    <div class="product__like like">
-                                        <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div class="product__body">
-                                    <div class="product__prices">
-                                        <div class="product__price h3">1 340 ₽</div>
-                                        <div class="product__discount h6">5 340 ₽</div>
-                                    </div>
-                                    <div class="product__title h5">
-                                        Ежедневник фирмаГ
-                                        planner
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="product-list__item product">
-                                <div class="product__wrapper">
-                                    <div class="product__image">
-                                        <img src="../../../../../Store/Devs/unrgo_template/app/img/test.png" alt="Product">
-                                    </div>
-                                    <div class="product__like like">
-                                        <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div class="product__body">
-                                    <div class="product__prices">
-                                        <div class="product__price h3">1 340 ₽</div>
-                                        <div class="product__discount h6">5 340 ₽</div>
-                                    </div>
-                                    <div class="product__title h5">
-                                        Ежедневник фирмаГ
-                                        planner
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="product-list__item product">
-                                <div class="product__wrapper">
-                                    <div class="product__image">
-                                        <img src="../../../../../Store/Devs/unrgo_template/app/img/test.png" alt="Product">
-                                    </div>
-                                    <div class="product__like like">
-                                        <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div class="product__body">
-                                    <div class="product__prices">
-                                        <div class="product__price h3">1 340 ₽</div>
-                                        <div class="product__discount h6">5 340 ₽</div>
-                                    </div>
-                                    <div class="product__title h5">
-                                        Ежедневник фирмаГ
-                                        planner
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="product-list__item product">
-                                <div class="product__wrapper">
-                                    <div class="product__image">
-                                        <img src="../../../../../Store/Devs/unrgo_template/app/img/test.png" alt="Product">
-                                    </div>
-                                    <div class="product__like like">
-                                        <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div class="product__body">
-                                    <div class="product__prices">
-                                        <div class="product__price h3">1 340 ₽</div>
-                                        <div class="product__discount h6">5 340 ₽</div>
-                                    </div>
-                                    <div class="product__title h5">
-                                        Ежедневник фирмаГ
-                                        planner
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="product-list__item product">
-                                <div class="product__wrapper">
-                                    <div class="product__image">
-                                        <img src="../../../../../Store/Devs/unrgo_template/app/img/test.png" alt="Product">
-                                    </div>
-                                    <div class="product__like like">
-                                        <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div class="product__body">
-                                    <div class="product__prices">
-                                        <div class="product__price h3">1 340 ₽</div>
-                                        <div class="product__discount h6">5 340 ₽</div>
-                                    </div>
-                                    <div class="product__title h5">
-                                        Ежедневник фирмаГ
-                                        planner
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="product-list__item product">
-                                <div class="product__wrapper">
-                                    <div class="product__image">
-                                        <img src="../../../../../Store/Devs/unrgo_template/app/img/test.png" alt="Product">
-                                    </div>
-                                    <div class="product__like like">
-                                        <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div class="product__body">
-                                    <div class="product__prices">
-                                        <div class="product__price h3">1 340 ₽</div>
-                                        <div class="product__discount h6">5 340 ₽</div>
-                                    </div>
-                                    <div class="product__title h5">
-                                        Ежедневник фирмаГ
-                                        planner
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
 
                 </div>
@@ -293,208 +123,37 @@
             <div class="slider">
                 <div class="swiper popular-swiper">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="product-list__item product">
-                                <div class="product__wrapper">
-                                    <div class="product__image">
-                                        <img src="../../../../../Store/Devs/unrgo_template/app/img/test.png" alt="Product">
-                                    </div>
-                                    <div class="product__like like">
-                                        <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </div>
+                        @foreach($popular as $product)
+                            <div class="swiper-slide">
+                                <div class="product-list__item product">
+                                    <div class="product__wrapper">
+                                        <div class="product__image">
+                                            <img src="{{$product->images->first()
+                                            ? asset($product->images->first()->filename)
+                                            : asset("app/img/test.png")}}" alt="Product">
+                                        </div>
+                                        <div class="product__like like">
+                                            <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
 
-                                </div>
-                                <div class="product__body">
-                                    <div class="product__prices">
-                                        <div class="product__price h3">1 340 ₽</div>
-                                        <div class="product__discount h6">5 340 ₽</div>
                                     </div>
-                                    <div class="product__title h5">
-                                        Ежедневник фирмаГ
-                                        planner
+                                    <div class="product__body">
+                                        <div class="product__prices">
+                                            <div class="product__price h3">{{$product->currentPrice()}} ₽</div>
+                                            @if(isset($product->offer))
+                                                <div class="product__discount h6">{{$product->price}}₽</div>
+                                            @endif
+                                        </div>
+                                        <div class="product__title h5">
+                                            {{$product->title}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="product-list__item product">
-                                <div class="product__wrapper">
-                                    <div class="product__image">
-                                        <img src="../../../../../Store/Devs/unrgo_template/app/img/test.png" alt="Product">
-                                    </div>
-                                    <div class="product__like like">
-                                        <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div class="product__body">
-                                    <div class="product__prices">
-                                        <div class="product__price h3">1 340 ₽</div>
-                                        <div class="product__discount h6">5 340 ₽</div>
-                                    </div>
-                                    <div class="product__title h5">
-                                        Ежедневник фирмаГ
-                                        planner
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="product-list__item product">
-                                <div class="product__wrapper">
-                                    <div class="product__image">
-                                        <img src="../../../../../Store/Devs/unrgo_template/app/img/test.png" alt="Product">
-                                    </div>
-                                    <div class="product__like like">
-                                        <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div class="product__body">
-                                    <div class="product__prices">
-                                        <div class="product__price h3">1 340 ₽</div>
-                                        <div class="product__discount h6">5 340 ₽</div>
-                                    </div>
-                                    <div class="product__title h5">
-                                        Ежедневник фирмаГ
-                                        planner
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="product-list__item product">
-                                <div class="product__wrapper">
-                                    <div class="product__image">
-                                        <img src="../../../../../Store/Devs/unrgo_template/app/img/test.png" alt="Product">
-                                    </div>
-                                    <div class="product__like like">
-                                        <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div class="product__body">
-                                    <div class="product__prices">
-                                        <div class="product__price h3">1 340 ₽</div>
-                                        <div class="product__discount h6">5 340 ₽</div>
-                                    </div>
-                                    <div class="product__title h5">
-                                        Ежедневник фирмаГ
-                                        planner
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="product-list__item product">
-                                <div class="product__wrapper">
-                                    <div class="product__image">
-                                        <img src="../../../../../Store/Devs/unrgo_template/app/img/test.png" alt="Product">
-                                    </div>
-                                    <div class="product__like like">
-                                        <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div class="product__body">
-                                    <div class="product__prices">
-                                        <div class="product__price h3">1 340 ₽</div>
-                                        <div class="product__discount h6">5 340 ₽</div>
-                                    </div>
-                                    <div class="product__title h5">
-                                        Ежедневник фирмаГ
-                                        planner
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="product-list__item product">
-                                <div class="product__wrapper">
-                                    <div class="product__image">
-                                        <img src="../../../../../Store/Devs/unrgo_template/app/img/test.png" alt="Product">
-                                    </div>
-                                    <div class="product__like like">
-                                        <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div class="product__body">
-                                    <div class="product__prices">
-                                        <div class="product__price h3">1 340 ₽</div>
-                                        <div class="product__discount h6">5 340 ₽</div>
-                                    </div>
-                                    <div class="product__title h5">
-                                        Ежедневник фирмаГ
-                                        planner
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="product-list__item product">
-                                <div class="product__wrapper">
-                                    <div class="product__image">
-                                        <img src="../../../../../Store/Devs/unrgo_template/app/img/test.png" alt="Product">
-                                    </div>
-                                    <div class="product__like like">
-                                        <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div class="product__body">
-                                    <div class="product__prices">
-                                        <div class="product__price h3">1 340 ₽</div>
-                                        <div class="product__discount h6">5 340 ₽</div>
-                                    </div>
-                                    <div class="product__title h5">
-                                        Ежедневник фирмаГ
-                                        planner
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="product-list__item product">
-                                <div class="product__wrapper">
-                                    <div class="product__image">
-                                        <img src="../../../../../Store/Devs/unrgo_template/app/img/test.png" alt="Product">
-                                    </div>
-                                    <div class="product__like like">
-                                        <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div class="product__body">
-                                    <div class="product__prices">
-                                        <div class="product__price h3">1 340 ₽</div>
-                                        <div class="product__discount h6">5 340 ₽</div>
-                                    </div>
-                                    <div class="product__title h5">
-                                        Ежедневник фирмаГ
-                                        planner
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
-
                 </div>
                 <div class="swiper-button-next" id="swiper-button-next-2">
                     <svg width="15" height="23" viewBox="0 0 15 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -510,6 +169,42 @@
                 </div>
             </div>
         </div>
+    </section>
+    <section class="store-pr mt-2">
+        <div class="store-pr__title page-title h3">
+            Все товары
+        </div>
+        <div class="product-list">
+            @foreach($products as $product)
+                <div class="product-list__item product">
+                    <div class="product__wrapper">
+                        <div class="product__image">
+                            <img src="{{$product->images->first()
+                                            ? asset($product->images->first()->filename)
+                                            : asset("app/img/test.png")}}" alt="Product">
+                        </div>
+                        <div class="product__like like">
+                            <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+
+                    </div>
+                    <div class="product__body">
+                        <div class="product__prices">
+                            <div class="product__price h3">{{$product->currentPrice()}} ₽</div>
+                            @if(isset($product->offer))
+                                <div class="product__discount h6">{{$product->price}}₽</div>
+                            @endif
+                        </div>
+                        <div class="product__title h5">
+                            {{$product->title}}
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        {{ $products->links('includes.pagination') }}
     </section>
 @endsection
 

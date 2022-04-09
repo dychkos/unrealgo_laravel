@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             RolesSeeder::class,
             CategorySeeder::class,
             ArticlesSeeder::class,
+            ProductSeeder::class
         ]);
     }
 }

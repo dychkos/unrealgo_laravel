@@ -899,6 +899,18 @@ select option, .select option {
 /*
  * Product styling
  */
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-around;
+}
+
+@media only screen and (max-width: 767px) {
+  .product-list {
+    gap: 20px;
+  }
+}
 /*
  * Basket section styling
  */
@@ -2482,7 +2494,7 @@ select option, .select option {
 .product {
   background-color: #fff;
   color: #191a29;
-  max-width: 250px;
+  width: 250px;
   border-radius: 25px;
   overflow: hidden;
   transition: transform 0.3s ease;
