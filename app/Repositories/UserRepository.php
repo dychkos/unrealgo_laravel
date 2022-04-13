@@ -39,9 +39,17 @@ class UserRepository
         return $user->fresh();
     }
 
-    public function delete($userID)
+    public function delete($userID): int
     {
         $user = $this->user;
         return $user->destroy($userID);
+    }
+
+    public function clearLiked($user_id): bool
+    {
+        $user = $this->user->find($user_id);
+        $user->likedProducts->sync([]);
+
+        return true;
     }
 }

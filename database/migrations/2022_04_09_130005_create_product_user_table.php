@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('liked_product', function (Blueprint $table) {
+        Schema::create('product_user', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('liked_id');
-            $table->foreign('liked_id')
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
                 ->references('id')
-                ->on('liked')->cascadeOnDelete();
+                ->on('users')->cascadeOnDelete();
 
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')

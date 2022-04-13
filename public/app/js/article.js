@@ -43,6 +43,10 @@ likesBtn.forEach(likeBtn => {
             method: "POST",
             body: formData
         }).then(response=>{
+            if(response.redirected){
+                window.location.href = baseURL + "/login";
+            }
+            console.log(response)
             if (!response.ok && response.status === 404){
                 console.log("Like error")
             }else {

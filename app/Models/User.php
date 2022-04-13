@@ -59,4 +59,8 @@ class User extends Authenticatable
         return $this->role->value == "admin";
     }
 
+    public function likedProducts(){
+        return $this->belongsToMany(Product::class, "product_user");
+    }
+
 }

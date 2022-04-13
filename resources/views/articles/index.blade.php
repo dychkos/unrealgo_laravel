@@ -82,7 +82,7 @@
                                 <div class="large-article__content">
                                     <div class="large-article__title h4">{{$article->title}}</div>
                                     <div class="large-article__text p">
-                                        {{\Illuminate\Support\Str::limit($article->short_description, 200, $end='...')}}
+                                        {{\Illuminate\Support\Str::limit($article->description, 200, $end='...')}}
                                     </div>
                                 </div>
                                 <div class="large-article__footer">

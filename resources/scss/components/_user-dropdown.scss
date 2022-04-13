@@ -15,9 +15,12 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+    color: $black;
+    background-color: $background-light;
     justify-content: center;
     padding: 0 10px;
     min-width: 145px;
+    border-radius: 30px;
   }
   &__image{
     margin-left: 5px;

@@ -21,6 +21,7 @@ new Swiper(".popular-swiper", {
 let navigation = document.querySelector('.navigation__active');
 let sort = document.querySelector('.sort');
 
+
 /*
 * Event listeners
 * */

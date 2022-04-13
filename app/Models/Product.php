@@ -25,4 +25,9 @@ class Product extends Model
     {
         return $this->morphMany(Image::class, 'image');
     }
+
+    public function likedBy(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(User::class, "product_user");
+    }
 }

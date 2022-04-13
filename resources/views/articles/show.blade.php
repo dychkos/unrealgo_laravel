@@ -2,8 +2,7 @@
 
 @section('content')
     <script>
-        let likeUrl = "{{route('comment.like')}}";
-        let csrfToken = "{{ csrf_token() }}";
+        let likeUrl = "{{route('user.comment.like')}}";
     </script>
     <div class="row g-4 pt-4">
         <div class="col-12 col-lg-9">
@@ -136,7 +135,7 @@
                                                               : $answer->likes()->get()->count()}} Нравится
                                                         </div>
                                                         <div class="comment__action ellipse p-light to-add-comment"
-                                                             data-comment="{{$comment->id}}"
+                                                             data-comment="{{$answer->id}}"
                                                              data-answerfor="{{$answer->user->name}}"
                                                         >
                                                             Ответить

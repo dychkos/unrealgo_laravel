@@ -47,5 +47,13 @@
     @include("includes.modal")
 
 </body>
+    <script>
+        {{-- CSRF TOKEN--}}
+        const csrfToken = "{{ csrf_token() }}";
+
+        {{-- COMMON URLs--}}
+        let baseURL = "{{route("home")}}";
+        let likeProductURL = "{{route("user.product.like")}}";
+    </script>
     @stack('js')
 </html>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ControllerHelper;
-use App\Providers\CommentService;
+use App\Services\CommentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -27,7 +27,6 @@ class CommentController extends Controller
     {
         $data = $request->all();
         $user_id = ['user_id' => Auth::user()->id];
-
 
         $data = array_merge($data, $user_id);
 

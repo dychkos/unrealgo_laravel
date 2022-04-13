@@ -74,4 +74,13 @@ class UserService
         }
     }
 
+    public function clearLiked($data)
+    {
+        $validated = Validator::make($data, [
+            "user_id" => ['required', 'integer'],
+        ])->validate();
+
+        return $this->userRepository->clearLiked($validated);
+    }
+
 }

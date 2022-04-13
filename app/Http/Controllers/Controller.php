@@ -6,6 +6,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 class Controller extends BaseController
 {
@@ -47,6 +49,20 @@ class Controller extends BaseController
 
 
         return response()->json($response, $code);
+    }
+
+    public function withUser($viewName, $data): \Illuminate\Contracts\View\View
+    {
+
+        $user = null;
+        if(Auth::check()){
+            $user = Auth::user();
+        }
+
+        $ready = array_push($data, ["user" => $user]);
+
+        return View::make($viewName, $ready);
+
     }
 
     public function respondWithToken($token, $responseMessage, $data): \Illuminate\Http\JsonResponse

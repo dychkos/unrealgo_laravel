@@ -110,14 +110,13 @@ searchInput.addEventListener('input',(event)=>{
 	}
 })
 
-if(!isMobile){
+if(!isMobile && triggerUserDropdown){
     triggerUserDropdown.addEventListener("click",()=>{
-        console.log('here')
         userDropdown.classList.toggle("open");
 
-        let hider = new Hider(".user-dropdown",()=>{
+        let hider = new Hider(".user-dropdown",() => {
             $(".user-dropdown").removeClass("open");
-        });
+        },true);
 
         if(userDropdown.classList.contains("open")){
             document.addEventListener('mouseup',hider.hide);

@@ -245,7 +245,7 @@ textarea{
 	}
 	&_primary{
 		background-color: $primary;
-		color: #fff;
+		color: #fff !important;
 		&:hover{
 			text-decoration: none;
 			background-color: $hover;

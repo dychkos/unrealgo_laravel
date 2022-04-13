@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace App\Services;
 
 use App\Repositories\CommentRepository;
 use Illuminate\Support\Facades\Validator;

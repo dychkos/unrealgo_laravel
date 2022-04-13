@@ -10,6 +10,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\AdminController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +33,7 @@ Route::post('/articles/{id}/comment',[CommentController::class,'store'])->name("
 Route::get('/store',[StoreController::class,'index'])->name("store.index");
 Route::get('/store/{id}',[StoreController::class,'show'])->name("store.show");
 
+
 Route::redirect('/user','/user/profile');
 
 Route::get('/user/profile',[UserController::class,'profile'])->name("user.profile");
@@ -42,7 +44,7 @@ Route::get('/user/basket',[UserController::class,'basket'])->name("user.basket")
 
 
 //NEED TO ADD MIDDLEWARE
-Route::post('comment/like', [CommentController::class,'like'])->name('comment.like');
+
 
 
 
@@ -57,14 +59,21 @@ Route::middleware("guest")->group(function(){
 Route::name("user.")->prefix("user")->middleware("auth")->group(function(){
     Route::get('profile',[UserController::class,'profile'])->name("profile");
     Route::post('profile',[UserController::class,'update'])->name("update");
-    Route::delete('/delete/{id}',[UserController::class,'delete'])->name("delete");
+    Route::delete('delete/{id}',[UserController::class,'delete'])->name("delete");
 
     Route::get('liked',[UserController::class,'liked'])->name("liked");
     Route::get('order-history',[UserController::class,'orderHistory'])->name("order-history");
     Route::get('basket',[UserController::class,'basket'])->name("basket");
 
+    Route::post('comment/like', [CommentController::class,'like'])->name('comment.like');
+    Route::post('product/like',[StoreController::class, 'like'])->name("product.like");
+    Route::get('liked/clear', [StoreController::class,'clearLiked'])->name("liked.clear");
+
+
 
 });
+
+
 Route::get("/admin", [AdminController::class,"index"])->name("index");
 
 /* ADMIN ROLE  */
