@@ -14,21 +14,39 @@ class StoreController extends Controller
 
         $new = Product::orderBy("created_at")->limit(10)->get();
         $popular = Product::orderBy("created_at")->limit(10)->get();
-        $products = Product::paginate(8);
 
-        $user = null;
-        if(Auth::check()){
-            $user = Auth::user();
+        $query = Product::query();
+
+        if($request->filled("order")){
+            $new = [];
+            $popular = [];
+
+            $orderBy = $request->input("order");
+
+            switch ($orderBy) {
+                case "price-high-low" : {
+                    $query->orderByDesc("price");
+                    break;
+                }
+                case "price-low-high" : {
+                    $query->orderBy("price");
+                    break;
+                }
+                default:
+                    break;
+            }
         }
 
+        $products = $query->paginate(3)->withPath("?".$request->getQueryString());
 
-//        return $this->withUser("store.index", array(
-//            "new" => $new,
-//            "popular" => $popular,
-//            "products" => $products
-//        ));
 
-        return view("store.index", compact("new", "popular", "products", "user"));
+        return $this->withUser("store.index", array(
+            "new" => $new,
+            "popular" => $popular,
+            "products" => $products
+        ));
+
+
     }
 
 
