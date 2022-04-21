@@ -5,7 +5,7 @@
 let addAnswerButtons = document.querySelectorAll('.to-add-comment');
 let needFocusNode = document.querySelector('.add-comment__body textarea');
 let formAnswerInput = document.querySelector('#answer_for');
-let likesBtn = document.querySelectorAll('.likeable');
+let likesBtns = document.querySelectorAll('.likeable');
 
 
 
@@ -31,7 +31,7 @@ addAnswerButtons.forEach(button => {
 });
 
 
-likesBtn.forEach(likeBtn => {
+likesBtns.forEach(likeBtn => {
     likeBtn.addEventListener('click', () => {
         let modelID = likeBtn.nextElementSibling.dataset.comment;
         let formData = new FormData();
