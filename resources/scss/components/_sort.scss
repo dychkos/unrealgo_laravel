@@ -7,7 +7,7 @@
     padding-bottom: 5px;
   }
   &__body{
-    display: none;
+    max-height: 0;
     position: absolute;
     top: 30px;
     width: 100%;
@@ -16,12 +16,16 @@
     justify-content: center;
     left: 0;
     z-index: $sortZ;
+    opacity: 0;
     background-color: $background-light;
     border-radius: 0 0 20px 20px;
     box-shadow: $drop-shadow;
+    transition: max-height 0.4s ease;
     &.active{
       display: flex;
+      max-height: 120px;
       flex-direction: column;
+      opacity: 1;
     }
   }
   &__item{
