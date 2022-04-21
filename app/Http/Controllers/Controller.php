@@ -59,9 +59,9 @@ class Controller extends BaseController
             $user = Auth::user();
         }
 
-        $ready = array_push($data, ["user" => $user]);
+        $ready = array_merge($data, ["user" => $user]);
 
-        return View::make($viewName, $ready);
+        return view($viewName, $ready);
 
     }
 
