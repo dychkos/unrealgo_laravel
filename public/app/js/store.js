@@ -20,13 +20,22 @@ new Swiper(".popular-swiper", {
 * */
 let navigation = document.querySelector('.navigation__active');
 let sort = document.querySelector('.sort');
+let confirmSortForm = document.getElementById("confirm_sort");
 
 
 /*
 * Event listeners
 * */
-sort.addEventListener('click',()=>{
+sort.addEventListener('click',(event)=>{
     let sortBody = sort.querySelector('.sort__body');
+
+    if(event.target.classList.contains("sort__item")){
+        let order = event.target.dataset.order;
+        let chosenOrderNode = document.getElementById("chosen-order");
+        chosenOrderNode.value = order;
+        confirmSortForm.submit();
+        return;
+    }
 
     let hider = new Hider(".sort", ()=>{
         $(".sort__body").removeClass("active");
@@ -56,3 +65,8 @@ navigation.addEventListener("click",()=>{
         document.addEventListener('mouseup',hider.hide);
     }
 })
+
+
+function applySort(){
+
+}
