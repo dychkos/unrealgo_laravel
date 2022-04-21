@@ -42,19 +42,17 @@
                 </svg>
 
             </div>
-            <div class="sort__body">
+            <form class="sort__body"
+                  action="{{route("articles.index")}}"
+                  method="GET"
+                  id="confirm_sort"
+            >
                 <div class="sort__hide hide h5">Сортировать по</div>
-                <div class="sort__item h5 {{isset($sortBy) &&  $sortBy !== "" ? "sort__item_active" : ""}}">
-                    <a href="{{route(\Illuminate\Support\Facades\Route::currentRouteName())}}">
-                        дате
-                    </a>
-                </div>
-                <div class="sort__item h5 {{isset($sortBy) &&  $sortBy === "popular" ? "sort__item_active" : ""}}">
-                    <a href="{{route(\Illuminate\Support\Facades\Route::currentRouteName(), ["sort" => "popular"])}}">
-                        популярности
-                    </a>
-                </div>
-            </div>
+                <input type="hidden" value="default" name="order" id="chosen-order">
+                <div class="sort__item h5" data-order="popular">популярности</div>
+                <div class="sort__item h5" data-order="date">дате</div>
+                <div class="sort__item h5" data-order="default">умолчанию</div>
+            </form>
         </div>
     </div>
     <div class="articles">

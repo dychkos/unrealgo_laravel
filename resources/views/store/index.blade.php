@@ -53,130 +53,140 @@
                 </svg>
 
             </div>
-            <div class="sort__body">
+            <form class="sort__body"
+                  action="{{route("store.index")}}"
+                  method="GET"
+                  id="confirm_sort"
+            >
                 <div class="sort__hide hide h5">Сортировать по</div>
-                <div class="sort__item h5">дате</div>
-                <div class="sort__item h5">популярности</div>
-            </div>
+                <input type="hidden" value="default" name="order" id="chosen-order">
+                <div class="sort__item h5" data-order="price-low-high">возрастанию</div>
+                <div class="sort__item h5" data-order="price-high-low">убыванию</div>
+                <div class="sort__item h5" data-order="default">умолчанию</div>
+            </form>
         </div>
     </div>
-    <section class="store-pr mt-2">
-        <div class="store-pr__title page-title h3">
-            Новые поступления
-        </div>
-        <div class="store-pr__body">
-            <div class="slider">
-                <div class="swiper new-swiper">
-                    <div class="swiper-wrapper">
-                        @foreach($new as $product)
-                            <div class="swiper-slide">
-                                <div class="product-list__item product">
-                                    <div class="product__wrapper">
-                                        <div class="product__image">
-                                            <img src="{{$product->images->first()
+    @if(!empty($new))
+        <section class="store-pr mt-2">
+            <div class="store-pr__title page-title h3">
+                Новые поступления
+            </div>
+            <div class="store-pr__body">
+                <div class="slider">
+                    <div class="swiper new-swiper">
+                        <div class="swiper-wrapper">
+                            @foreach($new as $product)
+                                <div class="swiper-slide">
+                                    <a href="{{route("store.index", $product->id)}}" class="product-list__item product">
+                                        <div class="product__wrapper">
+                                            <div class="product__image">
+                                                <img src="{{$product->images->first()
                                             ? asset($product->images->first()->filename)
                                             : asset("app/img/test.png")}}" alt="Product">
+                                            </div>
+                                            <div data-product="{{$product->id}}" class="product__like like {{$user !== null && $product->likedBy()->where("user_id", $user->id)->exists() ? "like_liked" : ""}}">
+                                                <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>
                                         </div>
-                                        <div data-product="{{$product->id}}" class="product__like like {{$user !== null && $product->likedBy()->where("user_id", $user->id)->exists() ? "like_liked" : ""}}">
-                                            <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
+                                        <div class="product__body">
+                                            <div class="product__prices">
+                                                <div class="product__price h3">{{$product->currentPrice()}} ₽</div>
+                                                @if(isset($product->offer))
+                                                    <div class="product__discount h6">{{$product->price}}₽</div>
+                                                @endif
+                                            </div>
+                                            <div class="product__title h5">
+                                                {{$product->title}}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="product__body">
-                                        <div class="product__prices">
-                                            <div class="product__price h3">{{$product->currentPrice()}} ₽</div>
-                                            @if(isset($product->offer))
-                                                <div class="product__discount h6">{{$product->price}}₽</div>
-                                            @endif
-                                        </div>
-                                        <div class="product__title h5">
-                                            {{$product->title}}
-                                        </div>
-                                    </div>
+                                    </a>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
+
                     </div>
+                    <div class="swiper-button-next" id="swiper-button-next-1">
+                        <svg width="15" height="23" viewBox="0 0 15 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 11.5L0 22.3253L0 0.674683L15 11.5Z" fill="#C4C4C4"/>
+                        </svg>
 
-                </div>
-                <div class="swiper-button-next" id="swiper-button-next-1">
-                    <svg width="15" height="23" viewBox="0 0 15 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15 11.5L0 22.3253L0 0.674683L15 11.5Z" fill="#C4C4C4"/>
-                    </svg>
-
-                </div>
-                <div class="swiper-button-prev" id="swiper-button-prev-1">
-                    <svg width="15" height="23" viewBox="0 0 15 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15 11.5L0 22.3253L0 0.674683L15 11.5Z" fill="#C4C4C4"/>
-                    </svg>
+                    </div>
+                    <div class="swiper-button-prev" id="swiper-button-prev-1">
+                        <svg width="15" height="23" viewBox="0 0 15 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 11.5L0 22.3253L0 0.674683L15 11.5Z" fill="#C4C4C4"/>
+                        </svg>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="store-pr mt-4">
-        <div class="store-pr__title page-title h3">
-            Популярное
-        </div>
-        <div class="store-pr__body">
-            <div class="slider">
-                <div class="swiper popular-swiper">
-                    <div class="swiper-wrapper">
-                        @foreach($popular as $product)
-                            <div class="swiper-slide">
-                                <div class="product-list__item product">
-                                    <div class="product__wrapper">
-                                        <div class="product__image">
-                                            <img src="{{$product->images->first()
+        </section>
+    @endif
+    @if(!empty($popular))
+        <section class="store-pr mt-4">
+            <div class="store-pr__title page-title h3">
+                Популярное
+            </div>
+            <div class="store-pr__body">
+                <div class="slider">
+                    <div class="swiper popular-swiper">
+                        <div class="swiper-wrapper">
+                            @foreach($popular as $product)
+                                <div class="swiper-slide">
+                                    <a href="{{route("store.show", $product->id)}}" class="product-list__item product">
+                                        <div class="product__wrapper">
+                                            <div class="product__image">
+                                                <img src="{{$product->images->first()
                                             ? asset($product->images->first()->filename)
                                             : asset("app/img/test.png")}}" alt="Product">
-                                        </div>
+                                            </div>
 
-                                        <div data-product="{{$product->id}}" class="product__like like {{$user !== null && $product->likedBy()->where("user_id", $user->id)->exists() ? "like_liked" : ""}}">
-                                            <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </div>
+                                            <div data-product="{{$product->id}}" class="product__like like {{$user !== null && $product->likedBy()->where("user_id", $user->id)->exists() ? "like_liked" : ""}}">
+                                                <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>
 
-                                    </div>
-                                    <div class="product__body">
-                                        <div class="product__prices">
-                                            <div class="product__price h3">{{$product->currentPrice()}} ₽</div>
-                                            @if(isset($product->offer))
-                                                <div class="product__discount h6">{{$product->price}}₽</div>
-                                            @endif
                                         </div>
-                                        <div class="product__title h5">
-                                            {{$product->title}}
+                                        <div class="product__body">
+                                            <div class="product__prices">
+                                                <div class="product__price h3">{{$product->currentPrice()}} ₽</div>
+                                                @if(isset($product->offer))
+                                                    <div class="product__discount h6">{{$product->price}}₽</div>
+                                                @endif
+                                            </div>
+                                            <div class="product__title h5">
+                                                {{$product->title}}
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="swiper-button-next" id="swiper-button-next-2">
+                        <svg width="15" height="23" viewBox="0 0 15 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 11.5L0 22.3253L0 0.674683L15 11.5Z" fill="#C4C4C4"/>
+                        </svg>
+
+                    </div>
+                    <div class="swiper-button-prev" id="swiper-button-prev-2">
+                        <svg width="15" height="23" viewBox="0 0 15 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 11.5L0 22.3253L0 0.674683L15 11.5Z" fill="#C4C4C4"/>
+                        </svg>
+
                     </div>
                 </div>
-                <div class="swiper-button-next" id="swiper-button-next-2">
-                    <svg width="15" height="23" viewBox="0 0 15 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15 11.5L0 22.3253L0 0.674683L15 11.5Z" fill="#C4C4C4"/>
-                    </svg>
-
-                </div>
-                <div class="swiper-button-prev" id="swiper-button-prev-2">
-                    <svg width="15" height="23" viewBox="0 0 15 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15 11.5L0 22.3253L0 0.674683L15 11.5Z" fill="#C4C4C4"/>
-                    </svg>
-
-                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
     <section class="store-pr mt-2">
         <div class="store-pr__title page-title h3">
             Все товары
         </div>
         <div class="product-list">
             @foreach($products as $product)
-                <div class="product-list__item product">
+                <a href="{{route("store.show", $product->id)}}" class="product-list__item product">
                     <div class="product__wrapper">
                         <div class="product__image">
                             <img src="{{$product->images->first()
@@ -202,7 +212,7 @@
                             {{$product->title}}
                         </div>
                     </div>
-                </div>
+                </a>
             @endforeach
         </div>
         {{ $products->links('includes.pagination') }}
