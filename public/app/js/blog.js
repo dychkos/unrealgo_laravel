@@ -4,17 +4,26 @@
 
 let sort = document.querySelector('.sort');
 let navigation = document.querySelector('.navigation__active');
+let confirmSortForm = document.getElementById("confirm_sort");
 
 
 /*
 * Event listeners
 * */
-sort.addEventListener('click',()=>{
+sort.addEventListener('click',(event) => {
     let sortBody = sort.querySelector('.sort__body');
 
     let hider = new Hider(".sort", ()=>{
         $(".sort__body").removeClass("active");
     });
+
+    if(event.target.classList.contains("sort__item")){
+        let order = event.target.dataset.order;
+        let chosenOrderNode = document.getElementById("chosen-order");
+        chosenOrderNode.value = order;
+        confirmSortForm.submit();
+        return;
+    }
 
     if(sortBody.classList.contains("active")){
         sortBody.classList.remove("active");
