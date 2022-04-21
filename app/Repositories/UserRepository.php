@@ -48,7 +48,7 @@ class UserRepository
     public function clearLiked($user_id): bool
     {
         $user = $this->user->find($user_id);
-        $user->likedProducts->sync([]);
+        $user->likedProducts()->sync([]);
 
         return true;
     }

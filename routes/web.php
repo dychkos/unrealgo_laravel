@@ -67,7 +67,7 @@ Route::name("user.")->prefix("user")->middleware("auth")->group(function(){
 
     Route::post('comment/like', [CommentController::class,'like'])->name('comment.like');
     Route::post('product/like',[StoreController::class, 'like'])->name("product.like");
-    Route::get('liked/clear', [StoreController::class,'clearLiked'])->name("liked.clear");
+    Route::get('liked/clear', [UserController::class,'clearLiked'])->name("liked.clear");
 
 
 

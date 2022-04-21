@@ -66,6 +66,9 @@ class UserService
         return $userRepository->update($validatedUser);
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function delete($userID) {
         if(empty($userID)){
             throw ValidationException::withMessages(['user_remove_error' => 'Не удалось удалить аккаунт']);
@@ -74,13 +77,16 @@ class UserService
         }
     }
 
-    public function clearLiked($data)
+    /**
+     * @throws ValidationException
+     */
+    public function clearLiked($userID): bool
     {
-        $validated = Validator::make($data, [
-            "user_id" => ['required', 'integer'],
-        ])->validate();
-
-        return $this->userRepository->clearLiked($validated);
+        if(empty($userID)){
+            throw ValidationException::withMessages(['liked_clear_error' => 'Не удалось очистить избранное']);
+        }else{
+            return $this->userRepository->clearLiked($userID);
+        }
     }
 
 }

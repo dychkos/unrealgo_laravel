@@ -36,10 +36,10 @@ class UserController extends Controller
         return view('user.liked', compact("liked", "summa", "user", "recommended"));
     }
 
-    public function clearLiked(UserService $userService, Request $request)
+    public function clearLiked(UserService $userService, Request $request): \Illuminate\Http\RedirectResponse
     {
         $user = Auth::user();
-        $userService->clearLiked(["user_id" => $user->id]);
+        $userService->clearLiked($user->id);
 
         return redirect()->back();
     }
