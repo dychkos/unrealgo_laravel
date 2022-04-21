@@ -55,14 +55,17 @@
                 </div>
                 @if( \Illuminate\Support\Facades\Auth::check())
                     <div class="user-dropdown__preview">
-                            <span class="user-dropdown__name h4">
-                                  {{$user->name}}
-                                </span>
+{{--                            <span class="user-dropdown__name h4">--}}
+{{--                                  {{$user->name}}--}}
+{{--                            </span>--}}
                         <div class="user-dropdown__image">
                             <img src="{{isset($user->image)
                                     ? asset($user->image->filename)
                                     : asset('app/img/avatar-default.png')}}"
                                  alt="user icon" />
+                            <svg width="19" height="12" viewBox="0 0 19 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.75 2.25L9.5 9.75L17.25 2.25" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
                         </div>
                     </div>
                 @else

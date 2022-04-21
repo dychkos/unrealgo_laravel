@@ -16,6 +16,7 @@ class Product extends Model
         "offer"
     ];
 
+
     public function currentPrice() {
         return isset($this->offer) ? ($this->price / $this->offer) : $this->price;
 
@@ -30,4 +31,5 @@ class Product extends Model
     {
         return $this->belongsToMany(User::class, "product_user");
     }
+
 }
