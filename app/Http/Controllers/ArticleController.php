@@ -12,8 +12,15 @@ class ArticleController extends Controller
     public function index(Request $request)
     {
         $categories = Category::all();
-
         $query = Article::query();
+        $activeCategory = null;
+        //$articles = $query->where('category_id', $activeCategory->id)->paginate(3)->withPath("?".$request->getQueryString());
+
+        if($categorySlug = $request->route('category_slug')){
+            $activeCategory = Category::where('slug', $categorySlug)->first();
+            $categories = Category::all()->except($activeCategory->id);
+            $query = $query->where('category_id', $activeCategory->id);
+        }
 
         if($request->filled("order")){
             $orderBy = $request->input("order");
@@ -23,7 +30,7 @@ class ArticleController extends Controller
         $articles = $query->paginate(3)->withPath($request->getQueryString());
 
 
-        return view('articles.index', compact("categories", "articles"));
+        return view('articles.index', compact("categories", "articles", "activeCategory"));
     }
 
 
@@ -53,7 +60,7 @@ class ArticleController extends Controller
         }
 
         $articles = $query->where('category_id', $activeCategory->id)->paginate(3)->withPath("?".$request->getQueryString());
-        $categories = Category::all();
+        $categories = Category::all()->except($activeCategory->id);
 
         return view('articles.index', compact("articles","categories", "activeCategory"));
 
