@@ -111,18 +111,9 @@ searchInput.addEventListener('input',(event)=>{
 })
 
 if(!isMobile && triggerUserDropdown){
-    triggerUserDropdown.addEventListener("click",()=>{
-        userDropdown.classList.toggle("open");
-
-        let hider = new Hider(".user-dropdown",() => {
-            $(".user-dropdown").removeClass("open");
-        },true);
-
-        if(userDropdown.classList.contains("open")){
-            document.addEventListener('mouseup',hider.hide);
-        }else{
-            document.removeEventListener('mouseup',hider.hide);
-        }
+    triggerUserDropdown.addEventListener("click",() => {
+        $(".user-dropdown").toggleClass("open");
+        $(triggerUserDropdown).toggleClass("open");
     })
 }
 
