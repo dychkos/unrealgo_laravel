@@ -15,6 +15,11 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
+//        DB::table('categories')->insert([
+//            'value' => "Все статьи",
+//            'slug' => "",
+//        ]);
+
         DB::table('categories')->insert([
             'value' => "Мотивация",
             'slug' => "motivation",
