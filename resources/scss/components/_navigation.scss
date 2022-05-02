@@ -59,6 +59,9 @@
         display: block;
         margin-left: 14px;
       }
+      a{
+          pointer-events: none;
+      }
 
     }
     &__body{
