@@ -14,7 +14,7 @@ sort.addEventListener('click',(event) => {
     let sortBody = sort.querySelector('.sort__body');
 
     let hider = new Hider(".sort", ()=>{
-        $(".sort__body").removeClass("active");
+        $(sortBody).removeClass("active");
     });
 
     if(event.target.classList.contains("sort__item")){
@@ -26,11 +26,11 @@ sort.addEventListener('click',(event) => {
     }
 
     if(sortBody.classList.contains("active")){
-        sortBody.classList.remove("active");
-        document.removeEventListener('click',hider.hide);
+        $(sortBody).removeClass("active");
+        document.removeEventListener('click', hider.hide);
     }else{
-        sortBody.classList.add("active");
-        document.addEventListener('click',hider.hide);
+        $(sortBody).addClass("active");
+        document.addEventListener('click', hider.hide);
     }
 
 })
@@ -49,3 +49,4 @@ navigation.addEventListener("click",()=>{
         document.addEventListener('mouseup',hider.hide);
     }
 })
+
