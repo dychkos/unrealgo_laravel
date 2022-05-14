@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="page-title h1">Блог</div>
-    <div class="navigation">
+    <div class="navigation" id="navigation" data-navigation="{{$activeCategory->value ?? ""}}">
         <div class="navigation__categories">
-            <div class="{{!isset($activeCategory)
+            <div class="navigation__mobile {{!isset($activeCategory)
                 ? "navigation__active"
                 : "navigation__item"}} h5">
                 <a href="{{route('articles.index')}}">
@@ -13,17 +13,20 @@
                 <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M7 9L0.937822 0.75L13.0622 0.750001L7 9Z" fill="white"/>
                 </svg>
-
             </div>
             <div class="navigation__body">
                 @foreach($categories as $category)
-                    <div class="navigation__item h5">
-                        <a class="{{ isset($activeCategory) && $activeCategory->id === $category->id
-                        ? "navigation__active"
-                        : ""}}"
-                       href="{{route('articles.showByCategory', $category->slug )}}">{{$category->value}}</a>
+                    <div class="{{ isset($activeCategory) && $activeCategory->id === $category->id
+                            ? "navigation__active"
+                            : "navigation__item"}} h5">
+                        <a href="{{route('articles.index', $category->slug )}}">{{$category->value}}</a>
                     </div>
                 @endforeach
+                <div class="navigation__item h5" id="main_nav" style="display: none">
+                    <a href="{{route('articles.index')}}">
+                        Все статьи
+                    </a>
+                </div>
             </div>
 
         </div>
@@ -43,15 +46,21 @@
 
             </div>
             <form class="sort__body"
-                  action="{{route("articles.index")}}"
+                  action="{{route("articles.index", [$activeCategory->slug ?? ""])}}"
                   method="GET"
                   id="confirm_sort"
             >
                 <div class="sort__hide hide h5">Сортировать по</div>
                 <input type="hidden" value="default" name="order" id="chosen-order">
-                <div class="sort__item h5" data-order="popular">популярности</div>
-                <div class="sort__item h5" data-order="date">дате</div>
-                <div class="sort__item h5" data-order="default">умолчанию</div>
+                @foreach($allowSorts as $key => $value)
+                    <div class="sort__item h5 {{ request("order", "") === $key
+                        ? "sort__item_active"
+                        : ""}}" data-order="{{$key}}">{{$value}}</div>
+                @endforeach
+                    <div class="sort__item h5 {{ request("order", "") === "" || request("order", "") === "default"
+                    ? "sort__item_active"
+                    : ""}}"
+                         data-order="default">умолчанию</div>
             </form>
         </div>
     </div>
@@ -73,7 +82,7 @@
                                     <div class="large-article__date p-light">
                                         {{$article->created_at
                                             ? $article->created_at->diffForHumans()
-                                            : "12.01.2002"
+                                            : "Щойно"
                                             }}
                                     </div>
                                 </div>
@@ -122,5 +131,6 @@
         <script src="{{asset('app/js/Hider.js')}}"></script>
         <script src="{{asset('app/js/main.js')}}"></script>
         <script src="{{asset('app/js/blog.js')}}"></script>
+        <script src="{{asset('app/js/includes/navigation.js')}}"></script>
     @endpush
 @endonce
