@@ -38,6 +38,13 @@ if (window.matchMedia("(max-width: 768px)").matches) {
 
 let navItems = quickNav.querySelectorAll(".quick-nav__item");
 
+window.addEventListener("load", () => {
+   let activeNav = localStorage.getItem("nav-active");
+   if(activeNav){
+       toStep(activeNav);
+   }
+});
+
 navItems.forEach(nav => {
     nav.addEventListener("click", () => {
         let needShow = nav.dataset.nav;
@@ -75,6 +82,7 @@ function toStep(stepName) {
     let needShowSelector = $("#" + stepName);
     $(needShowSelector).addClass("nav-active");
     $(needShowSelector).fadeIn();
+    localStorage.setItem("nav-active", stepName);
 }
 
 

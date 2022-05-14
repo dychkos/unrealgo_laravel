@@ -3,7 +3,7 @@
 * */
 
 let sort = document.querySelector('.sort');
-let navigation = document.querySelector('.navigation__active');
+let navigation = document.querySelector('.navigation__mobile');
 let confirmSortForm = document.getElementById("confirm_sort");
 
 
