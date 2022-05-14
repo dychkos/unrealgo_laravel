@@ -54,6 +54,8 @@
         {{-- COMMON URLs--}}
         let baseURL = "{{route("home")}}";
         let likeProductURL = "{{route("user.product.like")}}";
+        let likeUrl = "{{route('user.comment.like')}}";
+
     </script>
     @stack('js')
 </html>
