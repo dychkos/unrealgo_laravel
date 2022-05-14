@@ -24,9 +24,9 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/',[HomeController::class,'index'])->name("home");
 
-Route::get('/articles',[ArticleController::class,'index'])->name("articles.index");
+//Route::get('/articles',[ArticleController::class,'index'])->name("articles.index");
 Route::get('/articles/{category_slug}/{article_slug}',[ArticleController::class,'show'])->name("articles.show");
-Route::get('/articles/{category_slug?}',[ArticleController::class,'showByCategory'])->name("articles.showByCategory");
+Route::get('/articles/{category_slug?}',[ArticleController::class,'index'])->name("articles.index");
 Route::post('/articles/{id}/comment',[CommentController::class,'store'])->name("comment.store");
 
 
