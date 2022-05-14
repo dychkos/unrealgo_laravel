@@ -21,7 +21,7 @@
     padding: 9px 15px;
     border-radius: 20px;
     margin-right: 12px;
-    color: #fff !important;
+    color: #fff;
     svg{
       display: none;
     }
@@ -30,8 +30,14 @@
   }
   &__item{
     padding: 9px 15px;
-    transition: color 0.3s ease;
-    margin-right: 12px;
+    transition: all 0.3s ease;
+    margin-right: 17px;
+    cursor: pointer;
+      &:hover {
+        background-color: $secondary;
+        color: $primary;
+        border-radius: 20px
+    }
     svg{
         display: none;
     }
@@ -46,15 +52,23 @@
   .navigation{
     &__categories{
       position: relative;
-
     }
-    &__active{
-      padding: 10px 60px;
+    &__mobile{
+      background-color: $primary !important;
+      padding: 9px 15px;
+      min-width: 190px;
+      border-radius: 20px;
+      color: #fff !important;
       margin: 0 0 5px;
       display: flex;
       align-items: center;
+      justify-content: center;
       position: relative;
       z-index: $sortZ+1;
+      &:hover {
+        color: $black;
+        background-color: $primary;
+      }
       svg{
         display: block;
         margin-left: 14px;
@@ -63,6 +77,13 @@
           pointer-events: none;
       }
 
+    }
+    &__item{
+        margin-bottom: 7px;
+    }
+    &__active{
+        background-color: transparent;
+        color: $black;
     }
     &__body{
       display: none;

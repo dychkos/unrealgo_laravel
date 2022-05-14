@@ -7,7 +7,6 @@
     padding-bottom: 5px;
   }
   &__body{
-    max-height: 0;
     position: absolute;
     top: 30px;
     width: 100%;
@@ -23,16 +22,18 @@
     transition: max-height 0.4s ease;
     &.active{
       display: flex;
-      max-height: 120px;
       flex-direction: column;
       opacity: 1;
     }
   }
   &__item{
-    margin-bottom: 12px;
+    margin-bottom: 4px;
+    border-radius: 14px;
+    padding: 8px;
     cursor: pointer;
     transition: color 0.3s ease;
     &_active{
+        background-color: $secondary;
         color: $primary;
     }
     &:hover{
