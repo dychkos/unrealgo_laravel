@@ -20,6 +20,12 @@ class Article extends Model
         'views'
     ];
 
+    public static $SORTS = [
+      "date" => "дате",
+      "popular" => "популярности",
+    ];
+
+
     public function image(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
         return $this->morphOne(Image::class, 'image');
@@ -33,5 +39,10 @@ class Article extends Model
     public function category() {
         return $this->belongsTo(Category::class);
     }
+
+    public static function getSorts() {
+        return self::$SORTS;
+    }
+
 
 }

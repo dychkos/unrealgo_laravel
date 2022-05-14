@@ -14,11 +14,10 @@ class ArticleController extends Controller
         $categories = Category::all();
         $query = Article::query();
         $activeCategory = null;
-        //$articles = $query->where('category_id', $activeCategory->id)->paginate(3)->withPath("?".$request->getQueryString());
+        $allowSorts = Article::getSorts();
 
         if($categorySlug = $request->route('category_slug')){
             $activeCategory = Category::where('slug', $categorySlug)->first();
-            $categories = Category::all()->except($activeCategory->id);
             $query = $query->where('category_id', $activeCategory->id);
         }
 
@@ -27,10 +26,10 @@ class ArticleController extends Controller
             $query = $this->setupSort($orderBy, $query);
         }
 
-        $articles = $query->paginate(3)->withPath($request->getQueryString());
+        $articles = $query->paginate(2)->appends(request()->query());
 
 
-        return view('articles.index', compact("categories", "articles", "activeCategory"));
+        return view('articles.index', compact("categories", "articles", "activeCategory", "allowSorts"));
     }
 
 
