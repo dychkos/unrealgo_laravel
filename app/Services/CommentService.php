@@ -19,11 +19,11 @@ class CommentService
     {
         $validated = Validator::make($data,[
             "user_id"=>["required","integer"],
-            "article_id"=>["required","string"],
+            "article_id"=>["sometimes", "string"],
+            "product_id"=>["sometimes" ,"string"],
             "body"=>["required","string","max:255","min:8"],
             "answered_to"=>["sometimes","required","string"]
         ])->validate();
-
         return $this->commentRepository->store($validated);
     }
 

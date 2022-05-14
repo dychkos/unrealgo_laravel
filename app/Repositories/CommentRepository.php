@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Article;
 use App\Models\Comment;
+use App\Models\Product;
 
 class CommentRepository
 {
@@ -16,10 +17,15 @@ class CommentRepository
 
     public function store($commentData)
     {
-        return Article::find($commentData['article_id'])->comments()->create($commentData);
+        return match (true) {
+            isset($commentData['article_id']) => Article::find($commentData['article_id'])->comments()->create($commentData),
+            isset($commentData['product_id']) => Product::find($commentData['product_id'])->comments()->create($commentData),
+            default => null,
+        };
+
     }
 
-    public function delete($commentID)
+    public function delete($commentID): int
     {
         $comment = $this->comment;
 
