@@ -1,9 +1,6 @@
 @extends('layouts.base')
 
 @section('content')
-    <script>
-        let likeUrl = "{{route('user.comment.like')}}";
-    </script>
     <div class="row g-4 pt-4">
         <div class="col-12 col-lg-9">
             <div class="big-article">
@@ -284,5 +281,7 @@
         <script src="{{asset('app/js/main.js')}}"></script>
         <script src="{{asset('app/js/article.js')}}"></script>
         <script src="{{asset('app/js/includes/likeProduct.js')}}"></script>
+        <script src="{{asset('app/js/includes/likeComment.js')}}"></script>
+
     @endpush
 @endonce

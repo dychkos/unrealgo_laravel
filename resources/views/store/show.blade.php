@@ -8,56 +8,44 @@
                     <div class="photos__previews" id="photosSwiper">
                         <div id="swiper-wrapper" >
                             <div class="photos__slide">
-                                <img src="{{asset('app/img/product-big.png')}}" data-photo class="photos__previews_chosen" alt="Product">
+                                <img src="{{$product->images->first() !== null
+                                ? asset($product->images->first()->filename)
+                                : asset('app/img/test.png')}}" data-photo class="photos__previews_chosen" alt="Product">
                             </div>
-                            <div class="photos__slide">
-                                <img src="{{asset('app/img/banner.png')}}" data-photo alt="Product">
-                            </div>
-                            <div class="photos__slide">
-                                <img src="{{asset('app/img/tshirt.png')}}" data-photo alt="Product">
-                            </div>
-                            <div class="photos__slide">
-                                <img src="{{asset('app/img/product-big.png')}}" data-photo alt="Product">
-                            </div>
+                            @if($product->images()->get()->count() > 1)
+                                @foreach($product->images as $image)
+                                    <div class="photos__slide">
+                                        <img src="{{asset($image->filename)}}" data-photo alt="Product">
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
                         <div class="swiper-pagination"></div>
                     </div>
                     <div class="photos__big swiper-slide">
-                        <img src="{{asset('app/img/product-big.png')}}" id="main-photo" alt="Product">
+                        <img src="{{$product->images->first() !== null
+                                ? asset($product->images->first()->filename)
+                                : asset('app/img/test.png')}}"
+                             data-photo
+                             id="main-photo"
+                             class="photos__previews_chosen"
+                             alt="Product">
                     </div>
                 </div>
             </div>
             <div class="product-page__info co-12 col-lg-6">
-                <h1 class="product-page__title h1">Футболка unrgo simple</h1>
+                <h1 class="product-page__title h1">{{$product->title}}</h1>
                 <div class="product-page__sizes sizes">
                           <span class="sizes__text p-light">
                               Выберите размер
                           </span>
                     <div class="sizes__block">
-                        <div class="sizes__item sizes__item_chosen">
-                            XS
-                            <input type="checkbox" name="size" class="hide">
-                        </div>
-                        <div class="sizes__item">
-                            S
-                            <input type="checkbox" name="size" class="hide">
-                        </div>
-                        <div class="sizes__item">
-                            M
-                            <input type="checkbox" name="size" class="hide">
-                        </div>
-                        <div class="sizes__item">
-                            L
-                            <input type="checkbox" name="size" class="hide">
-                        </div>
-                        <div class="sizes__item sizes__item_none">
-                            Xl
-                            <input type="checkbox" name="size" class="hide">
-                        </div>
-                        <div class="sizes__item">
-                            XXl
-                            <input type="checkbox" name="size" class="hide">
-                        </div>
+                        @foreach($product->sizes as $size)
+                            <div class="sizes__item sizes__item_chosen {{$size->available ? "" : "sizes__item_none"}}">
+                                {{$size->value}}
+                                <input type="checkbox" name="size" class="hide" value="{{$size->value}}">
+                            </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="product-page__links">
@@ -66,9 +54,12 @@
                 </div>
                 <div class="product-page__main">
                     <h2 class="product-page__price h2">
-                        1 200 UAH
+                        {{$product->currentPrice()}} UAH
                     </h2>
-                    <div class="product-page__make-order product-page__make-order_ordered">
+                    @if(isset($product->offer))
+                        <div class="product__discount h6">{{$product->price}} UAH</div>
+                    @endif
+                    <div class="product-page__make-order">
                         <div class="btn btn_primary">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M20.94 18.06L19.26 8.31C19.1452 7.47997 18.7404 6.71734 18.1171 6.15725C17.4939 5.59716 16.6925 5.27576 15.855 5.25H15.75C15.75 4.25544 15.3549 3.30161 14.6516 2.59835C13.9484 1.89509 12.9946 1.5 12 1.5C11.0054 1.5 10.0516 1.89509 9.34834 2.59835C8.64508 3.30161 8.24999 4.25544 8.24999 5.25H8.14499C7.30746 5.27576 6.50608 5.59716 5.88285 6.15725C5.25961 6.71734 4.85475 7.47997 4.73999 8.31L3.05999 18.06C2.95681 18.6256 2.97924 19.2071 3.12569 19.7631C3.27215 20.3191 3.53905 20.8361 3.90749 21.2775C4.21794 21.6565 4.60801 21.9625 5.05001 22.1738C5.49201 22.385 5.9751 22.4964 6.46499 22.5H17.535C18.0249 22.4964 18.508 22.385 18.95 22.1738C19.392 21.9625 19.7821 21.6565 20.0925 21.2775C20.4609 20.8361 20.7278 20.3191 20.8743 19.7631C21.0208 19.2071 21.0432 18.6256 20.94 18.06ZM12 3C12.5967 3 13.169 3.23705 13.591 3.65901C14.0129 4.08097 14.25 4.65326 14.25 5.25H9.74999C9.74999 4.65326 9.98705 4.08097 10.409 3.65901C10.831 3.23705 11.4033 3 12 3ZM18.945 20.31C18.7755 20.522 18.5612 20.6938 18.3174 20.8131C18.0736 20.9325 17.8064 20.9963 17.535 21H6.46499C6.1936 20.9963 5.9264 20.9325 5.6826 20.8131C5.43881 20.6938 5.22447 20.522 5.05499 20.31C4.82644 20.0365 4.66146 19.7157 4.57197 19.3707C4.48247 19.0257 4.4707 18.6651 4.53749 18.315L6.21749 8.565C6.27332 8.08382 6.49734 7.63782 6.85001 7.30574C7.20268 6.97365 7.66132 6.77683 8.14499 6.75H15.855C16.3387 6.77683 16.7973 6.97365 17.15 7.30574C17.5026 7.63782 17.7267 8.08382 17.7825 8.565L19.4625 18.315C19.5293 18.6651 19.5175 19.0257 19.428 19.3707C19.3385 19.7157 19.1735 20.0365 18.945 20.31Z" fill="white"/>
@@ -78,7 +69,7 @@
                     </div>
                 </div>
             </div>
-            <div class="product-page__like like">
+            <div data-product="{{$product->id}}" class="product__like like {{$user !== null && $product->likedBy()->where("user_id", $user->id)->exists() ? "like_liked" : ""}}">
                 <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -90,45 +81,7 @@
                 <div class="quick-nav__item" data-nav="feedbacks">Отзывы</div>
             </div>
             <div class="product-page__description nav-active" id="description">
-                <h3 class="h3">
-                    Почему он используется?
-                </h3>
-                <p class="p">
-                    Давно выяснено, что при оценке дизайна и композиции читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому, что тот обеспечивает более или менее стандартное заполнение шаблона, а также реальное распределение букв и пробелов в абзацах, которое не получается при простой дубликации "Здесь ваш текст.. Здесь ваш текст.. Здесь ваш текст.." Многие программы электронной вёрстки и редакторы HTML используют Lorem Ipsum в качестве текста по умолчанию, так что поиск по ключевым словам "lorem ipsum" сразу показывает, как много веб-страниц всё ещё дожидаются своего настоящего рождения.
-                </p>
-                <h3 class="h3">
-                    Материал:
-                </h3>
-                <p class="p">
-                    - 90% хлопок, 10% эластан.
-                </p>
-                <div class="h3">
-                    Детали и крой:
-                </div>
-                <p class="p">
-                    - тип кроя oversize;
-                    - круглый вырез;
-                    - качественный принт на груди;
-                    - бирка с фирменным логотипом Staff вшита в боковой шов.
-                </p>
-                <h3 class="h3">
-                    Цвет:
-                </h3>
-                <p class="p">
-                    - желтый.
-                </p>
-                <h3 class="h3">
-                    Уход:
-                </h3>
-                <p class="p">
-                    - стирка в обычном режиме при температуре не выше 30°С, без отжима;
-                    - отбеливание запрещено;
-                    - сушить в подвешенном состоянии, без применения искусственной сушки.
-                </p>
-                <h3 class="h3">
-                    Доставка: 1-2 дня
-                </h3>
-                <p class="p">Оплата при получении</p>
+               {!! $product->description !!}}
             </div>
             <div class="product-page__comments-block comments-block" id="feedbacks" style="display: none">
                 <div class="comments-block__header">
@@ -144,160 +97,131 @@
                         </div>
                     </div>
                 </div>
-                <div class="comments-block__empty p">
-                    Комменарии остутсвуют. <a href="#" class="link">Оставьте первый.</a>
-                </div>
-                <div class="comments-block__comments comments">
-                    <div class="comment">
-                        <div class="comment__header with-icon">
-                            <div class="with-icon__icon">
-                                <img src="{{asset('app/img/user-icon.png')}}" alt="user">
-                            </div>
-                            <div class="with-icon__body d-flex flex-column flex-column">
-                                <div class="h6">username</div>
-                                <div class="p-light">30 минут назад</div>
-                            </div>
-                        </div>
-                        <div class="comment__text p">
-                            Windows XP была построена на базе того же ядра Windows NT, что и Windows 2000
-                        </div>
-                        <div class="comment__footer">
-                            <div class="comment__action p-light">
-                                3 Нравится
-                            </div>
-                            <div class="comment__action ellipse p-light">
-                                Ответить
-                            </div>
-                        </div>
-                        <div class="comment__answer answer">
-                            <div class="comment__header with-icon">
-                                <div class="with-icon__icon">
-                                    <img src="{{asset('app/img/user-icon.png')}}" alt="user">
+                @if($product->comments()->first() == null)
+                    <div class="comments-block__empty p">
+                        Отзывы о товаре остутсвуют. <a
+                            @if(\Illuminate\Support\Facades\Auth::check())
+                            href="#add-comment"
+                            @else
+                            href="{{route('login.login')}}"
+                            @endif
+                            class="link to-add-comment">Оставьте первый.</a>
+                    </div>
+                @else
+                    <div class="comments-block__comments comments">
+                        @foreach($product->comments()->whereNull("answered_to")->get() as $comment)
+                            <div class="comment">
+                                <div class="comment__header with-icon">
+                                    <div class="comment__header-icon with-icon__icon">
+                                        <img src="{{isset($comment->user->image)
+                                                ? asset($comment->user->image->filename)
+                                                : asset('app/img/avatar-default.png')}}"
+                                             alt="user icon"
+                                        />
+                                    </div>
+                                    <div class="with-icon__body d-flex flex-column flex-column">
+                                        <div class="h6">{{$comment->user->name}}</div>
+                                        <div class="p-light">{{$comment->user->created_at->diffForHumans()}}</div>
+                                    </div>
                                 </div>
-                                <div class="with-icon__body d-flex flex-column">
-                                    <div class="h6">username</div>
-                                    <div class="p-light">30 минут назад</div>
-                                </div>
-                            </div>
-                            <div class="comment__text p">
-                                Windows XP была построена на базе того же ядра Windows NT, что и Windows 2000
-                            </div>
-                            <div class="comment__footer">
-                                <div class="comment__action p-light">
-                                    3 Нравится
-                                </div>
-                                <div class="comment__action ellipse p-light">
-                                    Ответить
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment__answer answer">
-                            <div class="comment__header with-icon">
-                                <div class="with-icon__icon">
-                                    <img src="{{asset('app/img/user-icon.png')}}" alt="user">
-                                </div>
-                                <div class="with-icon__body d-flex flex-column">
-                                    <div class="h6">username</div>
-                                    <div class="p-light">30 минут назад</div>
-                                </div>
-                            </div>
-                            <div class="comment__text p">
-                                Windows XP была построена на базе того же ядра Windows NT, что и Windows 2000
-                            </div>
-                            <div class="comment__footer">
-                                <div class="comment__action p-light">
-                                    3 Нравится
-                                </div>
-                                <div class="comment__action ellipse p-light">
-                                    Ответить
-                                </div>
-                            </div>
-                        </div>
 
-                    </div>
-                    <div class="comment">
-                        <div class="comment__header with-icon">
-                            <div class="with-icon__icon">
-                                <img src="{{asset('app/img/user-icon.png')}}" alt="user">
-                            </div>
-                            <div class="with-icon__body d-flex flex-column">
-                                <div class="h6">username</div>
-                                <div class="p-light">30 минут назад</div>
-                            </div>
-                        </div>
-                        <div class="comment__text p">
-                            Windows XP была построена на базе того же ядра Windows NT, что и Windows 2000
-                        </div>
-                        <div class="comment__footer">
-                            <div class="comment__action p-light">
-                                3 Нравится
-                            </div>
-                            <div class="comment__action ellipse p-light">
-                                Ответить
-                            </div>
-                        </div>
-                        <div class="comment__answer answer">
-                            <div class="comment__header with-icon">
-                                <div class="with-icon__icon">
-                                    <img src="{{asset('app/img/user-icon.png')}}" alt="user">
+                                <div class="comment__text p">
+                                    {{$comment->body}}
                                 </div>
-                                <div class="with-icon__body d-flex flex-column">
-                                    <div class="h6">username</div>
-                                    <div class="p-light">30 минут назад</div>
+                                <div class="comment__footer">
+                                    <div class="comment__action p-light likeable" data-like="comment">
+                                        {{$comment->likes()->first() == null
+                                        ? "0"
+                                        : $comment->likes()->get()->count()}} Нравится
+                                    </div>
+                                    <a class="comment__action ellipse p-light to-add-comment"
+                                       href="#add-comment"
+                                       data-answerfor="{{$comment->user->name}}"
+                                       data-comment="{{$comment->id}}">
+                                        Ответить
+                                    </a>
                                 </div>
+                                @if($product->comments()->where("answered_to", $comment->id)->first() !== null)
+                                    @foreach($product->comments()->where("answered_to", $comment->id)->get() as $answer)
+                                        <div class="comment__answer answer">
+                                            <div class="comment__header with-icon">
+                                                <div class="comment__header-icon with-icon__icon">
+                                                    <img src="{{isset($answer->user->image)
+                                                        ? asset($answer->user->image->filename)
+                                                        : asset('app/img/avatar-default.png')}}"
+                                                         alt="user icon"
+                                                    />
+                                                </div>
+                                                <div class="with-icon__body d-flex flex-column">
+                                                    <div class="h6">{{$answer->user->name}}</div>
+                                                    <div class="p-light">{{$comment->user->created_at->diffForHumans()}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="comment__text p">
+                                                {{$answer->body}}
+                                            </div>
+                                            <div class="comment__footer">
+                                                <div class="comment__action p-light likeable" data-like="answer">
+                                                    {{$answer->likes()->first() == null
+                                                      ? "0"
+                                                      : $answer->likes()->get()->count()}} Нравится
+                                                </div>
+                                                <div class="comment__action ellipse p-light to-add-comment"
+                                                     data-comment="{{$answer->id}}"
+                                                     data-answerfor="{{$answer->user->name}}"
+                                                >
+                                                    Ответить
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
-                            <div class="comment__text p">
-                                Windows XP была построена на базе того же ядра Windows NT, что и Windows 2000
-                            </div>
-                            <div class="comment__footer">
-                                <div class="comment__action p-light">
-                                    3 Нравится
-                                </div>
-                                <div class="comment__action ellipse p-light">
-                                    Ответить
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="comment">
-                        <div class="comment__header with-icon">
-                            <div class="with-icon__icon">
-                                <img src="{{asset('app/img/user-icon.png')}}" alt="user">
-                            </div>
-                            <div class="with-icon__body d-flex flex-column">
-                                <div class="h6">username</div>
-                                <div class="p-light">30 минут назад</div>
-                            </div>
-                        </div>
-                        <div class="comment__text p">
-                            Windows XP была построена на базе того же ядра Windows NT, что и Windows 2000
-                        </div>
-                        <div class="comment__footer">
-                            <div class="comment__action p-light">
-                                3 Нравится
-                            </div>
-                            <div class="comment__action ellipse p-light">
-                                Ответить
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <form class="comments-block__add-comment add-comment">
-                    <div class="add-comment__title h3">
-                        Напишите комментарий
-                    </div>
-                    <div class="add-comment__name form-input form-input_sm">
-                        <input class="required" type="text" placeholder="Введите имя">
-                    </div>
-                    <div class="add-comment__body form-input">
-                        <textarea class="required" placeholder="Введите текст" rows="4"></textarea>
-                    </div>
 
-                    <div class="required_alert p">
-                        Заполните необходимые поля
+                        @endforeach
                     </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
-                    <button class="add-comment__btn btn btn_primary h4">Оставить отзыв</button>
+                <form
+                    class="comments-block__add-comment add-comment"
+                    id="add-comment"
+                    method="POST"
+                    action="{{route('comment.store', $product->id)}}"
+                >
+                    @csrf
+                    @if(\Illuminate\Support\Facades\Auth::check())
+                        <div class="add-comment__title h3">
+                            Оставьте отзыв
+                        </div>
+                        <input type="hidden" value="0" name="answered_to" data-answerFor="" id="answer_for">
+                        <input type="hidden" value="{{$product->id}}" name="product_id" id="product_id">
+
+                        <div class="add-comment__body form-input">
+                                <textarea
+                                    class="{{$errors->has('body') ? 'required' : '' }}"
+                                    placeholder="Введите текст"
+                                    name="body"
+                                    rows="4"></textarea>
+                        </div>
+                        @error("body")
+                        <div class="required_alert p">
+                            {{$message}}
+                        </div>
+                        @enderror
+
+                        <button class="add-comment__btn btn btn_primary h4">
+                            Оставить отзыв
+                        </button>
+                    @endif
 
                 </form>
             </div>
@@ -311,5 +235,8 @@
         <script src="{{asset('app/js/main.js')}}"></script>
         <script src="{{asset('app/js/libs/PhotoPreviews.js')}}"></script>
         <script src="{{asset('app/js/product.js')}}"></script>
+        <script src="{{asset('app/js/includes/likeComment.js')}}"></script>
+        <script src="{{asset('app/js/includes/likeProduct.js')}}"></script>
+
     @endpush
 @endonce
