@@ -23,33 +23,33 @@
                 <div class="liked-page__content">
                     <div class="liked-page__liked row row-cols-1 row-cols-md-2">
                         @forelse($liked as $product)
-                                <div class="product product_secondary col">
-                                    <div class="product__wrapper">
-                                        <div class="product__image">
-                                            <img src="{{$product->images->first()
+                            <a href="{{route("store.show", $product->id)}}" class="product product_secondary col">
+                                <div class="product__wrapper">
+                                    <div class="product__image">
+                                        <img src="{{$product->images->first()
                                             ? asset($product->images->first()->filename)
                                             : asset("app/img/test.png")}}" alt="Product">
-                                        </div>
-
-                                        <div data-product="{{$product->id}}" class="product__like like {{$user !== null && $product->likedBy()->where("user_id", $user->id)->exists() ? "like_liked" : ""}}">
-                                            <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </div>
-
                                     </div>
-                                    <div class="product__body">
-                                        <div class="product__prices">
-                                            <div class="product__price h3">{{$product->currentPrice()}} ₽</div>
-                                            @if(isset($product->offer))
-                                                <div class="product__discount h6">{{$product->price}}₽</div>
-                                            @endif
-                                        </div>
-                                        <div class="product__title h5">
-                                            {{$product->title}}
-                                        </div>
+
+                                    <div data-product="{{$product->id}}" class="product__like like {{$user !== null && $product->likedBy()->where("user_id", $user->id)->exists() ? "like_liked" : ""}}">
+                                        <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+
+                                </div>
+                                <div class="product__body">
+                                    <div class="product__prices">
+                                        <div class="product__price h3">{{$product->currentPrice()}} ₽</div>
+                                        @if(isset($product->offer))
+                                            <div class="product__discount h6">{{$product->price}}₽</div>
+                                        @endif
+                                    </div>
+                                    <div class="product__title h5">
+                                        {{$product->title}}
                                     </div>
                                 </div>
+                            </a>
                         @empty
                             <div class="order-history__empty empty col-12">
                                 <img src="{{asset("app/img/empty.png")}}" class="empty__image" alt="Empty">

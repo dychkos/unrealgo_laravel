@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product;
+use App\Models\Size;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,32 +17,12 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('products')->insert([
-            'title' => "Крутая футболка",
-            'price' => 1200,
-            'offer' => 10,
-            'description' => "Объясните, почему все кругом выгорают? Вся лента забита контентом про выгорание, все друзья выгорели, все молодежные издания запустили курсы и подкасты про выгорание.",
-        ]);
+        // Create 10 records of products
+        Product::factory()->count(10)->create()->each(function ($product) {
 
-        DB::table('products')->insert([
-            'title' => "Крутая ямайка",
-            'price' => 1200,
-            'offer' => 10,
-            'description' => "Объясните, почему все кругом выгорают? Вся лента забита контентом про выгорание, все друзья выгорели, все молодежные издания запустили курсы и подкасты про выгорание.",
-        ]);
-
-        DB::table('products')->insert([
-            'title' => "Крутая майка",
-            'price' => 1200,
-            'offer' => 10,
-            'description' => "Объясните, почему все кругом выгорают? Вся лента забита контентом про выгорание, все друзья выгорели, все молодежные издания запустили курсы и подкасты про выгорание.",
-        ]);
-
-        DB::table('products')->insert([
-            'title' => "Крутая tshirt",
-            'price' => 1200,
-            'offer' => 10,
-            'description' => "Объясните, почему все кругом выгорают? Вся лента забита контентом про выгорание, все друзья выгорели, все молодежные издания запустили курсы и подкасты про выгорание.",
-        ]);
+            // Seed the relation with 5 sizes
+            $sizes = Size::factory()->count(3)->make();
+            $product->sizes()->saveMany($sizes);
+        });
     }
 }

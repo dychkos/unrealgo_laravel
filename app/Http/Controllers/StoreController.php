@@ -12,14 +12,13 @@ class StoreController extends Controller
 {
     public function index(Request $request) {
 
-        $new = Product::orderBy("created_at")->limit(10)->get();
-        $popular = Product::orderBy("created_at")->limit(10)->get();
+        $new = [];
+        $popular = [];
 
+        $allowSorts = Product::getSorts();
         $query = Product::query();
 
         if($request->filled("order")){
-            $new = [];
-            $popular = [];
 
             $orderBy = $request->input("order");
 
@@ -37,21 +36,31 @@ class StoreController extends Controller
             }
         }
 
-        $products = $query->paginate(3)->withPath("?".$request->getQueryString());
+        if($query->paginate()->currentPage() == 1) {
+            $new = Product::orderBy("created_at")->limit(10)->get();
+            $popular = Product::orderBy("created_at")->limit(10)->get();
+        }
+
+        $products = $query->paginate(3)->appends(request()->query());
 
 
         return $this->withUser("store.index", array(
             "new" => $new,
             "popular" => $popular,
-            "products" => $products
+            "products" => $products,
+            "allowSorts" => $allowSorts
         ));
 
 
     }
 
 
-    public function show(Request $request) {
-        return view('store.show');
+    public function show(Request $request, $product_id) {
+        $product = Product::find($product_id);
+
+        return $this->withUser("store.show", array(
+            'product' => $product
+        ));
     }
 
     public function like(ProductService $productService, Request $request)
@@ -71,6 +80,11 @@ class StoreController extends Controller
         }
 
         return $this->sendResponse(['changed' => "true"],"Success");
+    }
+
+    public function addToBasket(Request $request)
+    {
+
     }
 
 

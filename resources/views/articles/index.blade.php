@@ -50,7 +50,7 @@
                   method="GET"
                   id="confirm_sort"
             >
-                <div class="sort__hide hide h5">Сортировать по</div>
+                <div class="sort__hide hide h5">Сортувати за</div>
                 <input type="hidden" value="default" name="order" id="chosen-order">
                 @foreach($allowSorts as $key => $value)
                     <div class="sort__item h5 {{ request("order", "") === $key
@@ -60,7 +60,7 @@
                     <div class="sort__item h5 {{ request("order", "") === "" || request("order", "") === "default"
                     ? "sort__item_active"
                     : ""}}"
-                         data-order="default">умолчанию</div>
+                         data-order="default">замовчуванням</div>
             </form>
         </div>
     </div>

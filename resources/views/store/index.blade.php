@@ -39,7 +39,7 @@
 
         </div>
         <div class="navigation__sort sort">
-            <div class="sort__title h5">Сортировать по</div>
+            <div class="sort__title h5">Сортувати за</div>
             <div class="sort__icon h5">
                 <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_326_115)">
@@ -58,11 +58,16 @@
                   method="GET"
                   id="confirm_sort"
             >
-                <div class="sort__hide hide h5">Сортировать по</div>
                 <input type="hidden" value="default" name="order" id="chosen-order">
-                <div class="sort__item h5" data-order="price-low-high">возрастанию</div>
-                <div class="sort__item h5" data-order="price-high-low">убыванию</div>
-                <div class="sort__item h5" data-order="default">умолчанию</div>
+                @foreach($allowSorts as $key => $value)
+                    <div class="sort__item h5 {{ request("order", "") === $key
+                        ? "sort__item_active"
+                        : ""}}" data-order="{{$key}}">{{$value}}</div>
+                @endforeach
+                <div class="sort__item h5 {{ request("order", "") === "" || request("order", "") === "default"
+                    ? "sort__item_active"
+                    : ""}}"
+                     data-order="default">замовчуванням</div>
             </form>
         </div>
     </div>
@@ -77,7 +82,7 @@
                         <div class="swiper-wrapper">
                             @foreach($new as $product)
                                 <div class="swiper-slide">
-                                    <a href="{{route("store.index", $product->id)}}" class="product-list__item product">
+                                    <a href="{{route("store.show", $product->id)}}" class="product-list__item product">
                                         <div class="product__wrapper">
                                             <div class="product__image">
                                                 <img src="{{$product->images->first()

@@ -16,9 +16,15 @@ class Product extends Model
         "offer"
     ];
 
+    public static $SORTS = [
+        "price-high-low" => "зменшенням",
+        "price-low-high" => "збільшенням",
+    ];
+
+
 
     public function currentPrice() {
-        return isset($this->offer) ? ($this->price / $this->offer) : $this->price;
+        return isset($this->offer) ? (int)($this->price / $this->offer) : $this->price;
 
     }
 
@@ -30,6 +36,22 @@ class Product extends Model
     public function likedBy(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, "product_user");
+    }
+
+    public function sizes()
+    {
+        return $this->belongsToMany(Size::class,'products_sizes',
+            'product_id',
+            'size_id');
+    }
+
+    public function comments(): \Illuminate\Database\Eloquent\Relations\morphMany
+    {
+        return $this->morphMany(Comment::class, 'comment');
+    }
+
+    public static function getSorts() {
+        return self::$SORTS;
     }
 
 }
