@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer("price");
             $table->integer("offer")->nullable();
 
-            $table->string("description");
+            $table->longText("description");
 
             $table->timestamps();
         });
