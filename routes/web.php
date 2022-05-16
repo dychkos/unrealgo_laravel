@@ -33,6 +33,12 @@ Route::post('/articles/{id}/comment',[CommentController::class,'store'])->name("
 Route::get('/store',[StoreController::class,'index'])->name("store.index");
 Route::get('/store/{id}',[StoreController::class,'show'])->name("store.show");
 
+//Store
+Route::post('/store/add-to-cart', [StoreController::class, "addToCart"])->name("store.toCart");
+Route::get('/store/clear-cart/{id}', [StoreController::class, "removeFromCart"])->name("basket.remove");
+Route::get('/basket', [StoreController::class,'basket'])->name("basket");
+Route::post('/basket/count', [StoreController::class, "editCount"])->name("basket.count");
+
 
 Route::redirect('/user','/user/profile');
 
@@ -40,7 +46,6 @@ Route::get('/user/profile',[UserController::class,'profile'])->name("user.profil
 Route::post('/user/profile',[UserController::class,'update'])->name("user.update");
 Route::get('/user/liked',[UserController::class,'liked'])->name("user.liked");
 Route::get('/user/order-history',[UserController::class,'orderHistory'])->name("user.order-history");
-Route::get('/user/basket',[UserController::class,'basket'])->name("user.basket");
 
 
 //NEED TO ADD MIDDLEWARE
