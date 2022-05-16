@@ -36,6 +36,7 @@ class Modal {
     }
 
     init() {
+
         if(!this.needFooter)
         {
             $('.modal__footer').addClass('d-none');
@@ -70,6 +71,8 @@ class Modal {
 
         })
 
+        return this;
+
     }
 
     onClose() {
@@ -79,6 +82,13 @@ class Modal {
     }
 
     onOpen() {
+
+        if(this.isOpen){
+            this.onClose();
+        }
+
+        this.isOpen = true;
+
         $('html, body').css({ overflow: 'hidden', height: '100%' });
         $(this.modalWrapper).fadeIn();
 
