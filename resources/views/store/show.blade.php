@@ -41,9 +41,11 @@
                           </span>
                     <div class="sizes__block">
                         @foreach($product->sizes as $size)
-                            <div class="sizes__item sizes__item_chosen {{$size->available ? "" : "sizes__item_none"}}">
+                            <div class="sizes__item
+                            {{$loop->index === 0 ? "sizes__item_chosen" : ""}}
+                            {{$size->available ? "" : "sizes__item_none"}}"
+                            data-size="{{$size->id}}">
                                 {{$size->value}}
-                                <input type="checkbox" name="size" class="hide" value="{{$size->value}}">
                             </div>
                         @endforeach
                     </div>
@@ -59,14 +61,23 @@
                     @if(isset($product->offer))
                         <div class="product__discount h6">{{$product->price}} UAH</div>
                     @endif
-                    <div class="product-page__make-order">
+                    <div class="product-page__make-order {{$inCart ? "product-page__make-order_ordered" : ""}}" id="add_to_card">
                         <div class="btn btn_primary">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M20.94 18.06L19.26 8.31C19.1452 7.47997 18.7404 6.71734 18.1171 6.15725C17.4939 5.59716 16.6925 5.27576 15.855 5.25H15.75C15.75 4.25544 15.3549 3.30161 14.6516 2.59835C13.9484 1.89509 12.9946 1.5 12 1.5C11.0054 1.5 10.0516 1.89509 9.34834 2.59835C8.64508 3.30161 8.24999 4.25544 8.24999 5.25H8.14499C7.30746 5.27576 6.50608 5.59716 5.88285 6.15725C5.25961 6.71734 4.85475 7.47997 4.73999 8.31L3.05999 18.06C2.95681 18.6256 2.97924 19.2071 3.12569 19.7631C3.27215 20.3191 3.53905 20.8361 3.90749 21.2775C4.21794 21.6565 4.60801 21.9625 5.05001 22.1738C5.49201 22.385 5.9751 22.4964 6.46499 22.5H17.535C18.0249 22.4964 18.508 22.385 18.95 22.1738C19.392 21.9625 19.7821 21.6565 20.0925 21.2775C20.4609 20.8361 20.7278 20.3191 20.8743 19.7631C21.0208 19.2071 21.0432 18.6256 20.94 18.06ZM12 3C12.5967 3 13.169 3.23705 13.591 3.65901C14.0129 4.08097 14.25 4.65326 14.25 5.25H9.74999C9.74999 4.65326 9.98705 4.08097 10.409 3.65901C10.831 3.23705 11.4033 3 12 3ZM18.945 20.31C18.7755 20.522 18.5612 20.6938 18.3174 20.8131C18.0736 20.9325 17.8064 20.9963 17.535 21H6.46499C6.1936 20.9963 5.9264 20.9325 5.6826 20.8131C5.43881 20.6938 5.22447 20.522 5.05499 20.31C4.82644 20.0365 4.66146 19.7157 4.57197 19.3707C4.48247 19.0257 4.4707 18.6651 4.53749 18.315L6.21749 8.565C6.27332 8.08382 6.49734 7.63782 6.85001 7.30574C7.20268 6.97365 7.66132 6.77683 8.14499 6.75H15.855C16.3387 6.77683 16.7973 6.97365 17.15 7.30574C17.5026 7.63782 17.7267 8.08382 17.7825 8.565L19.4625 18.315C19.5293 18.6651 19.5175 19.0257 19.428 19.3707C19.3385 19.7157 19.1735 20.0365 18.945 20.31Z" fill="white"/>
                             </svg>
-                            Добавить в корзину
+                            {{$inCart ? "Додано до кошику" : "В кошик"}}
                         </div>
                     </div>
+                </div>
+                <div class="product-page__error required_alert" style="display: none">
+                    <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <path fill="none" d="M0 0h24v24H0z"/>
+                            <path fill="#A84F43" d="M12.866 3l9.526 16.5a1 1 0 0 1-.866 1.5H2.474a1 1 0 0 1-.866-1.5L11.134 3a1 1 0 0 1 1.732 0zM11 16v2h2v-2h-2zm0-7v5h2V9h-2z"/>
+                        </g>
+                    </svg>
+                   <span id="product_error"></span>
                 </div>
             </div>
             <div data-product="{{$product->id}}" class="product__like like {{$user !== null && $product->likedBy()->where("user_id", $user->id)->exists() ? "like_liked" : ""}}">
@@ -181,15 +192,6 @@
                         @endforeach
                     </div>
                 @endif
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
 
                 <form
                     class="comments-block__add-comment add-comment"
@@ -231,12 +233,21 @@
 
 @once
     @push('js')
+        <script>
+            {{-- URLs --}}
+            let addToCartURL = "{{route("store.toCart")}}";
+
+            {{-- Product ID --}}
+            let productId = {{$product->id}};
+        </script>
+
+
         <script src="{{asset('app/js/Hider.js')}}"></script>
         <script src="{{asset('app/js/main.js')}}"></script>
         <script src="{{asset('app/js/libs/PhotoPreviews.js')}}"></script>
+        <script src="{{asset('app/js/libs/Modal.js')}}"></script>
         <script src="{{asset('app/js/product.js')}}"></script>
         <script src="{{asset('app/js/includes/likeComment.js')}}"></script>
         <script src="{{asset('app/js/includes/likeProduct.js')}}"></script>
-
     @endpush
 @endonce

@@ -1,8 +1,10 @@
 @php($user = \Illuminate\Support\Facades\Auth::user())
+@php($cart = \Illuminate\Support\Facades\Session::get("cart"))
 
 <header class="header" id="header">
     <div id="top"></div>
     <div class="header-desktop">
+{{--        {{dump(print_r($cart))}}--}}
         <div class="container header__row">
             <div class="header__col">
                 <a class="header__logo logo" href="{{asset(route('home'))}}">
@@ -47,6 +49,14 @@
                         </div>
                     </div>
                 </div>
+                <a class="header__link basket" href="{{route("basket")}}">
+                    @if(isset($cart))
+                        <span class="basket__notification">{{count($cart)}}</span>
+                    @endif
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.94 18.06L19.26 8.31C19.1452 7.47997 18.7404 6.71734 18.1171 6.15725C17.4939 5.59716 16.6925 5.27576 15.855 5.25H15.75C15.75 4.25544 15.3549 3.30161 14.6516 2.59835C13.9484 1.89509 12.9946 1.5 12 1.5C11.0054 1.5 10.0516 1.89509 9.34834 2.59835C8.64508 3.30161 8.24999 4.25544 8.24999 5.25H8.14499C7.30746 5.27576 6.50608 5.59716 5.88285 6.15725C5.25961 6.71734 4.85475 7.47997 4.73999 8.31L3.05999 18.06C2.95681 18.6256 2.97924 19.2071 3.12569 19.7631C3.27215 20.3191 3.53905 20.8361 3.90749 21.2775C4.21794 21.6565 4.60801 21.9625 5.05001 22.1738C5.49201 22.385 5.9751 22.4964 6.46499 22.5H17.535C18.0249 22.4964 18.508 22.385 18.95 22.1738C19.392 21.9625 19.7821 21.6565 20.0925 21.2775C20.4609 20.8361 20.7278 20.3191 20.8743 19.7631C21.0208 19.2071 21.0432 18.6256 20.94 18.06ZM12 3C12.5967 3 13.169 3.23705 13.591 3.65901C14.0129 4.08097 14.25 4.65326 14.25 5.25H9.74999C9.74999 4.65326 9.98705 4.08097 10.409 3.65901C10.831 3.23705 11.4033 3 12 3ZM18.945 20.31C18.7755 20.522 18.5612 20.6938 18.3174 20.8131C18.0736 20.9325 17.8064 20.9963 17.535 21H6.46499C6.1936 20.9963 5.9264 20.9325 5.6826 20.8131C5.43881 20.6938 5.22447 20.522 5.05499 20.31C4.82644 20.0365 4.66146 19.7157 4.57197 19.3707C4.48247 19.0257 4.4707 18.6651 4.53749 18.315L6.21749 8.565C6.27332 8.08382 6.49734 7.63782 6.85001 7.30574C7.20268 6.97365 7.66132 6.77683 8.14499 6.75H15.855C16.3387 6.77683 16.7973 6.97365 17.15 7.30574C17.5026 7.63782 17.7267 8.08382 17.7825 8.565L19.4625 18.315C19.5293 18.6651 19.5175 19.0257 19.428 19.3707C19.3385 19.7157 19.1735 20.0365 18.945 20.31Z" fill="white"></path>
+                    </svg>
+                </a>
                 <div class="header__link">
                     <a href="{{route('articles.index')}}" class="h4 link">Блог</a>
                 </div>
@@ -55,9 +65,7 @@
                 </div>
                 @if( \Illuminate\Support\Facades\Auth::check())
                     <div class="user-dropdown__preview">
-{{--                            <span class="user-dropdown__name h4">--}}
-{{--                                  {{$user->name}}--}}
-{{--                            </span>--}}
+
                         <div class="user-dropdown__image">
                             <img src="{{isset($user->image)
                                     ? asset($user->image->filename)
@@ -82,7 +90,7 @@
             <div class="container">
                 <div class="user-dropdown__body">
                     <div class="user-dropdown__item">
-                        <span class="h5"><a href="{{asset(route('user.basket'))}}" class="link">Корзина</a></span>
+                        <span class="h5"><a href="{{asset(route('basket'))}}" class="link">Корзина</a></span>
                     </div>
                     <div class="user-dropdown__item">
                         <span class="h5"><a href="{{asset(route('user.liked'))}}" class="link">Избранное</a></span>
@@ -143,7 +151,7 @@
                         </div>
                         @if(\Illuminate\Support\Facades\Auth::check())
                             <div class="header-mobile__link">
-                                <a href="{{route('user.basket')}}">Корзина</a>
+                                <a href="{{route('basket')}}">Корзина</a>
                             </div>
                             <div class="header-mobile__link">
                                 <a href="{{route('user.liked')}}">Избранное</a>

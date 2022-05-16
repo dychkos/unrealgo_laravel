@@ -15,7 +15,7 @@
                 <div class="footer__title h4">Ваш аккаунт</div>
                 @if(\Illuminate\Support\Facades\Auth::check())
                     <div class="footer__link">
-                        <a class="p" href="{{route('user.basket')}}">Корзина</a>
+                        <a class="p" href="{{route('basket')}}">Корзина</a>
                     </div>
                     <div class="footer__link">
                         <a class="p" href="{{route('user.liked')}}">Избранное</a>

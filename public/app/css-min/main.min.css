@@ -21,6 +21,7 @@ ul, li {
 a, a:hover, a:visited {
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
 }
 
 button, input, optgroup, select, textarea {
@@ -282,6 +283,31 @@ h4, h4 {
   align-items: center;
   align-self: flex-start;
   margin: 0 40px;
+}
+.header .basket {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  background-color: #ececec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+}
+.header .basket svg path {
+  fill: #191a29;
+}
+.header .basket__notification {
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  height: 25px;
+  width: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #A84F43;
+  border-radius: 50%;
 }
 
 @media only screen and (max-width: 1199px) {
@@ -555,6 +581,11 @@ a.link:hover {
   top: -213px;
 }
 
+.disabled {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
 input[type=checkbox] {
   display: block;
 }
@@ -585,7 +616,7 @@ textarea {
 }
 .btn_primary {
   background-color: #A5A815;
-  color: #fff !important;
+  color: #fff;
 }
 .btn_primary:hover {
   text-decoration: none;
@@ -968,7 +999,7 @@ select option, .select option {
 }
 .order__title {
   text-align: center;
-  max-width: 200px;
+  width: 200px;
 }
 .order__count {
   border-radius: 50%;
@@ -1070,6 +1101,13 @@ select option, .select option {
 .product-page__sizes .sizes__block {
   width: 40%;
 }
+.product-page__error {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
 .product-page__links {
   margin-top: 40px;
   margin-bottom: 40px;
@@ -1100,6 +1138,7 @@ select option, .select option {
 .product-page__make-order .btn {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 250px;
 }
 .product-page__make-order .btn svg {
@@ -1109,6 +1148,7 @@ select option, .select option {
   background-color: #ffffff;
   color: #A5A815;
   border: 3px solid #A5A815;
+  pointer-events: none;
 }
 .product-page__make-order_ordered .btn svg path {
   fill: #A5A815;
@@ -1301,6 +1341,9 @@ select option, .select option {
 }
 .liked-page__clear-liked:hover {
   text-decoration: underline;
+}
+.liked-page .btn {
+  color: #FFFFFF !important;
 }
 
 @media only screen and (max-width: 991px) {
@@ -1580,7 +1623,6 @@ select option, .select option {
   margin: 0 auto 16px;
   padding: 0;
   border: 2px solid #A5A815;
-  width: 100%;
 }
 
 .blog-nav {
@@ -1657,23 +1699,29 @@ select option, .select option {
   display: flex;
   align-items: center;
   color: #191a29;
-  background-color: #ececec;
   justify-content: center;
   padding: 0 10px;
   min-width: 145px;
   border-radius: 30px;
 }
+.user-dropdown__preview.open .user-dropdown__image svg {
+  transform: rotate(180deg);
+}
 .user-dropdown__image {
-  margin-left: 5px;
-  width: 40px;
-  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .user-dropdown__image img {
   border-radius: 50%;
-  width: 100%;
-  height: 100%;
+  width: 45px;
+  height: 45px;
+  border: 3px solid #fff;
   -o-object-fit: cover;
      object-fit: cover;
+}
+.user-dropdown__image svg {
+  transition: transform 0.3s ease;
 }
 .user-dropdown__body {
   display: flex;
@@ -1876,7 +1924,6 @@ select option, .select option {
   padding-bottom: 5px;
 }
 .sort__body {
-  max-height: 0;
   position: absolute;
   top: 30px;
   width: 100%;
@@ -1893,16 +1940,18 @@ select option, .select option {
 }
 .sort__body.active {
   display: flex;
-  max-height: 120px;
   flex-direction: column;
   opacity: 1;
 }
 .sort__item {
-  margin-bottom: 12px;
+  margin-bottom: 4px;
+  border-radius: 14px;
+  padding: 8px;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 .sort__item_active {
+  background-color: #FDFFBA;
   color: #A5A815;
 }
 .sort__item:hover {
@@ -1953,15 +2002,21 @@ select option, .select option {
   padding: 9px 15px;
   border-radius: 20px;
   margin-right: 12px;
-  color: #fff !important;
+  color: #fff;
 }
 .navigation__active svg {
   display: none;
 }
 .navigation__item {
   padding: 9px 15px;
-  transition: color 0.3s ease;
-  margin-right: 12px;
+  transition: all 0.3s ease;
+  margin-right: 17px;
+  cursor: pointer;
+}
+.navigation__item:hover {
+  background-color: #FDFFBA;
+  color: #A5A815;
+  border-radius: 20px;
 }
 .navigation__item svg {
   display: none;
@@ -1974,17 +2029,36 @@ select option, .select option {
   .navigation__categories {
     position: relative;
   }
-  .navigation__active {
-    padding: 10px 60px;
+  .navigation__mobile {
+    background-color: #A5A815 !important;
+    padding: 9px 15px;
+    min-width: 190px;
+    border-radius: 20px;
+    color: #fff !important;
     margin: 0 0 5px;
     display: flex;
     align-items: center;
+    justify-content: center;
     position: relative;
     z-index: 25;
   }
-  .navigation__active svg {
+  .navigation__mobile:hover {
+    color: #191a29;
+    background-color: #A5A815;
+  }
+  .navigation__mobile svg {
     display: block;
     margin-left: 14px;
+  }
+  .navigation__mobile a {
+    pointer-events: none;
+  }
+  .navigation__item {
+    margin-bottom: 7px;
+  }
+  .navigation__active {
+    background-color: transparent;
+    color: #191a29;
   }
   .navigation__body {
     display: none;
@@ -2497,6 +2571,7 @@ select option, .select option {
 }
 .empty__title {
   margin-bottom: 50px;
+  color: #191a29;
 }
 
 .product {
