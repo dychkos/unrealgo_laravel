@@ -49,10 +49,6 @@ class UserController extends Controller
         return view('user.order-history');
     }
 
-    public function basket(Request $request)
-    {
-        return view('user.basket');
-    }
 
     public function update(UserService $userService, Request $request)
     {
