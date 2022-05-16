@@ -22,4 +22,13 @@ class Helper
         $array[$key] = $value;
         return $array;
     }
+
+    public static function stringToBool($str): bool
+    {
+        if ($str === "true") {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
