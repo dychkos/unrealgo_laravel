@@ -87,6 +87,33 @@
 		align-self: flex-start;
 		margin: 0 40px;
 	}
+    .basket{
+        width: 50px;
+        height: 50px;
+        position: relative;
+        background-color: $background-light;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+        svg {
+            path{
+                fill: $black;
+            }
+        }
+        &__notification {
+            position: absolute;
+            right: -10px;
+            top: -10px;
+            height: 25px;
+            width: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $danger;
+            border-radius: 50%;
+        }
+    }
 }
 
 @media only screen and (max-width: 1199px){

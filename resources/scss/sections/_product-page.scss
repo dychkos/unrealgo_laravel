@@ -30,6 +30,13 @@
 			width: 40%;
 		}
 	}
+    &__error{
+        margin-top: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1em;
+    }
 	&__links{
 		margin-top: 40px;
 		margin-bottom: 40px;
@@ -61,6 +68,7 @@
 		.btn{
 			display: flex;
 			align-items: center;
+            justify-content: center;
 			width: 250px;
 			svg{
 				margin-right: 7px;
@@ -71,6 +79,7 @@
 				background-color: $white;
 				color: $primary;
 				border: 3px solid $primary;
+                pointer-events: none;
 				svg {
 					path{
 						fill: $primary;
@@ -131,7 +140,7 @@
 	}
 }
 
-	
+
 @media only screen and (max-width: 767px){
 	.product-page{
 		&__content{

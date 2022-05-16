@@ -214,6 +214,11 @@ a.link{
 	top: -213px;
 }
 
+.disabled {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
 
 input[type="checkbox"]{
 	display: block;
@@ -245,7 +250,7 @@ textarea{
 	}
 	&_primary{
 		background-color: $primary;
-		color: #fff !important;
+		color: #fff;
 		&:hover{
 			text-decoration: none;
 			background-color: $hover;
