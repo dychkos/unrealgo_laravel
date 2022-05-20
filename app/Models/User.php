@@ -24,6 +24,7 @@ class User extends Authenticatable
         'notification',
         'status ',
         'password',
+        'google_id',
     ];
 
     /**
