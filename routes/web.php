@@ -29,15 +29,20 @@ Route::get('/articles/{category_slug}/{article_slug}',[ArticleController::class,
 Route::get('/articles/{category_slug?}',[ArticleController::class,'index'])->name("articles.index");
 Route::post('/articles/{id}/comment',[CommentController::class,'store'])->name("comment.store");
 
+//Search
+Route::post("/search", [HomeController::class, 'search'])->name("search");
 
-Route::get('/store',[StoreController::class,'index'])->name("store.index");
-Route::get('/store/{id}',[StoreController::class,'show'])->name("store.show");
+//Route::get('/store',[StoreController::class,'index'])->name("store.index");
+Route::get('/store/{type_slug?}',[StoreController::class,'index'])->name("store.index");
+Route::get('/store/{type_slug}/{id}',[StoreController::class,'show'])->name("store.show");
 
 //Store
 Route::post('/store/add-to-cart', [StoreController::class, "addToCart"])->name("store.toCart");
 Route::get('/store/clear-cart/{id}', [StoreController::class, "removeFromCart"])->name("basket.remove");
 Route::get('/basket', [StoreController::class,'basket'])->name("basket");
 Route::post('/basket/count', [StoreController::class, "editCount"])->name("basket.count");
+Route::post('/make-order', [StoreController::class, "makeOrder"])->name("store.order");
+Route::get('/cancel-order/{id}', [StoreController::class, "cancelOrder"])->name("store.cancel-order");
 
 
 Route::redirect('/user','/user/profile');

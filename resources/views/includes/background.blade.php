@@ -62,8 +62,6 @@
 </div>
 <a class="up" href="#top">
     <svg width="24px" height="14px" viewBox="0 0 12 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <title>keyboard_arrow_up</title>
-        <desc>Created with Sketch.</desc>
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
             <g id="Rounded" transform="translate(-718.000000, -2466.000000)">
                 <g id="Hardware" transform="translate(100.000000, 2404.000000)">
