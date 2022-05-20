@@ -113,8 +113,28 @@
             background-color: $danger;
             border-radius: 50%;
         }
+
+    }
+    .basket-mobile{
+        width: 50px;
+        height: 50px;
+        position: fixed;
+        bottom: 80px;
+        left: 80px;
+        background-color: $primary;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: $upZ;
+        border-radius: 20px;
+        svg {
+            path{
+                fill: #FFFFFF;
+            }
+        }
     }
 }
+
 
 @media only screen and (max-width: 1199px){
 	.header{
@@ -149,6 +169,13 @@
 
 @media only screen and (max-width: 575px){
 	.header{
-
+        .basket-mobile{
+            bottom: 60px;
+            left: 20px;
+            &:hover{
+                box-shadow: none;
+            }
+        }
 	}
+
 }

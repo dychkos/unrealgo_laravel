@@ -12,6 +12,9 @@ a.link{
 	&_danger{
 		color:$danger;
 	}
+    &_decorated {
+        text-decoration: underline;
+    }
 	&:hover{
 		color: $primary;
 	}
@@ -373,7 +376,7 @@ select,.select{
 
 @media only screen and (max-width: 575px){
 	.up{
-		bottom: 30px;
+		bottom: 60px;
 		right: 20px;
 		&:hover{
 			box-shadow: none;

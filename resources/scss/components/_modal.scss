@@ -23,11 +23,11 @@
 	z-index: $modalZ;
 	overflow: hidden;
 	&__header{
-		padding: 40px;
+		padding: 20px;
 		text-align: center;
 	}
 	&__body{
-		padding: 40px;
+		padding: 20px;
 	}
 	&__footer{
 		display: flex;
@@ -84,7 +84,7 @@
 	}
 }
 
-	
+
 @media only screen and (max-width: 767px){
 	.modal{
 

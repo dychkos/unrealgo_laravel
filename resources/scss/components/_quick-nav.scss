@@ -24,6 +24,7 @@
     &_disabled{
       color: $gray;
       border-bottom-color: $gray;
+      pointer-events: none;
       &:hover{
         color: $gray;
         border-bottom-color: $gray;
