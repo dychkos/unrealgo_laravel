@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\BasketItem;
 use App\Models\Order;
+use App\Models\OrderStatus;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
@@ -28,26 +29,39 @@ class OrderRepository
             "email" => $data["email"],
             "phone" => $data["phone"],
             "city" => $data["city"],
-            "departament" => $data["departament"]
+            "department" => $data["department"]
 
         ]);
+
 
         if(!empty($data["user_id"])) {
             $order->user_id = $data["user_id"];
         }
 
+
         if(!empty($data["products"])){
             $order->items()->createMany($data['products']);
+            $order->total_price = $data['total_price'];
+
         }
 
-        Session::forget("cart");
 
+        Session::forget("cart");
+        $order->save();
+        Session::put("order", $order);
 
         return $order;
     }
 
+    public function cancelOrder($order_id) {
+        $order = Order::find($order_id);
+        $order->order_status_id = OrderStatus::where("value", "canceled")->get()->first()->id;
+        $order->save();
+
+        return $order;
 
 
+    }
 
 
 }

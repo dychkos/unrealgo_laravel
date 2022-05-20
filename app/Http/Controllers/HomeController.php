@@ -4,10 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Product;
+use App\Services\MainService;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class HomeController extends Controller
 {
+    protected MainService $mainService;
+
+    public function __construct(MainService $mainService)
+    {
+        $this->mainService = $mainService;
+    }
+
     public function index(Request $request){
 
         $popular = Article::find(4);
@@ -19,5 +28,20 @@ class HomeController extends Controller
             "randomArticles" => $randomArticles,
             "popularProducts" => $popularProducts,
         ));
+    }
+
+    public function search(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $search = $request->input("search_text");
+
+        try {
+            $result = $this->mainService->doSearch($search);
+        } catch (ValidationException $exception) {
+            $message = $exception->getMessage();
+            return $this->sendError($message, $exception->errors(), $exception->status);
+        }
+
+        return $this->sendResponse($result,"Found successful");
+
     }
 }

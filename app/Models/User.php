@@ -49,6 +49,10 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
+    public function orders() {
+        return $this->hasMany(Order::class);
+    }
+
     public function image(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
         return $this->morphOne(Image::class, 'image');

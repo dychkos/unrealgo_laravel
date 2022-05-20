@@ -23,7 +23,7 @@
                 <div class="liked-page__content">
                     <div class="liked-page__liked row row-cols-1 row-cols-md-2">
                         @forelse($liked as $product)
-                            <a href="{{route("store.show", $product->id)}}" class="product product_secondary col">
+                            <a href="{{route("store.show", [$product->type->slug, $product->id])}}" class="product product_secondary col">
                                 <div class="product__wrapper">
                                     <div class="product__image">
                                         <img src="{{$product->images->first()

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Type;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,13 +12,26 @@ use Illuminate\Validation\ValidationException;
 
 class StoreController extends Controller
 {
+    private ProductService $productService;
+
+    public function __construct(ProductService $productService) {
+        $this->productService = $productService;
+    }
+
     public function index(Request $request) {
 
         $new = [];
         $popular = [];
+        $activeType = null;
 
         $allowSorts = Product::getSorts();
+        $types = Type::all();
         $query = Product::query();
+
+        if($typeSlug = $request->route('type_slug')){
+            $activeType = Type::where('slug', $typeSlug)->first();
+            $query = $query->where('type_id', $activeType->id);
+        }
 
         if($request->filled("order")){
 
@@ -37,18 +51,19 @@ class StoreController extends Controller
             }
         }
 
-        if($query->paginate()->currentPage() == 1) {
+        if($query->paginate()->currentPage() == 1 && !isset($activeType)) {
             $new = Product::orderBy("created_at")->limit(10)->get();
             $popular = Product::orderBy("created_at")->limit(10)->get();
         }
 
         $products = $query->paginate(3)->appends(request()->query());
 
-
         return $this->withUser("store.index", array(
             "new" => $new,
             "popular" => $popular,
             "products" => $products,
+            "activeType" => $activeType,
+            "types" => $types,
             "allowSorts" => $allowSorts
         ));
 
@@ -56,12 +71,12 @@ class StoreController extends Controller
     }
 
 
-    public function show(Request $request, $product_id, ProductService $productService) {
+    public function show (Request $request, $product_slug, $product_id) {
         $product = Product::find($product_id);
 
         //Session::forget("cart");
         $cart = Session::get('cart');
-        $inCart = $productService->checkInCart($cart, $product->id);
+        $inCart = $this->productService->checkInCart($cart, $product->id);
 
         return $this->withUser("store.show", array(
             'product' => $product,
@@ -69,14 +84,15 @@ class StoreController extends Controller
         ));
     }
 
-    public function basket(ProductService $productService, Request $request)
+    public function basket(Request $request)
     {
         $cart = Session::get("cart");
+        $totalPrice = $this->productService->getTotalProductPrice($cart);
 
-        return view('user.basket', compact("cart"));
+        return view('user.basket', compact("cart", "totalPrice"));
     }
 
-    public function like(ProductService $productService, Request $request)
+    public function like(Request $request)
     {
 
         $user_id = ['user_id' => Auth::user()->id];
@@ -85,7 +101,7 @@ class StoreController extends Controller
         $data = array_merge($product_id, $user_id);
 
         try {
-            $productService->like($data);
+            $this->productService->like($data);
         }catch (ValidationException $exception){
             $message = $exception->getMessage();
             return $this->sendError($message, $exception->errors(), $exception->status);
@@ -94,12 +110,12 @@ class StoreController extends Controller
         return $this->sendResponse(['changed' => "true"],"Success");
     }
 
-    public function addToCart(Request $request, ProductService $productService): \Illuminate\Http\JsonResponse
+    public function addToCart(Request $request): \Illuminate\Http\JsonResponse
     {
         $cartData = array_merge($request->all(), ["count" => 1]);
 
         try {
-            $result = $productService->addToCart($cartData);
+            $result = $this->productService->addToCart($cartData);
         }catch (ValidationException $exception){
             $message = $exception->getMessage();
             return $this->sendError($message, $exception->errors(), $exception->status);
@@ -109,9 +125,9 @@ class StoreController extends Controller
 
     }
 
-    public function editCount(ProductService $productService, Request $request) {
+    public function editCount(Request $request) {
         try {
-            $result = $productService->editCount($request->all());
+            $result = $this->productService->editCount($request->all());
         }catch (ValidationException $exception){
             $message = $exception->getMessage();
             return $this->sendError($message, $exception->errors(), $exception->status);
@@ -131,10 +147,30 @@ class StoreController extends Controller
 
     }
 
-    public function makeOrder(Request $request, ProductService $productService) {
-        $order = $productService->makeOrder($request->all());
+    public function makeOrder(Request $request) {
 
-        return redirect()->back()->with('message', 'Ваше замовлення успішно сформоване');
+        $data = $request->all();
+        if (Auth::check()){
+            $user_id = Auth::user()->id;
+            $data = array_merge($data, ["user_id" => $user_id]);
+        }
+
+        try {
+            $order = $this->productService->makeOrder($data);
+        }catch (ValidationException $exception){
+            $message = $exception->getMessage();
+            return $this->sendError($message, $exception->errors(), $exception->status);
+        }
+
+        return $this->sendResponse($order,"Success");
+
+    }
+
+    public function cancelOrder(Request $request, $order_id) {
+
+        $this->productService->cancelOrder($order_id);
+
+        return redirect()->back();
     }
 
 

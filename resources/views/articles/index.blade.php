@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="page-title h1">Блог</div>
-    <div class="navigation" id="navigation" data-navigation="{{$activeCategory->value ?? ""}}">
+    <div class="navigation" id="navigation">
         <div class="navigation__categories">
             <div class="navigation__mobile {{!isset($activeCategory)
                 ? "navigation__active"

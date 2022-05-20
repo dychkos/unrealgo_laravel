@@ -6,7 +6,10 @@ let swiperSlides = document.querySelectorAll(".photos__slide");
 let quickNav = document.querySelector(".quick-nav");
 let quickLinks = document.querySelectorAll(".product-page__link");
 let addToCardBtn = document.getElementById("add_to_card");
-let basketNotification = document.querySelector(".basket__notification");
+
+let basketNotification = isMobile
+    ? document.querySelector('.basket-mobile .basket__notification')
+    : document.querySelector('.basket .basket__notification')  ;
 
 const photoPreviews = document.querySelectorAll("[data-photo]");
 const photo = document.querySelector("#main-photo");
@@ -103,6 +106,9 @@ addToCardBtn.addEventListener("click", () => {
                     () => {
                         toggleCartButton(addToCardBtn, true);
                         let prev = +basketNotification.textContent;
+                        if(basketNotification.parentElement.classList.contains("d-none")) {
+                            basketNotification.parentElement.classList.remove("d-none");
+                        }
                         basketNotification.textContent = ++prev;
                         modal
                             .setTitle("Успішно")

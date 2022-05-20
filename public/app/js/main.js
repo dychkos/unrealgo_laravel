@@ -9,7 +9,7 @@ let search = isMobile
 	: document.querySelector('.search[data-desktop]')  ;
 let searchWrapper = document.querySelector('.search__wrapper');
 let searchInput = search.querySelector('.search__input');
-let searchResults = search.querySelector('.search__results');
+let searchResults = search.querySelector('.search__results-body');
 
 let logo = document.querySelector(".header-mobile__col .logo");
 
@@ -20,22 +20,12 @@ let up = document.querySelector('.up');
 let blogNav = document.querySelectorAll('.blog-nav__category');
 
 
-let successMessages = document.querySelectorAll('.success-message');
-
-if(successMessages) {
-    setTimeout(() => {
-        $(successMessages).each()
-    },5000);
-
-}
-
 let sliderOptions  = {
 	slidesPerView: 1,
 	spaceBetween: 10,
 	direction:"horizontal",
 	// Responsive breakpoints
 	breakpoints: {
-
 		// when window width is >= 640px
 		640: {
 			slidesPerView: 2,
@@ -75,38 +65,75 @@ blogNav.forEach(nav=>{
 })
 
 search.addEventListener('click',()=>{
-	search.classList.add('open');
 	btnBurger.classList.add('open');
 	btnBurger.setAttribute('action','search');
 	if(isMobile) return;
 	searchWrapper.style.width = '320px';
 
-	let hider = new Hider("search__wrapper",()=>{
+	let hider = new Hider("search__wrapper",() => {
 		$(".search").removeClass("open");
 		$(".burger").removeClass("open").attr("action","");
 		$(".search__wrapper").css("width","50px");
 		$(".search__results").hide();
 	})
 
-	document.addEventListener('mouseup',hider.hide);
+	document.addEventListener('mouseup', hider.hide);
 });
 
 searchInput.addEventListener('input',(event)=>{
 	if(event.target.value.length > 2){
-		searchResults.style.display = "block";
-		searchResults.innerHTML =
-			` <div class="search__row">
-             	<div class="search__title h4">Статьи</div>
-                  <p class="search__link h5"><a href="#">Рандомный текст</a></p>
-                  <p class="search__link h5"><a href="#">Типо текст</a></p>
-              </div>
-              <div class="search__row">
-                <div class="search__title h4">Товары</div>
-                  <p class="search__link h5"><a href="#">Найдено туть</a></p>
-                  <p class="search__link h5"><a href="#">эовы туть</a></p>
-              </div>`
+        let formData = new FormData();
+        formData.append("_token", csrfToken);
+        formData.append("search_text", event.target.value);
+
+        $(".search__results").show();
+        $(".search__empty").fadeOut();
+        $(".search__loader").fadeIn();
+
+        fetch(baseURL + '/search', {
+            method: "POST",
+            body: formData
+        })
+            .then((response) => {
+                if (!response.ok){
+                    $(".search__empty").fadeIn();
+                } else {
+                    response.json().then(
+                        (result) => {
+                            $(".search__loader").fadeOut();
+                            searchResults.innerHTML = "";
+                            if (result.data.articles.length < 1 && result.data.products.length < 1) {
+                                $(".search__empty").fadeIn();
+                            }
+                            if (result.data.articles.length > 0) {
+                                let articlesHtml = result.data.articles.map(generateSearchLink).join("");
+                                searchResults.innerHTML = `<div class="search__row">
+                                 <div class="search__title h4">Статті</div>
+                                  ${articlesHtml}
+                                 </div>`;
+                            }
+                            if (result.data.products.length > 0) {
+                                let productsHtml = result.data.products.map(generateSearchLink).join("");
+                                searchResults.innerHTML += `<div class="search__row">
+                                 <div class="search__title h4">Продукти</div>
+                                  ${productsHtml}
+                                 </div>`;
+                            }
+                        }
+                    )
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                $(".search__empty").fadeIn();
+            })
+            .finally( () => {
+                $(".search__loader").fadeOut();
+            })
+
 	}else{
-		searchResults.style.display = "none";
+        $(".search__results").hide();
+        $(".search__empty").fadeOut();
 	}
 })
 
@@ -123,7 +150,7 @@ function toggleMobileMenu(burger){
 	let action = $(burger).attr("action");
 	if(action === "search"){
 		$(".search").removeClass("open");
-		searchResults.style.display = "none";
+		$(".search__results").hide();
 		$(burger).removeClass("open").attr("action",'');
 		return;
 	}
@@ -153,4 +180,7 @@ function hideSidebarNav() {
 	})
 }
 
+function generateSearchLink (elem) {
+    return `<p class="search__link h5"><a href="${elem.link}">${elem.title}</a></p>`;
+}
 

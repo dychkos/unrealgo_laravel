@@ -15,6 +15,12 @@ class Modal {
         return this;
     }
 
+    setOnClose(close) {
+        this.onCloseAction = close;
+
+        return this;
+    }
+
     setDescription(description) {
         this.description = description;
 
@@ -76,6 +82,7 @@ class Modal {
     }
 
     onClose() {
+        this.onCloseAction && this.onCloseAction();
         $('html, body').css({ overflow: 'auto', height: 'initial' });
         $(this.modalWrapper).fadeOut();
 

@@ -97,7 +97,7 @@
                     <div class="swiper-wrapper">
                         @foreach($popularProducts as $product)
                             <div class="swiper-slide">
-                                <a href="{{route("store.show", $product->id)}}" class="product-list__item product">
+                                <a href="{{route("store.show", [$product->type->slug, $product->id])}}" class="product-list__item product">
                                     <div class="product__wrapper">
                                         <div class="product__image">
                                             <img src="{{$product->images->first()

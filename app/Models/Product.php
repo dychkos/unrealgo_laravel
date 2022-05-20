@@ -13,7 +13,8 @@ class Product extends Model
         "title",
         "description",
         "price",
-        "offer"
+        "offer",
+        "type"
     ];
 
     public static $SORTS = [
@@ -31,6 +32,11 @@ class Product extends Model
     public function images(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(Image::class, 'image');
+    }
+
+    public function type(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Type::class);
     }
 
     public function likedBy(): \Illuminate\Database\Eloquent\Relations\BelongsToMany

@@ -67,13 +67,30 @@ class ProductService
             "email" => ["required", "string"],
             "phone" => ["required", "string"],
             "city" => ["required", "string"],
-            "departament" => ["required", "string"],
+            "department" => ["required", "string"],
             "user_id" => ["sometimes", "integer"]
         ])->validate();
 
         $basketItems = Session::get("cart");
+        $totalPrice = $this->getTotalProductPrice($basketItems);
 
-        return $this->orderRepository->makeOrder(array_merge($validated, ["products" => $basketItems]));
+        return $this->orderRepository->makeOrder(array_merge($validated,
+            [
+                "products" => $basketItems,
+                "total_price" => $totalPrice
+            ]
+        ));
+    }
+
+    public function cancelOrder($order_id): bool
+    {
+        if(isset($order_id)) {
+            $this->orderRepository->cancelOrder($order_id);
+            return true;
+        }
+
+        return false;
+
     }
 
     public function editCount($data) {
@@ -97,10 +114,12 @@ class ProductService
 
         $newCount = $cart[$index]["count"];
         $newPrice = $cart[$index]["product"]->currentPrice() * $cart[$index]["count"];
+        $totalPrice = $this->getTotalProductPrice($cart);
 
         return [
             "count" => $newCount,
-            "price" => $newPrice
+            "price" => $newPrice,
+            "total_price" => $totalPrice
         ];
 
     }
@@ -158,6 +177,19 @@ class ProductService
 
         return $products;
     }
+
+    public function getTotalProductPrice($products) {
+        $totalPrice = 0;
+
+        foreach ($products as $product){
+            $totalPrice += $product["product"]->currentPrice() * $product["count"];
+        }
+
+        return $totalPrice;
+    }
+
+
+
 
 
 

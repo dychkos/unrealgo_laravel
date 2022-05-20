@@ -18,22 +18,29 @@
     </div>
     <div class="navigation">
         <div class="navigation__categories">
-            <div class="navigation__active h5">
-                Интересное
+            <div class="navigation__mobile {{!isset($activeType)
+                ? "navigation__active"
+                : "navigation__item"}} h5">
+                <a href="{{route('store.index')}}">
+                    Всі товари
+                </a>
                 <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M7 9L0.937822 0.75L13.0622 0.750001L7 9Z" fill="white"/>
                 </svg>
-
             </div>
+
             <div class="navigation__body">
-                <div class="navigation__item h5">
-                    <a href="#">Мужчинам</a>
-                </div>
-                <div class="navigation__item h5">
-                    <a href="#">Женщинам</a>
-                </div>
-                <div class="navigation__item h5">
-                    <a href="#">Акссесуары</a>
+                @foreach($types as $type)
+                    <div class="{{ isset($activeType) && $activeType->id === $type->id
+                                ? "navigation__active"
+                                : "navigation__item"}} h5">
+                        <a href="{{route('store.index', $type->slug )}}">{{$type->value}}</a>
+                    </div>
+                @endforeach
+                <div class="navigation__item h5" id="main_nav" style="display: none">
+                    <a href="{{route('store.index')}}">
+                        Всі товари
+                    </a>
                 </div>
             </div>
 
@@ -54,7 +61,7 @@
 
             </div>
             <form class="sort__body"
-                  action="{{route("store.index")}}"
+                  action="{{route("store.index", [$activeType->slug ?? ""])}}"
                   method="GET"
                   id="confirm_sort"
             >
@@ -74,7 +81,7 @@
     @if(!empty($new))
         <section class="store-pr mt-2">
             <div class="store-pr__title page-title h3">
-                Новые поступления
+                Нові надходження
             </div>
             <div class="store-pr__body">
                 <div class="slider">
@@ -82,7 +89,7 @@
                         <div class="swiper-wrapper">
                             @foreach($new as $product)
                                 <div class="swiper-slide">
-                                    <a href="{{route("store.show", $product->id)}}" class="product-list__item product">
+                                    <a href="{{route("store.show", [$product->type->slug, $product->id])}}" class="product-list__item product">
                                         <div class="product__wrapper">
                                             <div class="product__image">
                                                 <img src="{{$product->images->first()
@@ -130,7 +137,7 @@
     @if(!empty($popular))
         <section class="store-pr mt-4">
             <div class="store-pr__title page-title h3">
-                Популярное
+                Популярне
             </div>
             <div class="store-pr__body">
                 <div class="slider">
@@ -138,7 +145,7 @@
                         <div class="swiper-wrapper">
                             @foreach($popular as $product)
                                 <div class="swiper-slide">
-                                    <a href="{{route("store.show", $product->id)}}" class="product-list__item product">
+                                    <a href="{{route("store.show", [$product->type->slug, $product->id])}}" class="product-list__item product">
                                         <div class="product__wrapper">
                                             <div class="product__image">
                                                 <img src="{{$product->images->first()
@@ -187,11 +194,11 @@
     @endif
     <section class="store-pr mt-2">
         <div class="store-pr__title page-title h3">
-            Все товары
+           {{!isset($activeType) ? "Всі товари" : $activeType->value }}
         </div>
         <div class="product-list">
             @foreach($products as $product)
-                <a href="{{route("store.show", $product->id)}}" class="product-list__item product">
+                <a href="{{route("store.show", [$product->type->slug, $product->id])}}" class="product-list__item product">
                     <div class="product__wrapper">
                         <div class="product__image">
                             <img src="{{$product->images->first()

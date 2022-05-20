@@ -240,7 +240,7 @@
                 <div class="sidebar__title h2">Акции</div>
                 <div class="sidebar__products row row-cols-1 row-cols-sm-2 row-cols-lg-1 g-3">
                     @foreach($stock as $product)
-                        <a href="{{route("store.show", $product->id)}}" class="product col">
+                        <a href="{{route("store.show", [$product->type->slug, $product->id])}}" class="product col">
                             <div class="product__wrapper">
                                 <div class="product__image">
                                     <img src="{{$product->images->first()

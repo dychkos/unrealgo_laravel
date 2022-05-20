@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\ControllerHelper;
 use App\Helpers\Helper;
+use App\Models\Order;
 use App\Models\Product;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -46,7 +47,23 @@ class UserController extends Controller
 
     public function orderHistory(Request $request)
     {
-        return view('user.order-history');
+        $user = Auth::user();
+        $orders = Order::where("user_id", $user->id)->get();
+
+        $waiting =  Order::where("user_id", $user->id)
+            ->where("order_status_id", [1, 2, 3])
+            ->get();
+
+        $ready =  Order::where("user_id", $user->id)
+            ->where("order_status_id", [4])
+            ->get();
+
+        $canceled =  Order::where("user_id", $user->id)
+            ->where("order_status_id", [5])
+            ->get();
+
+
+        return view('user.order-history', compact("orders","waiting", "ready", "canceled"));
     }
 
 
