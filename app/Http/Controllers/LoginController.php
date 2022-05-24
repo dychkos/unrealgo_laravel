@@ -43,13 +43,27 @@ class LoginController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
+    public function redirectToFacebook(): \Symfony\Component\HttpFoundation\RedirectResponse|\Illuminate\Http\RedirectResponse
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
     public function handleGoogleCallback(): \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        try {
+       return $this->authorizeBySocial('google');
+    }
 
-            $user = Socialite::driver('google')->user();
+    public function handleFacebookCallback(): \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
+    {
+        return $this->authorizeBySocial('facebook');
+    }
 
-            $finduser = User::where('google_id', $user->id)->first();
+    public function authorizeBySocial($driver): \Illuminate\Http\RedirectResponse
+    {
+        try{
+            $user = Socialite::driver($driver)->user();
+
+            $finduser = User::where($driver . '_id', $user->id)->first();
 
             if($finduser) {
                 Auth::login($finduser);
@@ -61,16 +75,14 @@ class LoginController extends Controller
                     'name' => $user->name,
                     'email' => $user->email,
                     'password' => encrypt($user->email),
-                    'google_id'=> $user->id
+                    $driver . '_id'=> $user->id
 
                 ]);
                 Auth::login($newUser);
                 return redirect()->route("home");
-
             }
-
         } catch (Exception $e) {
-            return redirect()->route("google_auth");
+            return redirect()->route($driver."_auth");
         }
 
     }

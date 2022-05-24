@@ -64,8 +64,12 @@ Route::middleware("guest")->group(function(){
     Route::post('/login',[LoginController::class,'login'])->name("login.login");
     Route::get('/register',[RegisterController::class,'index'])->name("register.index");
     Route::post('/register',[RegisterController::class,'register'])->name("register.register");
+
     Route::get('/auth/google', [LoginController::class, 'redirectToGoogle'])->name("google_auth");
     Route::get('/auth/google/callback', [LoginController::class, 'handleGoogleCallback'])->name("google_callback");
+
+    Route::get('/auth/facebook', [LoginController::class, 'redirectToFacebook'])->name("facebook_auth");
+    Route::get('/auth/facebook/callback', [LoginController::class, 'handleFacebookCallback'])->name("facebook_callback");
 });
 
 Route::name("user.")->prefix("user")->middleware("auth")->group(function(){
