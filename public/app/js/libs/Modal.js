@@ -48,7 +48,8 @@ class Modal {
             $('.modal__footer').addClass('d-none');
         }
 
-        $(this.trigger).on('click', () => {
+        $(this.trigger).on('click', (e) => {
+            e.preventDefault();
             this.onOpen();
         })
 

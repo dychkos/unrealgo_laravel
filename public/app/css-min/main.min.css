@@ -1971,6 +1971,7 @@ select option, .select option {
   display: flex;
   position: relative;
   padding: 0 20px;
+  min-width: 200px;
 }
 .sort__title {
   cursor: pointer;
@@ -2704,7 +2705,10 @@ select option, .select option {
   text-align: center;
 }
 .modal__body {
-  padding: 20px;
+  padding: 25px;
+  margin-bottom: 40px;
+  max-height: 450px;
+  overflow-y: auto;
 }
 .modal__footer {
   display: flex;

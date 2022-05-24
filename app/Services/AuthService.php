@@ -24,20 +24,24 @@ class AuthService {
     public function register($userData)
     {
         $authRepository = $this->authRepository;
-
         $validatedUser = Validator::make($userData,[
             'name' => ["required","string","max:20"],
             'role_id' => ["nullable","integer"],
+            'confirm' => ["required","integer"],
             'email' => [
                 'required',
                 'email',
                 function ($attribute, $value, $fail) use ($authRepository) {
                     if ($authRepository->checkEmailExists($value)) {
-                        $fail('This ' . $attribute. ' is already used.');
+                        $fail('Користувач з такою поштую вже існує');
                     }
                 },
             ],
             'password' => 'min:6|required',
+        ],[
+            'required' => 'Необхідно вказати ваш :attribute',
+            'confirm.required' => 'Необхідно погодитися з умовами використання сайту!',
+            'password.min' => 'Введіть складніший пароль',
         ])->validate();
 
         return $authRepository->register($validatedUser);
@@ -50,6 +54,9 @@ class AuthService {
         $validated = Validator::make($userData,[
             'email' => 'required|string',
             'password' => 'required|min:6',
+        ],[
+            'required' => 'Необхідно вказати ваш :attribute',
+            'password.min' => 'Введіть складніший пароль',
         ])->validate();
 
         $remember = $userData["remember_me"] ?? false;

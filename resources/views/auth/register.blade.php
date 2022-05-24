@@ -48,9 +48,12 @@
                 </div>
 
                 <div class="auth-form__item confirm">
-                    <input id="confirm" name="radio-group" type="checkbox" checked>
+                    @error("confirm")
+                    <div class="required_alert">{{$message}}</div>
+                    @enderror
+                    <input id="confirm" name="confirm" type="checkbox" value="1">
                     <label for="confirm" class="p-light">
-                        Я согласен с <a href="#" class="link">Пользовательським соглашениям</a>
+                        Я согласен с <a href="#" class="link" id="privacy">Пользовательським соглашениям</a>
                     </label>
                 </div>
                 <div class="auth-form__item row">
@@ -89,7 +92,9 @@
 @once
     @push('js')
         <script src="{{asset('app/js/Hider.js')}}"></script>
+        <script src="{{asset('app/js/libs/Modal.js')}}"></script>
         <script src="{{asset('app/js/main.js')}}"></script>
+        <script src="{{asset('app/js/auth.js')}}"></script>
     @endpush
 @endonce
 
