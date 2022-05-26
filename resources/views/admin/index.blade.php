@@ -1,677 +1,170 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends("admin.layout.admin")
 
-<head>
-
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>SB Admin 2 - Dashboard</title>
-
-  <!-- Custom fonts for this template-->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-  <!-- Custom styles for this template-->
-  <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
-</head>
-
-<body id="page-top">
-
-  <!-- Page Wrapper -->
-  <div id="wrapper">
-
-    <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-      <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.blade.php">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+@section('content')
+    <div class="admin-content__header">
+        <div class="admin-content__title h1">{{strtoupper($modelName)}}</div>
+        <div class="admin-content__navigation">
+            <div class="admin-content__search form-input">
+                <input type="text" placeholder="Введіть для пошуку">
+            </div>
+            <div class="admin-content__add">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 6C12.5523 6 13 6.44772 13 7V11H17C17.5523 11 18 11.4477 18 12C18 12.5523 17.5523 13 17 13H13V17C13 17.5523 12.5523 18 12 18C11.4477 18 11 17.5523 11 17V13H7C6.44772 13 6 12.5523 6 12C6 11.4477 6.44772 11 7 11H11V7C11 6.44772 11.4477 6 12 6Z" fill="white"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5 22C3.34315 22 2 20.6569 2 19V5C2 3.34315 3.34315 2 5 2H19C20.6569 2 22 3.34315 22 5V19C22 20.6569 20.6569 22 19 22H5ZM4 19C4 19.5523 4.44772 20 5 20H19C19.5523 20 20 19.5523 20 19V5C20 4.44772 19.5523 4 19 4H5C4.44772 4 4 4.44772 4 5V19Z" fill="white"/>
+                </svg>
+            </div>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-      </a>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider my-0">
-
-      <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
-        <a class="nav-link" href="index.blade.php">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></a>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Interface
-      </div>
-
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Components</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="buttons.html">Buttons</a>
-            <a class="collapse-item" href="cards.html">Cards</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-wrench"></i>
-          <span>Utilities</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">Colors</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Addons
-      </div>
-
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-            <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Other Pages:</h6>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item" href="blank.html">Blank Page</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Nav Item - Charts -->
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
-      </li>
-
-      <!-- Nav Item - Tables -->
-      <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block">
-
-      <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-      </div>
-
-    </ul>
-    <!-- End of Sidebar -->
-
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
-      <!-- Main Content -->
-      <div id="content">
-
-        <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-          <!-- Sidebar Toggle (Topbar) -->
-          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-          </button>
-
-          <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-
-          <!-- Topbar Navbar -->
-          <ul class="navbar-nav ml-auto">
-
-            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
-              </a>
-              <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </li>
-
-            <!-- Nav Item - Alerts -->
-            <li class="nav-item dropdown no-arrow mx-1">
-              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-bell fa-fw"></i>
-                <!-- Counter - Alerts -->
-                <span class="badge badge-danger badge-counter">3+</span>
-              </a>
-              <!-- Dropdown - Alerts -->
-              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-                <h6 class="dropdown-header">
-                  Alerts Center
-                </h6>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-primary">
-                      <i class="fas fa-file-alt text-white"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">December 12, 2019</div>
-                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-success">
-                      <i class="fas fa-donate text-white"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">December 7, 2019</div>
-                    $290.29 has been deposited into your account!
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-warning">
-                      <i class="fas fa-exclamation-triangle text-white"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">December 2, 2019</div>
-                    Spending Alert: We've noticed unusually high spending for your account.
-                  </div>
-                </a>
-                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-              </div>
-            </li>
-
-            <!-- Nav Item - Messages -->
-            <li class="nav-item dropdown no-arrow mx-1">
-              <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-envelope fa-fw"></i>
-                <!-- Counter - Messages -->
-                <span class="badge badge-danger badge-counter">7</span>
-              </a>
-              <!-- Dropdown - Messages -->
-              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
-                <h6 class="dropdown-header">
-                  Message Center
-                </h6>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
-                    <div class="status-indicator bg-success"></div>
-                  </div>
-                  <div class="font-weight-bold">
-                    <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div>
-                    <div class="small text-gray-500">Emily Fowler · 58m</div>
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="https://source.unsplash.com/AU4VPcFN4LE/60x60" alt="">
-                    <div class="status-indicator"></div>
-                  </div>
-                  <div>
-                    <div class="text-truncate">I have the photos that you ordered last month, how would you like them sent to you?</div>
-                    <div class="small text-gray-500">Jae Chun · 1d</div>
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="https://source.unsplash.com/CS2uCrpNzJY/60x60" alt="">
-                    <div class="status-indicator bg-warning"></div>
-                  </div>
-                  <div>
-                    <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>
-                    <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="">
-                    <div class="status-indicator bg-success"></div>
-                  </div>
-                  <div>
-                    <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>
-                    <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                  </div>
-                </a>
-                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-              </div>
-            </li>
-
-            <div class="topbar-divider d-none d-sm-block"></div>
-
-            <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
-              </a>
-              <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
-                </a>
-              </div>
-            </li>
-
-          </ul>
-
-        </nav>
-        <!-- End of Topbar -->
-
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
-
-          <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-          </div>
-
-          <!-- Content Row -->
-          <div class="row">
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings (Monthly)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings (Annual)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks</div>
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                        </div>
-                        <div class="col">
-                          <div class="progress progress-sm mr-2">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Requests</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Content Row -->
-
-          <div class="row">
-
-            <!-- Area Chart -->
-            <div class="col-xl-8 col-lg-7">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </div>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                  <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Pie Chart -->
-            <div class="col-xl-4 col-lg-5">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </div>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                  <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
-                  </div>
-                  <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Direct
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Social
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-info"></i> Referral
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Content Row -->
-          <div class="row">
-
-            <!-- Content Column -->
-            <div class="col-lg-6 mb-4">
-
-              <!-- Project Card Example -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
-                </div>
-                <div class="card-body">
-                  <h4 class="small font-weight-bold">Server Migration <span class="float-right">20%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <h4 class="small font-weight-bold">Sales Tracking <span class="float-right">40%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <h4 class="small font-weight-bold">Customer Database <span class="float-right">60%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <h4 class="small font-weight-bold">Payout Details <span class="float-right">80%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <h4 class="small font-weight-bold">Account Setup <span class="float-right">Complete!</span></h4>
-                  <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Color System -->
-              <div class="row">
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-primary text-white shadow">
-                    <div class="card-body">
-                      Primary
-                      <div class="text-white-50 small">#4e73df</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-success text-white shadow">
-                    <div class="card-body">
-                      Success
-                      <div class="text-white-50 small">#1cc88a</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-info text-white shadow">
-                    <div class="card-body">
-                      Info
-                      <div class="text-white-50 small">#36b9cc</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-warning text-white shadow">
-                    <div class="card-body">
-                      Warning
-                      <div class="text-white-50 small">#f6c23e</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-danger text-white shadow">
-                    <div class="card-body">
-                      Danger
-                      <div class="text-white-50 small">#e74a3b</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-secondary text-white shadow">
-                    <div class="card-body">
-                      Secondary
-                      <div class="text-white-50 small">#858796</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            <div class="col-lg-6 mb-4">
-
-              <!-- Illustrations -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-                </div>
-                <div class="card-body">
-                  <div class="text-center">
-                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="">
-                  </div>
-                  <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
-                  <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw &rarr;</a>
-                </div>
-              </div>
-
-              <!-- Approach -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-                </div>
-                <div class="card-body">
-                  <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce CSS bloat and poor page performance. Custom CSS classes are used to create custom components and custom utility classes.</p>
-                  <p class="mb-0">Before working with this theme, you should become familiar with the Bootstrap framework, especially the utility classes.</p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-        <!-- /.container-fluid -->
-
-      </div>
-      <!-- End of Main Content -->
-
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
-          </div>
-        </div>
-      </footer>
-      <!-- End of Footer -->
-
     </div>
-    <!-- End of Content Wrapper -->
+    <table class="admin-content__list admin-table">
+        <thead>
+        @switch($modelName)
+            @case('articles')
+            <tr>
+                <th>ID</th>
+                <th>Назва</th>
+                <th>Категорія</th>
+                <th>Виконати</th>
+            </tr>
+            @break
+            @case('products')
+            <tr>
+                <th>ID</th>
+                <th>Назва</th>
+                <th>Статус</th>
+                <th>Виконати</th>
+            </tr>
+            @break
+            @case('comments')
+            <tr>
+                <th>ID</th>
+                <th>Контент</th>
+                <th>Автор</th>
+                <th>Виконати</th>
+            </tr>
+            @break
+            @case('pages')
+            <tr>
+                <th>ID</th>
+                <th>Назва</th>
+                <th>url</th>
+                <th>Виконати</th>
+            </tr>
+            @break
+            @case('users')
+            <tr>
+                <th>ID</th>
+                <th>Ім'я</th>
+                <th>Роль</th>
+                <th>Виконати</th>
+            </tr>
+            @break
+        @endswitch
+        </thead>
+        <tbody>
+        @foreach($models as $model)
+            @switch($modelName)
+                @case('articles')
+                <tr>
+                    <td>{{$model->id}}</td>
+                    <td>{{$model->title}}</td>
+                    <td>{{$model->category->value}}</td>
+                    <td>
+                        <a href="#" class="remove">
+                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19.61 18L24.47 13.14C24.6338 12.9487 24.7194 12.7026 24.7097 12.4509C24.7 12.1993 24.5957 11.9605 24.4176 11.7824C24.2395 11.6043 24.0007 11.5 23.749 11.4903C23.4974 11.4806 23.2513 11.5662 23.06 11.73L18.2 16.54L13.31 11.65C13.1187 11.4862 12.8726 11.4006 12.6209 11.4103C12.3693 11.42 12.1305 11.5243 11.9524 11.7024C11.7743 11.8805 11.67 12.1193 11.6603 12.3709C11.6506 12.6226 11.7362 12.8687 11.9 13.06L16.78 18L12 22.72C11.8953 22.8096 11.8103 22.92 11.7503 23.044C11.6902 23.1681 11.6565 23.3032 11.6512 23.4409C11.6459 23.5787 11.6691 23.716 11.7194 23.8443C11.7696 23.9727 11.8459 24.0892 11.9433 24.1867C12.0408 24.2841 12.1573 24.3604 12.2857 24.4106C12.414 24.4609 12.5513 24.4841 12.689 24.4788C12.8268 24.4735 12.9619 24.4398 13.086 24.3797C13.21 24.3197 13.3203 24.2347 13.41 24.13L18.18 19.36L22.92 24.1C23.1113 24.2638 23.3574 24.3494 23.609 24.3397C23.8607 24.33 24.0995 24.2257 24.2776 24.0476C24.4557 23.8695 24.56 23.6307 24.5697 23.3791C24.5794 23.1274 24.4938 22.8813 24.33 22.69L19.61 18Z" fill="black"/>
+                                <path d="M18 34C14.8355 34 11.7421 33.0616 9.11088 31.3035C6.4797 29.5454 4.42894 27.0466 3.21793 24.1229C2.00693 21.1993 1.69008 17.9823 2.30744 14.8786C2.92481 11.7749 4.44866 8.92394 6.6863 6.6863C8.92394 4.44866 11.7749 2.92481 14.8786 2.30744C17.9823 1.69008 21.1993 2.00693 24.1229 3.21793C27.0466 4.42894 29.5454 6.4797 31.3035 9.11088C33.0616 11.7421 34 14.8355 34 18C34 22.2435 32.3143 26.3131 29.3137 29.3137C26.3131 32.3143 22.2435 34 18 34ZM18 4.00001C15.2311 4.00001 12.5243 4.82109 10.222 6.35943C7.91974 7.89777 6.12532 10.0843 5.06569 12.6424C4.00607 15.2006 3.72882 18.0155 4.26901 20.7313C4.80921 23.447 6.14258 25.9416 8.10051 27.8995C10.0584 29.8574 12.553 31.1908 15.2687 31.731C17.9845 32.2712 20.7994 31.9939 23.3576 30.9343C25.9157 29.8747 28.1022 28.0803 29.6406 25.778C31.1789 23.4757 32 20.7689 32 18C32 14.287 30.525 10.726 27.8995 8.10051C25.274 5.475 21.713 4.00001 18 4.00001Z" fill="black"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="edit">
+                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M35.637 8.849L27.151 0.362884C26.9187 0.130546 26.6034 0 26.2747 0C25.946 0 25.6307 0.130546 25.3984 0.362884L0.629421 25.1318C0.406337 25.3552 0.276618 25.655 0.267034 25.9705L0.000819681 34.723C-0.00959092 35.0645 0.121616 35.3954 0.363208 35.6371C0.596041 35.8698 0.911334 36 1.23952 36C1.25207 36 1.26463 35.9998 1.27736 35.9993L10.0295 35.7328C10.345 35.7232 10.6449 35.5937 10.8682 35.3706L35.6371 10.6018C36.121 10.1178 36.121 9.33302 35.637 8.849ZM9.46273 33.2703L2.51837 33.4818L2.72972 26.5371L17.7877 11.4789L24.5216 18.2116L9.46273 33.2703ZM26.2744 16.459L19.5404 9.72647L26.2745 2.99214L33.0077 9.72548L26.2744 16.459Z" fill="black"/>
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+                @break
+                @case('products')
+                <tr>
+                    <td>{{$model->id}}</td>
+                    <td>{{$model->title}}</td>
+                    <td>{{$model->type->value}}</td>
+                    <td>
+                        <a href="#" class="remove">
+                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19.61 18L24.47 13.14C24.6338 12.9487 24.7194 12.7026 24.7097 12.4509C24.7 12.1993 24.5957 11.9605 24.4176 11.7824C24.2395 11.6043 24.0007 11.5 23.749 11.4903C23.4974 11.4806 23.2513 11.5662 23.06 11.73L18.2 16.54L13.31 11.65C13.1187 11.4862 12.8726 11.4006 12.6209 11.4103C12.3693 11.42 12.1305 11.5243 11.9524 11.7024C11.7743 11.8805 11.67 12.1193 11.6603 12.3709C11.6506 12.6226 11.7362 12.8687 11.9 13.06L16.78 18L12 22.72C11.8953 22.8096 11.8103 22.92 11.7503 23.044C11.6902 23.1681 11.6565 23.3032 11.6512 23.4409C11.6459 23.5787 11.6691 23.716 11.7194 23.8443C11.7696 23.9727 11.8459 24.0892 11.9433 24.1867C12.0408 24.2841 12.1573 24.3604 12.2857 24.4106C12.414 24.4609 12.5513 24.4841 12.689 24.4788C12.8268 24.4735 12.9619 24.4398 13.086 24.3797C13.21 24.3197 13.3203 24.2347 13.41 24.13L18.18 19.36L22.92 24.1C23.1113 24.2638 23.3574 24.3494 23.609 24.3397C23.8607 24.33 24.0995 24.2257 24.2776 24.0476C24.4557 23.8695 24.56 23.6307 24.5697 23.3791C24.5794 23.1274 24.4938 22.8813 24.33 22.69L19.61 18Z" fill="black"/>
+                                <path d="M18 34C14.8355 34 11.7421 33.0616 9.11088 31.3035C6.4797 29.5454 4.42894 27.0466 3.21793 24.1229C2.00693 21.1993 1.69008 17.9823 2.30744 14.8786C2.92481 11.7749 4.44866 8.92394 6.6863 6.6863C8.92394 4.44866 11.7749 2.92481 14.8786 2.30744C17.9823 1.69008 21.1993 2.00693 24.1229 3.21793C27.0466 4.42894 29.5454 6.4797 31.3035 9.11088C33.0616 11.7421 34 14.8355 34 18C34 22.2435 32.3143 26.3131 29.3137 29.3137C26.3131 32.3143 22.2435 34 18 34ZM18 4.00001C15.2311 4.00001 12.5243 4.82109 10.222 6.35943C7.91974 7.89777 6.12532 10.0843 5.06569 12.6424C4.00607 15.2006 3.72882 18.0155 4.26901 20.7313C4.80921 23.447 6.14258 25.9416 8.10051 27.8995C10.0584 29.8574 12.553 31.1908 15.2687 31.731C17.9845 32.2712 20.7994 31.9939 23.3576 30.9343C25.9157 29.8747 28.1022 28.0803 29.6406 25.778C31.1789 23.4757 32 20.7689 32 18C32 14.287 30.525 10.726 27.8995 8.10051C25.274 5.475 21.713 4.00001 18 4.00001Z" fill="black"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="edit">
+                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M35.637 8.849L27.151 0.362884C26.9187 0.130546 26.6034 0 26.2747 0C25.946 0 25.6307 0.130546 25.3984 0.362884L0.629421 25.1318C0.406337 25.3552 0.276618 25.655 0.267034 25.9705L0.000819681 34.723C-0.00959092 35.0645 0.121616 35.3954 0.363208 35.6371C0.596041 35.8698 0.911334 36 1.23952 36C1.25207 36 1.26463 35.9998 1.27736 35.9993L10.0295 35.7328C10.345 35.7232 10.6449 35.5937 10.8682 35.3706L35.6371 10.6018C36.121 10.1178 36.121 9.33302 35.637 8.849ZM9.46273 33.2703L2.51837 33.4818L2.72972 26.5371L17.7877 11.4789L24.5216 18.2116L9.46273 33.2703ZM26.2744 16.459L19.5404 9.72647L26.2745 2.99214L33.0077 9.72548L26.2744 16.459Z" fill="black"/>
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+                @break
+                @case('comments')
+                <tr>
+                    <th>ID</th>
+                    <th>Контент</th>
+                    <th>Автор</th>
+                    <th>Виконати</th>
+                </tr>
+                <tr>
+                    <td>{{$model->id}}</td>
+                    <td>{{$model->body}}</td>
+                    <td>{{$model->user->name}}</td>
+                    <td>
+                        <a href="#" class="remove">
+                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19.61 18L24.47 13.14C24.6338 12.9487 24.7194 12.7026 24.7097 12.4509C24.7 12.1993 24.5957 11.9605 24.4176 11.7824C24.2395 11.6043 24.0007 11.5 23.749 11.4903C23.4974 11.4806 23.2513 11.5662 23.06 11.73L18.2 16.54L13.31 11.65C13.1187 11.4862 12.8726 11.4006 12.6209 11.4103C12.3693 11.42 12.1305 11.5243 11.9524 11.7024C11.7743 11.8805 11.67 12.1193 11.6603 12.3709C11.6506 12.6226 11.7362 12.8687 11.9 13.06L16.78 18L12 22.72C11.8953 22.8096 11.8103 22.92 11.7503 23.044C11.6902 23.1681 11.6565 23.3032 11.6512 23.4409C11.6459 23.5787 11.6691 23.716 11.7194 23.8443C11.7696 23.9727 11.8459 24.0892 11.9433 24.1867C12.0408 24.2841 12.1573 24.3604 12.2857 24.4106C12.414 24.4609 12.5513 24.4841 12.689 24.4788C12.8268 24.4735 12.9619 24.4398 13.086 24.3797C13.21 24.3197 13.3203 24.2347 13.41 24.13L18.18 19.36L22.92 24.1C23.1113 24.2638 23.3574 24.3494 23.609 24.3397C23.8607 24.33 24.0995 24.2257 24.2776 24.0476C24.4557 23.8695 24.56 23.6307 24.5697 23.3791C24.5794 23.1274 24.4938 22.8813 24.33 22.69L19.61 18Z" fill="black"/>
+                                <path d="M18 34C14.8355 34 11.7421 33.0616 9.11088 31.3035C6.4797 29.5454 4.42894 27.0466 3.21793 24.1229C2.00693 21.1993 1.69008 17.9823 2.30744 14.8786C2.92481 11.7749 4.44866 8.92394 6.6863 6.6863C8.92394 4.44866 11.7749 2.92481 14.8786 2.30744C17.9823 1.69008 21.1993 2.00693 24.1229 3.21793C27.0466 4.42894 29.5454 6.4797 31.3035 9.11088C33.0616 11.7421 34 14.8355 34 18C34 22.2435 32.3143 26.3131 29.3137 29.3137C26.3131 32.3143 22.2435 34 18 34ZM18 4.00001C15.2311 4.00001 12.5243 4.82109 10.222 6.35943C7.91974 7.89777 6.12532 10.0843 5.06569 12.6424C4.00607 15.2006 3.72882 18.0155 4.26901 20.7313C4.80921 23.447 6.14258 25.9416 8.10051 27.8995C10.0584 29.8574 12.553 31.1908 15.2687 31.731C17.9845 32.2712 20.7994 31.9939 23.3576 30.9343C25.9157 29.8747 28.1022 28.0803 29.6406 25.778C31.1789 23.4757 32 20.7689 32 18C32 14.287 30.525 10.726 27.8995 8.10051C25.274 5.475 21.713 4.00001 18 4.00001Z" fill="black"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="edit">
+                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M35.637 8.849L27.151 0.362884C26.9187 0.130546 26.6034 0 26.2747 0C25.946 0 25.6307 0.130546 25.3984 0.362884L0.629421 25.1318C0.406337 25.3552 0.276618 25.655 0.267034 25.9705L0.000819681 34.723C-0.00959092 35.0645 0.121616 35.3954 0.363208 35.6371C0.596041 35.8698 0.911334 36 1.23952 36C1.25207 36 1.26463 35.9998 1.27736 35.9993L10.0295 35.7328C10.345 35.7232 10.6449 35.5937 10.8682 35.3706L35.6371 10.6018C36.121 10.1178 36.121 9.33302 35.637 8.849ZM9.46273 33.2703L2.51837 33.4818L2.72972 26.5371L17.7877 11.4789L24.5216 18.2116L9.46273 33.2703ZM26.2744 16.459L19.5404 9.72647L26.2745 2.99214L33.0077 9.72548L26.2744 16.459Z" fill="black"/>
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+                @break
+                @case('pages')
+                <tr>
+                    <td>ID</td>
+                    <td>Назва</td>
+                    <td>url</td>
+                    <td>Виконати</td>
+                </tr>
+                @break
+                @case('users')
+                <tr>
+                    <td>{{$model->id}}</td>
+                    <td>{{$model->name}}</td>
+                    <td>{{$model->role->value}}</td>
+                    <td>
+                        <a href="#" class="remove">
+                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19.61 18L24.47 13.14C24.6338 12.9487 24.7194 12.7026 24.7097 12.4509C24.7 12.1993 24.5957 11.9605 24.4176 11.7824C24.2395 11.6043 24.0007 11.5 23.749 11.4903C23.4974 11.4806 23.2513 11.5662 23.06 11.73L18.2 16.54L13.31 11.65C13.1187 11.4862 12.8726 11.4006 12.6209 11.4103C12.3693 11.42 12.1305 11.5243 11.9524 11.7024C11.7743 11.8805 11.67 12.1193 11.6603 12.3709C11.6506 12.6226 11.7362 12.8687 11.9 13.06L16.78 18L12 22.72C11.8953 22.8096 11.8103 22.92 11.7503 23.044C11.6902 23.1681 11.6565 23.3032 11.6512 23.4409C11.6459 23.5787 11.6691 23.716 11.7194 23.8443C11.7696 23.9727 11.8459 24.0892 11.9433 24.1867C12.0408 24.2841 12.1573 24.3604 12.2857 24.4106C12.414 24.4609 12.5513 24.4841 12.689 24.4788C12.8268 24.4735 12.9619 24.4398 13.086 24.3797C13.21 24.3197 13.3203 24.2347 13.41 24.13L18.18 19.36L22.92 24.1C23.1113 24.2638 23.3574 24.3494 23.609 24.3397C23.8607 24.33 24.0995 24.2257 24.2776 24.0476C24.4557 23.8695 24.56 23.6307 24.5697 23.3791C24.5794 23.1274 24.4938 22.8813 24.33 22.69L19.61 18Z" fill="black"/>
+                                <path d="M18 34C14.8355 34 11.7421 33.0616 9.11088 31.3035C6.4797 29.5454 4.42894 27.0466 3.21793 24.1229C2.00693 21.1993 1.69008 17.9823 2.30744 14.8786C2.92481 11.7749 4.44866 8.92394 6.6863 6.6863C8.92394 4.44866 11.7749 2.92481 14.8786 2.30744C17.9823 1.69008 21.1993 2.00693 24.1229 3.21793C27.0466 4.42894 29.5454 6.4797 31.3035 9.11088C33.0616 11.7421 34 14.8355 34 18C34 22.2435 32.3143 26.3131 29.3137 29.3137C26.3131 32.3143 22.2435 34 18 34ZM18 4.00001C15.2311 4.00001 12.5243 4.82109 10.222 6.35943C7.91974 7.89777 6.12532 10.0843 5.06569 12.6424C4.00607 15.2006 3.72882 18.0155 4.26901 20.7313C4.80921 23.447 6.14258 25.9416 8.10051 27.8995C10.0584 29.8574 12.553 31.1908 15.2687 31.731C17.9845 32.2712 20.7994 31.9939 23.3576 30.9343C25.9157 29.8747 28.1022 28.0803 29.6406 25.778C31.1789 23.4757 32 20.7689 32 18C32 14.287 30.525 10.726 27.8995 8.10051C25.274 5.475 21.713 4.00001 18 4.00001Z" fill="black"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="edit">
+                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M35.637 8.849L27.151 0.362884C26.9187 0.130546 26.6034 0 26.2747 0C25.946 0 25.6307 0.130546 25.3984 0.362884L0.629421 25.1318C0.406337 25.3552 0.276618 25.655 0.267034 25.9705L0.000819681 34.723C-0.00959092 35.0645 0.121616 35.3954 0.363208 35.6371C0.596041 35.8698 0.911334 36 1.23952 36C1.25207 36 1.26463 35.9998 1.27736 35.9993L10.0295 35.7328C10.345 35.7232 10.6449 35.5937 10.8682 35.3706L35.6371 10.6018C36.121 10.1178 36.121 9.33302 35.637 8.849ZM9.46273 33.2703L2.51837 33.4818L2.72972 26.5371L17.7877 11.4789L24.5216 18.2116L9.46273 33.2703ZM26.2744 16.459L19.5404 9.72647L26.2745 2.99214L33.0077 9.72548L26.2744 16.459Z" fill="black"/>
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+                @break
+            @endswitch
+        @endforeach
+        </tbody>
+    </table>
+    {{ $models->links('includes.pagination') }}
 
-  </div>
-  <!-- End of Page Wrapper -->
+@endsection
 
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
-
-  <!-- Page level plugins -->
-  <script src="vendor/chart.js/Chart.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="js/demo/chart-area-demo.js"></script>
-  <script src="js/demo/chart-pie-demo.js"></script>
-
-</body>
-
-</html>
+@push('js')
+    <script src="{{asset('app/js/admin.js')}}"></script>
+@endpush

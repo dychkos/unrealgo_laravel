@@ -93,12 +93,17 @@
                     <div class="user-dropdown__item">
                         <span class="h5"><a href="{{asset(route('user.profile'))}}" class="link">Профиль</a></span>
                     </div>
+                    @if(isset($user) && $user->isAdmin())
+                        <div class="user-dropdown__item">
+                            <span class="h5"><a href="{{asset(route('user.admin.index'))}}" class="link">Админ-панель</a></span>
+                        </div>
+                    @endif
                     <div class="user-dropdown__item">
-                               <span class="h5">
-                                   <a href="{{route('logout')}}" class="link link_danger">
-                                       Выйти
-                                   </a>
-                               </span>
+                       <span class="h5">
+                           <a href="{{route('logout')}}" class="link link_danger">
+                               Выйти
+                           </a>
+                       </span>
                     </div>
                 </div>
             </div>

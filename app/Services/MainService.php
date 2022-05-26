@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Article;
 use App\Repositories\SearchRepository;
 use Illuminate\Validation\ValidationException;
 
@@ -14,6 +15,14 @@ class MainService
         $this->searchRepository = $searchRepository;
     }
 
+    public array $activeModels = [
+        'articles' => 'Статі',
+        'products' => 'Товари',
+        'comments' => 'Коментарі',
+        'pages' => 'Сторінки',
+        'users' => 'Користувачі',
+    ];
+
     /**
      * @throws ValidationException
      */
@@ -25,4 +34,6 @@ class MainService
 
         return $this->searchRepository->doSearch($search);
     }
+
+
 }

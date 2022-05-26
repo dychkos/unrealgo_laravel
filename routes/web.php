@@ -90,24 +90,22 @@ Route::name("user.")->prefix("user")->middleware("auth")->group(function(){
 });
 
 
-Route::get("/admin", [AdminController::class,"index"])->name("index");
-
-
-
-
 /* ADMIN ROLE  */
-//Route::name('user.')->prefix('user')->middleware('auth')->group(function(){
-//    Route::name('admin.')->prefix('admin-panel')->middleware('admin_role')->group(function(){
-//        Route::get("", [AdminController::class,"index"])->name("index");
-//        Route::get("users", [AdminController::class,"usersShow"])->name("users");
-//        Route::get("houses", [AdminController::class,"housesShow"])->name("houses");
-//        Route::get("orders", [AdminController::class,"ordersShow"])->name("orders");
-//
-//        Route::post("features", [AdminController::class,"storeFeatures"])->name("features.store");
-//        Route::post("houses", [AdminController::class,"updateHouses"])->name("houses.update");
-//        Route::post("users", [AdminController::class,"updateUsers"])->name("users.update");
-//
-//        Route::delete("features", [AdminController::class,"deleteFeatures"])->name("features.delete");
-//        Route::delete("comments", [AdminController::class,"deleteComments"])->name("comments.delete");
-//    });
-//});
+Route::name('user.')->prefix('user')->middleware('auth')->group(function(){
+    Route::name('admin.')->prefix('admin')->middleware('admin_role')->group(function(){
+        Route::get("", [AdminController::class,"index"])->name("index");
+        Route::get("{modelName?}", [AdminController::class,"index"])->name("index");
+
+        Route::get("users", [AdminController::class,"usersShow"])->name("users");
+        Route::get("houses", [AdminController::class,"housesShow"])->name("houses");
+        Route::get("orders", [AdminController::class,"ordersShow"])->name("orders");
+
+        Route::post("features", [AdminController::class,"storeFeatures"])->name("features.store");
+        Route::post("houses", [AdminController::class,"updateHouses"])->name("houses.update");
+        Route::post("users", [AdminController::class,"updateUsers"])->name("users.update");
+
+        Route::delete("features", [AdminController::class,"deleteFeatures"])->name("features.delete");
+        Route::delete("comments", [AdminController::class,"deleteComments"])->name("comments.delete");
+    });
+});
+
