@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('slug');
 
             $table->string('title');
-            $table->string('description');
+            $table->longText('description');
             $table->longText('body');
-            $table->integer('views');
+            $table->integer('views')->default(0);
 
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')

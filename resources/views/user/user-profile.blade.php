@@ -30,7 +30,7 @@
                     <div class="success-message">
                         {{session()->get('message')}}
                     </div>
-                @endif
+            @endif
                 <div class="row">
                     <div class="user-profile__input-group col-12 col-md-6">
                         <label for="edit-photo" class="input-group__label p-light">Фото профиля</label>

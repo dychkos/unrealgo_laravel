@@ -6,13 +6,13 @@ use Illuminate\Support\Facades\Storage;
 
 class Helper
 {
-    public static function upload_image($files)
+    public static function upload_image($files): array
     {
         $images = array();
 
         foreach($files as $file){
             $image_url = Storage::putFile('images',$file,'public');
-            array_push($images,["filename" => $image_url]);
+            array_push($images, ["filename" => $image_url]);
         }
 
         return $images;
@@ -30,5 +30,10 @@ class Helper
         } else {
             return false;
         }
+    }
+
+    public static function createSlug($string): string
+    {
+        return preg_replace('/\s+/', '_', $string);;
     }
 }

@@ -28,7 +28,7 @@
 </head>
 <body>
 <header class="admin-header">
-    <span class="url h4">unreal-go.top</span>
+    <a href="{{route('home')}}" class="url h4">unreal-go.top</a>
     <a href="{{route('logout')}}" class="link">Вийти</a>
 </header>
 <main class="admin-main">

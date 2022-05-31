@@ -9,6 +9,14 @@ class Article extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'slug',
+        'description',
+        'body',
+        'category_id',
+    ];
+
     /**
      * Name of columns to which http sorting can be applied
      *

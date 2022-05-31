@@ -96,9 +96,17 @@ Route::name('user.')->prefix('user')->middleware('auth')->group(function(){
         Route::get("", [AdminController::class,"index"])->name("index");
         Route::get("{modelName?}", [AdminController::class,"index"])->name("index");
 
-        Route::get("users", [AdminController::class,"usersShow"])->name("users");
-        Route::get("houses", [AdminController::class,"housesShow"])->name("houses");
-        Route::get("orders", [AdminController::class,"ordersShow"])->name("orders");
+        /*Articles*/
+        Route::get("article/create", [AdminController::class, "createArticle"])->name("articles.create");
+        Route::get("article/edit/{id}", [AdminController::class, "editArticle"])->name("articles.edit");
+        Route::get("remove/article/{id}", [AdminController::class, "deleteArticle"])->name("articles.remove");
+        Route::post("article", [AdminController::class,"storeArticle"])->name("articles.store");
+        Route::post("article/{id}", [AdminController::class,"updateArticle"])->name("articles.update");
+
+        Route::get("remove/user/{id}", [AdminController::class,"deleteUser"])->name("user.remove");
+        Route::get("remove/product/{id}", [AdminController::class,"deleteProduct"])->name("product.remove");
+        Route::get("remove/order/{id}", [AdminController::class,"cancelOrder"])->name("order.cancel");
+        Route::get("remove/comment/{id}", [AdminController::class,"deleteComment"])->name("comment.remove");
 
         Route::post("features", [AdminController::class,"storeFeatures"])->name("features.store");
         Route::post("houses", [AdminController::class,"updateHouses"])->name("houses.update");

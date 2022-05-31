@@ -13,6 +13,11 @@ class ProductRepository
         $this->product = $product;
     }
 
+    public function delete($product_id)
+    {
+        return $this->product->destroy($product_id);
+    }
+
     public function like($data)
     {
         $product = Product::find($data['product_id']);

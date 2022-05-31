@@ -38,4 +38,9 @@ class CommentService
         return $this->commentRepository->like($validated);
     }
 
+    public function delete($data)
+    {
+        return $this->commentRepository->delete($data);
+    }
+
 }

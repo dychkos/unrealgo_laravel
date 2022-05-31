@@ -2,393 +2,405 @@
 //COMMON ELEMS STYLING
 
 body{
-	background-color: $background-dark;
-	font-family: Rubik-Regular;
+    background-color: $background-dark;
+    font-family: Rubik-Regular;
 }
 
 a.link{
-	transition: color 0.3s ease-in-out;
-	margin: 12px 0;
-	&_danger{
-		color:$danger;
-	}
-    &_decorated {
-        text-decoration: underline;
+    transition: color 0.3s ease-in-out;
+    margin: 12px 0;
+    &_danger{
+        color:$danger;
     }
-	&:hover{
-		color: $primary;
-	}
+    &:hover{
+        color: $primary;
+    }
 }
 
 .page-title{
-	padding-top: 20px;
-	padding-bottom: 30px;
+    padding-top: 20px;
+    padding-bottom: 30px;
 }
 
 .hide{
-	display: none;
+    display: none;
 }
 
 .with-icon{
-	color: $primary;
-	display: flex;
-	align-items: center;
-	&__icon{
-		margin-right: 7px;
-		svg{
-			path{
-				stroke: $primary;
-			}
-		}
-	}
+    color: $primary;
+    display: flex;
+    align-items: center;
+    &__icon{
+        margin-right: 7px;
+        svg{
+            path{
+                stroke: $primary;
+            }
+        }
+    }
 
 }
 
 .confirm{
-	input{
-		display: none !important;
-		&:checked+label::before {
-			background-color: $primary;
-			background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='16' height='16' rx='4' fill='%23FDFFBA'/%3E%3C/svg%3E%0A");
-			background-repeat: no-repeat;
-			background-position: center center;
-			background-size: 14px;
-		}
-	}
-	label{
-		padding-left: 36px;
-		position: relative;
-		cursor: pointer;
-		&:before{
-			content: "";
-			position: absolute;
-			left: 0;
-			height: 24px;
-			width: 24px;
-			background-color: $primary;
-			border-radius: 4px;
-			background-image: none;
-			background-size: 0;
-			transition: background-image 0.4s ease;
-		}
-	}
+    input{
+        display: none !important;
+        &:checked+label::before {
+            background-color: $primary;
+            background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='16' height='16' rx='4' fill='%23FDFFBA'/%3E%3C/svg%3E%0A");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 14px;
+        }
+    }
+    label{
+        padding-left: 36px;
+        position: relative;
+        cursor: pointer;
+        &:before{
+            content: "";
+            position: absolute;
+            left: 0;
+            height: 24px;
+            width: 24px;
+            background-color: $primary;
+            border-radius: 4px;
+            background-image: none;
+            background-size: 0;
+            transition: background-image 0.4s ease;
+        }
+    }
 
 }
 
 .input-group{
-	&__label{
-		color:$black;
-	}
-	&__input{
-		margin-top: 10px;
-	}
+    &__label{
+        color:$black;
+    }
+    &__input{
+        margin-top: 10px;
+    }
 }
 
 .ellipse{
-	padding-left:10px;
-	position: relative;
-	&:before{
-		content: "";
-		display: block;
-		border-radius: 50%;
-		position: absolute;
-		top:50%;
-		left: -5px;
-		height: 4px;
-		width: 4px;
-		background-color: $primary;
-	}
+    padding-left:10px;
+    position: relative;
+    &:before{
+        content: "";
+        display: block;
+        border-radius: 50%;
+        position: absolute;
+        top:50%;
+        left: -5px;
+        height: 4px;
+        width: 4px;
+        background-color: $primary;
+    }
 }
 
 .social{
-	&__item{
-		text-align: center;
-	}
+    &__item{
+        text-align: center;
+    }
 }
 .help-link{
-	color: $primary;
-	text-decoration: underline;
-	cursor: pointer;
+    color: $primary;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .like{
-	background-color: $primary;
-	border-radius: 50%;
-	width: 40px;
-	height: 40px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
-	z-index: $defaultZ;
-	svg{
-		fill:$primary ;
-	}
-	transition: all 0.3s ease;
-	&:hover{
-		background-color: $primary;
-		svg{
-			fill: #ffffff;
-			path{
-				stroke: #ffffff;
-			}
-		}
-	}
-	&_liked{
-		background-color: #fff;
-		svg{
-			fill: $primary;
-			path{
-				stroke: $primary;
-			}
-		}
+    background-color: $primary;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+    z-index: $defaultZ;
+    svg{
+        fill:$primary ;
+    }
+    transition: all 0.3s ease;
+    &:hover{
+        background-color: $primary;
+        svg{
+            fill: #ffffff;
+            path{
+                stroke: #ffffff;
+            }
+        }
+    }
+    &_liked{
+        background-color: #fff;
+        svg{
+            fill: $primary;
+            path{
+                stroke: $primary;
+            }
+        }
 
-	}
+    }
 }
 
 .mail{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 15px 0;
-	&__image{
-		margin-right: 8px;
-	}
-	&__text{
-		color: $primary;
-		font-family: Rubik-Bold;
-	}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 0;
+    &__image{
+        margin-right: 8px;
+    }
+    &__text{
+        color: $primary;
+        font-family: Rubik-Bold;
+    }
 }
 
 .required{
-	border: 2px solid $danger !important;
-	color: $danger !important;
-	&_alert{
-		color: $danger;
-        font-size: 14px;
-        margin-bottom: 4px;
-	}
-}
-
-.success-message{
-    color: $success;
-    padding: 14px 20px;
-    background-color: #fff;
-    border-radius: $b-radius;
-    margin: 20px 0;
-    transition: height 0.4s ease;
-
+    border: 2px solid $danger !important;
+    color: $danger !important;
+    &_alert{
+        color: $danger;
+    }
 }
 
 .up{
-	position: fixed;
-	opacity: 0;
-	height: 50px;
-	width: 50px;
-	background-color: $primary;
-	border-radius: 50%;
-	bottom: 80px;
-	right: 80px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-	z-index: $upZ;
-	transition: all 0.3s ease;
-	transition-property: box-shadow,opacity;
-	svg{
-		path{
-			fill: #fff;
-		}
-	}
-	&:hover{
-		box-shadow: 2px 1px 14px 0px $primary;
-	}
-	&.active{
-		opacity: 1;
-	}
+    position: fixed;
+    opacity: 0;
+    height: 50px;
+    width: 50px;
+    background-color: $primary;
+    border-radius: 50%;
+    bottom: 80px;
+    right: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: $upZ;
+    transition: all 0.3s ease;
+    transition-property: box-shadow,opacity;
+    svg{
+        path{
+            fill: #fff;
+        }
+    }
+    &:hover{
+        box-shadow: 2px 1px 14px 0px $primary;
+    }
+    &.active{
+        opacity: 1;
+    }
 }
 
 #top{
-	visibility: hidden;
-	opacity: 0;
-	position: relative;
-	top: -213px;
-}
-
-.disabled {
-    opacity: 0.7;
-    pointer-events: none;
+    visibility: hidden;
+    opacity: 0;
+    position: relative;
+    top: -213px;
 }
 
 
 input[type="checkbox"]{
-	display: block;
+    display: block;
 }
 
 textarea{
-	resize: vertical;
+    resize: vertical;
 }
 
 .btn{
-	display: inline-block;
-	line-height: 1;
-	cursor: pointer;
-	min-width: min-content;
-	white-space: nowrap;
-	transition: all .25s ease-in-out;
-	text-align: center;
-	padding: 16px 45px;
-	border-radius: $b-radius;
-	color: inherit;
-	&:focus{
-		outline: none;
-	}
-	&:hover{
+    display: inline-block;
+    line-height: 1;
+    cursor: pointer;
+    min-width: min-content;
+    white-space: nowrap;
+    transition: all .25s ease-in-out;
+    text-align: center;
+    padding: 16px 45px;
+    border-radius: $b-radius;
+    color: inherit;
+    &:focus{
+        outline: none;
+    }
+    &:hover{
 
-	}
-	&_small{
-		padding: 6px 18px;
-	}
-	&_primary{
-		background-color: $primary;
-		color: #fff;
-		&:hover{
-			text-decoration: none;
-			background-color: $hover;
-		}
-		&:active{
+    }
+    &_small{
+        padding: 6px 18px;
+    }
+    &_primary{
+        background-color: $primary;
+        color: #fff;
+        &:hover{
+            text-decoration: none;
+            background-color: $hover;
+        }
+        &:active{
 
-		}
-	}
-	&_danger{
-		background-color: $danger;
-		&:hover{
-			background-color: #AD6359;
-		}
-	}
-	&_secondary{
-		&:hover{
+        }
+    }
+    &_danger{
+        background-color: $danger;
+        &:hover{
+            background-color: #AD6359;
+        }
+    }
+    &_secondary{
+        &:hover{
 
-		}
-		&:active{
+        }
+        &:active{
 
-		}
-	}
-	&:disabled,
-	&[disabled]{
-		color: white !important;
-		border-color: #d7d7d7 !important;
-		background-color: #d7d7d7 !important;
-		box-shadow: none;
-	}
+        }
+    }
+    &:disabled,
+    &[disabled]{
+        color: white !important;
+        border-color: #d7d7d7 !important;
+        background-color: #d7d7d7 !important;
+        box-shadow: none;
+    }
 
 }
 
-select,.select{
-	width: 100%;
-	margin-bottom: 8px;
-	padding: 16px 24px;
-	color: $gray;
-	background-color: $secondary;
-	border: none;
-	border-radius: $b-radius;
-	-moz-appearance: none;
-	-webkit-appearance: none;
-	appearance: none;
-	background-image: url("data:image/svg+xml,%3csvg width='19' height='12' viewBox='0 0 19 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M1.75 2.25L9.5 9.75L17.25 2.25' stroke='%23A5A815' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
-	background-repeat: no-repeat, repeat;
-	background-position: right .7em top 50%, 0 0;
-	background-size: .65em auto, 100%;
-	option{
-		padding: 12px;
-	}
+select, .select{
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 16px 24px;
+    color: $gray;
+    background-color: $secondary;
+    border: none;
+    border-radius: $b-radius;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg width='19' height='12' viewBox='0 0 19 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M1.75 2.25L9.5 9.75L17.25 2.25' stroke='%23A5A815' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+    background-repeat: no-repeat, repeat;
+    background-position: right .7em top 50%, 0 0;
+    background-size: .65em auto, 100%;
+    option{
+        padding: 12px;
+    }
 
 }
 
 .dropdown{
-	position: relative;
-	&__label{
-		margin-bottom: 12px;
-	}
-	&__input{
-		margin: 6px 0 0 0;
-		background-image: url("data:image/svg+xml,%3csvg width='19' height='12' viewBox='0 0 19 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M1.75 2.25L9.5 9.75L17.25 2.25' stroke='%23A5A815' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
-		background-repeat: no-repeat, repeat;
-		background-position: right .7em top 50%, 0 0;
-		background-size: .65em auto, 100%;
-	}
-	&__body{
-		display: none;
-		position: absolute;
-		width: 100%;
-		left: 0;
-		top: 60px;
-		max-height: 140px;
-		overflow-y: auto;
-		z-index: $sortZ;
-		&.open{
-			display: block;
-		}
-	}
-	&__option{
-		color: $gray;
-		cursor: pointer;
-		background-color: $secondary;
-		padding: 16px 24px;
-		transition:background-color 0.4s ease;
-		&:hover{
-			background-color: $hoverThin;
-		}
-	}
+    position: relative;
+    &__label{
+        margin-bottom: 12px;
+    }
+    &__input{
+        margin: 6px 0 0 0;
+        background-image: url("data:image/svg+xml,%3csvg width='19' height='12' viewBox='0 0 19 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M1.75 2.25L9.5 9.75L17.25 2.25' stroke='%23A5A815' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+        background-repeat: no-repeat, repeat;
+        background-position: right .7em top 50%, 0 0;
+        background-size: .65em auto, 100%;
+    }
+    &__body{
+        display: none;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 60px;
+        max-height: 140px;
+        overflow-y: auto;
+        z-index: $sortZ;
+        &.open{
+            display: block;
+        }
+    }
+    &__option{
+        color: $gray;
+        cursor: pointer;
+        background-color: $secondary;
+        padding: 16px 24px;
+        transition:background-color 0.4s ease;
+        &:hover{
+            background-color: $hoverThin;
+        }
+    }
+}
+
+.file-input {
+    display: flex;
+    gap: 1rem;
+
+    &__label {
+        margin: 6px 0;
+        border-radius: $b-radius;
+        background-color: $primary;
+        min-width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    &__input {
+        display: none;
+    }
+
+    &__files {
+        margin-top: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+
+}
+
+.required_alert {
+    margin-top: 8px;
+    font-size: 15px;
 }
 
 .form-input{
-	margin-bottom: 8px;
-	&_sm{
-		width: 320px;
-	}
-	.label{
-		float: left;
-		margin: 6px 0;
-	}
-	input:not(input[type="checkbox"],input[type="radio"]),textarea{
-		width: 100%;
-		margin-bottom: 8px;
-		padding: 16px 24px;
-		color: $gray;
-		background-color: $secondary;
-		border: none;
-		border-radius: $b-radius;
+    &_sm{
+        width: 320px;
+    }
+    label{
+        float: left;
+        margin: 6px 0;
+    }
+    input:not(input[type="checkbox"],input[type="radio"]),textarea{
+        width: 100%;
+        padding: 16px 24px;
+        color: $gray;
+        background-color: $secondary;
+        border: none;
+        border-radius: $b-radius;
 
-	}
+    }
 
 }
 
 //COMMON ELEMS STYLING ENDs
 @media only screen and (max-width: 991px){
-	.page-title{
-		padding-top: 10px;
-	}
+    .page-title{
+        padding-top: 10px;
+    }
 }
 
 
 @media only screen and (max-width: 575px){
-	.up{
-		bottom: 60px;
-		right: 20px;
-		&:hover{
-			box-shadow: none;
-		}
-	}
-	.form-input {
-		&_sm {
-			width: 100%
-		}
-	}
-	.btn{
-		padding: 16px 32px;
+    .up{
+        bottom: 30px;
+        right: 20px;
+        &:hover{
+            box-shadow: none;
+        }
+    }
+    .form-input {
+        &_sm {
+            width: 100%
+        }
+    }
+    .btn{
+        padding: 16px 32px;
 
-	}
+    }
 }

@@ -19,7 +19,7 @@ class Select {
 
     init(){
         this.dropdownInput.placeholder = this.placeholder;
-        this.dropdownInput.addEventListener("input",this.onChange);
+        this.dropdownInput.addEventListener("input", this.onChange);
 
         this.render();
     }

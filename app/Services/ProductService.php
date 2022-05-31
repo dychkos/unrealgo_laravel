@@ -21,6 +21,11 @@ class ProductService
         $this->orderRepository = $orderRepository;
     }
 
+    public function deleteProduct($data): int
+    {
+        return $this->productRepository->delete($data);
+    }
+
     public function like($data)
     {
         $validated = Validator::make($data, [
@@ -152,30 +157,12 @@ class ProductService
 
         foreach ($cart as $key => $item)
         {
-//            dump($item['product_id'] === $product["product_id"] && $item['size_id'] === $product["size_id"]);
-//            dump($product);
-//            dd($cart);
-
             if ($item['product_id'] == $product["product_id"] && $item['size_id'] == $product["size_id"])  {
                 return $key;
             }
         }
 
         return -1;
-    }
-
-    public function getBasketProducts($cart) {
-        $products = [];
-        foreach ($cart as $key => $item)
-        {
-            $product = Product::find($item["product_id"]);
-            $size = Size::find($item["size_id"]);
-            $product["size"] = $size->value();
-            $product["count"] = 3;
-            array_push($products, $product);
-        }
-
-        return $products;
     }
 
     public function getTotalProductPrice($products) {

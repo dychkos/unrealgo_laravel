@@ -49,7 +49,7 @@
             margin: 0 20px;
             display: flex;
             flex-direction: column;
-            gap: 1.4rem;
+            gap: 0.3rem;
         }
         &__image {
             display: flex;
@@ -76,7 +76,6 @@
                 }
                 img{
                     filter: invert(1);
-
                 }
             }
         }
@@ -97,7 +96,7 @@
         width: 40px;
         height: 40px;
         margin: 0 auto;
-        padding-top: 30px;
+        padding-top: 12px;
     }
 
     &-content {
