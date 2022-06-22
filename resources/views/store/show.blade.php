@@ -14,9 +14,11 @@
                             </div>
                             @if($product->images()->get()->count() > 1)
                                 @foreach($product->images as $image)
+                                    @if($loop->index > 1)
                                     <div class="photos__slide">
                                         <img src="{{asset($image->filename)}}" data-photo alt="Product">
                                     </div>
+                                    @endif
                                 @endforeach
                             @endif
                         </div>

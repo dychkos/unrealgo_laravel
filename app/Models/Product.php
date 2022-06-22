@@ -14,7 +14,7 @@ class Product extends Model
         "description",
         "price",
         "offer",
-        "type"
+        "type_id"
     ];
 
     public static $SORTS = [

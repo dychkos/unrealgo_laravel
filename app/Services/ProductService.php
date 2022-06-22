@@ -21,7 +21,40 @@ class ProductService
         $this->orderRepository = $orderRepository;
     }
 
-    public function deleteProduct($data): int
+    public function store($data)
+    {
+        $validated = Validator::make($data, [
+            'images' => ['required', 'array'],
+            'sizes' => ['required', 'array'],
+            'type_id' => ['required', 'int'],
+            'slug' => ['required', 'string'],
+            'price' => ['required', 'int'],
+            'offer' => ['sometimes', 'int'],
+            'title' => ['required', 'string', 'max:100'],
+            'description' => ['required', 'string'],
+        ])->validate();
+
+        return $this->productRepository->store($validated);
+    }
+
+    public function update($data)
+    {
+        $validated = Validator::make($data, [
+            'product_id' => ['required', 'int'],
+            'price' => ['required', 'int'],
+            'offer' => ['sometimes', 'int'],
+            'type_id' => ['required', 'int'],
+            'images' => ['sometimes', 'array'],
+            'sizes' => ['sometimes', 'array'],
+            'slug' => ['required', 'string'],
+            'title' => ['required', 'string'],
+            'description' => ['required', 'string'],
+        ])->validate();
+
+        return $this->productRepository->update($validated);
+    }
+
+    public function delete($data): int
     {
         return $this->productRepository->delete($data);
     }
@@ -165,7 +198,8 @@ class ProductService
         return -1;
     }
 
-    public function getTotalProductPrice($products) {
+    public function getTotalProductPrice($products): float|int
+    {
         $totalPrice = 0;
 
         foreach ($products as $product){

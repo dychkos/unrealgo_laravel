@@ -6,6 +6,9 @@ use App\Helpers\ControllerHelper;
 use App\Helpers\Helper;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Product;
+use App\Models\Size;
+use App\Models\Type;
 use App\Services\ArticleService;
 use App\Services\CommentService;
 use App\Services\MainService;
@@ -61,11 +64,6 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function deleteProduct($id): \Illuminate\Http\RedirectResponse
-    {
-        $this->productService->deleteProduct($id);
-        return redirect()->back();
-    }
 
     public function cancelOrder($id): \Illuminate\Http\RedirectResponse
     {
@@ -73,6 +71,7 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
+    /* Articles */
     public function createArticle(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         $categories = Category::all();
@@ -142,7 +141,61 @@ class AdminController extends Controller
         return redirect()->back()->with("message", "Публікацію видалено");
     }
 
+    /* Products */
+    public function createProduct(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    {
+        $types = Type::all();
+        $sizes = Size::all();
+        $activeModels = $this->mainService->activeModels;
+        $modelName = 'products';
 
+        return view('admin.products.create', compact('types', 'sizes', 'activeModels', 'modelName'));
+    }
+
+    public function editProduct($product_id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    {
+        $product = Product::find($product_id);
+        $types = Type::all();
+        $sizes = Size::all();
+        $activeModels = $this->mainService->activeModels;
+        $modelName = 'products';
+
+        return view('admin.products.edit', compact(
+            'product',
+            'types',
+            'sizes',
+            'activeModels',
+            'modelName')
+        );
+    }
+
+    public function storeProduct(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        $images = [];
+
+        if($files = $request->file('image'))
+        {
+            $images = Helper::upload_image($files);
+        }
+
+        $processed = ControllerHelper::addOnlyExists($request->all());
+
+        $newProduct = array_merge(
+            $processed,
+            ['images' => $images],
+            ['slug' => Helper::createSlug($request->input('slug')) ?? '']
+        );
+
+        $this->productService->store($newProduct);
+
+        return redirect()->route("user.admin.index", "products")->with("message", "Новий товар створено");
+    }
+
+    public function deleteProduct($id): \Illuminate\Http\RedirectResponse
+    {
+        $this->productService->delete($id);
+        return redirect()->back()->with("message", "Товар видалено");
+    }
 
 
 

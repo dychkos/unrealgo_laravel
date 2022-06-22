@@ -103,8 +103,14 @@ Route::name('user.')->prefix('user')->middleware('auth')->group(function(){
         Route::post("article", [AdminController::class,"storeArticle"])->name("articles.store");
         Route::post("article/{id}", [AdminController::class,"updateArticle"])->name("articles.update");
 
+        /*Products*/
+        Route::get("product/create", [AdminController::class, "createProduct"])->name("products.create");
+        Route::get("product/edit/{id}", [AdminController::class, "editProduct"])->name("products.edit");
+        Route::get("remove/product/{id}", [AdminController::class, "deleteProduct"])->name("products.remove");
+        Route::post("product", [AdminController::class,"storeProduct"])->name("products.store");
+        Route::post("product/{id}", [AdminController::class,"updateProduct"])->name("products.update");
+
         Route::get("remove/user/{id}", [AdminController::class,"deleteUser"])->name("user.remove");
-        Route::get("remove/product/{id}", [AdminController::class,"deleteProduct"])->name("product.remove");
         Route::get("remove/order/{id}", [AdminController::class,"cancelOrder"])->name("order.cancel");
         Route::get("remove/comment/{id}", [AdminController::class,"deleteComment"])->name("comment.remove");
 

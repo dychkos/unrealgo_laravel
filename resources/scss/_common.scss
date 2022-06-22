@@ -283,8 +283,15 @@ select, .select{
     background-size: .65em auto, 100%;
     option{
         padding: 12px;
+        color: black;
     }
 
+}
+
+.multi-select {
+    option {
+        color: $black;
+    }
 }
 
 .dropdown{

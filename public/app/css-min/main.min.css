@@ -418,9 +418,6 @@ a.link {
 a.link_danger {
   color: #A84F43;
 }
-a.link_decorated {
-  text-decoration: underline;
-}
 a.link:hover {
   color: #A5A815;
 }
@@ -562,17 +559,6 @@ a.link:hover {
 }
 .required_alert {
   color: #A84F43;
-  font-size: 14px;
-  margin-bottom: 4px;
-}
-
-.success-message {
-  color: #20d020;
-  padding: 14px 20px;
-  background-color: #fff;
-  border-radius: 20px;
-  margin: 20px 0;
-  transition: height 0.4s ease;
 }
 
 .up {
@@ -607,11 +593,6 @@ a.link:hover {
   opacity: 0;
   position: relative;
   top: -213px;
-}
-
-.disabled {
-  opacity: 0.7;
-  pointer-events: none;
 }
 
 input[type=checkbox] {
@@ -681,6 +662,11 @@ select, .select {
 }
 select option, .select option {
   padding: 12px;
+  color: black;
+}
+
+.multi-select option {
+  color: #191a29;
 }
 
 .dropdown {
@@ -720,19 +706,45 @@ select option, .select option {
   background-color: #FCFF65;
 }
 
-.form-input {
-  margin-bottom: 8px;
+.file-input {
+  display: flex;
+  gap: 1rem;
 }
+.file-input__label {
+  margin: 6px 0;
+  border-radius: 20px;
+  background-color: #A5A815;
+  min-width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.file-input__input {
+  display: none;
+}
+.file-input__files {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.required_alert {
+  margin-top: 8px;
+  font-size: 15px;
+}
+
 .form-input_sm {
   width: 320px;
 }
-.form-input .label {
+.form-input label {
   float: left;
   margin: 6px 0;
 }
 .form-input input:not(input[type=checkbox], input[type=radio]), .form-input textarea {
   width: 100%;
-  margin-bottom: 8px;
   padding: 16px 24px;
   color: #6B6B6B;
   background-color: #FDFFBA;
@@ -747,7 +759,7 @@ select option, .select option {
 }
 @media only screen and (max-width: 575px) {
   .up {
-    bottom: 60px;
+    bottom: 30px;
     right: 20px;
   }
   .up:hover {
@@ -827,7 +839,7 @@ select option, .select option {
   margin-right: 0;
 }
 .big-article__body {
-  padding-top: 220px;
+  padding-top: 250px;
 }
 .big-article__content {
   padding-bottom: 50px;
@@ -846,7 +858,7 @@ select option, .select option {
     border-radius: 20px 20px 0 0;
   }
   .big-article__body {
-    padding-top: 350px;
+    padding-top: 360px;
   }
   .big-article__title {
     padding-top: 18px;
@@ -1504,7 +1516,7 @@ select option, .select option {
   margin: 0 20px;
   display: flex;
   flex-direction: column;
-  gap: 1.4rem;
+  gap: 0.3rem;
 }
 .admin-navbar__image {
   display: flex;
@@ -1545,7 +1557,7 @@ select option, .select option {
   width: 40px;
   height: 40px;
   margin: 0 auto;
-  padding-top: 30px;
+  padding-top: 12px;
 }
 .admin-content {
   padding: 60px 30px;
