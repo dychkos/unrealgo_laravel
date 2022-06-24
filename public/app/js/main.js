@@ -69,7 +69,7 @@ search.addEventListener('click',()=>{
 	btnBurger.setAttribute('action','search');
 	if(isMobile) return;
 	searchWrapper.style.width = '320px';
-
+    $(".search").addClass("open");
 	let hider = new Hider("search__wrapper",() => {
 		$(".search").removeClass("open");
 		$(".burger").removeClass("open").attr("action","");
