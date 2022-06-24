@@ -44,7 +44,7 @@ class AdminController extends Controller
         $this->articleService = $articleService;
     }
 
-    public function index($modelName = 'articles'): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function index($modelName = 'articles')
     {
         $paginateCount = 5;
 
@@ -54,21 +54,16 @@ class AdminController extends Controller
         return view("admin.index", compact('models', 'modelName', 'activeModels'));
     }
 
+    public function search(Request $request, $modelName) {
+        $searchValue = $request->input('search');
 
-    /**
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function deleteUser($id): \Illuminate\Http\RedirectResponse
-    {
-        $this->userService->delete($id);
-        return redirect()->back();
-    }
+        $models = $this->mainService->doSearchByModelName($modelName, $searchValue);
+        $activeModels = $this->mainService->activeModels;
 
-
-    public function cancelOrder($id): \Illuminate\Http\RedirectResponse
-    {
-        $this->productService->cancelOrder($id);
-        return redirect()->back();
+        return view(
+            "admin.index",
+            compact('models', 'modelName', 'activeModels')
+        )->with("message", 'Результати для: ' . $searchValue);
     }
 
     /* Articles */
@@ -222,6 +217,12 @@ class AdminController extends Controller
         return redirect()->route("user.admin.index", "orders")->with("message", "Зміни збереженні");
     }
 
+    public function cancelOrder($id): \Illuminate\Http\RedirectResponse
+    {
+        $this->productService->cancelOrder($id);
+        return redirect()->back();
+    }
+
     /* Users */
     public function editUser($user_id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
@@ -259,6 +260,15 @@ class AdminController extends Controller
         return redirect()->back()->with("message", $message);
     }
 
+    /**
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function deleteUser($id): \Illuminate\Http\RedirectResponse
+    {
+        $this->userService->delete($id);
+        return redirect()->back();
+    }
+
     /* Comments */
     public function editComment($comment_id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
@@ -294,6 +304,8 @@ class AdminController extends Controller
 
         return redirect()->back()->with("message", $message);
     }
+
+
 
 
 

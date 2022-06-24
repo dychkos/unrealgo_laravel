@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Http\Resources\ArticleResource;
+use App\Http\Resources\ProductResource;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Order;
@@ -39,7 +41,17 @@ class MainService
             throw ValidationException::withMessages(["message" => "Введіть слово для пошуку"]);
         }
 
-        return $this->searchRepository->doSearch($search);
+        $result = $this->searchRepository->doSearch($search);
+
+        return [
+            "articles" => ArticleResource::collection($result[0]),
+            "products" => ProductResource::collection($result[1])
+        ];
+    }
+
+    public function doSearchByModelName($modelName, $search) {
+        $model = $this->getModelQueryByName($modelName);
+        return $this->searchRepository->doSearchByModel($model, $search);
     }
 
     public function getModelQueryByName($modelName): \Illuminate\Database\Eloquent\Builder

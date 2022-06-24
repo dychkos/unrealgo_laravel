@@ -6,6 +6,7 @@ use App\Http\Resources\ArticleResource;
 use App\Http\Resources\ProductResource;
 use App\Models\Article;
 use App\Models\Product;
+use Illuminate\Support\Facades\Schema;
 
 class SearchRepository
 {
@@ -18,7 +19,6 @@ class SearchRepository
     }
 
     public function doSearch($search): array {
-
         $articles = $this->article::query()
             ->where('title', 'LIKE', "%{$search}%")
             ->orWhere('description', 'LIKE', "%{$search}%")
@@ -28,9 +28,17 @@ class SearchRepository
             ->where('title', 'LIKE', "%{$search}%")
             ->get();
 
-        return [
-          "articles" => ArticleResource::collection($articles),
-          "products" => ProductResource::collection($products)
-        ];
+        return [$articles, $products];
+    }
+
+    public function doSearchByModel($modelQuery, $search) {
+        $columns = Schema::getColumnListing($modelQuery->first()->getTable());
+
+        foreach($columns as $column){
+            $modelQuery->orWhere($column, 'LIKE', '%' . $search . '%');
+        }
+
+        $items = $modelQuery->paginate(5);
+        return $items;
     }
 }
