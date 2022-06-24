@@ -19,7 +19,7 @@ return new class extends Migration
             $table->morphs('comment');
 
             $table->integer("answered_to")->nullable();
-
+            $table->boolean("status")->default(false);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')

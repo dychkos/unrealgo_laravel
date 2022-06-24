@@ -25,11 +25,34 @@ class CommentRepository
 
     }
 
+    public function update($commentData)
+    {
+        $comment = $this->comment::find($commentData['id']);
+        $comment->body = $commentData['body'];
+        $comment->status = $commentData['status'];
+
+        if ($comment->user->status !== $commentData['user_status']) {
+            $comment->user->status = $commentData['user_status'];
+            $comment->user->save();
+        }
+
+        return $comment->save();
+    }
+
     public function delete($commentID): int
     {
         $comment = $this->comment;
 
         return $comment->destroy($commentID);
+    }
+
+    public function toggleStatus($comment_id): bool
+    {
+        $comment = $this->comment::find($comment_id);
+        $comment->status = !$comment->status;
+        $comment->save();
+
+        return $comment->status;
     }
 
     public function like($data)

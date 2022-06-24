@@ -17,9 +17,13 @@ class CommentController extends Controller
 
         $processed['user_id'] = Auth::user()->id;
 
+        if (!Auth::user()->status) {
+            return redirect()->back()->with('banned', 'Вам заблоковано можливість коментувати.');
+        }
+
         $commentService->store($processed);
 
-        return redirect()->back();
+        return redirect()->back()->with('commentMsg', 'Коментарій буде опубліковано після розляду адміністратора');
 
     }
 

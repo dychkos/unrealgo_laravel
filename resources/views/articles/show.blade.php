@@ -56,13 +56,13 @@
                                 </div>
                                 <div class="with-icon__body p-light">
                                     {{$article->comments
-                                        ? $article->comments()->get()->count()
+                                        ? $article->comments()->where(['status' => 1])->get()->count()
                                         : "0"
                                     }}
                                 </div>
                             </div>
                         </div>
-                        @if($article->comments()->first() == null)
+                        @if ($article->comments()->where(['status' => 1])->first() == null)
                             <div class="comments-block__empty p">
                                 Комменарии остутсвуют. <a
                                     @if(\Illuminate\Support\Facades\Auth::check())
@@ -74,7 +74,23 @@
                             </div>
                         @else
                             <div class="comments-block__comments comments">
-                                @foreach($article->comments()->whereNull("answered_to")->get() as $comment)
+                                @if(session()->has('commentMsg'))
+                                    <div class="alert info">
+                                        <span class="closebtn info">×</span>
+                                        <i style="margin-right: 12px;" class="fa fa-info-circle"></i>
+                                        {{ session()->get('commentMsg') }}
+                                    </div>
+                                @endif
+
+                                @if(session()->has('banned'))
+                                    <div class="alert warning">
+                                        <span class="closebtn warning">×</span>
+                                        <i style="margin-right: 12px;" class="fa fa-warning"></i>
+                                        {{ session()->get('banned') }}
+                                    </div>
+                                @endif
+
+                                @foreach ($article->comments()->whereNull("answered_to")->where(['status' => 1])->get() as $comment)
                                     <div class="comment">
                                         <div class="comment__header with-icon">
                                             <div class="comment__header-icon with-icon__icon">
@@ -107,7 +123,7 @@
                                             </a>
                                         </div>
                                         @if($article->comments()->where("answered_to", $comment->id)->first() !== null)
-                                            @foreach($article->comments()->where("answered_to", $comment->id)->get() as $answer)
+                                            @foreach($article->comments()->where("answered_to", $comment->id)->where(['status' => 1])->get() as $answer)
                                                 <div class="comment__answer answer">
                                                     <div class="comment__header with-icon">
                                                         <div class="comment__header-icon with-icon__icon">
@@ -123,16 +139,16 @@
                                                         </div>
                                                     </div>
                                                     <div class="comment__text p">
-                                                        {{$answer->body}}
+                                                        {{ $answer->body }}
                                                     </div>
                                                     <div class="comment__footer">
                                                         <div class="comment__action p-light likeable" data-like="answer">
-                                                            {{$answer->likes()->first() == null
+                                                            {{ $answer->likes()->first() == null
                                                               ? "0"
-                                                              : $answer->likes()->get()->count()}} Нравится
+                                                              : $answer->likes()->get()->count() }} Нравится
                                                         </div>
                                                         <div class="comment__action ellipse p-light to-add-comment"
-                                                             data-comment="{{$answer->id}}"
+                                                             data-comment="{{$comment->id}}"
                                                              data-answerfor="{{$answer->user->name}}"
                                                         >
                                                             Ответить
@@ -144,15 +160,6 @@
                                     </div>
 
                                 @endforeach
-                            </div>
-                        @endif
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
                             </div>
                         @endif
 
@@ -169,20 +176,17 @@
                                 </div>
                                 <input type="hidden" value="0" name="answered_to" data-answerFor="" id="answer_for">
                                 <input type="hidden" value="{{$article->id}}" name="article_id" id="article_id">
-
-                                {{--                            <div class="add-comment__name form-input">--}}
-                                {{--                                <input class="required" type="text" placeholder="Введите имя">--}}
-                                {{--                            </div>--}}
                                 <div class="add-comment__body form-input">
-                                <textarea
-                                    class="{{$errors->has('body') ? 'required' : '' }}"
-                                    placeholder="Введите текст"
-                                    name="body"
-                                    rows="4"></textarea>
+                                    <textarea
+                                        placeholder="Введите текст"
+                                        name="body"
+                                        rows="4"></textarea>
                                 </div>
                                 @error("body")
-                                <div class="required_alert p">
-                                    {{$message}}
+                                <div class="alert danger">
+                                    <span class="closebtn">×</span>
+                                    <i style="margin-right: 12px;" class="fa fa-exclamation"></i>
+                                    {{ $message }}
                                 </div>
                                 @enderror
 
@@ -281,7 +285,7 @@
         <script src="{{asset('app/js/main.js')}}"></script>
         <script src="{{asset('app/js/article.js')}}"></script>
         <script src="{{asset('app/js/includes/likeProduct.js')}}"></script>
+        <script src="{{asset('app/js/libs/alert-custom.js')}}"></script>
         <script src="{{asset('app/js/includes/likeComment.js')}}"></script>
-
     @endpush
 @endonce

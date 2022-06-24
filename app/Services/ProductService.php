@@ -131,6 +131,16 @@ class ProductService
 
     }
 
+    public function changeOrderStatus($data)
+    {
+        $validated = Validator::make($data, [
+            "order_id" => ["required", "integer"],
+            "status_id" => ["required", "integer"],
+        ])->validate();
+
+        return $this->orderRepository->changeStatus($validated);
+    }
+
     public function editCount($data) {
         $validated = Validator::make($data, [
             "index" => ["required", "string"],

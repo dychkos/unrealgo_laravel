@@ -27,6 +27,19 @@ class CommentService
         return $this->commentRepository->store($validated);
     }
 
+    public function update($data)
+    {
+        $validated = Validator::make($data,[
+            "id" => ["required","integer"],
+            "status" => ["required","integer"],
+            "user_status" => ["integer", "integer"],
+            "body" => ["required","string","max:255","min:8"],
+        ])->validate();
+
+        return $this->commentRepository->update($validated);
+    }
+
+
     public function like($data)
     {
         $validated = Validator::make($data, [
@@ -36,6 +49,11 @@ class CommentService
         ])->validate();
 
         return $this->commentRepository->like($validated);
+    }
+
+    public function toggleStatus($comment_id)
+    {
+        return $this->commentRepository->toggleStatus($comment_id);
     }
 
     public function delete($data)
