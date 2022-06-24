@@ -1,5 +1,3 @@
 {
-    "/app/css-min/main.min.css": "/app/css-min/main.min.css",
-    "/app/libs/libs.min.css": "/app/libs/libs.min.css",
-    "/app/libs/libs.min.js": "/app/libs/libs.min.js"
+    "/app/css-min/main.min.css": "/app/css-min/main.min.css"
 }

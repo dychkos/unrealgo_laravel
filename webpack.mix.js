@@ -13,11 +13,14 @@ const mix = require('laravel-mix');
 
 mix.sass('resources/scss/main.scss', 'app/css-min/main.min.css');
 
+
 /* Libs */
 
 mix.combine([
     'resources/css/libs/bootstrap-grid.min.css',
     'resources/css/libs/swiper-bundle.min.css',
+    'resources/css/libs/toastify.min.css',
+    'resources/css/libs/font-awesome.min.css',
 ], 'public/app/libs/libs.min.css');
 
 
@@ -25,6 +28,7 @@ mix.combine([
     'resources/js/libs/bootstrap.min.js',
     'resources/js/libs/jquery-3.6.0.min.js',
     'resources/js/libs/swiper-bundle.min.js',
+    'resources/js/libs/toastify.min.js',
 ], 'public/app/libs/libs.min.js');
 
 
