@@ -3,7 +3,7 @@
 @section("content")
     <section class="blog-pr">
         <div class="blog-pr__title page-title h3">
-            Новое в блоге
+            Нові публікації
         </div>
         <div class="blog-pr__body">
             <div class="row g-5">

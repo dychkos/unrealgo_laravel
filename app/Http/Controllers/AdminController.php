@@ -6,9 +6,14 @@ use App\Helpers\ControllerHelper;
 use App\Helpers\Helper;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Order;
+use App\Models\OrderStatus;
 use App\Models\Product;
+use App\Models\Role;
 use App\Models\Size;
 use App\Models\Type;
+use App\Models\User;
 use App\Services\ArticleService;
 use App\Services\CommentService;
 use App\Services\MainService;
@@ -43,17 +48,12 @@ class AdminController extends Controller
     {
         $paginateCount = 5;
 
-        $models = $this->mainService->getModelQueryByName($modelName)->paginate($paginateCount);
+        $models = $this->mainService->getModelQueryByName($modelName)->orderByDesc("created_at")->paginate($paginateCount);
         $activeModels = $this->mainService->activeModels;
 
         return view("admin.index", compact('models', 'modelName', 'activeModels'));
     }
 
-    public function deleteComment($id): \Illuminate\Http\RedirectResponse
-    {
-        $this->commentService->delete($id);
-        return redirect()->back();
-    }
 
     /**
      * @throws \Illuminate\Validation\ValidationException
@@ -196,6 +196,107 @@ class AdminController extends Controller
         $this->productService->delete($id);
         return redirect()->back()->with("message", "Товар видалено");
     }
+
+    /* Orders */
+    public function editOrder($order_id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    {
+        $order = Order::find($order_id);
+        $statuses = OrderStatus::all();
+        $modelName = 'orders';
+        $activeModels = $this->mainService->activeModels;
+
+        return view('admin.orders.index', compact(
+                'order',
+                'statuses',
+                'activeModels',
+                'modelName')
+        );
+    }
+
+    public function updateOrder(Request $request, $order_id): \Illuminate\Http\RedirectResponse
+    {
+        $status_id = $request->input('status_id');
+        $updatedData = ['order_id' => $order_id, 'status_id' => $status_id];
+        $this->productService->changeOrderStatus($updatedData);
+
+        return redirect()->route("user.admin.index", "orders")->with("message", "Зміни збереженні");
+    }
+
+    /* Users */
+    public function editUser($user_id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    {
+        $user = User::find($user_id);
+        $roles = Role::all();
+        $modelName = 'users';
+        $activeModels = $this->mainService->activeModels;
+
+        return view('admin.users.index', compact(
+                'user',
+                'roles',
+                'activeModels',
+                'modelName')
+        );
+    }
+
+    /**
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function updateUser(Request $request, $user_id): \Illuminate\Http\RedirectResponse
+    {
+        $role_id = $request->input('role_id');
+
+        $updatedData = ['user_id' => $user_id, 'role_id' => $role_id];
+        $this->userService->changeRole($updatedData);
+
+        return redirect()->route("user.admin.index", "users")->with("message", "Зміни збереженні");
+    }
+
+    public function toggleUserStatus($id): \Illuminate\Http\RedirectResponse
+    {
+        $status = $this->userService->toggleStatus($id);
+        $message = $status ? "Розблоковано" : "Заблоковано";
+
+        return redirect()->back()->with("message", $message);
+    }
+
+    /* Comments */
+    public function editComment($comment_id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    {
+        $comment = Comment::find($comment_id);
+        $modelName = 'comments';
+        $activeModels = $this->mainService->activeModels;
+
+        return view('admin.comments.index', compact(
+                'comment',
+                'activeModels',
+                'modelName')
+        );
+    }
+
+    public function updateComment(Request $request, $comment_id): \Illuminate\Http\RedirectResponse
+    {
+        $updatedData = array_merge($request->all(), ['id' => $comment_id]);
+        $this->commentService->update($updatedData);
+
+        return redirect()->route("user.admin.index", "comments")->with("message", "Зміни збереженні");
+    }
+
+    public function deleteComment($id): \Illuminate\Http\RedirectResponse
+    {
+        $this->commentService->delete($id);
+        return redirect()->back()->with("message", "Коментар видалено");
+    }
+
+    public function toggleCommentStatus($id): \Illuminate\Http\RedirectResponse
+    {
+        $status = $this->commentService->toggleStatus($id);
+        $message = $status ? "Опубліковано" : "Сховано";
+
+        return redirect()->back()->with("message", $message);
+    }
+
+
+
 
 
 
