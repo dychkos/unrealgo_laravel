@@ -19,7 +19,7 @@ class HomeController extends Controller
 
     public function index(Request $request){
 
-        $popular = Article::find(4);
+        $popular = Article::orderByDesc("views")->first();
         $randomArticles = Article::inRandomOrder()->limit(2)->get();
         $popularProducts = Product::orderBy("created_at")->limit(10)->get();
 

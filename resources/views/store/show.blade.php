@@ -106,13 +106,15 @@
                             </svg>
                         </div>
                         <div class="with-icon__body p-light">
-                            908
+                            {{ $product->comments
+                                      ? $article->comments()->where(['status' => 1])->get()->count()
+                                      : "0" }}
                         </div>
                     </div>
                 </div>
-                @if($product->comments()->first() == null)
+                @if ($product->comments()->where(['status' => 1])->first() == null)
                     <div class="comments-block__empty p">
-                        Отзывы о товаре остутсвуют. <a
+                        Відгуки про товар відсутні. <a
                             @if(\Illuminate\Support\Facades\Auth::check())
                             href="#add-comment"
                             @else
@@ -122,6 +124,13 @@
                     </div>
                 @else
                     <div class="comments-block__comments comments">
+                        @if(session()->has('banned'))
+                            <div class="alert warning">
+                                <span class="closebtn warning">×</span>
+                                <i style="margin-right: 12px;" class="fa fa-warning"></i>
+                                {{ session()->get('banned') }}
+                            </div>
+                        @endif
                         @foreach($product->comments()->whereNull("answered_to")->get() as $comment)
                             <div class="comment">
                                 <div class="comment__header with-icon">
@@ -143,9 +152,9 @@
                                 </div>
                                 <div class="comment__footer">
                                     <div class="comment__action p-light likeable" data-like="comment">
-                                        {{$comment->likes()->first() == null
+                                        {{ $comment->likes()->first() == null
                                         ? "0"
-                                        : $comment->likes()->get()->count()}} Нравится
+                                        : $comment->likes()->get()->count() }} Нравится
                                     </div>
                                     <a class="comment__action ellipse p-light to-add-comment"
                                        href="#add-comment"
@@ -180,7 +189,7 @@
                                                       : $answer->likes()->get()->count()}} Нравится
                                                 </div>
                                                 <div class="comment__action ellipse p-light to-add-comment"
-                                                     data-comment="{{$answer->id}}"
+                                                     data-comment="{{$comment->id}}"
                                                      data-answerfor="{{$answer->user->name}}"
                                                 >
                                                     Ответить
@@ -211,14 +220,16 @@
 
                         <div class="add-comment__body form-input">
                                 <textarea
-                                    class="{{$errors->has('body') ? 'required' : '' }}"
                                     placeholder="Введите текст"
                                     name="body"
                                     rows="4"></textarea>
                         </div>
+
                         @error("body")
-                        <div class="required_alert p">
-                            {{$message}}
+                        <div class="alert danger">
+                            <span class="closebtn">×</span>
+                            <i style="margin-right: 12px;" class="fa fa-exclamation"></i>
+                            {{ $message }}
                         </div>
                         @enderror
 

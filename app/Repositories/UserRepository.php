@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -45,11 +46,27 @@ class UserRepository
         return $user->destroy($userID);
     }
 
+    public function changeRole($data) {
+        $user = User::find($data['user_id']);
+        $user->role_id = $data['role_id'];
+        $user->save();
+
+        return $user;
+    }
+
     public function clearLiked($user_id): bool
     {
         $user = $this->user->find($user_id);
         $user->likedProducts()->sync([]);
 
         return true;
+    }
+
+    public function toggleStatus($user_id) {
+        $user = $this->user::find($user_id);
+        $user->status = !$user->status;
+        $user->save();
+
+        return $user->status;
     }
 }

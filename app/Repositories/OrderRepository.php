@@ -38,17 +38,23 @@ class OrderRepository
             $order->user_id = $data["user_id"];
         }
 
-
-        if(!empty($data["products"])){
+        if(!empty($data["products"])) {
             $order->items()->createMany($data['products']);
             $order->total_price = $data['total_price'];
 
         }
 
-
         Session::forget("cart");
         $order->save();
         Session::put("order", $order);
+
+        return $order;
+    }
+
+    public function changeStatus($data) {
+        $order = Order::find($data['order_id']);
+        $order->order_status_id = $data['status_id'];
+        $order->save();
 
         return $order;
     }

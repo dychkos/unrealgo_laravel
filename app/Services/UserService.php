@@ -89,4 +89,23 @@ class UserService
         }
     }
 
+    /**
+     * @throws ValidationException
+     */
+    public function changeRole($data)
+    {
+        $validated = Validator::make($data, [
+            "user_id" => ["required", "integer"],
+            "role_id" => ["required", "integer"],
+        ])->validate();
+
+        return $this->userRepository->changeRole($validated);
+    }
+
+    public function toggleStatus($id) {
+        return $this->userRepository->toggleStatus($id);
+    }
+
+
+
 }
