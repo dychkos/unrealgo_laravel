@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Type;
+use App\Services\ApiNovaPoshtaService;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,9 +14,14 @@ use Illuminate\Validation\ValidationException;
 class StoreController extends Controller
 {
     private ProductService $productService;
+    private ApiNovaPoshtaService $apiNovaPoshtaService;
 
-    public function __construct(ProductService $productService) {
+    public function __construct(
+        ProductService $productService,
+        ApiNovaPoshtaService $apiNovaPoshtaService
+    ) {
         $this->productService = $productService;
+        $this->apiNovaPoshtaService = $apiNovaPoshtaService;
     }
 
     public function index(Request $request) {
@@ -70,7 +76,6 @@ class StoreController extends Controller
 
     }
 
-
     public function show (Request $request, $product_slug, $product_id) {
         $product = Product::find($product_id);
 
@@ -88,7 +93,8 @@ class StoreController extends Controller
     {
         $cart = Session::get("cart");
         $totalPrice = $this->productService->getTotalProductPrice($cart);
-
+        //$this->apiNovaPoshtaService->getWarehouses();
+        //$cities = $this->apiNovaPoshtaService->getCities();
         return view('user.basket', compact("cart", "totalPrice"));
     }
 

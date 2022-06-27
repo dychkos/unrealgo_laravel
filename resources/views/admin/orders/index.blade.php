@@ -52,60 +52,86 @@
             </div>
         </div>
         <div class="admin-row row">
-            <div class="col-6">
-                <div class="h5">
+            <div class="col-3">
+                <div class="h6">
                     Дата
                 </div>
                 <div class="p">
                     {{$order->created_at->format('Y-m-d')}}
                 </div>
             </div>
+            <div class="col-3">
+                <div class="h6">
+                    ФІО покупця:
+                </div>
+                <div class="p">
+                    {{ $order->data_name }}
+                </div>
+            </div>
             <div class="col-6">
-                <div class="h5">
+                <div class="h6">
                     Номер заказа
                 </div>
                 <div class="p">
-                    № {{$order->id}}
+                    № {{ $order->id }}
                 </div>
             </div>
         </div>
         <div class="admin-row">
           <div class="col-6">
-              <div class="h5">
+              <div class="h6">
                   Сумма заказа
               </div>
               <div class="p">
-                  {{$order->total_price}}  UAH
+                  {{ $order->total_price }}  UAH
               </div>
           </div>
             <div class="col-6">
-                <div class="h5">
+                <div class="h6">
                     Статус
                 </div>
                 <div class="p">
-                    {{$order->status->title}}
+                    {{ $order->status->title }}
+                </div>
+            </div>
+        </div>
+        <div class="admin-row">
+            <div class="col-6">
+                <div class="h6">
+                    Адреса для доставки:
+                </div>
+                <div class="p">
+                    місто: {{ $order->city }}
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="h6">
+                    Відділення
+                </div>
+                <div class="p">
+                    {{ $order->department }}
                 </div>
             </div>
         </div>
         <div class="admin-row d-flex flex-column mt-5">
             <div class="order-final__body-title row">
                 <div class="order-final__body-label col-4 p-light">Товар</div>
-                <div class="order-final__body-label col-4 p-light">Количество</div>
-                <div class="order-final__body-label col-4 p-light">Цена</div>
+                <div class="order-final__body-label col-4 p-light">Кількість</div>
+                <div class="order-final__body-label col-4 p-light">Ціна</div>
             </div>
             <div class="order-final__item-list">
                 @foreach($order->items as $item)
                     <div class="order-final__item row">
                         <div class="order-final__product col-4">
                             <div class="order-final__image">
-                                <img src="{{$item->product->images->first()
+                                <img src="{{ $item->product->images->first()
                                     ? asset($item->product->images->first()->filename)
-                                    : asset("app/img/test.png")}}" alt="Product">
+                                    : asset("app/img/test.png") }}" alt="Product">
                             </div>
-                            <div class="order-final__name">{{$item->product->title}}</div>
+                            <div class="order-final__name">{{ $item->product->title }}</div>
                         </div>
-                        <div class="order-final__count col-4">{{$item->count}}</div>
-                        <div class="order-final__price col-4">{{$item->product->currentPrice()}} UAH</div>
+                        <div class="order-final__count col-4">{{ $item->count }}</div>
+                        <div class="order-final__price col-4">{{ $item->product->currentPrice() }} UAH</div>
                     </div>
                 @endforeach
             </div>

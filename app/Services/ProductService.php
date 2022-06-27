@@ -46,7 +46,6 @@ class ProductService
             'type_id' => ['required', 'int'],
             'images' => ['sometimes', 'array'],
             'sizes' => ['sometimes', 'array'],
-            'slug' => ['required', 'string'],
             'title' => ['required', 'string'],
             'description' => ['required', 'string'],
         ])->validate();
@@ -211,12 +210,13 @@ class ProductService
     public function getTotalProductPrice($products): float|int
     {
         $totalPrice = 0;
+        $deliveryCost = 70;
 
         foreach ($products as $product){
             $totalPrice += $product["product"]->currentPrice() * $product["count"];
         }
 
-        return $totalPrice;
+        return $totalPrice + $deliveryCost;
     }
 
 

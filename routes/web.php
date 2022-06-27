@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArticleController;
@@ -53,7 +54,9 @@ Route::get('/user/liked',[UserController::class,'liked'])->name("user.liked");
 Route::get('/user/order-history',[UserController::class,'orderHistory'])->name("user.order-history");
 
 
-//NEED TO ADD MIDDLEWARE
+/* API */
+Route::post('/get-cities', [ApiController::class, 'getCitites'])->name("api.cities");
+Route::post('/get-warehouses', [ApiController::class, 'getWarehouses'])->name("api.warehouses");
 
 
 

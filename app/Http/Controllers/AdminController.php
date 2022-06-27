@@ -125,7 +125,7 @@ class AdminController extends Controller
             ]
         );
 
-        $this->articleService->update(array_merge($updatedArticle));
+        $this->articleService->update($updatedArticle);
 
         return redirect()->route("user.admin.index", "articles")->with("message", "Зміни збереженні");
     }
@@ -184,6 +184,28 @@ class AdminController extends Controller
         $this->productService->store($newProduct);
 
         return redirect()->route("user.admin.index", "products")->with("message", "Новий товар створено");
+    }
+
+    public function updateProduct(Request $request, $article_id): \Illuminate\Http\RedirectResponse
+    {
+        $images = [];
+
+        if($files = $request->file('image'))
+        {
+            $images = Helper::upload_image($files);
+        }
+
+        $processed = ControllerHelper::addOnlyExists($request->all());
+        $updatedProduct = array_merge($processed,
+            [
+                'images' => $images,
+                'product_id' => $article_id,
+            ]
+        );
+
+        $this->productService->update($updatedProduct);
+
+        return redirect()->route("user.admin.index", "products")->with("message", "Зміни збереженні");
     }
 
     public function deleteProduct($id): \Illuminate\Http\RedirectResponse

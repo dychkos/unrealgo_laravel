@@ -556,7 +556,6 @@ a.link:hover {
 
 .required {
   border: 2px solid #A84F43 !important;
-  color: #A84F43 !important;
 }
 .required_alert {
   color: #A84F43;
@@ -751,6 +750,67 @@ select option, .select option {
   background-color: #FDFFBA;
   border: none;
   border-radius: 20px;
+  margin: 5px 0;
+}
+
+.select2-container--default {
+  background-color: transparent;
+  margin: 6px 0;
+  outline: none;
+}
+
+.select2-selection__rendered {
+  color: #6B6B6B !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+  color: #6B6B6B !important;
+}
+
+.select2-container--default .select2-selection--single {
+  background-color: #fdffba;
+  padding: 9px 24px;
+  border-radius: 20px;
+  border: none;
+  height: auto;
+}
+
+.select2-container--open .select2-dropdown--above {
+  border: none;
+  border-radius: 8px;
+  background-color: #FDFFBA;
+}
+
+.select2-selection--single {
+  background-color: #FDFFBA;
+}
+
+.select2-results__option {
+  padding: 9px;
+  cursor: pointer;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+  padding-left: 0;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 26px;
+  position: absolute;
+  top: 9px;
+  right: 5px;
+  width: 20px;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+  border-radius: 5px;
+  border: white;
+  padding: 6px;
+}
+
+.select2-container--open .select2-dropdown--below {
+  background-color: #fdffba;
+  border: navajowhite;
 }
 
 @media only screen and (max-width: 991px) {
@@ -2993,6 +3053,14 @@ select option, .select option {
 }
 .product__image {
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  max-width: 160px;
+  margin: 0 auto;
+}
+.product__image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .product__body {
   padding: 25px 20px 20px 20px;

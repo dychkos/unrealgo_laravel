@@ -1,17 +1,17 @@
 /*
 * Declaration
 * */
-// In your Javascript (external .js resource or <script> tag)
+let departaments = [];
 
 /*
 * Nodes
 * */
-let countPlusBtns = document.querySelectorAll(".count_plus");
-let countMinusBtns = document.querySelectorAll(".count_minus");
-let makeOrderForm = document.getElementById("make-order");
-
+let countPlusBtns = document.querySelectorAll('.count_plus');
+let countMinusBtns = document.querySelectorAll('.count_minus');
+let makeOrderForm = document.getElementById('make-order');
+let orderCityDropdown = document.getElementById('order_city_dropdown');
+let orderDepartmentSelect = document.getElementById('order_department');
 let navigation = document.querySelector('.navigation__active');
-
 let cities = [
     {id:1,value:"Снигиревка"},
     {id:2,value:"Николаев"},
@@ -122,10 +122,85 @@ makeOrderForm.addEventListener("submit", (event) => {
 
 
 
-let sel1 = new Select("#order_city_dropdown",cities);
-let sel2 = new Select("#order_department_dropdown",departments);
-sel1.init();
-sel2.init();
+// let sel2 = new Select("#order_department_dropdown", departments);
+// sel2.init();
+
+$('#order_city_dropdown').select2({
+    width: "100%",
+    placeholder: "Виберіть місто",
+    minimumInputLength: 3,
+    templateResult: formatResults,
+    ajax: {
+        url: baseURL + "/get-cities",
+        dataType: 'json',
+        method: "POST",
+        data: function (params) {
+            // Query parameters will be ?search=[term]&type=public
+            return {
+                search: params.term,
+                "_token": csrfToken
+            };
+        },
+        processResults: function (data) {
+            let res = data.data.map(item => ({
+                id: item.Ref,
+                text: item.Description + ", " + item.AreaDescription,
+            }))
+            return {
+                results: res,
+            };
+        }
+    }
+});
+
+$(orderDepartmentSelect).select2({
+    width: "100%",
+    placeholder: "Номер відділення",
+    disabled: true
+});
+
+
+$(orderCityDropdown).on('select2:select', function (e) {
+    let cityRef = e.target.value;
+    let formData = new FormData();
+    formData.append('_token', csrfToken);
+    formData.append('cityRef', cityRef);
+    $('input[name="city"]').val($("#order_city_dropdown option:selected").text());
+    fetch( baseURL + "/get-warehouses", {
+        method: "POST",
+        body: formData
+    })
+        .then((response) => {
+            if (!response.ok && response.status === 422){
+                console.log('error', response)
+            } else {
+                response.json().then(
+                    ( result ) => {
+                        let data = result.data.map(depart => {
+                            return {
+                                id: depart.Description,
+                                text: depart.Description
+                            };
+                        });
+                        console.log(data);
+                        $(orderDepartmentSelect).html('').select2({
+                            width: "100%",
+                            placeholder: "Номер відділення",
+                            disabled: false,
+                            data: data
+                        });
+                    }
+                )
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        })
+});
+
+$(orderCityDropdown).on('select2:unselect', function (e) {
+    console.log(e.target);
+});
 
 countPlusBtns.forEach( countPlusBtn => {
     countPlusBtn.addEventListener("click", countAction);
@@ -134,6 +209,13 @@ countPlusBtns.forEach( countPlusBtn => {
 countMinusBtns.forEach( countMinusBtn => {
     countMinusBtn.addEventListener("click", (e) => { countAction(e,true) });
 });
+
+function formatResults(res) {
+    if (!res.text) {
+        return "Пошук..."
+    }
+    return res.text;
+}
 
 function countAction(event, decrement = false) {
 
@@ -185,3 +267,4 @@ function countAction(event, decrement = false) {
 function checkEmptyField($node) {
     return $node.value.length <= 1;
 }
+

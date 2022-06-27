@@ -78,20 +78,27 @@
                                     <input type="email" placeholder="Електрона пошта" name="email">
                                 </div>
                                 <div class="order-form__input form-input">
-                                    <div class="dropdown" id="order_city_dropdown">
-                                        <label for="order_city" class="dropdown__label">Вкажіть ваше місто: </label>
-                                        <input type="text" id="order_city" name="city" autocomplete="off" class="dropdown__input" placeholder="Начните вводить">
-                                        <div class="dropdown__body">
-                                        </div>
-                                    </div>
+                                    <input type="hidden" name="city" value="">
+                                    <label for="order_city_dropdown" class="dropdown__label">Вкажіть ваше місто: </label>
+                                    <select name="city_ref" id="order_city_dropdown">
+                                    </select>
+{{--                                    <div class="dropdown" id="order_city_dropdown">--}}
+{{--                                        <label for="order_city" class="dropdown__label">Вкажіть ваше місто: </label>--}}
+{{--                                        <input type="text" id="order_city" name="city" autocomplete="off" class="dropdown__input" placeholder="Начните вводить">--}}
+{{--                                        <div class="dropdown__body">--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                 </div>
                                 <div class="order-form__input form-input">
-                                    <div class="dropdown" id="order_department_dropdown">
-                                        <label for="order_department" class="dropdown__label">Виберіть відділ: </label>
-                                        <input type="text" id="order_department" name="department" autocomplete="false" class="dropdown__input" placeholder="Начните вводить">
-                                        <div class="dropdown__body">
-                                        </div>
-                                    </div>
+                                    <label for="order_department" class="dropdown__label">Виберіть відділ: </label>
+                                    <select name="department" id="order_department">
+                                    </select>
+{{--                                    <div class="dropdown" id="order_department_dropdown">--}}
+{{--                                        <label for="order_department" class="dropdown__label">Виберіть відділ: </label>--}}
+{{--                                        <input type="text" id="order_department" name="department" autocomplete="false" class="dropdown__input" placeholder="Начните вводить">--}}
+{{--                                        <div class="dropdown__body">--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                 </div>
                             </div>
                             <div class="make-order__total">
@@ -128,6 +135,11 @@
 
 @once
     @push('js')
+        <script>
+            {{--let cities = @json($cities);--}}
+            {{--console.log(cities);--}}
+        </script>
+
         <script src="{{asset('app/js/Hider.js')}}"></script>
         <script src="{{asset('app/js/main.js')}}"></script>
         <script src="{{asset('app/js/libs/Select.js')}}"></script>

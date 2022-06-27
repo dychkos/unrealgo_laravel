@@ -60,4 +60,9 @@ class Product extends Model
         return self::$SORTS;
     }
 
+    public function hasSize($size_id): bool
+    {
+        return in_array($size_id, $this->sizes->pluck('id')->toArray());
+    }
+
 }

@@ -2,24 +2,26 @@ class Select {
     /*
     @param node - HTML dropdown element
     @param items - {id:number,value:string}
+    @param inputEvent - function
     @param placeholder - string
     @param selected - number (id chosen element)
     * */
-    constructor(node,items,placeholder = "Начните вводить",selected) {
+    constructor(node, items, placeholder = "Почніть вводити...", inputEvent, selected) {
         this.node = node;
         this.items = items;
         this.placeholder = placeholder;
+        this.inputEvent = inputEvent;
 
         this.dropdown = document.querySelector(this.node);
         this.dropdownInput = this.dropdown.querySelector(".dropdown__input");
         this.dropdownBody = this.dropdown.querySelector(".dropdown__body");
 
-        this._selected = this.items.filter(item=>item.id===this.selected)[0] ?? {};
+        this._selected = this.items.filter(item => item.id===this.selected)[0] ?? {};
     }
 
     init(){
         this.dropdownInput.placeholder = this.placeholder;
-        this.dropdownInput.addEventListener("input", this.onChange);
+        this.dropdownInput.addEventListener("input", this.onInput);
 
         this.render();
     }
@@ -43,19 +45,21 @@ class Select {
         this._selected = value;
     }
 
-    onChange = (event) => {
+    onInput = (event) => {
+
         let str = event.target.value.toLowerCase();
         this.dropdownBody.classList.add("open");
         this.selected = {};
 
-        if (str.length > 0){
-            let filtered = this.items.filter((item) => {
-                item = item.value.toLowerCase();
-                if(item.includes(str)){
-                    return item;
-                }
-            });
-            this.render(filtered);
+        if (str.length > 0) {
+            this.inputEvent();
+            // let filtered = this.items.filter((item) => {
+            //     item = item.value.toLowerCase();
+            //     if(item.includes(str)){
+            //         return item;
+            //     }
+            // });
+            // this.render(filtered);
         }else {
             this.dropdownBody.classList.remove("open");
         }

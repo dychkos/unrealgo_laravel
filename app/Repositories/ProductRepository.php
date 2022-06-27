@@ -39,13 +39,12 @@ class ProductRepository
 
     public function update($data)
     {
-        $product = $this->product::find($data['id']);
+        $product = $this->product::find($data['product_id']);
 
         if(!empty($data["images"])){
             $product->images()->delete();
             $product->images()->createMany($data['images']);
         }
-
         if(!empty($data["sizes"])){
             $product->sizes()->sync($data['sizes']);
         }
@@ -54,7 +53,6 @@ class ProductRepository
             'title' => $data['title'],
             'price' => $data['price'],
             'offer' => $data['offer'],
-            'slug' => $data['slug'],
             'description' => $data['description'],
             'type_id' => $data['type_id']
         ]);

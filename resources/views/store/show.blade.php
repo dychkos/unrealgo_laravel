@@ -107,7 +107,7 @@
                         </div>
                         <div class="with-icon__body p-light">
                             {{ $product->comments
-                                      ? $article->comments()->where(['status' => 1])->get()->count()
+                                      ? $product->comments()->where(['status' => 1])->get()->count()
                                       : "0" }}
                         </div>
                     </div>
