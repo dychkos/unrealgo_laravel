@@ -61,7 +61,7 @@
                 </div>
                 <div class="col-12 col-lg-6">
                     <div class="row g-3">
-                        <div class="h4">Рекомендуемое</div>
+                        <div class="h4">Рекомендовано</div>
                         @foreach($randomArticles as $article)
                         <div class="col-12 col-sm-6">
                             <div class="article">
@@ -89,7 +89,7 @@
     </section>
     <section class="store-pr mt-4">
         <div class="store-pr__title page-title h3">
-            Возьми в колекцию
+            Візьми в колекцію
         </div>
         <div class="store-pr__body">
             <div class="slider">
@@ -115,9 +115,9 @@
                                     </div>
                                     <div class="product__body">
                                         <div class="product__prices">
-                                            <div class="product__price h3">{{$product->currentPrice()}} ₽</div>
+                                            <div class="product__price h3">{{$product->currentPrice()}} ₴</div>
                                             @if(isset($product->offer))
-                                                <div class="product__discount h6">{{$product->price}}₽</div>
+                                                <div class="product__discount h6">{{$product->price}}₴</div>
                                             @endif
                                         </div>
                                         <div class="product__title h5">

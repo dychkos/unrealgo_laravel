@@ -1,7 +1,6 @@
 /*
 * Declaration
 * */
-let departaments = [];
 
 /*
 * Nodes
@@ -12,25 +11,8 @@ let makeOrderForm = document.getElementById('make-order');
 let orderCityDropdown = document.getElementById('order_city_dropdown');
 let orderDepartmentSelect = document.getElementById('order_department');
 let navigation = document.querySelector('.navigation__active');
-let cities = [
-    {id:1,value:"Снигиревка"},
-    {id:2,value:"Николаев"},
-    {id:3,value:"Сингапур"},
-    {id:4,value:"Село"},
-    {id:5,value:"Прикол 2 "},
-    {id:6,value:"Прикол 2 "},
-    {id:7,value:"Лофик 3"},
-    {id:8,value:"Гавана"}
-];
 
 
-let departments = [
-    {id:1,value:"Отделение 1"},
-    {id:2,value:"Отделение 2"},
-    {id:3,value:"Отделение 3"},
-    {id:4,value:"Отделение 4"},
-    {id:5,value:"Отделение 5"},
-];
 
 let yesHTML = `<div style="display: flex; flex-direction: column; align-items: center"><?xml version="1.0" encoding="iso-8859-1"?>
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="80px" height="80px" x="0px" y="0px"
@@ -118,12 +100,6 @@ makeOrderForm.addEventListener("submit", (event) => {
         })
 
 });
-
-
-
-
-// let sel2 = new Select("#order_department_dropdown", departments);
-// sel2.init();
 
 $('#order_city_dropdown').select2({
     width: "100%",

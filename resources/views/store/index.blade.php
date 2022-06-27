@@ -104,9 +104,9 @@
                                         </div>
                                         <div class="product__body">
                                             <div class="product__prices">
-                                                <div class="product__price h3">{{$product->currentPrice()}} ₽</div>
+                                                <div class="product__price h3">{{$product->currentPrice()}} ₴</div>
                                                 @if(isset($product->offer))
-                                                    <div class="product__discount h6">{{$product->price}}₽</div>
+                                                    <div class="product__discount h6">{{$product->price}}₴</div>
                                                 @endif
                                             </div>
                                             <div class="product__title h5">
@@ -162,9 +162,9 @@
                                         </div>
                                         <div class="product__body">
                                             <div class="product__prices">
-                                                <div class="product__price h3">{{$product->currentPrice()}} ₽</div>
+                                                <div class="product__price h3">{{$product->currentPrice()}} ₴</div>
                                                 @if(isset($product->offer))
-                                                    <div class="product__discount h6">{{$product->price}}₽</div>
+                                                    <div class="product__discount h6">{{$product->price}} ₴</div>
                                                 @endif
                                             </div>
                                             <div class="product__title h5">
@@ -215,9 +215,9 @@
                     </div>
                     <div class="product__body">
                         <div class="product__prices">
-                            <div class="product__price h3">{{$product->currentPrice()}} ₽</div>
+                            <div class="product__price h3">{{$product->currentPrice()}} ₴</div>
                             @if(isset($product->offer))
-                                <div class="product__discount h6">{{$product->price}}₽</div>
+                                <div class="product__discount h6">{{$product->price}}₴</div>
                             @endif
                         </div>
                         <div class="product__title h5">
