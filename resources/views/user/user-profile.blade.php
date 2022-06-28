@@ -162,7 +162,7 @@
     @push('js')
         <script src="{{asset('app/js/Hider.js')}}"></script>
         <script src="{{asset('app/js/main.js')}}"></script>
-        <script src="{{asset('app/js/Modal.js')}}"></script>
+        <script src="{{asset('app/js/libs/Modal.js')}}"></script>
         <script src="{{asset('app/js/user-profile.js?' . random_int(0, 99999))}}"></script>
     @endpush
 @endonce

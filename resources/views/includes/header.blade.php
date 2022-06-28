@@ -4,7 +4,6 @@
 <header class="header" id="header">
     <div id="top"></div>
     <div class="header-desktop">
-{{--        {{dump(print_r($cart))}}--}}
         <div class="container header__row">
             <div class="header__col">
                 <a class="header__logo logo" href="{{asset(route('home'))}}">
@@ -57,7 +56,6 @@
                 </div>
                 @if( \Illuminate\Support\Facades\Auth::check())
                     <div class="user-dropdown__preview">
-
                         <div class="user-dropdown__image">
                             <img src="{{isset($user->image)
                                     ? asset($user->image->filename)
@@ -71,7 +69,7 @@
                 @else
                     <a href="{{route('login.index')}}">
                         <button class="btn btn_primary h4">
-                            Войти
+                            Увійти
                         </button>
                     </a>
                 @endif
@@ -81,27 +79,32 @@
         <div class="user-dropdown header__row">
             <div class="container">
                 <div class="user-dropdown__body">
-                    <div class="user-dropdown__item">
-                        <span class="h5"><a href="{{asset(route('basket'))}}" class="link">Корзина</a></span>
+                    <div class="user-dropdown__item link">
+                        <i class="fa fa-cart-shopping"></i>
+                        <span class="h5"><a href="{{asset(route('basket'))}}">Кошик</a></span>
                     </div>
-                    <div class="user-dropdown__item">
-                        <span class="h5"><a href="{{asset(route('user.liked'))}}" class="link">Избранное</a></span>
+                    <div class="user-dropdown__item link">
+                        <i class="fa-regular fa-heart"></i>
+                        <span class="h5"><a href="{{asset(route('user.liked'))}}">Вподобане</a></span>
                     </div>
-                    <div class="user-dropdown__item">
-                        <span class="h5"><a href="{{asset(route('user.order-history'))}}" class="link">Мои заказы</a></span>
+                    <div class="user-dropdown__item link">
+                        <i class="fa fa-bars"></i>
+                        <span class="h5"><a href="{{asset(route('user.order-history'))}}">Мої замовлення</a></span>
                     </div>
-                    <div class="user-dropdown__item">
-                        <span class="h5"><a href="{{asset(route('user.profile'))}}" class="link">Профиль</a></span>
+                    <div class="user-dropdown__item link">
+                        <i class="fa-regular fa-user"></i>
+                        <span class="h5"><a href="{{asset(route('user.profile'))}}">Профіль</a></span>
                     </div>
                     @if(isset($user) && $user->isAdmin())
-                        <div class="user-dropdown__item">
-                            <span class="h5"><a href="{{asset(route('user.admin.index'))}}" class="link">Админ-панель</a></span>
+                        <div class="user-dropdown__item link">
+                            <i class="fa-brands fa-angellist"></i>
+                            <span class="h5"><a href="{{asset(route('user.admin.index'))}}" >Адмін-панель</a></span>
                         </div>
                     @endif
-                    <div class="user-dropdown__item">
+                    <div class="user-dropdown__item link link_danger">
                        <span class="h5">
-                           <a href="{{route('logout')}}" class="link link_danger">
-                               Выйти
+                           <a href="{{route('logout')}}">
+                               Вийти
                            </a>
                        </span>
                     </div>

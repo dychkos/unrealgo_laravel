@@ -6,11 +6,10 @@ body{
     font-family: Rubik-Regular;
 }
 
-a.link{
+.link {
     transition: color 0.3s ease-in-out;
-    margin: 12px 0;
     &_danger{
-        color:$danger;
+        color: $danger !important;
     }
     &:hover{
         color: $primary;

@@ -14,7 +14,6 @@
     <meta name="theme-color" content="#ffffff">
 
     <link rel="stylesheet" href="{{asset('app/libs/libs.min.css?v=' . random_int(1000, 9999)) }}">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('app/css-min/main.min.css?v='. random_int(1000, 9999)) }}">
     <script src="{{asset('app/libs/libs.min.js')}}"></script>
 

@@ -19,6 +19,8 @@ mix.sass('resources/scss/main.scss', 'app/css-min/main.min.css');
 mix.combine([
     'resources/css/libs/bootstrap-grid.min.css',
     'resources/css/libs/swiper-bundle.min.css',
+    'resources/css/libs/all.min.css',
+    'resources/css/libs/regular.min.css',
     'resources/css/libs/select2.min.css',
     'resources/css/libs/toastify.min.css',
 ], 'public/app/libs/libs.min.css');

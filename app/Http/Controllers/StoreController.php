@@ -92,7 +92,8 @@ class StoreController extends Controller
     public function basket(Request $request)
     {
         $cart = Session::get("cart");
-        $totalPrice = $this->productService->getTotalProductPrice($cart);
+        $totalPrice = 0;
+        $cart && $totalPrice = $this->productService->getTotalProductPrice($cart);
         //$this->apiNovaPoshtaService->getWarehouses();
         //$cities = $this->apiNovaPoshtaService->getCities();
         return view('user.basket', compact("cart", "totalPrice"));

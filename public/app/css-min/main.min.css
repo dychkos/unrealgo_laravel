@@ -412,14 +412,13 @@ body {
   font-family: Rubik-Regular;
 }
 
-a.link {
+.link {
   transition: color 0.3s ease-in-out;
-  margin: 12px 0;
 }
-a.link_danger {
-  color: #A84F43;
+.link_danger {
+  color: #A84F43 !important;
 }
-a.link:hover {
+.link:hover {
   color: #A5A815;
 }
 
