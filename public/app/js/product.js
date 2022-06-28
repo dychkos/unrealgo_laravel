@@ -20,7 +20,6 @@ let photoPreview = new PhotoPreview (photo, photoPreviews);
 let modal = new Modal("", ".modal-wrapper" , true);
 
 if (window.matchMedia("(max-width: 768px)").matches) {
-
     swiperWrapper.append(bigPhoto);
 
     swiperWrapper.classList.add("swiper-wrapper");

@@ -6,8 +6,8 @@ editPhotoNode.addEventListener('change', readURL);
 
 let modal = new Modal(removeUserBtn, ".modal-wrapper" , true);
 modal
-    .setTitle("Вы уверены ?")
-    .setDescription('<p class="p" style="text-align: center"> Ваш аккаунт будет полностью удалён из системы </p>')
+    .setTitle("Ви увпевнені ?")
+    .setDescription('<p class="p" style="text-align: center"> Ваш аккаунт буде повністю видалений із системи </p>')
     .setActionYES(deleteAccount)
     .init();
 

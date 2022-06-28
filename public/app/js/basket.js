@@ -174,10 +174,6 @@ $(orderCityDropdown).on('select2:select', function (e) {
         })
 });
 
-$(orderCityDropdown).on('select2:unselect', function (e) {
-    console.log(e.target);
-});
-
 countPlusBtns.forEach( countPlusBtn => {
     countPlusBtn.addEventListener("click", countAction);
 });
@@ -194,8 +190,7 @@ function formatResults(res) {
 }
 
 function countAction(event, decrement = false) {
-
-    if(!event.target.classList.contains("order__action-image")) {
+    if (!event.target.classList.contains("order__action-image")) {
         return;
     }
 

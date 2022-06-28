@@ -25,7 +25,6 @@ fileInput.addEventListener("change",function (e) {
             fileNames += `<span>${file.name}</span>`;
         }
 
-
         let fileLabel = document.querySelector(".file-input__files");
         if (files.length >= 2) {
             fileLabel.innerHTML  = fileNames;

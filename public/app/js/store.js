@@ -66,7 +66,3 @@ navigation.addEventListener("click",()=>{
     }
 })
 
-
-function applySort(){
-
-}
