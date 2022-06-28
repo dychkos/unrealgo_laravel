@@ -19,14 +19,14 @@
                                 <svg xmlns="http://www.w3.org/2000/svg"  width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                             </div>
                             <div class="with-icon__body p-light">
-                                {{$article->created_at
+                                {{ $article->created_at
                                              ? $article->created_at->diffForHumans()
-                                             : "12.01.2002"
+                                             : "Щойно"
                                }}
                             </div>
                         </div>
                         <div class="big-article__info-item tag col-12 col-sm-3 order-0 order-sm-1">
-                            {{$article->category->value}}
+                            {{ $article->category->value }}
                         </div>
                         <div class="big-article__info-item with-icon col-5 col-sm-3 order-3">
                             <div class="with-icon__icon pt-1">
@@ -36,7 +36,7 @@
                                 </svg>
                             </div>
                             <div class="with-icon__body p-light">
-                                {{$article->views}}
+                                {{ $article->views }}
                             </div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="big-article__comments-block comments-block">
                         <div class="comments-block__header">
-                            <div class="comments-block__title h3">Комментарии</div>
+                            <div class="comments-block__title h3">Коментарі</div>
                             <div class="comments-block__count with-icon">
                                 <div class="with-icon__icon">
                                     <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -64,13 +64,13 @@
                         </div>
                         @if ($article->comments()->where(['status' => 1])->first() == null)
                             <div class="comments-block__empty p">
-                                Комменарии остутсвуют. <a
+                                Коментарі відсутні. <a
                                     @if(\Illuminate\Support\Facades\Auth::check())
                                     href="#add-comment"
                                     @else
                                     href="{{route('login.login')}}"
                                     @endif
-                                    class="link to-add-comment">Оставьте первый.</a>
+                                    class="link to-add-comment">Залишіть перший.</a>
                             </div>
                         @else
                             <div class="comments-block__comments comments">
@@ -94,32 +94,32 @@
                                     <div class="comment">
                                         <div class="comment__header with-icon">
                                             <div class="comment__header-icon with-icon__icon">
-                                                <img src="{{isset($comment->user->image)
+                                                <img src="{{ isset($comment->user->image)
                                                 ? asset($comment->user->image->filename)
                                                 : asset('app/img/avatar-default.png')}}"
                                                  alt="user icon"
                                                 />
                                             </div>
                                             <div class="with-icon__body d-flex flex-column flex-column">
-                                                <div class="h6">{{$comment->user->name}}</div>
-                                                <div class="p-light">{{$comment->user->created_at->diffForHumans()}}</div>
+                                                <div class="h6">{{ $comment->user->name }}</div>
+                                                <div class="p-light">{{ $comment->user->created_at->diffForHumans() }}</div>
                                             </div>
                                         </div>
 
                                         <div class="comment__text p">
-                                           {{$comment->body}}
+                                           {{ $comment->body }}
                                         </div>
                                         <div class="comment__footer">
                                             <div class="comment__action p-light likeable" data-like="comment">
-                                                {{$comment->likes()->first() == null
+                                                {{ $comment->likes()->first() == null
                                                 ? "0"
-                                                : $comment->likes()->get()->count()}} Нравится
+                                                : $comment->likes()->get()->count() }} Подобається
                                             </div>
                                             <a class="comment__action ellipse p-light to-add-comment"
                                                href="#add-comment"
                                                data-answerfor="{{$comment->user->name}}"
                                                data-comment="{{$comment->id}}">
-                                                Ответить
+                                                Відповісти
                                             </a>
                                         </div>
                                         @if($article->comments()->where("answered_to", $comment->id)->first() !== null)
@@ -145,13 +145,13 @@
                                                         <div class="comment__action p-light likeable" data-like="answer">
                                                             {{ $answer->likes()->first() == null
                                                               ? "0"
-                                                              : $answer->likes()->get()->count() }} Нравится
+                                                              : $answer->likes()->get()->count() }} Подобається
                                                         </div>
                                                         <div class="comment__action ellipse p-light to-add-comment"
                                                              data-comment="{{$comment->id}}"
                                                              data-answerfor="{{$answer->user->name}}"
                                                         >
-                                                            Ответить
+                                                            Відповісти
                                                         </div>
                                                     </div>
                                                 </div>
@@ -172,13 +172,13 @@
                             @csrf
                             @if(\Illuminate\Support\Facades\Auth::check())
                                 <div class="add-comment__title h3">
-                                    Напишите комментарий
+                                    Напишіть коментар
                                 </div>
                                 <input type="hidden" value="0" name="answered_to" data-answerFor="" id="answer_for">
                                 <input type="hidden" value="{{$article->id}}" name="article_id" id="article_id">
                                 <div class="add-comment__body form-input">
                                     <textarea
-                                        placeholder="Введите текст"
+                                        placeholder="Введіть текст"
                                         name="body"
                                         rows="4"></textarea>
                                 </div>
@@ -191,7 +191,7 @@
                                 @enderror
 
                                 <button class="add-comment__btn btn btn_primary h4">
-                                    Оставить отзыв
+                                    Залишити коментар
                                 </button>
                             @endif
 
@@ -202,7 +202,7 @@
         </div>
         <div class="col-12 col-lg-3">
             <div class="sidebar">
-                <div class="sidebar__title h2">Навигация</div>
+                <div class="sidebar__title h2">Навігація</div>
                 <div class="sidebar__blog-nav blog-nav row ">
                     @foreach($categories as $category)
                         <div class="blog-nav__category">
@@ -227,13 +227,13 @@
                                     </svg>
                                 </div>
                                 <div class="with-icon__body h4">
-                                    {{$category->value}}
+                                    {{ $category->value }}
                                 </div>
                             </div>
                             <div class="blog-nav__sub-categories">
                                 @foreach(App\Models\Article::where('category_id', $category->id)->get() as $sub_article)
                                     <div class="blog-nav__sub h5 {{$article->id === $sub_article->id ? "chosen" : ""}}">
-                                        <a href="{{route("articles.show", [$sub_article->category->slug, $sub_article->slug])}}">{{$sub_article->title}}</a>
+                                        <a href="{{ route("articles.show", [$sub_article->category->slug, $sub_article->slug]) }}">{{$sub_article->title}}</a>
                                     </div>
                                 @endforeach
 
@@ -241,7 +241,7 @@
                         </div>
                     @endforeach
                 </div>
-                <div class="sidebar__title h2">Акции</div>
+                <div class="sidebar__title h2">Акціїні пропозиції: </div>
                 <div class="sidebar__products row row-cols-1 row-cols-sm-2 row-cols-lg-1 g-3">
                     @foreach($stock as $product)
                         <a href="{{route("store.show", [$product->type->slug, $product->id])}}" class="product col">
@@ -252,8 +252,8 @@
                                             : asset("app/img/test.png")}}" alt="Product">
                                 </div>
 
-                                <div data-product="{{$product->id}}" class="product__like like
-                                            {{$user !== null && $product->likedBy()->where("user_id", $user->id)->exists() ? "like_liked" : ""}}">
+                                <div data-product="{{ $product->id }}" class="product__like like
+                                            {{ $user !== null && $product->likedBy()->where("user_id", $user->id)->exists() ? "like_liked" : ""}}">
                                     <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
                                         <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
@@ -262,13 +262,13 @@
                             </div>
                             <div class="product__body">
                                 <div class="product__prices">
-                                    <div class="product__price h3">{{$product->currentPrice()}} ₴</div>
+                                    <div class="product__price h3">{{ $product->currentPrice() }} ₴</div>
                                     @if(isset($product->offer))
-                                        <div class="product__discount h6">{{$product->price}}₴</div>
+                                        <div class="product__discount h6">{{ $product->price }} ₴</div>
                                     @endif
                                 </div>
                                 <div class="product__title h5">
-                                    {{$product->title}}
+                                    {{ $product->title }}
                                 </div>
                             </div>
                         </a>

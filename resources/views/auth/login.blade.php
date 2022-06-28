@@ -2,13 +2,13 @@
 
 @section('content')
     <div class="auth auth_login">
-        <div class="auth__title h2">Войти</div>
+        <div class="auth__title h2">Увійти</div>
         <div class="auth__body">
-            <form action="{{route('login.login')}}" method="POST" class="auth__form auth-form">
+            <form action="{{ route('login.login') }}" method="POST" class="auth__form auth-form">
                 @csrf
 
                 @error("email")
-                <div class="required_alert">{{$message}}</div>
+                <div class="required_alert">{{ $message }}</div>
                 @enderror
                 <div class="auth-form__item form-input">
                     <input
@@ -21,23 +21,23 @@
                 </div>
 
                 @error("password")
-                <div class="required_alert">{{$message}}</div>
+                <div class="required_alert">{{ $message }}</div>
                 @enderror
                 <div class="auth-form__item form-input">
                     <input
                         type="password"
                         placeholder="Пароль"
                         name="password"
-                        class="{{$errors->has('password') ? 'required' : '' }}"
+                        class="{{ $errors->has('password') ? 'required' : '' }}"
                         value="{{ old('email') }}"
                     />
                 </div>
                 <div class="auth-form__item row">
                     <button type="submit" class="auth-form__submit btn btn_primary h4">
-                        Войти
+                        Увійти
                     </button>
                     <div class="auth-form__link h5 mt-3">
-                        Ещё нет аккаунта ? <a class="link" href="{{route('register.index')}}">Зарегистироваться</a>
+                        Ще немає акаунту ? <a class="link" href="{{route('register.index')}}">Зареєструватись</a>
                     </div>
                 </div>
             </form>
@@ -47,7 +47,7 @@
                 OR
             </div>
             <div class="auth__footer-text">
-                Войти с помощью
+                Увійти за допомогою:
             </div>
             <div class="auth__footer-links">
                 <a href="{{route("google_auth")}}" class="auth__footer-link google-link">

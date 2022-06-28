@@ -24,7 +24,7 @@
                             <path d="M21 21L16.65 16.65" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                         <div class="search__input">
-                            <input class="h5" type="text" placeholder="Что ищем?">
+                            <input class="h5" type="text" placeholder="Що знайти?">
                         </div>
                         <div class="search__results">
                             <div class="search__results-body">
@@ -119,7 +119,7 @@
                             <path d="M21 21L16.65 16.65" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                         <div class="search__input">
-                            <input class="h5" type="text" placeholder="Что ищем?">
+                            <input class="h5" type="text" placeholder="Що знайти?">
                         </div>
                         <div class="search__results">
                             <div class="search__results-body">

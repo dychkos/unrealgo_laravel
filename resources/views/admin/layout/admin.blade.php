@@ -40,12 +40,12 @@
         </div>
         <div class="admin-navbar__nav">
             @foreach($activeModels as $model => $value)
-                <a href="{{route('user.admin.index', $model == 'articles' ? '' : $model)}}" class="admin-navbar__item {{$modelName === $model ? "active" : ""}}">
+                <a href="{{ route('user.admin.index', $model == 'articles' ? '' : $model) }}" class="admin-navbar__item {{$modelName === $model ? "active" : ""}}">
                 <span class="admin-navbar__image">
-                    <img src="{{asset('app/img/'.$model.'.svg')}}" alt="Model">
+                    <img src="{{ asset('app/img/'.$model.'.svg') }}" alt="Model">
                 </span>
                     <span class="admin-navbar__title h4">
-                        {{$value}}
+                        {{ $value }}
                 </span>
                 </a>
             @endforeach

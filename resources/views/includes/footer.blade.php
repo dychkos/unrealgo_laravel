@@ -12,38 +12,38 @@
                 </div>
             </div>
             <div class="footer__col col order-1 order-sm-0 order-lg-1">
-                <div class="footer__title h4">Ваш аккаунт</div>
+                <div class="footer__title h4">Твій аккаунт</div>
                 @if(\Illuminate\Support\Facades\Auth::check())
                     <div class="footer__link">
-                        <a class="p" href="{{route('basket')}}">Корзина</a>
+                        <a class="p" href="{{route('basket')}}">Кошик</a>
                     </div>
                     <div class="footer__link">
-                        <a class="p" href="{{route('user.liked')}}">Избранное</a>
+                        <a class="p" href="{{route('user.liked')}}">Вподобання</a>
                     </div>
                     <div class="footer__link">
-                        <a class="p" href="{{route('user.order-history')}}">Мои заказы</a>
+                        <a class="p" href="{{route('user.order-history')}}">Мої замовлення</a>
                     </div>
                     <div class="footer__link">
-                        <a class="p" href="{{route('user.profile')}}">Профиль</a>
+                        <a class="p" href="{{route('user.profile')}}">Профіль</a>
                     </div>
                 @else
                     <div class="footer__link">
-                        <a class="p" href="{{route('login.login')}}">Войти</a>
+                        <a class="p" href="{{route('login.login')}}">Увійти</a>
                     </div>
                     <div class="footer__link">
-                        <a class="p" href="{{route('register.register')}}">Регистрация</a>
+                        <a class="p" href="{{route('register.register')}}">Реєстрація</a>
                     </div>
                 @endif
             </div>
             <div class="footer__col col order-2 order-sm-2 order-lg-2">
-                <div class="footer__title h4">Разделы</div>
+                <div class="footer__title h4">Розділи</div>
                 <div class="footer__link">
                     <a class="p" href="{{route('articles.index')}}" >Блог</a>
                 </div>
                 <div class="footer__link">
                     <a class="p" href="{{route('store.index')}}">Магазин</a>
                 </div>
-                <div class="footer__link p">О нас</div>
+                <div class="footer__link p">Про нас</div>
             </div>
             <div class="footer__col col order-3 order-sm-3 order-lg-3">
                 <div class="footer__social social">
@@ -79,7 +79,7 @@
                                 </svg>
                             </div>
                             <div class="mail__text">
-                                simplemail@gmail.com
+                                unrealgoteam@gmail.com
                             </div>
                         </div>
                     </div>

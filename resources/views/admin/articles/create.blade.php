@@ -17,12 +17,6 @@
           method="POST">
         @csrf
 
-        @if(session()->has('message'))
-            <div class="success-message">
-                {{session()->get('message')}}
-            </div>
-        @endif
-
         <div class="admin-row">
             <div class="admin-input form-input">
                 <label for="title">Назва статті</label>
@@ -91,7 +85,7 @@
                 <label for="html-body">HTML</label>
                 <textarea
                     class="{{$errors->has('body') ? 'required' : '' }}"
-                    id="html-body" name="body" placeholder="Введите текст"
+                    id="html-body" name="body" placeholder="Введіть текст"
                     rows="10">{{old('body')}}</textarea>
                 @error("body")
                 <div class="required_alert">{{$message}}</div>

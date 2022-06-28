@@ -39,22 +39,22 @@
                 <h1 class="product-page__title h1">{{$product->title}}</h1>
                 <div class="product-page__sizes sizes">
                           <span class="sizes__text p-light">
-                              Выберите размер
+                              Виберіть розмір:
                           </span>
                     <div class="sizes__block">
                         @foreach($product->sizes as $size)
                             <div class="sizes__item
-                            {{$loop->index === 0 ? "sizes__item_chosen" : ""}}
-                            {{$size->available ? "" : "sizes__item_none"}}"
+                            {{ $loop->index === 0 ? "sizes__item_chosen" : "" }}
+                            {{ $size->available ? "" : "sizes__item_none" }}"
                             data-size="{{$size->id}}">
-                                {{$size->value}}
+                                {{ $size->value }}
                             </div>
                         @endforeach
                     </div>
                 </div>
                 <div class="product-page__links">
-                    <a href="#description" class="product-page__link h5" data-nav="description">Описание</a>
-                    <a href="#feedbacks" class="product-page__link h5" data-nav="feedbacks">Отзывы</a>
+                    <a href="#description" class="product-page__link h5" data-nav="description">Опис</a>
+                    <a href="#feedbacks" class="product-page__link h5" data-nav="feedbacks">Відгуки</a>
                 </div>
                 <div class="product-page__main">
                     <h2 class="product-page__price h2">
@@ -90,15 +90,15 @@
         </div>
         <div class="product-page__content">
             <div class="product-page__quick-nav quick-nav">
-                <div class="quick-nav__item quick-nav__item_active" data-nav="description">Описание</div>
-                <div class="quick-nav__item" data-nav="feedbacks">Отзывы</div>
+                <div class="quick-nav__item quick-nav__item_active" data-nav="description">Опис</div>
+                <div class="quick-nav__item" data-nav="feedbacks">Відгуки</div>
             </div>
             <div class="product-page__description nav-active" id="description">
                {!! $product->description !!}}
             </div>
             <div class="product-page__comments-block comments-block" id="feedbacks" style="display: none">
                 <div class="comments-block__header">
-                    <div class="comments-block__title h3">Отзывы</div>
+                    <div class="comments-block__title h3">Відгуки</div>
                     <div class="comments-block__count with-icon">
                         <div class="with-icon__icon">
                             <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -120,7 +120,7 @@
                             @else
                             href="{{route('login.login')}}"
                             @endif
-                            class="link to-add-comment">Оставьте первый.</a>
+                            class="link to-add-comment">Залиште перший.</a>
                     </div>
                 @else
                     <div class="comments-block__comments comments">
@@ -154,13 +154,13 @@
                                     <div class="comment__action p-light likeable" data-like="comment">
                                         {{ $comment->likes()->first() == null
                                         ? "0"
-                                        : $comment->likes()->get()->count() }} Нравится
+                                        : $comment->likes()->get()->count() }} Подобається
                                     </div>
                                     <a class="comment__action ellipse p-light to-add-comment"
                                        href="#add-comment"
                                        data-answerfor="{{$comment->user->name}}"
                                        data-comment="{{$comment->id}}">
-                                        Ответить
+                                        Відповісти
                                     </a>
                                 </div>
                                 @if($product->comments()->where("answered_to", $comment->id)->first() !== null)
@@ -186,13 +186,13 @@
                                                 <div class="comment__action p-light likeable" data-like="answer">
                                                     {{$answer->likes()->first() == null
                                                       ? "0"
-                                                      : $answer->likes()->get()->count()}} Нравится
+                                                      : $answer->likes()->get()->count()}} Подобається
                                                 </div>
                                                 <div class="comment__action ellipse p-light to-add-comment"
                                                      data-comment="{{$comment->id}}"
                                                      data-answerfor="{{$answer->user->name}}"
                                                 >
-                                                    Ответить
+                                                    Відповісти
                                                 </div>
                                             </div>
                                         </div>
@@ -213,14 +213,14 @@
                     @csrf
                     @if(\Illuminate\Support\Facades\Auth::check())
                         <div class="add-comment__title h3">
-                            Оставьте отзыв
+                            Залишити відгук
                         </div>
                         <input type="hidden" value="0" name="answered_to" data-answerFor="" id="answer_for">
                         <input type="hidden" value="{{$product->id}}" name="product_id" id="product_id">
 
                         <div class="add-comment__body form-input">
                                 <textarea
-                                    placeholder="Введите текст"
+                                    placeholder="Введіть текст"
                                     name="body"
                                     rows="4"></textarea>
                         </div>
@@ -234,7 +234,7 @@
                         @enderror
 
                         <button class="add-comment__btn btn btn_primary h4">
-                            Оставить отзыв
+                            Залишити відгук
                         </button>
                     @endif
 

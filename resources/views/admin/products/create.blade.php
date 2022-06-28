@@ -26,12 +26,6 @@
           method="POST">
         @csrf
 
-        @if(session()->has('message'))
-            <div class="success-message">
-                {{session()->get('message')}}
-            </div>
-        @endif
-
         <div class="admin-row">
             <div class="admin-input form-input">
                 <label for="title">Назва продукту</label>
@@ -47,7 +41,7 @@
             <div class="admin-input form-input">
                 <div class="dropdown" id="types_dropdown">c
                     @error("type_id")
-                    <div class="required_alert">{{$message}}</div>
+                    <div class="required_alert">{{ $message }}</div>
                     @enderror
                     <label for="type">Виберіть тип :</label>
                     <select name="type_id" id="type" class="select" class="{{$errors->has('type_id') ? 'required' : '' }}">
@@ -64,10 +58,10 @@
                 <input type="number" id="price"
                        placeholder="1000"
                        name="price"
-                       value="{{old('price')}}"
-                       class="{{$errors->has('price') ? 'required' : '' }}">
+                       value="{{ old('price') }}"
+                       class="{{ $errors->has('price') ? 'required' : '' }}">
                 @error("price")
-                <div class="required_alert">{{$message}}</div>
+                <div class="required_alert">{{ $message }}</div>
                 @enderror
             </div>
             <div class="admin-input form-input">
@@ -77,10 +71,10 @@
                        min="0"
                        max="100"
                        name="offer"
-                       value="{{old('offer')}}"
-                       class="{{$errors->has('offer') ? 'required' : '' }}">
+                       value="{{ old('offer') }}"
+                       class="{{ $errors->has('offer') ? 'required' : '' }}">
                 @error("offer")
-                <div class="required_alert">{{$message}}</div>
+                <div class="required_alert">{{ $message }}</div>
                 @enderror
             </div>
         </div>
@@ -100,12 +94,12 @@
             <div class="admin-input form-input">
                 <label for="slug">Slug</label>
                 <input type="text" id="slug"
-                       value="{{old('slug')}}"
+                       value="{{ old('slug') }}"
                        placeholder="slug"
-                       class="{{$errors->has('slug') ? 'required' : '' }}"
+                       class="{{ $errors->has('slug') ? 'required' : '' }}"
                        name="slug">
                 @error("slug")
-                <div class="required_alert">{{$message}}</div>
+                <div class="required_alert">{{ $message }}</div>
                 @enderror
             </div>
             <div class="admin-input">
@@ -120,7 +114,7 @@
                     <div class="file-input__files">
                     </div>
                     @error("image")
-                    <div class="required_alert">{{$message}}</div>
+                    <div class="required_alert">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
@@ -131,7 +125,7 @@
                 <textarea
                     class="{{$errors->has('description') ? 'required' : '' }}"
                     id="description" name="description"
-                    placeholder="Введите текст" rows="4">{{old('description')}}</textarea>
+                    placeholder="Введіть текст" rows="4">{{old('description')}}</textarea>
                 @error("description")
                 <div class="required_alert">{{$message}}</div>
                 @enderror

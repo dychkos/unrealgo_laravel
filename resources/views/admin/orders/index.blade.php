@@ -13,7 +13,7 @@
     <div class="admin-content__header">
         <div class="admin-content__title h1">Orders</div>
         <div class="admin-content__navigation">
-            <a class="admin-content__add" href="{{route('user.admin.index', 'orders')}}">
+            <a class="admin-content__add" href="{{ route('user.admin.index', 'orders') }}">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M22.9611 10.9611H3.54692L8.17942 6.32827C8.58525 5.92268 8.58525 5.26472 8.17942 4.85919C7.77358 4.45335 7.11563 4.45335 6.71039 4.85919L0.304377 11.2653C-0.101459 11.6709 -0.101459 12.3289 0.304377 12.7344L6.71039 19.1408C6.91325 19.3438 7.17911 19.4452 7.44491 19.4452C7.7107 19.4452 7.97656 19.3438 8.17942 19.1408C8.58525 18.7352 8.58525 18.0773 8.17942 17.6718L3.54692 13.0388H22.9611C23.5348 13.0388 24 12.5736 24 11.9999C24 11.4262 23.5348 10.9611 22.9611 10.9611Z" fill="#FDFFBA"/>
                 </svg>
@@ -26,7 +26,7 @@
           method="POST">
         @csrf
 
-        @if(session()->has('message'))
+        @if (session()->has('message'))
             <div class="success-message">
                 {{session()->get('message')}}
             </div>
@@ -36,15 +36,15 @@
             <div class="admin-input form-input">
                 <div class="dropdown">
                     @error("status_id")
-                    <div class="required_alert">{{$message}}</div>
+                    <div class="required_alert">{{ $message }}</div>
                     @enderror
                     <label for="status">Вкажіть статус замовлення :</label>
-                    <select name="status_id" id="status" class="select" class="{{$errors->has('status_id') ? 'required' : '' }}">
+                    <select name="status_id" id="status" class="select" class="{{ $errors->has('status_id') ? 'required' : '' }}">
                         @foreach($statuses as $status)
                         @if ($order->status->id === $status->id)
-                                <option value="{{$status->id}}" selected >{{$status->title}}</option>
+                                <option value="{{ $status->id }}" selected >{{ $status->title }}</option>
                             @else
-                                <option value="{{$status->id}}">{{$status->title}}</option>
+                                <option value="{{ $status->id }}">{{ $status->title }}</option>
                             @endif
                         @endforeach
                     </select>
@@ -57,7 +57,7 @@
                     Дата
                 </div>
                 <div class="p">
-                    {{$order->created_at->format('Y-m-d')}}
+                    {{ $order->created_at->format('Y-m-d') }}
                 </div>
             </div>
             <div class="col-3">

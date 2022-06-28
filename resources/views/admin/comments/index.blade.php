@@ -45,9 +45,9 @@
                 <textarea
                     class="{{$errors->has('body') ? 'required' : '' }}"
                     id="body" name="body"
-                    placeholder="Введите текст" rows="4">{{old('body', $comment->body)}}</textarea>
+                    placeholder="Введіть текст" rows="4">{{old('body', $comment->body)}}</textarea>
                 @error("body")
-                <div class="required_alert">{{$message}}</div>
+                <div class="required_alert">{{ $message }}</div>
                 @enderror
             </div>
         </div>

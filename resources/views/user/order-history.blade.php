@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="order-history">
-        <div class="order-history__title page-title h1">История заказов</div>
+        <div class="order-history__title page-title h1">Історія замовлення</div>
         <div class="order-history__body card">
             @if(count($orders) < 1)
                 <div class="order-history__empty empty">
@@ -15,13 +15,13 @@
             @else
                 <div class="order-history__header">
                     <div class="order-history__quick-nav quick-nav">
-                        <div class="quick-nav__item quick-nav__item_active" data-nav="all" >Все заказы <span class="count">( {{count($orders)}} )</span></div>
-                        <div class="quick-nav__item {{count($waiting) > 0 ? "" : "quick-nav__item_disabled"}}" data-nav="waiting">В обработке <span class="count">( {{count($waiting)}} )</span></div>
-                        <div class="quick-nav__item {{count($ready) > 0 ? "" : "quick-nav__item_disabled"}}" data-nav="ready">Завершённые <span class="count">( {{count($ready)}} )</span></div>
-                        <div class="quick-nav__item  {{count($canceled) > 0 ? "" : "quick-nav__item_disabled"}}" data-nav="canceled">Отмененные <span class="count">({{ count($canceled )}} )</span></div>
+                        <div class="quick-nav__item quick-nav__item_active" data-nav="all" >Всі замовлення <span class="count">( {{count($orders)}} )</span></div>
+                        <div class="quick-nav__item {{count($waiting) > 0 ? "" : "quick-nav__item_disabled"}}" data-nav="waiting">В обробці <span class="count">( {{count($waiting)}} )</span></div>
+                        <div class="quick-nav__item {{count($ready) > 0 ? "" : "quick-nav__item_disabled"}}" data-nav="ready">Завершені <span class="count">( {{count($ready)}} )</span></div>
+                        <div class="quick-nav__item  {{count($canceled) > 0 ? "" : "quick-nav__item_disabled"}}" data-nav="canceled">Скасовані <span class="count">({{ count($canceled )}} )</span></div>
                     </div>
                     <div class="order-history__help-link help-link">
-                        Помощь
+                        Допомога
                     </div>
                 </div>
                 <div class="order-history__order-list nav-active" id="all">
@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="order-final__info">
                                     <div class="order-final__info-label p-light">
-                                        Номер заказа
+                                        Номер замовлення
                                     </div>
                                     <div class="order-final__info-value p">
                                         № {{$order->id}}
@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="order-final__info">
                                     <div class="order-final__info-label p-light">
-                                        Сумма заказа
+                                        Сума замовлення
                                     </div>
                                     <div class="order-final__info-value p">
                                         {{$order->total_price}}  UAH
@@ -64,8 +64,8 @@
                             <div class="order-final__body">
                                 <div class="order-final__body-title row">
                                     <div class="order-final__body-label col-4 p-light">Товар</div>
-                                    <div class="order-final__body-label col-4 p-light">Количество</div>
-                                    <div class="order-final__body-label col-4 p-light">Цена</div>
+                                    <div class="order-final__body-label col-4 p-light">Кількість</div>
+                                    <div class="order-final__body-label col-4 p-light">Ціна</div>
                                 </div>
                                 <div class="order-final__item-list">
                                     @foreach($order->items as $item)
@@ -86,7 +86,7 @@
                             </div>
                             <div class="order-final__button {{$order->status->value == "waiting" ? "" : "d-none"}}">
                                 <a href="{{route("store.cancel-order", $order->id)}}" class="btn btn_danger h4">
-                                    Отменить заказ
+                                    Скасувати замовлення
                                 </a>
                             </div>
 
@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="order-final__info">
                                     <div class="order-final__info-label p-light">
-                                        Номер заказа
+                                        Номер замовлення
                                     </div>
                                     <div class="order-final__info-value p">
                                         № {{$order->id}}
@@ -115,7 +115,7 @@
                                 </div>
                                 <div class="order-final__info">
                                     <div class="order-final__info-label p-light">
-                                        Сумма заказа
+                                        Сума замовлення
                                     </div>
                                     <div class="order-final__info-value p">
                                         {{$order->total_price}}  UAH
@@ -155,7 +155,7 @@
                             </div>
                             <div class="order-final__button {{$order->status->value == "waiting" ? "" : "d-none"}}">
                                 <a href="{{route("store.cancel-order", $order->id)}}" class="btn btn_danger h4">
-                                    Отменить заказ
+                                    Скасувати замовлення
                                 </a>
                             </div>
                         </div>
@@ -175,7 +175,7 @@
                                 </div>
                                 <div class="order-final__info">
                                     <div class="order-final__info-label p-light">
-                                        Номер заказа
+                                        Номер замовлення
                                     </div>
                                     <div class="order-final__info-value p">
                                         № {{$order->id}}
@@ -183,7 +183,7 @@
                                 </div>
                                 <div class="order-final__info">
                                     <div class="order-final__info-label p-light">
-                                        Сумма заказа
+                                        Сума замовлення
                                     </div>
                                     <div class="order-final__info-value p">
                                         {{$order->total_price}}  UAH
@@ -238,7 +238,7 @@
                                 </div>
                                 <div class="order-final__info">
                                     <div class="order-final__info-label p-light">
-                                        Номер заказа
+                                        Номер замовлення
                                     </div>
                                     <div class="order-final__info-value p">
                                         № {{$order->id}}
@@ -246,7 +246,7 @@
                                 </div>
                                 <div class="order-final__info">
                                     <div class="order-final__info-label p-light">
-                                        Сумма заказа
+                                        Сума замовлення
                                     </div>
                                     <div class="order-final__info-value p">
                                         {{$order->total_price}}  UAH

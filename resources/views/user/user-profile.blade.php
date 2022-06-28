@@ -5,14 +5,14 @@
         let urlDelete = "{{route("user.delete",$user->id )}}"
     </script>
     <section class="user-profile">
-        <div class="user-profile__title page-title h1">Информация пользователя</div>
+        <div class="user-profile__title page-title h1">Інформація про користувача</div>
         <div class="user-profile__body card">
             <form action="{{route('user.update')}}" method="POST" class="user-profile__content" enctype="multipart/form-data">
                 @csrf
                 <div class="user-profile__remove">
                     <div class="user-profile__remove-body" id="open-modal">
                         <span class="p">
-                              Удалить аккаунт
+                              Видалити аккаунт
                         </span>
                         <svg
                             width="18"
@@ -22,7 +22,7 @@
                         </svg>
                     </div>
                     @error("user_remove_error")
-                        <div class="required_alert">{{$message}}</div>
+                        <div class="required_alert">{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -33,7 +33,7 @@
             @endif
                 <div class="row">
                     <div class="user-profile__input-group col-12 col-md-6">
-                        <label for="edit-photo" class="input-group__label p-light">Фото профиля</label>
+                        <label for="edit-photo" class="input-group__label p-light">Фото профілю</label>
                         <div class="edit-photo">
                             <div class="edit-photo__preview">
                                 <img
@@ -53,7 +53,7 @@
 
                     </div>
                     <div class="user-profile__input-group input-group col-12 col-md-6">
-                        <label for="edit-name" class="input-group__label p-light">Имя пользователя</label>
+                        <label for="edit-name" class="input-group__label p-light">Ім'я користувача</label>
                         <div class="form-input input-group__input" >
                             <input
                                 type="text"
@@ -118,7 +118,7 @@
                         </div>
                     </div>
                     <div class="user-profile__input-group input-group col-12 col-md-6">
-                        <label for="confirm-password" class="input-group__label p-light">Подтверждения пароля</label>
+                        <label for="confirm-password" class="input-group__label p-light">Підтверждення паролю</label>
                         <div class="form-input input-group__input">
                             <input
                                 type="password"
@@ -142,14 +142,14 @@
                             value="{{$user->notification ? 'on' : 'off'}}"
                         />
                         <label for="confirm" class="p-light">
-                            Получать уведомления на почту
+                            Отримувати повідомлення на пошту
                         </label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="user-profile__input-group coд">
                         <button type="submit" class="user-profile__btn btn btn_primary h4">
-                            Сохранить изменения
+                            Зберегти зміни
                         </button>
                     </div>
                 </div>

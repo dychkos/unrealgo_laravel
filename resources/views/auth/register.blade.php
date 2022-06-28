@@ -2,21 +2,21 @@
 
 @section('content')
     <div class="auth">
-        <div class="auth__title h2">Регистрация</div>
+        <div class="auth__title h2">Реєстрація</div>
         <div class="auth__body row g-3 justify-content-center">
             <div class="auth__image col-6">
-                <img src="{{asset('app/img/auth.png')}}" alt="Auth">
+                <img src="{{ asset('app/img/auth.png') }}" alt="Auth">
             </div>
-            <form action="{{route('register.register')}}" method="POST" class="auth__form auth-form col-12 col-md-8 col-xl-6">
+            <form action="{{ route('register.register')}}" method="POST" class="auth__form auth-form col-12 col-md-8 col-xl-6">
                 @csrf
 
                 @error("name")
-                <div class="required_alert">{{$message}}</div>
+                <div class="required_alert">{{ $message }}</div>
                 @enderror
                 <div class="auth-form__item form-input">
                     <input
                         type="text"
-                        placeholder="Имя"
+                        placeholder="Ім'я"
                         name="name"
                         class="{{$errors->has('name') ? 'required' : '' }}"
                         value="{{ old('name') }}"
@@ -49,19 +49,19 @@
 
                 <div class="auth-form__item confirm">
                     @error("confirm")
-                    <div class="required_alert">{{$message}}</div>
+                    <div class="required_alert">{{ $message }}</div>
                     @enderror
                     <input id="confirm" name="confirm" type="checkbox" value="1">
                     <label for="confirm" class="p-light">
-                        Я согласен с <a href="#" class="link" id="privacy">Пользовательським соглашениям</a>
+                        Я згоден з <a href="#" class="link" id="privacy">Угодою користувача</a>
                     </label>
                 </div>
                 <div class="auth-form__item row">
                     <button type="submit" class="auth-form__submit btn btn_primary h4">
-                        Зарегистрироваться
+                        Зареєструватись
                     </button>
                     <div class="auth-form__link h5">
-                        Уже есть аккаунт ? <a class="link" href="{{route('login.index')}}">Войти</a>
+                        Вже є аккаунт ? <a class="link" href="{{route('login.index')}}">Увійти</a>
                     </div>
                 </div>
             </form>
@@ -71,7 +71,7 @@
                 OR
             </div>
             <div class="auth__footer-text">
-                Регистрация с помощью
+               Реєстрація за допомогою:
             </div>
             <div class="auth__footer-links">
                 <a href="{{route("google_auth")}}" class="auth__footer-link">

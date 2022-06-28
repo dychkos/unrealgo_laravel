@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="basket">
-        <div class="basket__title page-title h1">Корзина</div>
+        <div class="basket__title page-title h1">Кошик</div>
         <div class="basket__body card">
             <div class="row g-4">
                 <div class="{{empty($cart) ? "col-12" : "col-lg-8"}} ">
@@ -19,7 +19,7 @@
                                         <div class="order__size h6">{{$item["product"]->sizes()->find($item["size_id"])->value}}</div>
                                     </div>
                                     <div class="order__title h5">
-                                        {{$item["product"]->title}}
+                                        {{ $item["product"]->title }}
                                     </div>
                                     <div class="order__actions">
                                         <div class="order__action count_minus" data-item="{{$key}}">
@@ -43,7 +43,7 @@
                                 <img src="{{asset("app/img/empty.png")}}" class="empty__image" alt="Empty">
                                 <h3 class="empty__title h3">Уппс, кошик до сих пір пустий</h3>
                                 <a href="{{route("store.index")}}" class="btn btn_primary h4">
-                                    Перейти в каталог
+                                    Перейти до каталогу
                                 </a>
                             </div>
                         @endif
@@ -53,15 +53,18 @@
                     <form class="make-order" id="make-order">
                         <div class="make-order__card">
                             <div class="make-order__title h3">
-                                Итог
+                                Форма замовлення
                             </div>
                             <div class="make-order__info">
-                                <div class="make-order__item">
-                                    <div class="p">Промокод:</div>
-                                    <div class="btn btn_primary btn_small p">
-                                        Добавить
+                                @if ( env('APP_ENV', '') == 'local' )
+                                    <div class="make-order__item">
+                                        <div class="p">Промокод:</div>
+                                        <div class="btn btn_primary btn_small p">
+                                            Додати
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
+
                                 <div class="make-order__item">
                                     <div class="p">Доставка: </div>
                                     <div class="h6" id="delivery_price">70 UAH</div>
@@ -82,23 +85,11 @@
                                     <label for="order_city_dropdown" class="dropdown__label">Вкажіть ваше місто: </label>
                                     <select name="city_ref" id="order_city_dropdown">
                                     </select>
-{{--                                    <div class="dropdown" id="order_city_dropdown">--}}
-{{--                                        <label for="order_city" class="dropdown__label">Вкажіть ваше місто: </label>--}}
-{{--                                        <input type="text" id="order_city" name="city" autocomplete="off" class="dropdown__input" placeholder="Начните вводить">--}}
-{{--                                        <div class="dropdown__body">--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
                                 </div>
                                 <div class="order-form__input form-input">
                                     <label for="order_department" class="dropdown__label">Виберіть відділ: </label>
                                     <select name="department" id="order_department">
                                     </select>
-{{--                                    <div class="dropdown" id="order_department_dropdown">--}}
-{{--                                        <label for="order_department" class="dropdown__label">Виберіть відділ: </label>--}}
-{{--                                        <input type="text" id="order_department" name="department" autocomplete="false" class="dropdown__input" placeholder="Начните вводить">--}}
-{{--                                        <div class="dropdown__body">--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
                                 </div>
                             </div>
                             <div class="make-order__total">
@@ -107,11 +98,11 @@
                             </div>
                         </div>
                         <div class="required_alert p" style="display: none;">
-                            Заполните необходимые поля
+                            Заповніть всі рядки
                         </div>
                         <div class="make-order__footer">
                             <button class="make-order__submit btn btn_primary h4">
-                                Подтвердить заказ
+                                Підтвердити замовлення
                             </button>
                             <div class="make-order__loader" style="display: none">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" stroke="#A5A815">
@@ -135,11 +126,6 @@
 
 @once
     @push('js')
-        <script>
-            {{--let cities = @json($cities);--}}
-            {{--console.log(cities);--}}
-        </script>
-
         <script src="{{asset('app/js/Hider.js')}}"></script>
         <script src="{{asset('app/js/main.js')}}"></script>
         <script src="{{asset('app/js/libs/Select.js')}}"></script>

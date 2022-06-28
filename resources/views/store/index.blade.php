@@ -9,7 +9,7 @@
             <img src="{{asset("app/img/banner.png")}}" alt="Banner">
         </div>
         <div class="banner__card">
-            <div class="banner__title">Встречай новую коллекцию</div>
+            <div class="banner__title">Зустрічай новую колекцію</div>
             <div class="banner__text">unrgo 2022</div>
         </div>
         <div class="glow-wrap">

@@ -70,7 +70,7 @@
                        value="{{old('price', $product->price)}}"
                        class="{{$errors->has('price') ? 'required' : '' }}">
                 @error("price")
-                <div class="required_alert">{{$message}}</div>
+                <div class="required_alert">{{ $message }}</div>
                 @enderror
             </div>
             <div class="admin-input form-input">
@@ -78,10 +78,10 @@
                 <input type="text" id="discount"
                        placeholder="10%"
                        name="offer"
-                       value="{{old('offer', $product->offer)}}"
-                       class="{{$errors->has('offer') ? 'required' : '' }}">
+                       value="{{ old('offer', $product->offer )}}"
+                       class="{{ $errors->has('offer') ? 'required' : '' }}">
                 @error("price")
-                <div class="required_alert">{{$message}}</div>
+                <div class="required_alert">{{ $message }}</div>
                 @enderror
             </div>
         </div>
@@ -113,7 +113,7 @@
                     <div class="file-input__files">
                     </div>
                     @error("image")
-                    <div class="required_alert">{{$message}}</div>
+                    <div class="required_alert">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
@@ -122,11 +122,11 @@
             <div class="form-input">
                 <label for="description">Опис</label>
                 <textarea
-                    class="{{$errors->has('description') ? 'required' : '' }}"
+                    class="{{ $errors->has('description') ? 'required' : '' }}"
                     id="description" name="description"
-                    placeholder="Введите текст" rows="4">{{old('description', $product->description)}}</textarea>
+                    placeholder="Введіть текст" rows="4">{{ old('description', $product->description) }}</textarea>
                 @error("description")
-                <div class="required_alert">{{$message}}</div>
+                <div class="required_alert">{{ $message }}</div>
                 @enderror
             </div>
         </div>
@@ -146,6 +146,7 @@
 
         document.querySelector('.file-input__files').innerHTML = fileNames;
     </script>
+
     <script src="{{asset('app/js/libs/Select.js')}}"></script>
     <script src="{{asset('app/js/admin.js')}}"></script>
 @endpush

@@ -8,7 +8,7 @@
                 ? "navigation__active"
                 : "navigation__item"}} h5">
                 <a href="{{route('articles.index')}}">
-                    Все статьи
+                   Всі публікації
                 </a>
                 <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M7 9L0.937822 0.75L13.0622 0.750001L7 9Z" fill="white"/>
@@ -24,14 +24,14 @@
                 @endforeach
                 <div class="navigation__item h5" id="main_nav" style="display: none">
                     <a href="{{route('articles.index')}}">
-                        Все статьи
+                        Всі публікації
                     </a>
                 </div>
             </div>
 
         </div>
         <div class="navigation__sort sort">
-            <div class="sort__title h5">Сортировать по</div>
+            <div class="sort__title h5">Сортувати за</div>
             <div class="sort__icon h5">
                 <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_326_115)">

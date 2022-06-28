@@ -2,20 +2,22 @@
 
 @section('content')
     <section class="liked-page">
-        <div class="liked-page page-title h1">Избранное</div>
+        <div class="liked-page page-title h1">Вподобання</div>
         <div class="liked-page card">
             <div class="liked-page__body">
                 @if($liked->count())
                     <div class="liked-page__header">
                         <div class="liked-page__price p">
-                            Добавлено товаров на сумму: <span class="price">{{$summa}} UAH</span>
+                            Додано товарів на суму: <span class="price">{{$summa}} UAH</span>
                         </div>
                         <div class="liked-page__actions">
-                            <div class="liked-page__make-order btn btn_primary">
-                                Оформить заказ
-                            </div>
+                            @if ( env('APP_ENV', '' ) == 'local' )
+                                <div class="liked-page__make-order btn btn_primary">
+                                    Оформити замовлення
+                                </div>
+                            @endif
                             <a href="{{route("user.liked.clear")}}" class="liked-page__clear-liked btn">
-                                Очистить избранное
+                                Очистити вподобання
                             </a>
                         </div>
                     </div>
@@ -55,13 +57,13 @@
                                 <img src="{{asset("app/img/empty.png")}}" class="empty__image" alt="Empty">
                                 <h3 class="empty__title h3">История заказов пустая</h3>
                                 <a href="{{route("store.index")}}" class="btn btn_primary h4">
-                                    Перейти в каталог
+                                    Перейти до каталогу
                                 </a>
                             </div>
                         @endforelse
                     </div>
                     <div class="liked-page__recommended">
-                        <div class="liked-page__subtitle h3">Рекоммендуемые товары</div>
+                        <div class="liked-page__subtitle h3">Рекомендовані товари</div>
                         <div class="slider">
                             <div class="swiper recommended-swiper">
                                 <div class="swiper-wrapper">
