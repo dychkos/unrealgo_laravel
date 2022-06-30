@@ -41,13 +41,7 @@ class OrderRepository
         if(!empty($data["products"])) {
             $order->items()->createMany($data['products']);
             $order->total_price = $data['total_price'];
-
-            foreach ($data["products"] as $item) {
-                $product = Product::find($item['product_id']);
-                $size = $product->sizes()->find($item['size_id']);
-                $currentCount = $size->pivot->count;
-                $product->sizes()->updateExistingPivot($size, ['count'=> $currentCount - $item['count']]);
-            }
+            $this->updateProductsCount($data["products"]);
         }
         Session::forget("cart");
         $order->save();
@@ -59,6 +53,9 @@ class OrderRepository
     public function changeStatus($data) {
         $order = Order::find($data['order_id']);
         $order->order_status_id = $data['status_id'];
+        if ($order->order_status_id === OrderStatus::where("value", "canceled")->get()->first()->id) {
+            $this->updateProductsCount($this->order->items, true);
+        }
         $order->save();
 
         return $order;
@@ -67,10 +64,24 @@ class OrderRepository
     public function cancelOrder($order_id) {
         $order = Order::find($order_id);
         $order->order_status_id = OrderStatus::where("value", "canceled")->get()->first()->id;
+        $this->updateProductsCount($order->items, true);
         $order->save();
 
         return $order;
     }
+
+    private function updateProductsCount($orderProducts, $increase = false) {
+        foreach ($orderProducts as $item) {
+            $product = Product::find($item['product_id']);
+            $size = $product->sizes()->find($item['size_id']);
+            $currentCount = $size->pivot->count;
+            $product->sizes()->updateExistingPivot($size, ['count'=> $increase
+                ? $currentCount + $item['count']
+                : $currentCount - $item['count']
+            ]);
+        }
+    }
+
 
 
 }

@@ -2887,6 +2887,7 @@ select option, .select option {
   background-color: #6B6B6B;
   border-radius: 20px;
   color: #ffffff;
+  pointer-events: none;
 }
 
 .quick-nav {

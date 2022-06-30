@@ -37,21 +37,27 @@
             </div>
             <div class="product-page__info co-12 col-lg-6">
                 <h1 class="product-page__title h1">{{$product->title}}</h1>
-                <div class="product-page__sizes sizes">
+                @if ($product->isAvailable())
+                    <div class="product-page__sizes sizes">
                           <span class="sizes__text p-light">
                               Виберіть розмір:
                           </span>
-                    <div class="sizes__block">
-                        @foreach($product->sizes as $size)
-                            <div class="sizes__item
+                        <div class="sizes__block">
+                            @foreach($product->sizes as $size)
+                                <div class="sizes__item
                             {{ $loop->index === 0 ? "sizes__item_chosen" : "" }}
-                            {{ $size->count < 1 ? "" : "sizes__item_none" }}"
-                            data-size="{{ $size->id }}">
-                                {{ $size->value }}
-                            </div>
-                        @endforeach
+                                {{ $product->isSizeAvailable($size->id) ? "" : "sizes__item_none" }}"
+                                     data-size="{{ $size->id }}">
+                                    {{ $size->value }}
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                </div>
+                @else
+                    <div class="py-xl-5">
+                        <h2 class="h2">Товар закінчився &#128532</h2>
+                    </div>
+                @endif
                 <div class="product-page__links">
                     <a href="#description" class="product-page__link h5" data-nav="description">Опис</a>
                     <a href="#feedbacks" class="product-page__link h5" data-nav="feedbacks">Відгуки</a>

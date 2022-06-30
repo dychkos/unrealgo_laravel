@@ -63,5 +63,23 @@ class Product extends Model
         return in_array($size_id, $this->sizes->pluck('id')->toArray());
     }
 
+    public function isSizeAvailable($size_id): bool
+    {
+        return $this->sizes()->find($size_id)->pivot->count > 0;
+    }
+
+    public function isAvailable(): bool
+    {
+        $status = false;
+
+        foreach ($this->sizes as $size) {
+            if ($size->pivot->count > 0) {
+                $status = true;
+            }
+        }
+
+        return $status;
+    }
+
 
 }

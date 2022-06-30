@@ -177,7 +177,7 @@ class AdminController extends Controller
         $sizeArray = [];
         foreach ($processed['sizes'] as $size) {
             $sizeItem['size_id'] = $size;
-            $sizeItem['count'] = $processed['count-size-' . $size];
+            $sizeItem['count'] = $processed['count-size-' . $size] ?? 0;
             array_push($sizeArray, $sizeItem);
         }
 
@@ -204,7 +204,7 @@ class AdminController extends Controller
         $sizeArray = [];
         foreach ($processed['sizes'] as $size) {
             $sizeItem['size_id'] = $size;
-            $sizeItem['count'] = $processed['count-size-' . $size];
+            $sizeItem['count'] = $processed['count-size-' . $size] ?? 0;
             array_push($sizeArray, $sizeItem);
         }
         $updatedProduct = array_merge($processed,
