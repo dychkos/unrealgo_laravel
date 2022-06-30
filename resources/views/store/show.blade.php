@@ -45,8 +45,8 @@
                         @foreach($product->sizes as $size)
                             <div class="sizes__item
                             {{ $loop->index === 0 ? "sizes__item_chosen" : "" }}
-                            {{ $size->available ? "" : "sizes__item_none" }}"
-                            data-size="{{$size->id}}">
+                            {{ $size->count < 1 ? "" : "sizes__item_none" }}"
+                            data-size="{{ $size->id }}">
                                 {{ $size->value }}
                             </div>
                         @endforeach
@@ -112,15 +112,15 @@
                         </div>
                     </div>
                 </div>
-                @if ($product->comments()->where(['status' => 1])->first() == null)
+                @if ($product->comments()->first() == null)
                     <div class="comments-block__empty p">
                         Відгуки про товар відсутні. <a
-                            @if(\Illuminate\Support\Facades\Auth::check())
+                            @if (\Illuminate\Support\Facades\Auth::check())
                             href="#add-comment"
                             @else
                             href="{{route('login.login')}}"
                             @endif
-                            class="link to-add-comment">Залиште перший.</a>
+                            class="link to-add-comment">Залишити перший.</a>
                     </div>
                 @else
                     <div class="comments-block__comments comments">

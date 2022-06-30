@@ -16,8 +16,10 @@ class SizeFactory extends Factory
      */
     public function definition()
     {
+        $sizes = ["XS", "S", "M" , "L", "XL"];
+        $randomKey = array_rand($sizes, 1);
         return [
-            'value' => $this->faker->title()
+            'value' => $sizes[$randomKey]
         ];
     }
 }

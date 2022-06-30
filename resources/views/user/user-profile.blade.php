@@ -26,11 +26,6 @@
                     @enderror
                 </div>
 
-            @if(session()->has('message'))
-                    <div class="success-message">
-                        {{session()->get('message')}}
-                    </div>
-            @endif
                 <div class="row">
                     <div class="user-profile__input-group col-12 col-md-6">
                         <label for="edit-photo" class="input-group__label p-light">Фото профілю</label>
@@ -60,7 +55,7 @@
                                 id="edit-name"
                                 value="{{$user->name}}"
                                 name="name"
-                                class="{{$errors->has('name') ? 'required' : '' }}"
+                                class="{{ $errors->has('name') ? 'required' : '' }}"
                             />
                             @error("name")
                             <div class="required_alert">{{$message}}</div>
@@ -160,6 +155,18 @@
 
 @once
     @push('js')
+        <script>
+            @if(session()->has('message'))
+            Toastify({
+                text: "{{ session()->get('message') }}",
+                backgroundColor: "#04AA6D",
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "left",
+            }).showToast();
+            @endif
+        </script>
         <script src="{{asset('app/js/Hider.js')}}"></script>
         <script src="{{asset('app/js/main.js')}}"></script>
         <script src="{{asset('app/js/libs/Modal.js')}}"></script>

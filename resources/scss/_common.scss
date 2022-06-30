@@ -43,7 +43,7 @@ body{
 .confirm{
     input{
         display: none !important;
-        &:checked+label::before {
+        &:checked + label::before {
             background-color: $primary;
             background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='16' height='16' rx='4' fill='%23FDFFBA'/%3E%3C/svg%3E%0A");
             background-repeat: no-repeat;
@@ -384,13 +384,10 @@ select, .select{
 }
 
 //Select2 Styling
-.select2-container--default {
+.select2-container--default, .select2-selection--multiple {
     background-color: transparent;
     margin: 6px 0;
     outline: none;
-}
-
-.select2-selection {
 }
 
 .select2-selection__rendered {
@@ -431,7 +428,6 @@ select, .select{
 
 .select2-container--default .select2-selection--single .select2-selection__arrow {
     height: 26px;
-    position: absolute;
     top: 9px;
     right: 5px;
     width: 20px;
@@ -446,6 +442,20 @@ select, .select{
 .select2-container--open .select2-dropdown--below {
     background-color: #fdffba;
     border: navajowhite;
+}
+
+.select2-container--default .select2-selection--multiple {
+    background-color: $secondary;
+    border: none;
+    border-radius: 20px;
+    padding: 9px 24px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    padding: 6px 14px;
+    background-color: $secondary;
+    border-radius: 6px;
+    $border: 1px solid $primary;
 }
 
 

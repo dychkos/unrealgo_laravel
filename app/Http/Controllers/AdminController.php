@@ -174,11 +174,16 @@ class AdminController extends Controller
         }
 
         $processed = ControllerHelper::addOnlyExists($request->all());
+        $sizeArray = [];
+        foreach ($processed['sizes'] as $size) {
+            $sizeItem['size_id'] = $size;
+            $sizeItem['count'] = $processed['count-size-' . $size];
+            array_push($sizeArray, $sizeItem);
+        }
 
         $newProduct = array_merge(
             $processed,
-            ['images' => $images],
-            ['slug' => Helper::createSlug($request->input('slug')) ?? '']
+            ['images' => $images, 'sizes' => $sizeArray],
         );
 
         $this->productService->store($newProduct);
@@ -186,7 +191,7 @@ class AdminController extends Controller
         return redirect()->route("user.admin.index", "products")->with("message", "Новий товар створено");
     }
 
-    public function updateProduct(Request $request, $article_id): \Illuminate\Http\RedirectResponse
+    public function updateProduct(Request $request, $product_id): \Illuminate\Http\RedirectResponse
     {
         $images = [];
 
@@ -196,10 +201,17 @@ class AdminController extends Controller
         }
 
         $processed = ControllerHelper::addOnlyExists($request->all());
+        $sizeArray = [];
+        foreach ($processed['sizes'] as $size) {
+            $sizeItem['size_id'] = $size;
+            $sizeItem['count'] = $processed['count-size-' . $size];
+            array_push($sizeArray, $sizeItem);
+        }
         $updatedProduct = array_merge($processed,
             [
                 'images' => $images,
-                'product_id' => $article_id,
+                'sizes' => $sizeArray,
+                'product_id' => $product_id
             ]
         );
 

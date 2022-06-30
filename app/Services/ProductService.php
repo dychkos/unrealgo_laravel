@@ -27,7 +27,6 @@ class ProductService
             'images' => ['required', 'array'],
             'sizes' => ['required', 'array'],
             'type_id' => ['required', 'int'],
-            'slug' => ['required', 'string'],
             'price' => ['required', 'int'],
             'offer' => ['sometimes', 'int'],
             'title' => ['required', 'string', 'max:100'],
@@ -218,8 +217,6 @@ class ProductService
 
         return $totalPrice + $deliveryCost;
     }
-
-
 
 
 

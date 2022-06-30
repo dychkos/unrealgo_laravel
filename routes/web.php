@@ -78,7 +78,7 @@ Route::middleware("guest")->group(function(){
 Route::name("user.")->prefix("user")->middleware("auth")->group(function(){
     Route::get('profile',[UserController::class,'profile'])->name("profile");
     Route::post('profile',[UserController::class,'update'])->name("update");
-    Route::delete('delete/{id}',[UserController::class,'delete'])->name("delete");
+    Route::get('delete/{id}',[UserController::class,'delete'])->name("delete");
 
     Route::get('liked',[UserController::class,'liked'])->name("liked");
     Route::get('order-history',[UserController::class,'orderHistory'])->name("order-history");

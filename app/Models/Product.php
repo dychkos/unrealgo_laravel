@@ -22,10 +22,8 @@ class Product extends Model
         "price-low-high" => "збільшенням",
     ];
 
-
-
     public function currentPrice() {
-        return isset($this->offer) ? (int)($this->price / $this->offer) : $this->price;
+        return isset($this->offer) ? (int)($this->price - $this->price / $this->offer) : $this->price;
 
     }
 
@@ -48,7 +46,7 @@ class Product extends Model
     {
         return $this->belongsToMany(Size::class,'products_sizes',
             'product_id',
-            'size_id');
+            'size_id')->withPivot('count');
     }
 
     public function comments(): \Illuminate\Database\Eloquent\Relations\morphMany
@@ -64,5 +62,6 @@ class Product extends Model
     {
         return in_array($size_id, $this->sizes->pluck('id')->toArray());
     }
+
 
 }

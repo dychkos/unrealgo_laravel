@@ -26,6 +26,8 @@ return new class extends Migration
                 ->references('id')
                 ->on('sizes')->onDelete('cascade');
 
+            $table->integer("count")->default(0);
+
             $table->timestamps();
         });
     }

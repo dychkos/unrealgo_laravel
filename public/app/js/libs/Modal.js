@@ -4,8 +4,8 @@ class Modal {
         this.needFooter = needFooter;
         this.trigger = trigger;
 
-        this.textYES = "Окей";
-        this.textNO = "Отменить";
+        this.textYES = "Згода";
+        this.textNO = "Скасувати";
 
     }
 
@@ -27,14 +27,14 @@ class Modal {
         return this;
     }
 
-    setActionYES(action, text = "Окей") {
+    setActionYES(action, text = "Згоден") {
         this.actionYES = action;
         this.textYES = text;
 
         return this;
     }
 
-    setActionNO(action, text = "Отменить") {
+    setActionNO(action, text = "Скасувати") {
         this.actionNO = action;
         this.textNO = text;
 

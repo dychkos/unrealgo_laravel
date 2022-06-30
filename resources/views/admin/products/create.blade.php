@@ -80,28 +80,21 @@
         </div>
         <div class="admin-row">
             <div class="admin-input form-input">
-                <div class="container mt-5">
+                <div class="container mt-5" style="padding: 0">
                     <label for="sizes">Вкажіть доступні розміри : </label>
-                    <select class="select multi-select" multiple id="sizes" name="sizes[]">
+                    <select multiple id="sizes" name="sizes[]">
                         @foreach($sizes as $size)
                             <option value="{{$size->id}}">{{$size->value}}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
+            <div class="admin-input form-input">
+                <div class="container mt-5" id="sizes_array" style="padding: 0">
+                </div>
+            </div>
         </div>
         <div class="admin-row">
-            <div class="admin-input form-input">
-                <label for="slug">Slug</label>
-                <input type="text" id="slug"
-                       value="{{ old('slug') }}"
-                       placeholder="slug"
-                       class="{{ $errors->has('slug') ? 'required' : '' }}"
-                       name="slug">
-                @error("slug")
-                <div class="required_alert">{{ $message }}</div>
-                @enderror
-            </div>
             <div class="admin-input">
                 <span class="p">Завантаженні фото:</span>
                 <div class="file-input">

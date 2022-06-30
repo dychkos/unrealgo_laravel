@@ -97,6 +97,20 @@
                             </option>
                         @endforeach
                     </select>
+                    <div class="available-sizes" class="container mt-5" id="sizes_array" style="padding: 0">
+                        @foreach ($product->sizes as $size)
+                            <div class="ready-size">
+                                <label for="count-size-${item.id}">Кількість товарів розміру {{ $size->value }}: </label>
+                                <input type="number" id="count-size-{{ $size->id }}"
+                                       placeholder="10"
+                                       value="{{ $size->pivot->count }}"
+                                       name="count-size-{{ $size->id }}"
+                                       data-id="{{ $size->id }}"
+                                       data-name="{{ $size->value }}"
+                                >
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
@@ -145,6 +159,7 @@
         }
 
         document.querySelector('.file-input__files').innerHTML = fileNames;
+
     </script>
 
     <script src="{{asset('app/js/libs/Select.js')}}"></script>

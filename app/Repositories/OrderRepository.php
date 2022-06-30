@@ -42,8 +42,13 @@ class OrderRepository
             $order->items()->createMany($data['products']);
             $order->total_price = $data['total_price'];
 
+            foreach ($data["products"] as $item) {
+                $product = Product::find($item['product_id']);
+                $size = $product->sizes()->find($item['size_id']);
+                $currentCount = $size->pivot->count;
+                $product->sizes()->updateExistingPivot($size, ['count'=> $currentCount - $item['count']]);
+            }
         }
-
         Session::forget("cart");
         $order->save();
         Session::put("order", $order);

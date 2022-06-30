@@ -19,7 +19,6 @@ class ProductRepository
             'title' => $data['title'],
             'price' => $data['price'],
             'offer' => $data['offer'] ?? '',
-            'slug' => $data['slug'],
             'description' => $data['description'],
             'type_id' => $data['type_id']
         ]);

@@ -86,21 +86,20 @@ class UserController extends Controller
 
         $userService->update($updatedUser);
 
-        return redirect()->back()->with('message', 'Личные данные успешно изменены!');
+        return redirect()->back()->with('message', 'Особисті дані оновленні!');
     }
 
-    public function delete(UserService $userService, $request) {
-        $userID = $request->input('id');
-
-        $userService->delete($userID);
+    public function delete(UserService $userService, Request $request, $userId) {
+        if(Auth::user()->id == $userId) {
+            $userService->delete($userId);
+        }
 
         Auth::logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
-        return redirect()->route('home');
+        return $this->sendResponse(["success" => true], 'Successful removed');
     }
 
 

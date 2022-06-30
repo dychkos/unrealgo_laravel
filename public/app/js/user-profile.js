@@ -27,12 +27,40 @@ function readURL(input){
     }
 }
 
-console.log('urlDelete',urlDelete);
 
-function deleteAccount() {
+function deleteaccount() {
     fetch(urlDelete,{
-        method: "delete"
-    })
+        method: "GET"
+    }).then((response) => {
+            if (!response.ok && response.status === 422){
+                Toastify({
+                    text: "Помилка, при видалені",
+                    backgroundColor: "#04AA6D",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "left",
+                }).showToast();
+            } else {
+                response.json().then(
+                    (result) => {
+                        if (result.success)  window.location.href = baseURL
+                    }
+                )
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            Toastify({
+                text: "Помилка, при видалені",
+                backgroundColor: "#04AA6D",
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "left",
+            }).showToast();
+        })
+
 }
 
 
