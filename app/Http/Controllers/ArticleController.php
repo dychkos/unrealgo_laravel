@@ -34,7 +34,7 @@ class ArticleController extends Controller
             $query = $this->setupSort($orderBy, $query);
         }
 
-        $articles = $query->paginate(2)->appends(request()->query());
+        $articles = $query->paginate(4)->appends(request()->query());
 
 
         return view('articles.index', compact("categories", "articles", "activeCategory", "allowSorts"));

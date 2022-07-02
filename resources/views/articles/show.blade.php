@@ -281,6 +281,18 @@
 
 @once
     @push('js')
+        <script>
+            @if(session()->has('commentMsg'))
+                Toastify({
+                    text: "Відгук додано!",
+                    backgroundColor: "#04AA6D",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "left",
+                }).showToast();
+            @endif
+        </script>
         <script src="{{asset('app/js/Hider.js')}}"></script>
         <script src="{{asset('app/js/main.js')}}"></script>
         <script src="{{asset('app/js/article.js')}}"></script>

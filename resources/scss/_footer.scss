@@ -35,16 +35,24 @@
 
 
 @media only screen and (max-width: 991px){
-	.footer{
+	.footer {
 		&__social{
 			.mail{
 				padding: 15px 0;
 			}
 		}
+        &__logo{
+            justify-content: end;
+            .logo{
+                &__image{
+                    margin: 0 12px;
+                }
+            }
+        }
 	}
 }
 
-	
+
 @media only screen and (max-width: 767px){
 	.footer{
 

@@ -64,13 +64,6 @@ sizes.forEach( size => {
    });
 });
 
-window.addEventListener("load", () => {
-   let activeNav = localStorage.getItem("nav-active");
-   if(activeNav){
-       toStep(activeNav);
-   }
-});
-
 addToCardBtn.addEventListener("click", () => {
 
     let formData = new FormData();

@@ -67,7 +67,7 @@
     <div class="articles">
         <div class="row g-4">
             @foreach($articles as $article)
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-6 align-items-stretch">
                     <div class="large-article"
                          style="background-image: url({{$article->image
                         ? asset($article->image->filename)
@@ -100,7 +100,9 @@
                                             </svg>
                                         </div>
                                         <div class="with-icon__body h5">
-                                            12
+                                            {{ $article->comments
+                                            ? $article->comments()->where(['status' => 1])->get()->count()
+                                            : "0" }}
                                         </div>
                                     </div>
                                     <div class="large-article__watcher with-icon">
