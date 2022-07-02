@@ -18,7 +18,7 @@ class ProductRepository
         $product = $this->product::create([
             'title' => $data['title'],
             'price' => $data['price'],
-            'offer' => $data['offer'] ?? '',
+            'offer' => $data['offer'] ?? 0,
             'description' => $data['description'],
             'type_id' => $data['type_id']
         ]);
@@ -51,7 +51,7 @@ class ProductRepository
         $product->update([
             'title' => $data['title'],
             'price' => $data['price'],
-            'offer' => $data['offer'],
+            'offer' => $data['offer'] ?? 0,
             'description' => $data['description'],
             'type_id' => $data['type_id']
         ]);
