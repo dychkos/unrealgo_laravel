@@ -99,12 +99,14 @@
 
 
 @media only screen and (max-width: 991px){
-	.example{
-
+	.auth {
+        &_login {
+            width: 100%;
+        }
 	}
 }
 
-	
+
 @media only screen and (max-width: 767px){
 	.auth{
 		&__body{
