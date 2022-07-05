@@ -17,7 +17,7 @@ class ArticlesSeeder extends Seeder
     public function run()
     {
         DB::table('articles')->insert([
-            'category_id' => "5",
+            'category_id' => "4",
             'slug' => "vigoranie",
             'title' => "Почему все кругом выгорают?",
             'views' => "12",

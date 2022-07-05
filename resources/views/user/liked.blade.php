@@ -16,7 +16,7 @@
                                     Оформити замовлення
                                 </div>
                             @endif
-                            <a href="{{route("user.liked.clear")}}" class="liked-page__clear-liked btn">
+                            <a href="{{route("user.liked.clear")}}" class="liked-page__clear-liked link">
                                 Очистити вподобання
                             </a>
                         </div>

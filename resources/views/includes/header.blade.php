@@ -165,19 +165,26 @@
                         </div>
                         @if(\Illuminate\Support\Facades\Auth::check())
                             <div class="header-mobile__link">
-                                <a href="{{route('basket')}}">Корзина</a>
+                                <a href="{{route('basket')}}">Кошик</a>
                             </div>
                             <div class="header-mobile__link">
-                                <a href="{{route('user.liked')}}">Избранное</a>
+                                <a href="{{route('user.liked')}}">Вподобане</a>
                             </div>
                             <div class="header-mobile__link">
-                                <a href="{{route('user.order-history')}}">Мои заказы</a>
+                                <a href="{{route('user.order-history')}}">Мої замовлення</a>
                             </div>
                             <div class="header-mobile__link">
-                                <a href="#{{route('user.profile')}}">Профиль</a>
+                                <a href="#{{route('user.profile')}}">Профіль</a>
                             </div>
                             <div class="header-mobile__link">
-                                <a href="{{route('logout')}}">Выйти</a>
+                                <a href="{{route('logout')}}">Вийти</a>
+                            </div>
+                        @else
+                            <div class="header-mobile__link">
+                                <a href="#{{route('login.login')}}">Увійти</a>
+                            </div>
+                            <div class="header-mobile__link">
+                                <a href="{{route('register.register')}}">Реєстрація</a>
                             </div>
                         @endif
 

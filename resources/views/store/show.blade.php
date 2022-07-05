@@ -1,5 +1,7 @@
 @extends('layouts.base')
-
+@php
+    $withoutSize = $product->sizes()->where("value", "one")->exists();
+@endphp
 @section('content')
     <div class="product-page pt-4">
         <div class="product-page__header row g-3">
@@ -38,21 +40,23 @@
             <div class="product-page__info co-12 col-lg-6">
                 <h1 class="product-page__title h1">{{$product->title}}</h1>
                 @if ($product->isAvailable())
-                    <div class="product-page__sizes sizes">
+                    @if(!$withoutSize)
+                        <div class="product-page__sizes sizes">
                           <span class="sizes__text p-light">
                               Виберіть розмір:
                           </span>
-                        <div class="sizes__block">
-                            @foreach($product->sizes as $size)
-                                <div class="sizes__item
-                            {{ $loop->index === 0 ? "sizes__item_chosen" : "" }}
-                                {{ $product->isSizeAvailable($size->id) ? "" : "sizes__item_none" }}"
-                                     data-size="{{ $size->id }}">
-                                    {{ $size->value }}
-                                </div>
-                            @endforeach
+                            <div class="sizes__block">
+                                @foreach($product->sizes as $size)
+                                    <div class="sizes__item
+                                    {{ $loop->index === 0 ? "sizes__item_chosen" : "" }}
+                                    {{ $product->isSizeAvailable($size->id) ? "" : "sizes__item_none" }}"
+                                         data-size="{{ $size->id }}">
+                                        {{ $size->value }}
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 @else
                     <div class="py-xl-5">
                         <h2 class="h2">Товар закінчився &#128532</h2>
@@ -66,7 +70,7 @@
                     <h2 class="product-page__price h2">
                         {{$product->currentPrice()}} UAH
                     </h2>
-                    @if(isset($product->offer))
+                    @if(isset($product->offer) && $product->offer !== 0)
                         <div class="product__discount h6">{{$product->price}} UAH</div>
                     @endif
                     <div class="product-page__make-order {{$inCart ? "product-page__make-order_ordered" : ""}}" id="add_to_card">
@@ -100,7 +104,7 @@
                 <div class="quick-nav__item" data-nav="feedbacks">Відгуки</div>
             </div>
             <div class="product-page__description nav-active" id="description">
-               {!! $product->description !!}}
+               {!! $product->description !!}
             </div>
             <div class="product-page__comments-block comments-block" id="feedbacks" style="display: none">
                 <div class="comments-block__header">

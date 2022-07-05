@@ -22,14 +22,14 @@
                                     <div class="large-article__date p-light">
                                         {{$popular->created_at
                                             ? $popular->created_at->diffForHumans()
-                                            : "12.01.2002"
+                                            : "Щойно"
                                             }}
                                     </div>
                                 </div>
                                 <div class="large-article__content">
                                     <div class="large-article__title h4">{{$popular->title}}</div>
                                     <div class="large-article__text p">
-                                        {{$popular->description}}
+                                        {{ $popular->description }}
                                     </div>
                                 </div>
                                 <div class="large-article__footer">
@@ -40,7 +40,9 @@
                                             </svg>
                                         </div>
                                         <div class="with-icon__body h5">
-                                            12
+                                            {{ $popular->comments
+                                              ? $popular->comments()->where(['status' => 1])->get()->count()
+                                              : "0" }}
                                         </div>
                                     </div>
                                     <div class="large-article__watcher with-icon">

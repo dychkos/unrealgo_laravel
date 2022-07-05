@@ -21,6 +21,8 @@
 	&__actions{
 		display: flex;
 		justify-content: space-between;
+        align-items: center;
+        gap: 18px;
 	}
 	&__price{
 		& .price{
