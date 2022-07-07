@@ -64,12 +64,12 @@ blogNav.forEach(nav=>{
 	})
 })
 
-search.addEventListener('click',()=>{
+search.addEventListener('click',() => {
 	btnBurger.classList.add('open');
 	btnBurger.setAttribute('action','search');
-	if(isMobile) return;
-	searchWrapper.style.width = '320px';
     $(".search").addClass("open");
+    if(isMobile) return;
+    searchWrapper.style.width = '320px';
 	let hider = new Hider("search__wrapper",() => {
 		$(".search").removeClass("open");
 		$(".burger").removeClass("open").attr("action","");
@@ -80,7 +80,7 @@ search.addEventListener('click',()=>{
 	document.addEventListener('mouseup', hider.hide);
 });
 
-searchInput.addEventListener('input',(event)=>{
+searchInput.addEventListener('input',(event) => {
 	if(event.target.value.length > 2){
         let formData = new FormData();
         formData.append("_token", csrfToken);
@@ -131,24 +131,24 @@ searchInput.addEventListener('input',(event)=>{
                 $(".search__loader").fadeOut();
             })
 
-	}else{
+	} else {
         $(".search__results").hide();
         $(".search__empty").fadeOut();
 	}
 })
 
-if(!isMobile && triggerUserDropdown){
+if (!isMobile && triggerUserDropdown) {
     triggerUserDropdown.addEventListener("click",() => {
         $(".user-dropdown").toggleClass("open");
         $(triggerUserDropdown).toggleClass("open");
-    })
+    });
 }
 
 
 //Additional
 function toggleMobileMenu(burger){
 	let action = $(burger).attr("action");
-	if(action === "search"){
+	if (action === "search") {
 		$(".search").removeClass("open");
 		$(".search__results").hide();
 		$(burger).removeClass("open").attr("action",'');
@@ -156,7 +156,7 @@ function toggleMobileMenu(burger){
 	}
 
 	let isOpen = burger.classList.contains("open");
-	if(isOpen){
+	if (isOpen) {
 		$(burger).removeClass("open");
 		$('.header-mobile__wrapper').removeClass("active");
 		$('.header-mobile__col .logo').removeClass("invert");
@@ -174,7 +174,7 @@ function toggleMobileMenu(burger){
 
 function hideSidebarNav() {
 	blogNav.forEach(nav=>{
-		if(nav.classList.contains("open")){
+		if (nav.classList.contains("open")) {
 			nav.classList.remove("open");
 		}
 	})
