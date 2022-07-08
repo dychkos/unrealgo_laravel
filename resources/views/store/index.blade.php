@@ -1,5 +1,12 @@
 @extends('layouts.base')
 
+@php
+    $typeName = "Всі товари";
+    if (isset($activeType)) {
+        $typeName = $activeType->value;
+    }
+@endphp
+
 @section('content')
     <div class="page-title h1">
         Магазин
@@ -18,18 +25,22 @@
     </div>
     <div class="navigation">
         <div class="navigation__categories">
-            <div class="navigation__mobile {{!isset($activeType)
-                ? "navigation__active"
-                : "navigation__item"}} h5">
-                <a href="{{route('store.index')}}">
-                    Всі товари
-                </a>
+            <div class="navigation__mobile h5">
+                <span>
+                    {{ $typeName }}
+                </span>
                 <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M7 9L0.937822 0.75L13.0622 0.750001L7 9Z" fill="white"/>
                 </svg>
             </div>
 
             <div class="navigation__body">
+                <div class="navigation__desktop navigation__item h5
+                    {{ !isset($activeType) ? "navigation__active" : "" }}">
+                    <a href="{{ route('articles.index') }}">
+                        Всі товари
+                    </a>
+                </div>
                 @foreach($types as $type)
                     <div class="{{ isset($activeType) && $activeType->id === $type->id
                                 ? "navigation__active"
@@ -46,7 +57,7 @@
 
         </div>
         <div class="navigation__sort sort">
-            <div class="sort__title h5">Сортувати за</div>
+            <div class="sort__title hide h5">Сортувати за</div>
             <div class="sort__icon h5">
                 <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_326_115)">

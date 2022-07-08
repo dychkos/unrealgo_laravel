@@ -57,7 +57,11 @@ class StoreController extends Controller
             }
         }
 
-        if($query->paginate()->currentPage() == 1 && !isset($activeType)) {
+        if (
+            $query->paginate()->currentPage() == 1
+            && !isset($activeType)
+            && !$request->filled("order")
+        ) {
             $new = Product::orderBy("created_at")->limit(10)->get();
             $popular = Product::orderBy("created_at")->limit(10)->get();
         }

@@ -34,17 +34,15 @@
 	}
 	&__info{
 		margin-top: 16px;
-		display: flex;
+		display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
 		flex-wrap: wrap;
 		justify-content: space-between;
 		gap: 8px;
 		align-items: center;
 		color:$primary;
-
-
 	}
 	&__info-item{
-		margin-right: 20px;
 		justify-content: center;
 		&:last-child{
 			margin-right: 0;
@@ -104,8 +102,23 @@
 
 @media only screen and (max-width: 575px){
 	.big-article{
-		&__info{
-			.ellipse{
+		&__info {
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 1rem;
+            grid-template-areas:
+              "tag tag"
+              "info-1 info-2";
+            .short-info-1 {
+                grid-area: info-1;
+            }
+            .short-info-2 {
+                grid-area: info-2;
+            }
+            .tag {
+                grid-area: tag;
+                margin: 0 auto;
+            }
+            .ellipse{
 				&:before{
 					display: none;
 				}

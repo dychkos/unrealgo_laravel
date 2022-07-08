@@ -29,8 +29,9 @@ class Article extends Model
     ];
 
     public static $SORTS = [
-      "date" => "дате",
-      "popular" => "популярности",
+      "date-new" => "спочатку нові",
+      "date-old" => "спочатку давні",
+      "popular" => "популярністю",
     ];
 
 

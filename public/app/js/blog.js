@@ -25,16 +25,16 @@ sort.addEventListener('click',(event) => {
         return;
     }
 
-    if(sortBody.classList.contains("active")){
+    if (sortBody.classList.contains("active")) {
         $(sortBody).removeClass("active");
         document.removeEventListener('click', hider.hide);
-    }else{
+    } else {
         $(sortBody).addClass("active");
         document.addEventListener('click', hider.hide);
     }
+});
 
-})
-navigation.addEventListener("click",()=>{
+navigation.addEventListener("click",() => {
     let navBody = document.querySelector(".navigation__body");
 
     let hider = new Hider(".navigation__active",()=>{

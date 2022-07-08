@@ -1,23 +1,34 @@
 @extends('layouts.base')
 
+@php
+    $categoryName = "Всі публікації";
+    if (isset($activeCategory)) {
+        $categoryName = $activeCategory->value;
+    }
+@endphp
+
 @section('content')
     <div class="page-title h1">Блог</div>
     <div class="navigation" id="navigation">
         <div class="navigation__categories">
-            <div class="navigation__mobile {{!isset($activeCategory)
-                ? "navigation__active"
-                : "navigation__item"}} h5">
-                <a href="{{route('articles.index')}}">
-                   Всі публікації
-                </a>
+            <div class="navigation__mobile h5">
+                <span>
+                    {{ $categoryName }}
+                </span>
                 <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M7 9L0.937822 0.75L13.0622 0.750001L7 9Z" fill="white"/>
                 </svg>
             </div>
             <div class="navigation__body">
+                <div class="navigation__desktop navigation__item h5
+                    {{ !isset($activeCategory) ? "navigation__active" : "" }}">
+                    <a href="{{ route('articles.index') }}">
+                        Всі публікації
+                    </a>
+                </div>
                 @foreach($categories as $category)
                     <div class="{{ isset($activeCategory) && $activeCategory->id === $category->id
-                            ? "navigation__active"
+                            ? "navigation__item navigation__active"
                             : "navigation__item"}} h5">
                         <a href="{{route('articles.index', $category->slug )}}">{{$category->value}}</a>
                     </div>

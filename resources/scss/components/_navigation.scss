@@ -1,34 +1,36 @@
-.navigation{
+.navigation {
   background-color: $background-light;
   display: flex;
   justify-content: space-between;
   color: $black;
   border-radius: 20px;
   align-items: center;
-  &__categories{
-    display: flex;
-    padding: 16px 24px;
-
+  padding: 15px;
+  &__mobile {
+      display: none;
   }
-  &__body{
+  &__categories {
     display: flex;
-    &.active{
+  }
+  &__body {
+    display: flex;
+    &.active {
       display: flex;
     }
   }
-  &__active{
+  &__active {
     background-color: $primary;
     padding: 9px 15px;
     border-radius: 20px;
     margin-right: 12px;
     color: #fff;
-    svg{
+    svg {
       display: none;
     }
 
 
   }
-  &__item{
+  &__item {
     padding: 9px 15px;
     transition: all 0.3s ease;
     margin-right: 17px;
@@ -49,11 +51,14 @@
 }
 
 @media only screen and (max-width: 991px){
-  .navigation{
-    &__categories{
+  .navigation {
+    &__categories {
       position: relative;
     }
-    &__mobile{
+    &__desktop {
+        display: none;
+    }
+    &__mobile {
       background-color: $primary !important;
       padding: 9px 15px;
       min-width: 190px;
@@ -69,11 +74,11 @@
         color: $black;
         background-color: $primary;
       }
-      svg{
+      svg {
         display: block;
         margin-left: 14px;
       }
-      a{
+      a {
           pointer-events: none;
       }
 
@@ -89,7 +94,7 @@
       display: none;
       position: absolute;
       box-shadow: $drop-shadow;
-      top: 60px;
+      top: 55px;
       padding: 20px 10px;
       width: 100%;
       left: 0;
@@ -107,15 +112,10 @@
 
     &__categories {
       position: static;
-      padding: 10px 18px;
-    }
-
-    &__active {
-      padding: 8px 12px;
     }
 
     &__body {
-      top: 40px;
+      top: 45px;
     }
   }
 }

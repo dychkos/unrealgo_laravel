@@ -18,7 +18,7 @@ new Swiper(".popular-swiper", {
 /*
 * Nodes
 * */
-let navigation = document.querySelector('.navigation__active');
+let navigation = document.querySelector('.navigation__mobile');
 let sort = document.querySelector('.sort');
 let confirmSortForm = document.getElementById("confirm_sort");
 
