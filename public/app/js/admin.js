@@ -106,3 +106,23 @@ function initSizesArray() {
 
     return sizeArray;
 }
+
+let element = document.querySelector("trix-editor");
+if (element.editor) {
+    let editor = element.editor; // is a Trix.Editor instance
+    document.addEventListener('trix-before-initialize ', () => {
+        debugger
+        console.log('now')
+        Trix.config.blockAttributes.heading1 = {
+            tagName: 'h3'
+        }
+
+    });
+
+
+
+}
+
+let updateToolbars = () => {
+
+}

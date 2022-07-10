@@ -103,7 +103,7 @@
                 <div class="quick-nav__item quick-nav__item_active" data-nav="description">Опис</div>
                 <div class="quick-nav__item" data-nav="feedbacks">Відгуки</div>
             </div>
-            <div class="product-page__description nav-active" id="description">
+            <div class="product-page__description nav-active body-content" id="description">
                {!! $product->description !!}
             </div>
             <div class="product-page__comments-block comments-block" id="feedbacks" style="display: none">
@@ -262,7 +262,20 @@
 
             {{-- Product ID --}}
             let productId = {{$product->id}};
+
+            @error('body')
+            Toastify({
+                text: "Ваш відгук занадто короткий!",
+                backgroundColor: "#A84F43",
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "left",
+            }).showToast();
+            @enderror
         </script>
+
+
 
 
         <script src="{{asset('app/js/Hider.js')}}"></script>

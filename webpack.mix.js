@@ -23,6 +23,7 @@ mix.combine([
     'resources/css/libs/regular.min.css',
     'resources/css/libs/select2.min.css',
     'resources/css/libs/toastify.min.css',
+    //'resources/css/libs/trix.css',
 ], 'public/app/libs/libs.min.css');
 
 
@@ -32,6 +33,7 @@ mix.combine([
     'resources/js/libs/swiper-bundle.min.js',
     'resources/js/libs/toastify.min.js',
     'resources/js/libs/select2.min.js',
+    //'resources/js/libs/trix.min.js',
 ], 'public/app/libs/libs.min.js');
 
 

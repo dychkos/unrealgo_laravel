@@ -19,7 +19,7 @@ h1, h2, h3, h4, h5,
 /* H1 Desk */
 h1, .h1{
 	font-size: 32px;
-	line-height: 42px;
+	line-height: 48px;
     font-family: Rubik-Bold;
     font-weight: bold;
 }
@@ -27,7 +27,7 @@ h1, .h1{
 /* H2 Desk */
 h2, .h2{
 	font-size: 28px;
-	line-height: 30px;
+	line-height: 42px;
     letter-spacing: 0.10em;
     font-family: Rubik-Light;
 
@@ -35,43 +35,49 @@ h2, .h2{
 
 /* H3 Desk */
 h3, .h3{
-	font-size: 24px;
-	line-height: 26px;
+	font-size: 28px;
+	line-height: 42px;
     font-family: Rubik-Bold;
 
 }
 
 /* H4 Desk */
 h4, .h4{
-	font-size: 18px;
-	line-height: 24px;
+	font-size: 22px;
+	line-height: 34px;
     font-family: Rubik-Bold;
 }
 
 /* H5 Desk */
 h5, .h5{
-	font-size: 18px;
-	line-height: 22px;
+	font-size: 20px;
+	line-height: 30px;
     font-family: Rubik-Regular;
 }
 
 
 /* H6 Desk */
 h6, .h6{
-  font-size: 18px;
-  line-height: 20px;
+  font-size: 20px;
+  line-height: 30px;
   font-family: Rubik-Bold;
 }
 
 /* Paragraph Desk */
 p, .p {
-  font-size: 16px;
-  line-height:28px;
+  font-size: 18px;
+  line-height: 28px;
   font-family: Rubik-Regular;
 }
 
 .p-light{
   font-size: 14px;
+  line-height: 22px;
+}
+
+/* Body Content Styling */
+.body-content {
+    /* H1 Desk */
 }
 
 @media only screen and (max-width: 1199px) {
@@ -82,55 +88,69 @@ p, .p {
   /* H1 Tablet */
   h1, .h1{
     font-size: 28px;
-    line-height: 30px;
+    line-height: 42px;
 
   }
 
   /* H2 Tablet */
   h2, .h2{
     font-size: 24px;
-    line-height: 26px;
+    line-height: 32px;
   }
 
-
-          /* H3 and H5 Tablet */
+  /* H3 and H5 Tablet */
   h3, .h3,
   h4, h4{
     font-size: 20px;
-    line-height: 22px;
+    line-height: 30px;
 
+  }
+
+  /* Paragraph Tab */
+  p, .p {
+      font-size: 16px;
+      line-height: 24px;
+      font-family: Rubik-Regular;
   }
 
 
 }
 
+
+
 @media only screen and (max-width: 767px){
   /* H1 Mobile */
   h1, .h1{
-    font-size: 22px;
-    line-height: 28px;
+    font-size: 26px;
+    line-height: 38px;
   }
 
 
   /* H2 Mobile */
   h2, .h2{
-    font-size: 22px;
-    line-height: 20px;
+    font-size: 24px;
+    line-height: 32px;
   }
 
 
   /* H3 and H5 Mobile */
   h3, .h3,
   h4, h4{
-    font-size: 18px;
+    font-size: 20px;
+    line-height: 30px;
+  }
+
+  /* H4 Mobile */
+  h6, .h6{
+    font-size: 14px;
     line-height: 22px;
   }
 
-
-          /* H4 Mobile */
-  h6, .h6{
-    font-size: 14px;
-    line-height: 18px;
+  /* Paragraph Desk */
+  p, .p {
+      font-size: 14px;
+      line-height:22px;
+      font-family: Rubik-Regular;
   }
 
 }

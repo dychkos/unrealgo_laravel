@@ -364,15 +364,19 @@ select, .select{
     font-size: 15px;
 }
 
-.form-input{
-    &_sm{
+.form-input {
+    &_sm {
         width: 320px;
     }
-    label{
+    &_trix {
+        display: flex;
+        flex-direction: column;
+    }
+    label {
         float: left;
         margin: 6px 0;
     }
-    input:not(input[type="checkbox"],input[type="radio"]),textarea{
+    input:not(input[type="checkbox"], input[type="radio"]), textarea {
         width: 100%;
         padding: 16px 24px;
         color: $gray;
@@ -456,6 +460,19 @@ select, .select{
     background-color: $secondary;
     border-radius: 6px;
     $border: 1px solid $primary;
+}
+
+trix-editor {
+    min-height: 12em;
+    background-color: $secondary;
+    border-radius: 4px;
+}
+
+//Inserted body styling
+.body-content {
+    ul {
+        padding: 0 25px;
+    }
 }
 
 

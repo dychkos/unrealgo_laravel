@@ -13,10 +13,13 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.css" integrity="sha512-5m1IeUDKtuFGvfgz32VVD0Jd/ySGX7xdLxhqemTmThxHdgqlgPdupWoSN8ThtUSLpAGBvA8DY2oO7jJCrGdxoA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{asset('app/libs/libs.min.css?v=' . random_int(1000, 9999)) }}">
     <link rel="stylesheet" href="{{asset('app/css-min/main.min.css?v='. random_int(1000, 9999)) }}">
 
     <script src="{{asset('app/libs/libs.min.js')}}"></script>
+    <script src="{{ asset('app/js/libs/trix.min.js') }}"></script>
+
     <title>UnReal GO | Admin Panel </title>
 
     <style>
@@ -62,5 +65,7 @@
 </main>
 
 </body>
+
 @stack('js')
+
 </html>

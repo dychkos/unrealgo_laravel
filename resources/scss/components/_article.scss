@@ -6,10 +6,11 @@
   background-size: cover;
   background-repeat: no-repeat;
   transition: all 0.2s ease;
-  height: 440px;
+  min-height: 400px;
+  height: 100%;
   &__card{
     background-color: #fff;
-    max-width: 340px;
+    max-width: 380px;
     color:$black;
     padding: 20px;
     border-radius: 20px;

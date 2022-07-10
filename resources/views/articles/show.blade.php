@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="big-article__body">
-                    <div class="big-article__content">
+                    <div class="big-article__content body-content">
                         {!! $article->body !!}
                     </div>
                     <div class="big-article__comments-block comments-block">
@@ -284,7 +284,7 @@
         <script>
             @if(session()->has('commentMsg'))
                 Toastify({
-                    text: "Відгук додано!",
+                    text: "Коментар додано!",
                     backgroundColor: "#04AA6D",
                     duration: 3000,
                     close: true,
@@ -292,6 +292,17 @@
                     position: "left",
                 }).showToast();
             @endif
+
+            @error('body')
+            Toastify({
+                text: "Ваш коментар занадто короткий!",
+                backgroundColor: "#A84F43",
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "left",
+            }).showToast();
+            @enderror
         </script>
         <script src="{{asset('app/js/Hider.js')}}"></script>
         <script src="{{asset('app/js/main.js')}}"></script>

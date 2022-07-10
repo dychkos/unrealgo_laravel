@@ -69,7 +69,7 @@
             </div>
         </div>
         <div class="admin-row">
-            <div class="form-input">
+            <div class="form-input form-input_trix">
                 <label for="description">Опис</label>
                 <textarea
                     class="{{$errors->has('description') ? 'required' : '' }}"
@@ -83,12 +83,10 @@
         <div class="admin-row">
             <div class="form-input">
                 <label for="html-body">HTML</label>
-                <textarea
-                    class="{{$errors->has('body') ? 'required' : '' }}"
-                    id="html-body" name="body" placeholder="Введіть текст"
-                    rows="10">{{old('body')}}</textarea>
+                <input id="html-body" type="hidden" name="body" value="{{ old('body', $article->body) }}">
+                <trix-editor input="html-body"></trix-editor>
                 @error("body")
-                <div class="required_alert">{{$message}}</div>
+                <div class="required_alert">{{ $message }}</div>
                 @enderror
             </div>
         </div>
