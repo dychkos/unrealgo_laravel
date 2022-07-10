@@ -25,7 +25,7 @@ likesBtns.forEach(likeBtn => {
             }else {
                 response.json().then(
                     result => {
-                        likeBtn.textContent = result.data.likes + " Нравится";
+                        likeBtn.textContent = result.data.likes + " Подобається";
                     }
                 )
             }

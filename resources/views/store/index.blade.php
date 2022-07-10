@@ -57,7 +57,7 @@
 
         </div>
         <div class="navigation__sort sort">
-            <div class="sort__title hide h5">Сортувати за</div>
+            <div class="sort__title h5">Сортувати за</div>
             <div class="sort__icon h5">
                 <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_326_115)">

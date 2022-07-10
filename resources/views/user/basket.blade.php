@@ -6,8 +6,6 @@
         <div class="basket__body card">
             <div class="row g-4">
                 <div class="{{empty($cart) ? "col-12" : "col-lg-8"}} ">
-                    <div class="basket__action-error required_alert mb-3" style="display: none">
-                    </div>
                     <div class="orders">
                         @if(!empty($cart))
                             @foreach($cart as $key => $item)

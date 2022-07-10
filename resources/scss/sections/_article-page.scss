@@ -44,9 +44,7 @@
 	}
 	&__info-item{
 		justify-content: center;
-		&:last-child{
-			margin-right: 0;
-		}
+        margin: 0 auto;
 	}
 	&__body{
 		padding-top: 250px;
