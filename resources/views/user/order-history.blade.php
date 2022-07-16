@@ -8,7 +8,7 @@
                 <div class="order-history__empty empty">
                     <img src="{{asset("app/img/empty.png")}}" class="empty__image" alt="Empty">
                     <h3 class="empty__title h3">Ще не зробили жодного замовлення</h3>
-                    <a class="btn btn_primary h4" href="{{route("store.index")}}" style="color: #fff">
+                    <a class="btn btn_primary h6" href="{{route("store.index")}}" style="color: #fff">
                         Перейти до каталогу
                     </a>
                 </div>

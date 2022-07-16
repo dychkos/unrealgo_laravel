@@ -143,7 +143,7 @@
                 </div>
                 <div class="row">
                     <div class="user-profile__input-group coд">
-                        <button type="submit" class="user-profile__btn btn btn_primary h4">
+                        <button type="submit" class="user-profile__btn btn btn_primary h6">
                             Зберегти зміни
                         </button>
                     </div>

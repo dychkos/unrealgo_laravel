@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="footer__col col order-1 order-sm-0 order-lg-1">
-                <div class="footer__title h4">Твій аккаунт</div>
+                <div class="footer__title h6">Твій аккаунт</div>
                 @if(\Illuminate\Support\Facades\Auth::check())
                     <div class="footer__link">
                         <a class="p" href="{{route('basket')}}">Кошик</a>
@@ -36,7 +36,7 @@
                 @endif
             </div>
             <div class="footer__col col order-2 order-sm-2 order-lg-2">
-                <div class="footer__title h4">Розділи</div>
+                <div class="footer__title h6">Розділи</div>
                 <div class="footer__link">
                     <a class="p" href="{{route('articles.index')}}" >Блог</a>
                 </div>

@@ -33,7 +33,7 @@
                     />
                 </div>
                 <div class="auth-form__item row">
-                    <button type="submit" class="auth-form__submit btn btn_primary h4">
+                    <button type="submit" class="auth-form__submit btn btn_primary h6">
                         Увійти
                     </button>
                     <div class="auth-form__link h5 mt-3">

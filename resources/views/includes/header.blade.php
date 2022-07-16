@@ -49,10 +49,10 @@
                     </svg>
                 </a>
                 <div class="header__link">
-                    <a href="{{ route('articles.index') }}" class="h4 link">Блог</a>
+                    <a href="{{ route('articles.index') }}" class="h6 link">Блог</a>
                 </div>
                 <div class="header__link">
-                    <a href="{{ route("store.index") }}" class="h4 link">Магазин</a>
+                    <a href="{{ route("store.index") }}" class="h6 link">Магазин</a>
                 </div>
                 @if( \Illuminate\Support\Facades\Auth::check())
                     <div class="user-dropdown__preview">
@@ -68,7 +68,7 @@
                     </div>
                 @else
                     <a href="{{route('login.index')}}">
-                        <button class="btn btn_primary h4">
+                        <button class="btn btn_primary h6">
                             Увійти
                         </button>
                     </a>

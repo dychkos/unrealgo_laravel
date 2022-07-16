@@ -1,18 +1,13 @@
 /*
-* Declaration
+* Imports
 * */
+import Mask from './includes/Mask';
+
+
 
 /*
-* Nodes
+* Declaration
 * */
-let countPlusBtns = document.querySelectorAll('.count_plus');
-let countMinusBtns = document.querySelectorAll('.count_minus');
-let makeOrderForm = document.getElementById('make-order');
-let orderCityDropdown = document.getElementById('order_city_dropdown');
-let orderDepartmentSelect = document.getElementById('order_department');
-let navigation = document.querySelector('.navigation__active');
-
-
 
 let yesHTML = `<div style="display: flex; flex-direction: column; align-items: center"><?xml version="1.0" encoding="iso-8859-1"?>
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="80px" height="80px" x="0px" y="0px"
@@ -28,6 +23,22 @@ let yesHTML = `<div style="display: flex; flex-direction: column; align-items: c
 let hasFormError = false;
 let modal = new Modal("", ".modal-wrapper");
 
+
+/*
+* Nodes
+* */
+let countPlusBtns = document.querySelectorAll('.count_plus');
+let countMinusBtns = document.querySelectorAll('.count_minus');
+let makeOrderForm = document.getElementById('make-order');
+let orderCityDropdown = document.getElementById('order_city_dropdown');
+let orderDepartmentSelect = document.getElementById('order_department');
+let navigation = document.querySelector('.navigation__active');
+let phoneInput = document.querySelector('input[name="phone"]');
+
+
+/*
+* Listeners
+* */
 makeOrderForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
@@ -181,6 +192,8 @@ countPlusBtns.forEach( countPlusBtn => {
 countMinusBtns.forEach( countMinusBtn => {
     countMinusBtn.addEventListener("click", (e) => { countAction(e,true) });
 });
+
+phoneInput.addEventListener('input', (e) => { e.target.value = Mask.phoneNumber(e.target.value) });
 
 function formatResults(res) {
     if (!res.text) {

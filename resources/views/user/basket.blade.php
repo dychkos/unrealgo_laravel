@@ -40,7 +40,7 @@
                             <div class="empty col-12">
                                 <img src="{{asset("app/img/empty.png")}}" class="empty__image" alt="Empty">
                                 <h3 class="empty__title h3">Уппс, кошик до сих пір пустий</h3>
-                                <a href="{{route("store.index")}}" class="btn btn_primary h4">
+                                <a href="{{route("store.index")}}" class="btn btn_primary h6">
                                     Перейти до каталогу
                                 </a>
                             </div>
@@ -73,7 +73,7 @@
                                     <input type="text" placeholder="Вкажіть ФІО" name="data_name">
                                 </div>
                                 <div class="order-form__input form-input">
-                                    <input type="text" placeholder="Номер телефону" name="phone">
+                                    <input type="text" placeholder="(000) 111-1111" name="phone">
                                 </div>
                                 <div class="order-form__input form-input">
                                     <input type="email" placeholder="Електрона пошта" name="email">
@@ -99,7 +99,7 @@
                             Заповніть всі рядки
                         </div>
                         <div class="make-order__footer">
-                            <button class="make-order__submit btn btn_primary h4">
+                            <button class="make-order__submit btn btn_primary h6">
                                 Підтвердити замовлення
                             </button>
                             <div class="make-order__loader" style="display: none">

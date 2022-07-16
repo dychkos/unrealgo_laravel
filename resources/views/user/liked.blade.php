@@ -56,7 +56,7 @@
                             <div class="order-history__empty empty col-12">
                                 <img src="{{asset("app/img/empty.png")}}" class="empty__image" alt="Empty">
                                 <h3 class="empty__title h3">История заказов пустая</h3>
-                                <a href="{{route("store.index")}}" class="btn btn_primary h4">
+                                <a href="{{route("store.index")}}" class="btn btn_primary h6">
                                     Перейти до каталогу
                                 </a>
                             </div>

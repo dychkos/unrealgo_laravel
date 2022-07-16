@@ -243,7 +243,7 @@
                         </div>
                         @enderror
 
-                        <button class="add-comment__btn btn btn_primary h4">
+                        <button class="add-comment__btn btn btn_primary h6">
                             Залишити відгук
                         </button>
                     @endif
