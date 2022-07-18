@@ -1,9 +1,9 @@
 .sort {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   position: relative;
   padding: 0 20px;
-  min-width: 200px;
+  min-width: 220px;
     &__title {
     cursor: pointer;
     padding-bottom: 5px;
