@@ -2,7 +2,7 @@
 
 @section('content')
     <script>
-        let urlDelete = "{{route("user.delete",$user->id )}}"
+        let urlDelete = "{{ route("user.delete",$user->id )}}"
     </script>
     <section class="user-profile">
         <div class="user-profile__title page-title h1">Інформація про користувача</div>
@@ -167,9 +167,6 @@
             }).showToast();
             @endif
         </script>
-        <script src="{{asset('app/js/Hider.js')}}"></script>
-        <script src="{{asset('app/js/main.js')}}"></script>
-        <script src="{{asset('app/js/libs/Modal.js')}}"></script>
-        <script src="{{asset('app/js/user-profile.js?' . random_int(0, 99999))}}"></script>
+        <script src="{{ asset('app/js-min/user-profile.min.js?v=' . random_int(1000, 9999)) }}"></script>
     @endpush
 @endonce

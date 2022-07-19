@@ -172,7 +172,7 @@ class ProductService
 
     public function checkInCart($cart, $product_id): bool
     {
-        if(empty($cart)){
+        if(empty($cart) || !$product_id){
             return false;
         }
 

@@ -171,7 +171,7 @@
                                 <a href="{{route('user.liked')}}">Вподобане</a>
                             </div>
                             <div class="header-mobile__link">
-                                <a href="{{route('user.order-history')}}">Мої замовлення</a>
+                                <a href="{{route('user.order-history')}}">Замовлення</a>
                             </div>
                             <div class="header-mobile__link">
                                 <a href="#{{route('user.profile')}}">Профіль</a>

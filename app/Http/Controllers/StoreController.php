@@ -82,10 +82,12 @@ class StoreController extends Controller
 
     public function show (Request $request, $product_slug, $product_id) {
         $product = Product::find($product_id);
-
-        //Session::forget("cart");
         $cart = Session::get('cart');
-        $inCart = $this->productService->checkInCart($cart, $product->id);
+        $inCart = false;
+
+        if ($product) {
+            $inCart = $this->productService->checkInCart($cart, $product->id);
+        }
 
         return $this->withUser("store.show", array(
             'product' => $product,

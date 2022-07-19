@@ -257,11 +257,8 @@
 @once
     @push('js')
         <script>
-            {{-- URLs --}}
-            let addToCartURL = "{{route("store.toCart")}}";
-
             {{-- Product ID --}}
-            let productId = {{$product->id}};
+            let productId = {{ $product->id }};
 
             @error('body')
             Toastify({
@@ -275,15 +272,6 @@
             @enderror
         </script>
 
-
-
-
-        <script src="{{asset('app/js/Hider.js')}}"></script>
-        <script src="{{asset('app/js/main.js')}}"></script>
-        <script src="{{asset('app/js/libs/PhotoPreviews.js')}}"></script>
-        <script src="{{asset('app/js/libs/Modal.js')}}"></script>
-        <script src="{{asset('app/js/product.js')}}"></script>
-        <script src="{{asset('app/js/includes/likeComment.js')}}"></script>
-        <script src="{{asset('app/js/includes/likeProduct.js')}}"></script>
+        <script src="{{ asset('app/js-min/product.min.js?v=' . random_int(1000, 9999)) }}"></script>
     @endpush
 @endonce

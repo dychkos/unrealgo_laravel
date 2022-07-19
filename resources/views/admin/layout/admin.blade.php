@@ -18,9 +18,8 @@
     <link rel="stylesheet" href="{{asset('app/css-min/main.min.css?v='. random_int(1000, 9999)) }}">
 
     <script src="{{asset('app/libs/libs.min.js')}}"></script>
-    <script src="{{ asset('app/js/libs/trix.min.js') }}"></script>
 
-    <title>UnReal GO | Admin Panel </title>
+    <title>UnReal GO | Admin Panel</title>
 
     <style>
         body {
@@ -45,7 +44,7 @@
             @foreach($activeModels as $model => $value)
                 <a href="{{ route('user.admin.index', $model == 'articles' ? '' : $model) }}" class="admin-navbar__item {{$modelName === $model ? "active" : ""}}">
                 <span class="admin-navbar__image">
-                    <img src="{{ asset('app/img/'.$model.'.svg') }}" alt="Model">
+                    <img src="{{ asset('app/img/' . $model . '.svg') }}" alt="Model">
                 </span>
                     <span class="admin-navbar__title h4">
                         {{ $value }}

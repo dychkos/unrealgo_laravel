@@ -294,9 +294,7 @@
 
 @once
     @push('js')
-        <script src="{{asset('app/js/Hider.js')}}"></script>
-        <script src="{{asset('app/js/main.js')}}"></script>
-        <script src="{{asset('app/js/orders.js')}}"></script>
+        <script src="{{ asset('app/js-min/orders.min.js?v=' . random_int(1000, 9999)) }}"></script>
     @endpush
 @endonce
 

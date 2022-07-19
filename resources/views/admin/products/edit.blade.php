@@ -160,6 +160,5 @@
 
     </script>
 
-    <script src="{{asset('app/js/libs/Select.js')}}"></script>
-    <script src="{{asset('app/js/admin.js')}}"></script>
+    <script src="{{ asset('app/js-min/admin.min.js?v=' . random_int(1000, 9999)) }}"></script>
 @endpush

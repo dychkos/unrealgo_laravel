@@ -9,7 +9,7 @@
                     <div class="orders">
                         @if(!empty($cart))
                             @foreach($cart as $key => $item)
-                                <div class="order" data-item="{{$key}}">
+                                <div class="order" data-item="{{ $key }}">
                                     <div class="order__image">
                                         <img src="{{$item["product"]->images->first()
                                             ? asset($item["product"]->images->first()->filename)
@@ -124,11 +124,7 @@
 
 @once
     @push('js')
-        <script src="{{asset('app/js/Hider.js')}}"></script>
-        <script src="{{asset('app/js/main.js')}}"></script>
-        <script src="{{asset('app/js/libs/Select.js')}}"></script>
-        <script src="{{asset('app/js/libs/Modal.js')}}"></script>
-        <script src="{{asset('app/js/basket.js')}}"></script>
+        <script src="{{ asset('app/js-min/basket.min.js?v=' . random_int(1000, 9999)) }}"></script>
     @endpush
 @endonce
 

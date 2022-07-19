@@ -26,18 +26,18 @@
                        value="{{old('title')}}"
                        class="{{$errors->has('title') ? 'required' : '' }}">
                 @error("title")
-                <div class="required_alert">{{$message}}</div>
+                <div class="required_alert">{{ $message }}</div>
                 @enderror
             </div>
             <div class="admin-input form-input">
                 <div class="dropdown" id="categories_dropdown">
                     @error("category_id")
-                    <div class="required_alert">{{$message}}</div>
+                    <div class="required_alert">{{ $message }}</div>
                     @enderror
                     <label for="category">Виберіть категорію :</label>
-                    <select name="category_id" id="category" class="select" class="{{$errors->has('category') ? 'required' : '' }}">
+                    <select name="category_id" id="category" class="select" class="{{ $errors->has('category') ? 'required' : '' }}">
                         @foreach($categories as $category)
-                            <option value="{{$category->id}}">{{$category->value}}</option>
+                            <option value="{{ $category->id }}">{{ $category->value }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -97,6 +97,5 @@
 @endsection
 
 @push('js')
-    <script src="{{asset('app/js/libs/Select.js')}}"></script>
-    <script src="{{asset('app/js/admin.js')}}"></script>
+    <script src="{{ asset('app/js-min/admin.min.js?v=' . random_int(1000, 9999)) }}"></script>
 @endpush
