@@ -1,6 +1,6 @@
 @extends('layouts.base')
 @php
-    $withoutSize = $product->sizes()->where("value", "one")->exists();
+    $withoutSize = $product->sizes()->where("value", "NO_SIZE")->exists();
 @endphp
 @section('content')
     <div class="product-page pt-4">
@@ -16,11 +16,9 @@
                             </div>
                             @if($product->images()->get()->count() > 1)
                                 @foreach($product->images as $image)
-                                    @if($loop->index > 1)
                                     <div class="photos__slide">
                                         <img src="{{asset($image->filename)}}" data-photo alt="Product">
                                     </div>
-                                    @endif
                                 @endforeach
                             @endif
                         </div>
@@ -46,9 +44,10 @@
                               Виберіть розмір:
                           </span>
                             <div class="sizes__block">
+                                @php $chosen = false @endphp
                                 @foreach($product->sizes as $size)
                                     <div class="sizes__item
-                                    {{ $loop->index === 0 ? "sizes__item_chosen" : "" }}
+                                    {{ $product->firstAvailableSize() == $size->id ? "sizes__item_chosen" : "" }}
                                     {{ $product->isSizeAvailable($size->id) ? "" : "sizes__item_none" }}"
                                          data-size="{{ $size->id }}">
                                         {{ $size->value }}
@@ -103,7 +102,7 @@
                 <div class="quick-nav__item quick-nav__item_active" data-nav="description">Опис</div>
                 <div class="quick-nav__item" data-nav="feedbacks">Відгуки</div>
             </div>
-            <div class="product-page__description nav-active" id="description">
+            <div class="product-page__description nav-active body-content" id="description">
                {!! $product->description !!}
             </div>
             <div class="product-page__comments-block comments-block" id="feedbacks" style="display: none">
@@ -243,7 +242,7 @@
                         </div>
                         @enderror
 
-                        <button class="add-comment__btn btn btn_primary h4">
+                        <button class="add-comment__btn btn btn_primary h6">
                             Залишити відгук
                         </button>
                     @endif
@@ -257,20 +256,21 @@
 @once
     @push('js')
         <script>
-            {{-- URLs --}}
-            let addToCartURL = "{{route("store.toCart")}}";
-
             {{-- Product ID --}}
-            let productId = {{$product->id}};
+            let productId = {{ $product->id }};
+
+            @error('body')
+            Toastify({
+                text: "Ваш відгук занадто короткий!",
+                backgroundColor: "#A84F43",
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "left",
+            }).showToast();
+            @enderror
         </script>
 
-
-        <script src="{{asset('app/js/Hider.js')}}"></script>
-        <script src="{{asset('app/js/main.js')}}"></script>
-        <script src="{{asset('app/js/libs/PhotoPreviews.js')}}"></script>
-        <script src="{{asset('app/js/libs/Modal.js')}}"></script>
-        <script src="{{asset('app/js/product.js')}}"></script>
-        <script src="{{asset('app/js/includes/likeComment.js')}}"></script>
-        <script src="{{asset('app/js/includes/likeProduct.js')}}"></script>
+        <script src="{{ asset('app/js-min/product.min.js?v=' . random_int(1000, 9999)) }}"></script>
     @endpush
 @endonce

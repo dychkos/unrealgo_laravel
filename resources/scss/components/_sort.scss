@@ -1,13 +1,15 @@
-.sort{
+.sort {
   display: flex;
+  justify-content: flex-end;
   position: relative;
   padding: 0 20px;
-  min-width: 200px;
-  &__title{
+  min-width: 220px;
+    &__title {
     cursor: pointer;
     padding-bottom: 5px;
   }
-  &__body{
+  &__body {
+    display: none;
     position: absolute;
     top: 30px;
     width: 100%;
@@ -16,32 +18,30 @@
     justify-content: center;
     left: 0;
     z-index: $sortZ;
-    opacity: 0;
     background-color: $background-light;
     border-radius: 0 0 20px 20px;
     box-shadow: $drop-shadow;
     transition: max-height 0.4s ease;
-    &.active{
+    &.active {
       display: flex;
       flex-direction: column;
-      opacity: 1;
     }
   }
-  &__item{
+  &__item {
     margin-bottom: 4px;
     border-radius: 14px;
     padding: 8px;
     cursor: pointer;
     transition: color 0.3s ease;
-    &_active{
+    &_active {
         background-color: $secondary;
         color: $primary;
     }
-    &:hover{
+    &:hover {
       color: $primary;
     }
   }
-  &__icon{
+  &__icon {
     margin-left: 9px;
   }
 }
@@ -50,13 +50,14 @@
 @media only screen and (max-width: 575px) {
   .sort {
     position: static;
+    min-width: unset;
 
     &__title {
       display: none;
     }
 
     &__body {
-      top: 40px;
+      top: 45px;
     }
 
     &__hide {

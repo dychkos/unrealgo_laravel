@@ -63,7 +63,7 @@
 	}
 	&__button{
 		display: flex;
-		justify-content: end;
+		justify-content: flex-end;
         color: #FFF;
 	}
 
@@ -97,6 +97,9 @@
 		&__name{
 			display: none;
 		}
+        &__button{
+            justify-content: center;
+        }
 
 	}
 }

@@ -8,7 +8,7 @@
                 <div class="order-history__empty empty">
                     <img src="{{asset("app/img/empty.png")}}" class="empty__image" alt="Empty">
                     <h3 class="empty__title h3">Ще не зробили жодного замовлення</h3>
-                    <a class="btn btn_primary h4" href="{{route("store.index")}}" style="color: #fff">
+                    <a class="btn btn_primary h6" href="{{route("store.index")}}" style="color: #fff">
                         Перейти до каталогу
                     </a>
                 </div>
@@ -85,7 +85,7 @@
                                 </div>
                             </div>
                             <div class="order-final__button {{$order->status->value == "waiting" ? "" : "d-none"}}">
-                                <a href="{{route("store.cancel-order", $order->id)}}" class="btn btn_danger h4">
+                                <a href="{{route("store.cancel-order", $order->id)}}" class="btn btn_danger h6">
                                     Скасувати замовлення
                                 </a>
                             </div>
@@ -294,9 +294,7 @@
 
 @once
     @push('js')
-        <script src="{{asset('app/js/Hider.js')}}"></script>
-        <script src="{{asset('app/js/main.js')}}"></script>
-        <script src="{{asset('app/js/orders.js')}}"></script>
+        <script src="{{ asset('app/js-min/orders.min.js?v=' . random_int(1000, 9999)) }}"></script>
     @endpush
 @endonce
 

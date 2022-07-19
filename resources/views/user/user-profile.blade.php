@@ -2,7 +2,7 @@
 
 @section('content')
     <script>
-        let urlDelete = "{{route("user.delete",$user->id )}}"
+        let urlDelete = "{{ route("user.delete",$user->id )}}"
     </script>
     <section class="user-profile">
         <div class="user-profile__title page-title h1">Інформація про користувача</div>
@@ -72,6 +72,7 @@
                                 id="edit-phone"
                                 value="{{$user->phone ?? ""}}"
                                 name="phone"
+                                placeholder="+38 (___) ___-__-__"
                                 class="{{$errors->has('phone') ? 'required' : '' }}"
                             />
                             @error("phone")
@@ -143,7 +144,7 @@
                 </div>
                 <div class="row">
                     <div class="user-profile__input-group coд">
-                        <button type="submit" class="user-profile__btn btn btn_primary h4">
+                        <button type="submit" class="user-profile__btn btn btn_primary h6">
                             Зберегти зміни
                         </button>
                     </div>
@@ -167,9 +168,6 @@
             }).showToast();
             @endif
         </script>
-        <script src="{{asset('app/js/Hider.js')}}"></script>
-        <script src="{{asset('app/js/main.js')}}"></script>
-        <script src="{{asset('app/js/libs/Modal.js')}}"></script>
-        <script src="{{asset('app/js/user-profile.js?' . random_int(0, 99999))}}"></script>
+        <script src="{{ asset('app/js-min/user-profile.min.js?v=' . random_int(1000, 9999)) }}"></script>
     @endpush
 @endonce

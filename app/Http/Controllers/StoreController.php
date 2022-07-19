@@ -14,14 +14,11 @@ use Illuminate\Validation\ValidationException;
 class StoreController extends Controller
 {
     private ProductService $productService;
-    private ApiNovaPoshtaService $apiNovaPoshtaService;
 
     public function __construct(
         ProductService $productService,
-        ApiNovaPoshtaService $apiNovaPoshtaService
     ) {
         $this->productService = $productService;
-        $this->apiNovaPoshtaService = $apiNovaPoshtaService;
     }
 
     public function index(Request $request) {
@@ -57,7 +54,11 @@ class StoreController extends Controller
             }
         }
 
-        if($query->paginate()->currentPage() == 1 && !isset($activeType)) {
+        if (
+            $query->paginate()->currentPage() == 1
+            && !isset($activeType)
+            && !$request->filled("order")
+        ) {
             $new = Product::orderBy("created_at")->limit(10)->get();
             $popular = Product::orderBy("created_at")->limit(10)->get();
         }
@@ -78,8 +79,6 @@ class StoreController extends Controller
 
     public function show (Request $request, $product_slug, $product_id) {
         $product = Product::find($product_id);
-
-        //Session::forget("cart");
         $cart = Session::get('cart');
         $inCart = $this->productService->checkInCart($cart, $product->id);
 
@@ -94,8 +93,6 @@ class StoreController extends Controller
         $cart = Session::get("cart");
         $totalPrice = 0;
         $cart && $totalPrice = $this->productService->getTotalProductPrice($cart);
-        //$this->apiNovaPoshtaService->getWarehouses();
-        //$cities = $this->apiNovaPoshtaService->getCities();
         return view('user.basket', compact("cart", "totalPrice"));
     }
 
@@ -123,7 +120,7 @@ class StoreController extends Controller
 
         try {
             $result = $this->productService->addToCart($cartData);
-        }catch (ValidationException $exception){
+        } catch (ValidationException $exception) {
             $message = $exception->getMessage();
             return $this->sendError($message, $exception->errors(), $exception->status);
         }
@@ -179,8 +176,5 @@ class StoreController extends Controller
 
         return redirect()->back();
     }
-
-
-
 
 }

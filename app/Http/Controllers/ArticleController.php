@@ -64,7 +64,10 @@ class ArticleController extends Controller
             case "popular":
                 $query->orderByDesc("views");
                 break;
-            case "date":
+            case "date-new":
+                $query->orderByDesc("created_at");
+                break;
+            case "date-old":
                 $query->orderBy("created_at");
                 break;
             default:

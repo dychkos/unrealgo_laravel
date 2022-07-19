@@ -16,6 +16,10 @@ class SizeSeeder extends Seeder
     public function run()
     {
         DB::table('sizes')->insert([
+            'value' => "NO_SIZE",
+        ]);
+
+        DB::table('sizes')->insert([
             'value' => "XS",
         ]);
 
@@ -33,6 +37,30 @@ class SizeSeeder extends Seeder
 
         DB::table('sizes')->insert([
             'value' => "L",
+        ]);
+
+        DB::table('sizes')->insert([
+            'value' => "39",
+        ]);
+
+        DB::table('sizes')->insert([
+            'value' => "40",
+        ]);
+
+        DB::table('sizes')->insert([
+            'value' => "41",
+        ]);
+
+        DB::table('sizes')->insert([
+            'value' => "42",
+        ]);
+
+        DB::table('sizes')->insert([
+            'value' => "43",
+        ]);
+
+        DB::table('sizes')->insert([
+            'value' => "44",
         ]);
     }
 }

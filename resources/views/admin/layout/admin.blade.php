@@ -13,11 +13,13 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.css" integrity="sha512-5m1IeUDKtuFGvfgz32VVD0Jd/ySGX7xdLxhqemTmThxHdgqlgPdupWoSN8ThtUSLpAGBvA8DY2oO7jJCrGdxoA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{asset('app/libs/libs.min.css?v=' . random_int(1000, 9999)) }}">
     <link rel="stylesheet" href="{{asset('app/css-min/main.min.css?v='. random_int(1000, 9999)) }}">
 
     <script src="{{asset('app/libs/libs.min.js')}}"></script>
-    <title>UnReal GO | Admin Panel </title>
+
+    <title>UnReal GO | Admin Panel</title>
 
     <style>
         body {
@@ -42,7 +44,7 @@
             @foreach($activeModels as $model => $value)
                 <a href="{{ route('user.admin.index', $model == 'articles' ? '' : $model) }}" class="admin-navbar__item {{$modelName === $model ? "active" : ""}}">
                 <span class="admin-navbar__image">
-                    <img src="{{ asset('app/img/'.$model.'.svg') }}" alt="Model">
+                    <img src="{{ asset('app/img/' . $model . '.svg') }}" alt="Model">
                 </span>
                     <span class="admin-navbar__title h4">
                         {{ $value }}
@@ -62,5 +64,7 @@
 </main>
 
 </body>
+
 @stack('js')
+
 </html>

@@ -13,8 +13,8 @@
                     <div class="big-article__title h3">
                         {{$article->title}}
                     </div>
-                    <div class="big-article__info d-flex">
-                        <div class="big-article__info-item with-icon col-5 col-sm-3 order-1 ">
+                    <div class="big-article__info">
+                        <div class="big-article__info-item with-icon short-info-1">
                             <div class="with-icon__icon">
                                 <svg xmlns="http://www.w3.org/2000/svg"  width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                             </div>
@@ -25,10 +25,10 @@
                                }}
                             </div>
                         </div>
-                        <div class="big-article__info-item tag col-12 col-sm-3 order-0 order-sm-1">
+                        <div class="big-article__info-item tag">
                             {{ $article->category->value }}
                         </div>
-                        <div class="big-article__info-item with-icon col-5 col-sm-3 order-3">
+                        <div class="big-article__info-item with-icon short-info-2">
                             <div class="with-icon__icon pt-1">
                                 <svg width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M20.8246 12C20.8246 12 16.6705 18 11.5138 18C6.35703 18 2.20297 12 2.20297 12C2.20297 12 6.35703 6 11.5138 6C16.6705 6 20.8246 12 20.8246 12Z" stroke="#A5A815" stroke-width="2" stroke-miterlimit="10" stroke-linejoin="round"/>
@@ -42,12 +42,12 @@
                     </div>
                 </div>
                 <div class="big-article__body">
-                    <div class="big-article__content">
+                    <div class="big-article__content body-content">
                         {!! $article->body !!}
                     </div>
                     <div class="big-article__comments-block comments-block">
                         <div class="comments-block__header">
-                            <div class="comments-block__title h3">Коментарі</div>
+                            <h1 class="comments-block__title h1">Коментарі</h1>
                             <div class="comments-block__count with-icon">
                                 <div class="with-icon__icon">
                                     <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -190,7 +190,7 @@
                                 </div>
                                 @enderror
 
-                                <button class="add-comment__btn btn btn_primary h4">
+                                <button class="add-comment__btn btn btn_primary h6">
                                     Залишити коментар
                                 </button>
                             @endif
@@ -284,7 +284,7 @@
         <script>
             @if(session()->has('commentMsg'))
                 Toastify({
-                    text: "Відгук додано!",
+                    text: "Коментар додано!",
                     backgroundColor: "#04AA6D",
                     duration: 3000,
                     close: true,
@@ -292,12 +292,18 @@
                     position: "left",
                 }).showToast();
             @endif
+
+            @error('body')
+            Toastify({
+                text: "Ваш коментар занадто короткий!",
+                backgroundColor: "#A84F43",
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "left",
+            }).showToast();
+            @enderror
         </script>
-        <script src="{{asset('app/js/Hider.js')}}"></script>
-        <script src="{{asset('app/js/main.js')}}"></script>
-        <script src="{{asset('app/js/article.js')}}"></script>
-        <script src="{{asset('app/js/includes/likeProduct.js')}}"></script>
-        <script src="{{asset('app/js/libs/alert-custom.js')}}"></script>
-        <script src="{{asset('app/js/includes/likeComment.js')}}"></script>
+        <script src="{{ asset('app/js-min/article.min.js?v=' . random_int(1000, 9999)) }}"></script>
     @endpush
 @endonce

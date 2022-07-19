@@ -78,22 +78,3 @@
   }
 }
 
-@media only screen and (max-width: 575px) {
-  .sort {
-    position: static;
-    &__title {
-      display: none;
-    }
-    &__body {
-      top: 40px;
-    }
-    &__hide {
-      color: $primary;
-      margin-bottom: 12px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid;
-      display: block;
-    }
-  }
-}
-

@@ -133,12 +133,10 @@
             </div>
         </div>
         <div class="admin-row">
-            <div class="form-input">
+            <div class="form-input form-input_trix">
                 <label for="description">Опис</label>
-                <textarea
-                    class="{{ $errors->has('description') ? 'required' : '' }}"
-                    id="description" name="description"
-                    placeholder="Введіть текст" rows="4">{{ old('description', $product->description) }}</textarea>
+                <input id="html-description" type="hidden" name="description" value="{{ old('description', $product->description) }}">
+                <trix-editor input="html-description"></trix-editor>
                 @error("description")
                 <div class="required_alert">{{ $message }}</div>
                 @enderror
@@ -162,6 +160,5 @@
 
     </script>
 
-    <script src="{{asset('app/js/libs/Select.js')}}"></script>
-    <script src="{{asset('app/js/admin.js')}}"></script>
+    <script src="{{ asset('app/js-min/admin.min.js?v=' . random_int(1000, 9999)) }}"></script>
 @endpush

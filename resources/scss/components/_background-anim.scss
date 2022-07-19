@@ -54,4 +54,10 @@
   top:0;
   z-index:-33;
 }
+
+@media only screen and (max-width: 576px) {
+    .back-shapes img {
+        width: 4%;
+    }
+}
 //BACKGROUND STYLING ENDS

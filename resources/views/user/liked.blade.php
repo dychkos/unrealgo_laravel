@@ -8,15 +8,13 @@
                 @if($liked->count())
                     <div class="liked-page__header">
                         <div class="liked-page__price p">
-                            Додано товарів на суму: <span class="price">{{$summa}} UAH</span>
+                            Додано товарів на суму: <span class="price">{{ $summa }} UAH</span>
                         </div>
                         <div class="liked-page__actions">
-                            @if ( env('APP_ENV', '' ) == 'local' )
-                                <div class="liked-page__make-order btn btn_primary">
-                                    Оформити замовлення
-                                </div>
-                            @endif
-                            <a href="{{route("user.liked.clear")}}" class="liked-page__clear-liked link">
+{{--                            <div class="liked-page__make-order btn btn_primary">--}}
+{{--                                Оформити замовлення--}}
+{{--                            </div>--}}
+                            <a href="{{ route("user.liked.clear") }}" class="liked-page__make-order btn btn_primary">
                                 Очистити вподобання
                             </a>
                         </div>
@@ -43,7 +41,7 @@
                                 <div class="product__body">
                                     <div class="product__prices">
                                         <div class="product__price h3">{{$product->currentPrice()}} ₴</div>
-                                        @if(isset($product->offer))
+                                        @if(isset($product->offer) && $product->offer !== 0)
                                             <div class="product__discount h6">{{$product->price}}₴</div>
                                         @endif
                                     </div>
@@ -55,15 +53,15 @@
                         @empty
                             <div class="order-history__empty empty col-12">
                                 <img src="{{asset("app/img/empty.png")}}" class="empty__image" alt="Empty">
-                                <h3 class="empty__title h3">История заказов пустая</h3>
-                                <a href="{{route("store.index")}}" class="btn btn_primary h4">
+                                <h3 class="empty__title h3">Ви ще не вподобали жодного товару</h3>
+                                <a href="{{route("store.index")}}" class="btn btn_primary h6">
                                     Перейти до каталогу
                                 </a>
                             </div>
                         @endforelse
                     </div>
                     <div class="liked-page__recommended">
-                        <div class="liked-page__subtitle h3">Рекомендовані товари</div>
+                        <div class="liked-page__subtitle h2">Рекомендовані товари</div>
                         <div class="slider">
                             <div class="swiper recommended-swiper">
                                 <div class="swiper-wrapper">
@@ -122,10 +120,7 @@
 
 @once
     @push('js')
-        <script src="{{asset('app/js/Hider.js')}}"></script>
-        <script src="{{asset('app/js/main.js')}}"></script>
-        <script src="{{asset('app/js/liked.js')}}"></script>
-        <script src="{{asset('app/js/includes/likeProduct.js')}}"></script>
+        <script src="{{ asset('app/js-min/liked.min.js?v=' . random_int(1000, 9999)) }}"></script>
     @endpush
 @endonce
 

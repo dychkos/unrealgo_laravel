@@ -7,6 +7,7 @@
 		margin-bottom: 6px;
 	}
 	&__link{
+        margin-top: 10px;
 		color:$primary;
 		cursor: pointer;
 		&:hover{
@@ -17,8 +18,7 @@
 		max-width: 210px;
 		margin-left: auto;
 		.social__mail{
-			justify-content: start;
-			padding: 15px 15px 15px 25px;
+			justify-content: flex-start;
 		}
 		.social__item{
 			text-align: left;
@@ -42,7 +42,7 @@
 			}
 		}
         &__logo{
-            justify-content: end;
+            justify-content: flex-end;
             .logo{
                 &__image{
                     margin: 0 12px;

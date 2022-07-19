@@ -1,4 +1,4 @@
-@extends("admin.layout.admin")
+@extends('admin.layout.admin')
 
 @section('content')
 
@@ -90,14 +90,12 @@
             </div>
         </div>
         <div class="admin-row">
-            <div class="form-input">
+            <div class="form-input form-input_trix">
                 <label for="html-body">HTML</label>
-                <textarea
-                    class="{{$errors->has('body') ? 'required' : '' }}"
-                    id="html-body" name="body"
-                    placeholder="Введіть текст" rows="10">{{$article->body}}</textarea>
+                <input id="html-body" type="hidden" name="body" value="{{ old('body', $article->body) }}">
+                <trix-editor input="html-body"></trix-editor>
                 @error("body")
-                <div class="required_alert">{{$message}}</div>
+                <div class="required_alert">{{ $message }}</div>
                 @enderror
             </div>
         </div>
@@ -112,6 +110,5 @@
         let fileImage = @json($article->image ? $article->image->filename : '');
         document.querySelector('.file-input__files').innerHTML = `<span>${fileImage}</span>`
     </script>
-    <script src="{{asset('app/js/libs/Select.js')}}"></script>
-    <script src="{{asset('app/js/admin.js')}}"></script>
+    <script src="{{ asset('app/js-min/admin.min.js?v=' . random_int(1000, 9999)) }}"></script>
 @endpush

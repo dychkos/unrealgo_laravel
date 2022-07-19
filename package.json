@@ -11,6 +11,7 @@
     },
     "devDependencies": {
         "axios": "^0.25",
+        "eslint": "^8.20.0",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
@@ -19,6 +20,7 @@
         "sass-loader": "^12.1.0"
     },
     "dependencies": {
+        "autoprefixer": "10.4.5",
         "y18n": "^5.0.8"
     }
 }

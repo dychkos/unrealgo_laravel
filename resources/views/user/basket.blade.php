@@ -6,17 +6,17 @@
         <div class="basket__body card">
             <div class="row g-4">
                 <div class="{{empty($cart) ? "col-12" : "col-lg-8"}} ">
-                    <div class="basket__action-error required_alert mb-3" style="display: none">
-                    </div>
                     <div class="orders">
                         @if(!empty($cart))
                             @foreach($cart as $key => $item)
-                                <div class="order" data-item="{{$key}}">
+                                <div class="order" data-item="{{ $key }}">
                                     <div class="order__image">
                                         <img src="{{$item["product"]->images->first()
                                             ? asset($item["product"]->images->first()->filename)
                                             : asset("app/img/test.png")}}" alt="Product">
-                                        <div class="order__size h6">{{$item["product"]->sizes()->find($item["size_id"])->value}}</div>
+                                        @if($item["product"]->sizes()->find($item["size_id"])->value !== "NO_SIZE")
+                                            <div class="order__size h6">{{ $item["product"]->sizes()->find($item["size_id"])->value }}</div>
+                                        @endif
                                     </div>
                                     <div class="order__title h5">
                                         {{ $item["product"]->title }}
@@ -42,7 +42,7 @@
                             <div class="empty col-12">
                                 <img src="{{asset("app/img/empty.png")}}" class="empty__image" alt="Empty">
                                 <h3 class="empty__title h3">Уппс, кошик до сих пір пустий</h3>
-                                <a href="{{route("store.index")}}" class="btn btn_primary h4">
+                                <a href="{{route("store.index")}}" class="btn btn_primary h6">
                                     Перейти до каталогу
                                 </a>
                             </div>
@@ -75,7 +75,7 @@
                                     <input type="text" placeholder="Вкажіть ФІО" name="data_name">
                                 </div>
                                 <div class="order-form__input form-input">
-                                    <input type="text" placeholder="Номер телефону" name="phone">
+                                    <input type="text" placeholder="+38 (___) ___-__-__" name="phone">
                                 </div>
                                 <div class="order-form__input form-input">
                                     <input type="email" placeholder="Електрона пошта" name="email">
@@ -101,7 +101,7 @@
                             Заповніть всі рядки
                         </div>
                         <div class="make-order__footer">
-                            <button class="make-order__submit btn btn_primary h4">
+                            <button class="make-order__submit btn btn_primary h6">
                                 Підтвердити замовлення
                             </button>
                             <div class="make-order__loader" style="display: none">
@@ -126,11 +126,7 @@
 
 @once
     @push('js')
-        <script src="{{asset('app/js/Hider.js')}}"></script>
-        <script src="{{asset('app/js/main.js')}}"></script>
-        <script src="{{asset('app/js/libs/Select.js')}}"></script>
-        <script src="{{asset('app/js/libs/Modal.js')}}"></script>
-        <script src="{{asset('app/js/basket.js')}}"></script>
+        <script src="{{ asset('app/js-min/basket.min.js?v=' . random_int(1000, 9999)) }}"></script>
     @endpush
 @endonce
 
