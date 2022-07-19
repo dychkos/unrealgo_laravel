@@ -26,6 +26,7 @@ use App\Http\Controllers\admin;
 
 Route::get('/', [HomeController::class,'index'])->name("home");
 
+
 Route::get('/articles/{category_slug}/{article_slug}',[ArticleController::class,'show'])->name("articles.show");
 Route::get('/articles/{category_slug?}',[ArticleController::class,'index'])->name("articles.index");
 Route::post('/articles/{id}/comment',[CommentController::class,'store'])->name("comment.store");
@@ -33,7 +34,6 @@ Route::post('/articles/{id}/comment',[CommentController::class,'store'])->name("
 //Search
 Route::post("/search", [HomeController::class, 'search'])->name("search");
 
-//Route::get('/store',[StoreController::class,'index'])->name("store.index");
 Route::get('/store/{type_slug?}',[StoreController::class,'index'])->name("store.index");
 Route::get('/store/{type_slug}/{id}',[StoreController::class,'show'])->name("store.show");
 
@@ -85,9 +85,6 @@ Route::name("user.")->prefix("user")->middleware("auth")->group(function(){
     Route::post('comment/like', [CommentController::class,'like'])->name('comment.like');
     Route::post('product/like',[StoreController::class, 'like'])->name("product.like");
     Route::get('liked/clear', [UserController::class,'clearLiked'])->name("liked.clear");
-
-
-
 });
 
 

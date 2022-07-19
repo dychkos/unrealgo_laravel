@@ -14,14 +14,11 @@ use Illuminate\Validation\ValidationException;
 class StoreController extends Controller
 {
     private ProductService $productService;
-    private ApiNovaPoshtaService $apiNovaPoshtaService;
 
     public function __construct(
         ProductService $productService,
-        ApiNovaPoshtaService $apiNovaPoshtaService
     ) {
         $this->productService = $productService;
-        $this->apiNovaPoshtaService = $apiNovaPoshtaService;
     }
 
     public function index(Request $request) {
@@ -96,8 +93,6 @@ class StoreController extends Controller
         $cart = Session::get("cart");
         $totalPrice = 0;
         $cart && $totalPrice = $this->productService->getTotalProductPrice($cart);
-        //$this->apiNovaPoshtaService->getWarehouses();
-        //$cities = $this->apiNovaPoshtaService->getCities();
         return view('user.basket', compact("cart", "totalPrice"));
     }
 
@@ -181,8 +176,5 @@ class StoreController extends Controller
 
         return redirect()->back();
     }
-
-
-
 
 }

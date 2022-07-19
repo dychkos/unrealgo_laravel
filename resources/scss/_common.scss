@@ -17,8 +17,8 @@ body{
 }
 
 .page-title{
-    padding-top: 20px;
-    padding-bottom: 30px;
+    padding-top: 28px;
+    padding-bottom: 20px;
 }
 
 .hide{
@@ -480,7 +480,9 @@ trix-editor {
 
 @media only screen and (max-width: 991px){
     .page-title{
-        padding-top: 10px;
+        padding-top: 18px;
+        padding-bottom: 12px;
+        text-align: center;
     }
 }
 

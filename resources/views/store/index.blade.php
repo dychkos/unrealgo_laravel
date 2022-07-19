@@ -91,9 +91,9 @@
     </div>
     @if(!empty($new))
         <section class="store-pr mt-2">
-            <div class="store-pr__title page-title h3">
+            <h2 class="store-pr__title page-title h2">
                 Нові надходження
-            </div>
+            </h2>
             <div class="store-pr__body">
                 <div class="slider">
                     <div class="swiper new-swiper">
@@ -147,9 +147,9 @@
     @endif
     @if(!empty($popular))
         <section class="store-pr mt-4">
-            <div class="store-pr__title page-title h3">
+            <h2 class="store-pr__title page-title h2">
                 Популярне
-            </div>
+            </h2>
             <div class="store-pr__body">
                 <div class="slider">
                     <div class="swiper popular-swiper">
@@ -204,9 +204,9 @@
         </section>
     @endif
     <section class="store-pr mt-2">
-        <div class="store-pr__title page-title h3">
+        <h2 class="store-pr__title page-title h2">
            {{!isset($activeType) ? "Всі товари" : $activeType->value }}
-        </div>
+        </h2>
         <div class="product-list">
             @foreach($products as $product)
                 <a href="{{route("store.show", [$product->type->slug, $product->id])}}" class="product-list__item product">

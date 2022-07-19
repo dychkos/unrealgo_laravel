@@ -47,7 +47,7 @@
                     </div>
                     <div class="big-article__comments-block comments-block">
                         <div class="comments-block__header">
-                            <div class="comments-block__title h3">Коментарі</div>
+                            <h1 class="comments-block__title h1">Коментарі</h1>
                             <div class="comments-block__count with-icon">
                                 <div class="with-icon__icon">
                                     <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">

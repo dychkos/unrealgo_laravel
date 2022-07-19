@@ -2,9 +2,9 @@
 
 @section("content")
     <section class="blog-pr">
-        <div class="blog-pr__title page-title h3">
-            Нові публікації
-        </div>
+        <h2 class="blog-pr__title page-title h2">
+            Рекомендовано
+        </h2>
         <div class="blog-pr__body">
             <div class="row g-5">
                 <div class="col-12 col-lg-6">
@@ -63,7 +63,7 @@
                 </div>
                 <div class="col-12 col-lg-6">
                     <div class="row g-3">
-                        <div class="h4">Рекомендовано</div>
+                        <div class="h4">Нові публікації</div>
                         @foreach($randomArticles as $article)
                         <div class="col-12 col-sm-6">
                             <div class="article">
@@ -90,9 +90,9 @@
         </div>
     </section>
     <section class="store-pr mt-4">
-        <div class="store-pr__title page-title h3">
+        <h2 class="store-pr__title page-title h2">
             Візьми в колекцію
-        </div>
+        </h2>
         <div class="store-pr__body">
             <div class="slider">
                 <div class="swiper mySwiper">

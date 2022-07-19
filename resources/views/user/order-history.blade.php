@@ -85,7 +85,7 @@
                                 </div>
                             </div>
                             <div class="order-final__button {{$order->status->value == "waiting" ? "" : "d-none"}}">
-                                <a href="{{route("store.cancel-order", $order->id)}}" class="btn btn_danger h4">
+                                <a href="{{route("store.cancel-order", $order->id)}}" class="btn btn_danger h6">
                                     Скасувати замовлення
                                 </a>
                             </div>

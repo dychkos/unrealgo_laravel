@@ -28,8 +28,7 @@ h1, .h1{
 h2, .h2{
 	font-size: 28px;
 	line-height: 42px;
-    letter-spacing: 0.10em;
-    font-family: Rubik-Light;
+    font-family: Rubik-Bold;
 
 }
 
@@ -142,13 +141,13 @@ p, .p {
 
   /* H4 Mobile */
   h6, .h6{
-    font-size: 14px;
+    font-size: 18px;
     line-height: 22px;
   }
 
-  /* Paragraph Desk */
+  /* Paragraph Mobile */
   p, .p {
-      font-size: 14px;
+      font-size: 16px;
       line-height:22px;
       font-family: Rubik-Regular;
   }
