@@ -2047,9 +2047,6 @@ select option, .select option {
 .search__input input::-moz-placeholder {
   color: #6B6B6B;
 }
-.search__input input:-ms-input-placeholder {
-  color: #6B6B6B;
-}
 .search__input input::placeholder {
   color: #6B6B6B;
 }
