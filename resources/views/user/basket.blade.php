@@ -73,7 +73,7 @@
                                     <input type="text" placeholder="Вкажіть ФІО" name="data_name">
                                 </div>
                                 <div class="order-form__input form-input">
-                                    <input type="text" placeholder="(000) 111-1111" name="phone">
+                                    <input type="text" placeholder="+38 (___) ___-__-__" name="phone">
                                 </div>
                                 <div class="order-form__input form-input">
                                     <input type="email" placeholder="Електрона пошта" name="email">

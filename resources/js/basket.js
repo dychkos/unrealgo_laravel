@@ -103,7 +103,7 @@ export default class Basket extends MainController {
 		});
 
 		let phoneInput = Basket.nodes.phoneInput;
-		phoneInput.addEventListener("input", (e) => { e.target.value = Mask.phoneNumber(e.target.value); });
+		phoneInput.addEventListener("input", Mask.phoneNumber);
 
 
 		$("#order_city_dropdown").select2({

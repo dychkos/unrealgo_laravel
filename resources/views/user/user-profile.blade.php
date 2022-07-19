@@ -72,6 +72,7 @@
                                 id="edit-phone"
                                 value="{{$user->phone ?? ""}}"
                                 name="phone"
+                                placeholder="+38 (___) ___-__-__"
                                 class="{{$errors->has('phone') ? 'required' : '' }}"
                             />
                             @error("phone")

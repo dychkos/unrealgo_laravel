@@ -1,12 +1,14 @@
 import Modal from "./includes/Modal";
 import Helper from "./includes/Helper";
 import MainController from "./main";
+import Mask from "./includes/Mask";
 
 export default class UserProfile extends MainController {
 	static nodes = {
 		editPhotoNode: document.querySelector("#edit-photo"),
 		photoPreview: document.querySelector("#photo-preview"),
-		removeUserBtn: document.querySelector("#open-modal")
+		removeUserBtn: document.querySelector("#open-modal"),
+		phoneInput : document.querySelector("input[name=\"phone\"]"),
 	};
 
 	static init() {
@@ -23,6 +25,9 @@ export default class UserProfile extends MainController {
 			.setDescription("<p class=\"p\" style=\"text-align: center\"> Ваш аккаунт буде повністю видалений із системи. </p>")
 			.setActionYES(this.deleteAccount)
 			.init();
+
+		let phoneInput = UserProfile.nodes.phoneInput;
+		phoneInput.addEventListener("input", Mask.phoneNumber);
 	}
 
 	static deleteAccount() {
