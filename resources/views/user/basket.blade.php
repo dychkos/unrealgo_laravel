@@ -14,7 +14,9 @@
                                         <img src="{{$item["product"]->images->first()
                                             ? asset($item["product"]->images->first()->filename)
                                             : asset("app/img/test.png")}}" alt="Product">
-                                        <div class="order__size h6">{{$item["product"]->sizes()->find($item["size_id"])->value}}</div>
+                                        @if($item["product"]->sizes()->find($item["size_id"])->value !== "NO_SIZE")
+                                            <div class="order__size h6">{{ $item["product"]->sizes()->find($item["size_id"])->value }}</div>
+                                        @endif
                                     </div>
                                     <div class="order__title h5">
                                         {{ $item["product"]->title }}

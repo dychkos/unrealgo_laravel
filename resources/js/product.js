@@ -58,13 +58,13 @@ export default class Product extends MainController {
 		addToCardBtn.addEventListener("click", () => {
 			let formData = new FormData();
 			let chosenSize = document.querySelector(".sizes__item_chosen");
-			let sizeId = chosenSize.dataset.size;
+			let sizeId = chosenSize ? chosenSize.dataset.size : -1;
 
 			if (addToCardBtn.classList.contains("product-page__make-order_ordered")){
 				return;
 			}
 
-			formData.append("size_id", sizeId );
+			formData.append("size_id", sizeId);
 			formData.append("product_id", productId);
 			formData.append("_token", csrfToken);
 

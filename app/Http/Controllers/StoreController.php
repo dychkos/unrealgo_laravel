@@ -83,11 +83,7 @@ class StoreController extends Controller
     public function show (Request $request, $product_slug, $product_id) {
         $product = Product::find($product_id);
         $cart = Session::get('cart');
-        $inCart = false;
-
-        if ($product) {
-            $inCart = $this->productService->checkInCart($cart, $product->id);
-        }
+        $inCart = $this->productService->checkInCart($cart, $product->id);
 
         return $this->withUser("store.show", array(
             'product' => $product,
@@ -129,7 +125,7 @@ class StoreController extends Controller
 
         try {
             $result = $this->productService->addToCart($cartData);
-        }catch (ValidationException $exception){
+        } catch (ValidationException $exception) {
             $message = $exception->getMessage();
             return $this->sendError($message, $exception->errors(), $exception->status);
         }

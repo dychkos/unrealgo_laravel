@@ -77,11 +77,14 @@ class ProductService
 
         $cart = Session::get("cart");
         $index = $this->findInCart($validated);
+        $sizeId = $validated["size_id"] == -1
+            ? Size::where("value", "NO_SIZE")->first()->id
+            : $validated["size_id"];
 
         if($index != -1) {
             $cart[$index] = array(
                 "product_id" => $validated["product_id"],
-                "size_id" => $validated["size_id"],
+                "size_id" => $sizeId,
                 "product" => $cart[$index]["product"],
                 "count" => $cart[$index]["count"] + 1
             );

@@ -68,6 +68,16 @@ class Product extends Model
         return $this->sizes()->find($size_id)->pivot->count > 0;
     }
 
+    public function firstAvailableSize(): int
+    {
+        foreach ($this->sizes as $size) {
+            if($size->pivot->count > 0) {
+                return $size->id;
+            }
+        }
+        return 0;
+    }
+
     public function isAvailable(): bool
     {
         $status = false;

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -9,7 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\admin;
 
 
 /*
@@ -23,9 +24,8 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::get('/',[HomeController::class,'index'])->name("home");
+Route::get('/', [HomeController::class,'index'])->name("home");
 
-//Route::get('/articles',[ArticleController::class,'index'])->name("articles.index");
 Route::get('/articles/{category_slug}/{article_slug}',[ArticleController::class,'show'])->name("articles.show");
 Route::get('/articles/{category_slug?}',[ArticleController::class,'index'])->name("articles.index");
 Route::post('/articles/{id}/comment',[CommentController::class,'store'])->name("comment.store");
@@ -39,7 +39,7 @@ Route::get('/store/{type_slug}/{id}',[StoreController::class,'show'])->name("sto
 
 //Store
 Route::post('/store/add-to-cart', [StoreController::class, "addToCart"])->name("store.toCart");
-Route::get('/store/clear-cart/{id}', [StoreController::class, "removeFromCart"])->name("basket.remove");
+Route::get('/clear-cart/{id}', [StoreController::class, "removeFromCart"])->name("basket.remove");
 Route::get('/basket', [StoreController::class,'basket'])->name("basket");
 Route::post('/basket/count', [StoreController::class, "editCount"])->name("basket.count");
 Route::post('/make-order', [StoreController::class, "makeOrder"])->name("store.order");
@@ -57,8 +57,6 @@ Route::get('/user/order-history',[UserController::class,'orderHistory'])->name("
 /* API */
 Route::post('/get-cities', [ApiController::class, 'getCitites'])->name("api.cities");
 Route::post('/get-warehouses', [ApiController::class, 'getWarehouses'])->name("api.warehouses");
-
-
 
 
 Route::middleware("guest")->group(function(){
@@ -101,43 +99,36 @@ Route::name('user.')->prefix('user')->middleware('auth')->group(function(){
         Route::get("search/{modelName}", [AdminController::class, "search"])->name("search");
 
         /* Articles */
-        Route::get("article/create", [AdminController::class, "createArticle"])->name("articles.create");
-        Route::get("article/edit/{id}", [AdminController::class, "editArticle"])->name("articles.edit");
-        Route::get("remove/article/{id}", [AdminController::class, "deleteArticle"])->name("articles.remove");
-        Route::post("article", [AdminController::class,"storeArticle"])->name("articles.store");
-        Route::post("article/{id}", [AdminController::class,"updateArticle"])->name("articles.update");
+        Route::get("article/create", [admin\ArticleController::class, "createArticle"])->name("articles.create");
+        Route::get("article/edit/{id}", [admin\ArticleController::class, "editArticle"])->name("articles.edit");
+        Route::get("remove/article/{id}", [admin\ArticleController::class, "deleteArticle"])->name("articles.remove");
+        Route::post("article", [admin\ArticleController::class,"storeArticle"])->name("articles.store");
+        Route::post("article/{id}", [admin\ArticleController::class,"updateArticle"])->name("articles.update");
 
         /* Products */
-        Route::get("product/create", [AdminController::class, "createProduct"])->name("products.create");
-        Route::get("product/edit/{id}", [AdminController::class, "editProduct"])->name("products.edit");
-        Route::get("remove/product/{id}", [AdminController::class, "deleteProduct"])->name("products.remove");
-        Route::post("product", [AdminController::class,"storeProduct"])->name("products.store");
-        Route::post("product/{id}", [AdminController::class,"updateProduct"])->name("products.update");
+        Route::get("product/create", [admin\StoreController::class, "createProduct"])->name("products.create");
+        Route::get("product/edit/{id}", [admin\StoreController::class, "editProduct"])->name("products.edit");
+        Route::get("remove/product/{id}", [admin\StoreController::class, "deleteProduct"])->name("products.remove");
+        Route::post("product", [admin\StoreController::class,"storeProduct"])->name("products.store");
+        Route::post("product/{id}", [admin\StoreController::class,"updateProduct"])->name("products.update");
 
         /* Orders */
-        Route::get("orders/edit/{id}", [AdminController::class, "editOrder"])->name("orders.edit");
-        Route::post("orders/{id}", [AdminController::class, "updateOrder"])->name("orders.update");
+        Route::get("orders/edit/{id}", [admin\OrderController::class, "editOrder"])->name("orders.edit");
+        Route::post("orders/{id}", [admin\OrderController::class, "updateOrder"])->name("orders.update");
+        Route::get("remove/order/{id}", [admin\OrderController::class,"cancelOrder"])->name("order.cancel");
 
         /* Users */
-        Route::get("users/edit/{id}", [AdminController::class, "editUser"])->name("users.edit");
-        Route::post("users/{id}", [AdminController::class, "updateUser"])->name("users.update");
-        Route::get("users/{id}/toggle-status", [AdminController::class, "toggleUserStatus"])->name("users.toggle");
+        Route::get("users/edit/{id}", [admin\UserController::class, "editUser"])->name("users.edit");
+        Route::post("users/{id}", [admin\UserController::class, "updateUser"])->name("users.update");
+        Route::get("users/{id}/toggle-status", [admin\UserController::class, "toggleUserStatus"])->name("users.toggle");
+        Route::get("remove/user/{id}", [admin\UserController::class,"deleteUser"])->name("user.remove");
 
         /* Comments */
-        Route::get("comments/edit/{id}", [AdminController::class, "editComment"])->name("comments.edit");
-        Route::post("comments/{id}", [AdminController::class, "updateComment"])->name("comments.update");
-        Route::get("comments/{id}/toggle-status", [AdminController::class, "toggleCommentStatus"])->name("comments.toggle");
-        Route::get("remove/comment/{id}", [AdminController::class,"deleteComment"])->name("comments.remove");
+        Route::get("comments/edit/{id}", [admin\CommentController::class, "editComment"])->name("comments.edit");
+        Route::post("comments/{id}", [admin\CommentController::class, "updateComment"])->name("comments.update");
+        Route::get("comments/{id}/toggle-status", [admin\CommentController::class, "toggleCommentStatus"])->name("comments.toggle");
+        Route::get("remove/comment/{id}", [admin\CommentController::class,"deleteComment"])->name("comments.remove");
 
-        Route::get("remove/user/{id}", [AdminController::class,"deleteUser"])->name("user.remove");
-        Route::get("remove/order/{id}", [AdminController::class,"cancelOrder"])->name("order.cancel");
-
-
-        Route::post("features", [AdminController::class,"storeFeatures"])->name("features.store");
-        Route::post("houses", [AdminController::class,"updateHouses"])->name("houses.update");
-
-        Route::delete("features", [AdminController::class,"deleteFeatures"])->name("features.delete");
-        Route::delete("comments", [AdminController::class,"deleteComments"])->name("comments.delete");
     });
 });
 

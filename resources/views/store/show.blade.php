@@ -1,6 +1,6 @@
 @extends('layouts.base')
 @php
-    $withoutSize = $product->sizes()->where("value", "one")->exists();
+    $withoutSize = $product->sizes()->where("value", "NO_SIZE")->exists();
 @endphp
 @section('content')
     <div class="product-page pt-4">
@@ -16,11 +16,9 @@
                             </div>
                             @if($product->images()->get()->count() > 1)
                                 @foreach($product->images as $image)
-                                    @if($loop->index > 1)
                                     <div class="photos__slide">
                                         <img src="{{asset($image->filename)}}" data-photo alt="Product">
                                     </div>
-                                    @endif
                                 @endforeach
                             @endif
                         </div>
@@ -46,9 +44,10 @@
                               Виберіть розмір:
                           </span>
                             <div class="sizes__block">
+                                @php $chosen = false @endphp
                                 @foreach($product->sizes as $size)
                                     <div class="sizes__item
-                                    {{ $loop->index === 0 ? "sizes__item_chosen" : "" }}
+                                    {{ $product->firstAvailableSize() == $size->id ? "sizes__item_chosen" : "" }}
                                     {{ $product->isSizeAvailable($size->id) ? "" : "sizes__item_none" }}"
                                          data-size="{{ $size->id }}">
                                         {{ $size->value }}
