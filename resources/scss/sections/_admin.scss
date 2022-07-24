@@ -264,7 +264,10 @@
         }
         &-content {
             &__header {
-                grid-template-columns: 30% 70%;
+                grid-template-columns: 100%;
+            }
+            &__title {
+                display: none;
             }
         }
         &-row {

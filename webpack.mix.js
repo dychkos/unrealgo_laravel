@@ -14,6 +14,7 @@ mix.sass("resources/scss/main.scss", "app/css-min/main.min.css");
 
 /* JS */
 mix.js("resources/js/main.js", "public/app/js-min/main.min.js");
+mix.js("resources/js/default.js", "public/app/js-min/default.min.js");
 mix.js("resources/js/admin.js", "public/app/js-min/admin.min.js");
 mix.js("resources/js/article.js", "public/app/js-min/article.min.js");
 mix.js("resources/js/auth.js", "public/app/js-min/auth.min.js");

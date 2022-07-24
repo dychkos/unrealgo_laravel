@@ -3,7 +3,7 @@
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\UserController;
@@ -24,7 +24,8 @@ use App\Http\Controllers\admin;
 |
 */
 
-Route::get('/', [HomeController::class,'index'])->name("home");
+Route::get('/', [PageController::class,'home'])->name("home");
+Route::get('/about', [PageController::class,'about'])->name("about");
 
 
 Route::get('/articles/{category_slug}/{article_slug}',[ArticleController::class,'show'])->name("articles.show");
@@ -32,7 +33,7 @@ Route::get('/articles/{category_slug?}',[ArticleController::class,'index'])->nam
 Route::post('/articles/{id}/comment',[CommentController::class,'store'])->name("comment.store");
 
 //Search
-Route::post("/search", [HomeController::class, 'search'])->name("search");
+Route::post("/search", [PageController::class, 'search'])->name("search");
 
 Route::get('/store/{type_slug?}',[StoreController::class,'index'])->name("store.index");
 Route::get('/store/{type_slug}/{id}',[StoreController::class,'show'])->name("store.show");

@@ -37,33 +37,36 @@ class UserController extends Controller
         return view('user.liked', compact("liked", "summa", "user", "recommended"));
     }
 
+    public function orderHistory(Request $request)
+    {
+        $user = Auth::user();
+        $orders = Order::where("user_id", $user->id)->orderByDesc("created_at")->get();
+
+        $waiting =  Order::where("user_id", $user->id)
+            ->where("order_status_id", [1, 2, 3])
+            ->orderByDesc("created_at")
+            ->get();
+
+        $ready =  Order::where("user_id", $user->id)
+            ->where("order_status_id", [4])
+            ->orderByDesc("created_at")
+            ->get();
+
+        $canceled =  Order::where("user_id", $user->id)
+            ->where("order_status_id", [5])
+            ->orderByDesc("created_at")
+            ->get();
+
+
+        return view('user.order-history', compact("orders","waiting", "ready", "canceled"));
+    }
+
     public function clearLiked(UserService $userService, Request $request): \Illuminate\Http\RedirectResponse
     {
         $user = Auth::user();
         $userService->clearLiked($user->id);
 
         return redirect()->back();
-    }
-
-    public function orderHistory(Request $request)
-    {
-        $user = Auth::user();
-        $orders = Order::where("user_id", $user->id)->get();
-
-        $waiting =  Order::where("user_id", $user->id)
-            ->where("order_status_id", [1, 2, 3])
-            ->get();
-
-        $ready =  Order::where("user_id", $user->id)
-            ->where("order_status_id", [4])
-            ->get();
-
-        $canceled =  Order::where("user_id", $user->id)
-            ->where("order_status_id", [5])
-            ->get();
-
-
-        return view('user.order-history', compact("orders","waiting", "ready", "canceled"));
     }
 
 

@@ -65,6 +65,14 @@ class MainService
         };
     }
 
+    public function getStatistics() {
+        return array(
+            'articles-count' => Article::all()->count(),
+            'user-count' => User::all()->count(),
+            'order-count' => Order::all()->count(),
+        );
+    }
+
 
 
 }
