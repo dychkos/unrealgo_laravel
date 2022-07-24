@@ -9,18 +9,13 @@
                 <div class="photos">
                     <div class="photos__previews" id="photosSwiper">
                         <div id="swiper-wrapper" >
-                            <div class="photos__slide">
-                                <img src="{{$product->images->first() !== null
-                                ? asset($product->images->first()->filename)
-                                : asset('app/img/test.png')}}" data-photo class="photos__previews_chosen" alt="Product">
-                            </div>
-                            @if($product->images()->get()->count() > 1)
-                                @foreach($product->images as $image)
-                                    <div class="photos__slide">
-                                        <img src="{{asset($image->filename)}}" data-photo alt="Product">
-                                    </div>
-                                @endforeach
-                            @endif
+                            @forelse($product->images as $image)
+                                <div class="photos__slide">
+                                    <img src="{{ asset($image->filename )}}" {{$loop->index == 1 ? "photos__previews_chosen" : "" }} data-photo alt="Product">
+                                </div>
+                            @empty
+                                <img src="{{ asset('app/img/test.png' )}}" data-photo class="photos__previews_chosen" alt="Product">
+                            @endforelse
                         </div>
                         <div class="swiper-pagination"></div>
                     </div>
@@ -30,7 +25,6 @@
                                 : asset('app/img/test.png')}}"
                              data-photo
                              id="main-photo"
-                             class="photos__previews_chosen"
                              alt="Product">
                     </div>
                 </div>

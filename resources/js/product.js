@@ -27,7 +27,7 @@ export default class Product extends MainController {
 
 
 		if (window.matchMedia("(max-width: 768px)").matches) {
-			Product.nodes.swiperWrapper.append(Product.nodes.bigPhoto);
+			Product.nodes.bigPhoto.style.display = "none";
 
 			Product.nodes.swiperWrapper.classList.add("swiper-wrapper");
 			Product.nodes.swiperSlides.forEach(swipe => {
@@ -41,6 +41,13 @@ export default class Product extends MainController {
 				pagination: {
 					el: ".swiper-pagination",
 				},
+			});
+		} else {
+			Product.nodes.swiperSlides.forEach(photo => {
+				photo.addEventListener("click", () => {
+					this.clearActive(document.querySelectorAll(".photos__slide img"),"photos__previews_chosen");
+					photo.querySelector("img").classList.add("photos__previews_chosen");
+				});
 			});
 		}
 
