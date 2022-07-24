@@ -8,7 +8,7 @@ use App\Services\MainService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-class HomeController extends Controller
+class PageController extends Controller
 {
     protected MainService $mainService;
 
@@ -17,7 +17,7 @@ class HomeController extends Controller
         $this->mainService = $mainService;
     }
 
-    public function index(Request $request){
+    public function home(Request $request){
 
         $popular = Article::orderByDesc("views")->first();
         $randomArticles = Article::inRandomOrder()->limit(2)->get();
@@ -28,6 +28,13 @@ class HomeController extends Controller
             "randomArticles" => $randomArticles,
             "popularProducts" => $popularProducts,
         ));
+    }
+
+    public function about(Request $request)
+    {
+        $statistics = $this->mainService->getStatistics();
+
+        return view('about.index', ["statistics" => $statistics]);
     }
 
     public function search(Request $request): \Illuminate\Http\JsonResponse
