@@ -75,9 +75,13 @@ class ProductService
             "count" => ["required", "integer"]
         ])->validate();
 
+        if (intval($validated["size_id"]) === -1) {
+            $validated['size_id'] = Size::where("value", "NO_SIZE")->first()->id;
+        }
+
         $cart = Session::get("cart");
         $index = $this->findInCart($validated);
-        $sizeId = $validated["size_id"] == -1
+        $sizeId = intval($validated["size_id"]) === -1
             ? Size::where("value", "NO_SIZE")->first()->id
             : $validated["size_id"];
 
@@ -90,7 +94,6 @@ class ProductService
             );
 
             Session::put("cart", $cart);
-
             return true;
         }
 
