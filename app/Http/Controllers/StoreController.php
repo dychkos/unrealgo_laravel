@@ -132,7 +132,7 @@ class StoreController extends Controller
     public function editCount(Request $request) {
         try {
             $result = $this->productService->editCount($request->all());
-        }catch (ValidationException $exception){
+        } catch (ValidationException $exception){
             $message = $exception->getMessage();
             return $this->sendError($message, $exception->errors(), $exception->status);
         }

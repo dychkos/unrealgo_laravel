@@ -1,5 +1,6 @@
 {
     "/app/js-min/main.min.js": "/app/js-min/main.min.js",
+    "/app/js-min/default.min.js": "/app/js-min/default.min.js",
     "/app/js-min/admin.min.js": "/app/js-min/admin.min.js",
     "/app/js-min/article.min.js": "/app/js-min/article.min.js",
     "/app/js-min/auth.min.js": "/app/js-min/auth.min.js",
