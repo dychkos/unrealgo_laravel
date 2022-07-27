@@ -19,7 +19,9 @@ class CommentRepository
     {
         return match (true) {
             isset($commentData['article_id']) => Article::find($commentData['article_id'])->comments()->create($commentData),
-            isset($commentData['product_id']) => Product::find($commentData['product_id'])->comments()->create($commentData),
+            isset($commentData['product_id']) => Product::find($commentData['product_id'])->comments()->create(
+                array_merge($commentData, ['status' => 1])
+            ),
             default => null,
         };
 

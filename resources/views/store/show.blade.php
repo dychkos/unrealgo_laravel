@@ -134,7 +134,7 @@
                                 {{ session()->get('banned') }}
                             </div>
                         @endif
-                        @foreach($product->comments()->whereNull("answered_to")->get() as $comment)
+                        @foreach($product->comments()->whereNull("answered_to")->orderByDesc("created_at")->get() as $comment)
                             <div class="comment">
                                 <div class="comment__header with-icon">
                                     <div class="comment__header-icon with-icon__icon">
@@ -146,7 +146,7 @@
                                     </div>
                                     <div class="with-icon__body d-flex flex-column flex-column">
                                         <div class="h6">{{$comment->user->name}}</div>
-                                        <div class="p-light">{{$comment->user->created_at->diffForHumans()}}</div>
+                                        <div class="p-light">{{ $comment->created_at->diffForHumans() }}</div>
                                     </div>
                                 </div>
 
@@ -179,7 +179,7 @@
                                                 </div>
                                                 <div class="with-icon__body d-flex flex-column">
                                                     <div class="h6">{{$answer->user->name}}</div>
-                                                    <div class="p-light">{{$comment->user->created_at->diffForHumans()}}</div>
+                                                    <div class="p-light">{{$comment->created_at->diffForHumans()}}</div>
                                                 </div>
                                             </div>
                                             <div class="comment__text p">
