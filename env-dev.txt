@@ -15,7 +15,7 @@ DB_DATABASE=unrealgo_dev
 DB_USERNAME=unrealgo_admin
 DB_PASSWORD=5901b63_F
 
-GOOGLE_CLIENT_ID=130636137478-fujtpfklccgonjdfabdpjvjm9egvhf14.apps.googleusercontent.com
+GOOGLE_CLIENT_ID=130636137478-1a83i96nh6rc2ekv0s933323bsvhgcds.apps.googleusercontent.com
 GOOGLE_CLIENT_SECRET=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
 
 FACEBOOK_CLIENT_ID=3154158468140996
