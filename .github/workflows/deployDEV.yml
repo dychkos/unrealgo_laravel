@@ -30,7 +30,7 @@ jobs:
         username: ${{secrets.FTP_USERNAME}}
         password: ${{secrets.FTP_PASSWORD}}
     - name: Creating public link
-    - run: ln -s /home2/unrealgo/dev.unreal-go.top/app/public /home2/unrealgo/dev.unreal-go.top/
+      run: ln -s /home2/unrealgo/dev.unreal-go.top/app/public /home2/unrealgo/dev.unreal-go.top/
 
     
     
