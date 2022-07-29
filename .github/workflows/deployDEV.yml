@@ -16,7 +16,7 @@ jobs:
         fetch-depth: 2
     - uses: actions/checkout@v3
     - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.staging', '.env');"
+      run: php -r "file_exists('.env') || copy('.env.dev', '.env');"
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     - name: Generate key

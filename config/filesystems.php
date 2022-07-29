@@ -67,8 +67,8 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
-        public_path('images') => storage_path('app/images'),
+        "/home2/unrealgo/dev.unreal-go.top/storage/" => storage_path('app/public'),
+        "/home2/unrealgo/dev.unreal-go.top/images/"  => storage_path('app/images'),
     ],
 
 ];
