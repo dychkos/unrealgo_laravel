@@ -92,7 +92,6 @@ Route::name("user.")->prefix("user")->middleware("auth")->group(function(){
 /* ADMIN ROLE  */
 Route::name('user.')->prefix('user')->middleware('auth')->group(function(){
     Route::name('admin.')->prefix('admin')->middleware('admin_role')->group(function(){
-        Route::get("", [AdminController::class,"index"])->name("index");
         Route::get("{modelName?}", [AdminController::class,"index"])->name("index");
         Route::get("search/{modelName}", [AdminController::class, "search"])->name("search");
 
