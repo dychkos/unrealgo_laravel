@@ -47,7 +47,7 @@ jobs:
           **/.git*/**
           **/node_modules/**
           **/public/ 
-      
+          **/vendor/**      
            
     - name: Ftp-deploy PUBLIC
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
