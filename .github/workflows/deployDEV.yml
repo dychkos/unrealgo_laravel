@@ -31,7 +31,7 @@ jobs:
         password: ${{secrets.FTP_PASSWORD}}
         server-dir: "/home2/unrealgo/projects/dev"
     - name: Configure Public folder
-    - run: mv -v /home2/unrealgo/projects/dev/public/* /home2/unrealgo/dev.unreal-go.top
+      run: mv -v /home2/unrealgo/projects/dev/public/* /home2/unrealgo/dev.unreal-go.top
 
 
 
