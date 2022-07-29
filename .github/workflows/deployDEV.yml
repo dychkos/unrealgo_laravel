@@ -20,11 +20,10 @@ jobs:
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
       
-    - name: Use Node.js 14
+    - name: Use Node.js 16
       uses: actions/setup-node@v2
       with:
-       node-version: '14'
-      
+       node-version: 'v16.10.0'      
     - name: 🔨 Build Project
       run: |
         npm install
@@ -35,6 +34,19 @@ jobs:
       
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
+      
+    - name: Ftp-deploy RES
+      uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      with:
+        server: ${{secrets.FTP_SERVER}}
+        username: ${{secrets.FTP_USERNAME}}
+        password: ${{secrets.FTP_PASSWORD}}
+        server-dir: "/home2/unrealgo/projects/dev/"
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          **/public/ 
       
            
     - name: Ftp-deploy PUBLIC
