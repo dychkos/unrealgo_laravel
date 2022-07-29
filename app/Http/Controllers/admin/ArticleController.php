@@ -29,7 +29,7 @@ class ArticleController extends AdminController
         $categories = Category::all();
 
         return $this->proccessView('admin.articles.create', array(
-            "allowSorts" => $categories
+            "categories" => $categories
         ));
     }
 
@@ -71,7 +71,7 @@ class ArticleController extends AdminController
         $image_url = [];
 
         if($file = $request->file('image')) {
-            $image_url = Helper::upload_image(array($file));
+            $image_url = Helper::upload_image(array($file), Article::find($article_id));
         }
 
         $processed = ControllerHelper::addOnlyExists($request->all());
