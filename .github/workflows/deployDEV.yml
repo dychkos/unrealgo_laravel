@@ -17,7 +17,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Configure Public folder
-      run: ls -l ~
+      run: mv -v /public/* /home2/unrealgo/dev.unreal-go.top
 
 
 
