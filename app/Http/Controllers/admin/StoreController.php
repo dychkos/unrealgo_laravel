@@ -83,7 +83,7 @@ class StoreController extends AdminController
 
         if($files = $request->file('image'))
         {
-            $images = Helper::upload_image($files);
+            $images = Helper::upload_image($files, Product::find($product_id));
         }
 
         $processed = ControllerHelper::addOnlyExists($request->all());

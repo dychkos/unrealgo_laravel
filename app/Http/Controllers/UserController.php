@@ -75,7 +75,7 @@ class UserController extends Controller
         $image_url = [];
 
         if($file = $request->file('image')) {
-            $image_url = Helper::upload_image(array($file));
+            $image_url = Helper::upload_image(array($file), Auth::user());
         }
 
         $processed = ControllerHelper::addOnlyExists($request->all());
