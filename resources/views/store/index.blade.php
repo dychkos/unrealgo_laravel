@@ -116,7 +116,7 @@
                                         <div class="product__body">
                                             <div class="product__prices">
                                                 <div class="product__price h3">{{$product->currentPrice()}} ₴</div>
-                                                @if(isset($product->offer) && $product->offer !== 0)
+                                                @if(isset($product->offer) && $product->offer > 0)
                                                     <div class="product__discount h6">{{$product->price}}₴</div>
                                                 @endif
                                             </div>
@@ -174,7 +174,7 @@
                                         <div class="product__body">
                                             <div class="product__prices">
                                                 <div class="product__price h3">{{$product->currentPrice()}} ₴</div>
-                                                @if(isset($product->offer) && $product->offer !== 0)
+                                                @if(isset($product->offer) && $product->offer > 0)
                                                     <div class="product__discount h6">{{$product->price}} ₴</div>
                                                 @endif
                                             </div>
@@ -227,7 +227,7 @@
                     <div class="product__body">
                         <div class="product__prices">
                             <div class="product__price h3">{{$product->currentPrice()}} ₴</div>
-                            @if(isset($product->offer) && $product->offer !== 0)
+                            @if(isset($product->offer) && $product->offer > 0)
                                 <div class="product__discount h6">{{$product->price}}₴</div>
                             @endif
                         </div>
