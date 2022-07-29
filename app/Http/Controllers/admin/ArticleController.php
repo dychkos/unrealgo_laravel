@@ -29,7 +29,7 @@ class ArticleController extends AdminController
         $categories = Category::all();
 
         return $this->proccessView('admin.articles.create', array(
-            "allowSorts" => $categories
+            "categories" => $categories
         ));
     }
 

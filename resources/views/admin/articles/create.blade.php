@@ -36,7 +36,7 @@
                     @enderror
                     <label for="category">Виберіть категорію :</label>
                     <select name="category_id" id="category" class="select" class="{{ $errors->has('category') ? 'required' : '' }}">
-                        @foreach($categories as $category)
+                        @foreach( $categories as $category )
                             <option value="{{ $category->id }}">{{ $category->value }}</option>
                         @endforeach
                     </select>
@@ -83,7 +83,7 @@
         <div class="admin-row">
             <div class="form-input">
                 <label for="html-body">HTML</label>
-                <input id="html-body" type="hidden" name="body" value="{{ old('body', $article->body) }}">
+                <input id="html-body" type="hidden" name="body" value="{{ old('body') }}">
                 <trix-editor input="html-body"></trix-editor>
                 @error("body")
                 <div class="required_alert">{{ $message }}</div>
