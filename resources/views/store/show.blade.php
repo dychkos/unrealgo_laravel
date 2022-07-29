@@ -63,7 +63,7 @@
                     <h2 class="product-page__price h2">
                         {{$product->currentPrice()}} UAH
                     </h2>
-                    @if(isset($product->offer) && $product->offer !== 0)
+                    @if(isset($product->offer) && $product->offer > 0)
                         <div class="product__discount h6">{{$product->price}} UAH</div>
                     @endif
                     <div class="product-page__make-order {{$inCart ? "product-page__make-order_ordered" : ""}}" id="add_to_card">
