@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\ApiController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ArticleController;
@@ -127,5 +128,10 @@ Route::name('user.')->prefix('user')->middleware('auth')->group(function(){
         Route::get("remove/comment/{id}", [admin\CommentController::class,"deleteComment"])->name("comments.remove");
 
     });
+});
+
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+    echo "try now";
 });
 
