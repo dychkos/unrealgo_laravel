@@ -27,7 +27,7 @@ jobs:
     - name: 🔨 Build Project
       run: |
         npm install
-        npm run build
+        npm run prod
     
     - name: Generate key
       run: php artisan key:generate
