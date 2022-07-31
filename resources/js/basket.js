@@ -82,6 +82,7 @@ export default class Basket extends MainController {
 					} else {
 						response.json().then(
 							() => {
+								window.scrollTo({ top: 0, behavior: "smooth" });
 								Basket.modal
 									.setTitle("Успішно")
 									.setDescription(yesHTML)
