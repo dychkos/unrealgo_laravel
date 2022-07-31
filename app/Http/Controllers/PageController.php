@@ -20,12 +20,12 @@ class PageController extends Controller
     public function home(Request $request){
 
         $popular = Article::orderByDesc("views")->first();
-        $randomArticles = Article::inRandomOrder()->limit(2)->get();
+        $newArticles = Article::orderByDesc("created_at")->limit(2)->get();
         $popularProducts = Product::orderBy("created_at")->limit(10)->get();
 
         return $this->withUser('home.index', array(
             "popular" => $popular,
-            "randomArticles" => $randomArticles,
+            "newArticles" => $newArticles,
             "popularProducts" => $popularProducts,
         ));
     }

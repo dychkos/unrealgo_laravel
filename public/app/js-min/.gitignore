@@ -1,1 +1,4 @@
-/*min.js
+*
+!js-min/
+!.gitignore
+*.min.js

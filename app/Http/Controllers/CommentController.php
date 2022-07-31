@@ -23,7 +23,7 @@ class CommentController extends Controller
 
         $commentService->store($processed);
 
-        return redirect()->back()->with('commentMsg', 'Коментарій буде опубліковано після розляду адміністратора');
+        return redirect()->back()->with('commentMsg', 'Коментар буде опубліковано після розляду адміністратора');
 
     }
 

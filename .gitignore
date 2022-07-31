@@ -17,3 +17,4 @@ yarn-error.log
 main.min.css
 /.idea
 /.vscode
+/public/app/js-min/

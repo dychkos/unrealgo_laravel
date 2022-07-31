@@ -37,7 +37,7 @@
             <div class="navigation__body">
                 <div class="navigation__desktop navigation__item h5
                     {{ !isset($activeType) ? "navigation__active" : "" }}">
-                    <a href="{{ route('articles.index') }}">
+                    <a href="{{ route('store.index') }}">
                         Всі товари
                     </a>
                 </div>
