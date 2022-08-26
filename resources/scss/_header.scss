@@ -70,6 +70,7 @@
 	&__row{
 		display: flex;
 		justify-content: space-between;
+        height: 60px;
 		gap: 40px;
 	}
 	&__col{
@@ -85,7 +86,7 @@
 		display: flex;
 		align-items: center;
 		align-self: flex-start;
-		margin: 0 40px;
+		margin: 0 35px;
         a.link {
             margin-top: 12px;
         }

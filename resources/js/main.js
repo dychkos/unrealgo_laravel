@@ -97,13 +97,16 @@ export default class MainController {
 		let search = MainController.nodes.search;
 		let searchWrapper = MainController.nodes.searchWrapper;
 		search && search.addEventListener("click", () => {
+			window.innerWidth < 1199 && $("#hide-if-no-size").fadeOut(300);
+
 			MainController.nodes.btnBurger.classList.add("open");
 			MainController.nodes.btnBurger.setAttribute("action", "search");
 			$(".search").addClass("open");
 			if (MainController.isMobile) return;
-			searchWrapper.style.width = "320px";
+			searchWrapper.style.width = "220px";
 			let hider = new Hider("search__wrapper", () => {
 				$(".search").removeClass("open");
+				window.innerWidth < 1199 && $("#hide-if-no-size").fadeIn(500);
 				$(".burger").removeClass("open").attr("action", "");
 				$(".search__wrapper").css("width", "50px");
 				$(".search__results").hide();

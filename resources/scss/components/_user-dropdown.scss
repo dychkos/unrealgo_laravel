@@ -7,7 +7,9 @@
   margin: 24px 0;
   transition: all 0.3s ease-in-out;
   opacity: 0;
+  pointer-events: none;
   &.open{
+    pointer-events: all;
     opacity: 1;
     max-height: 50px;
   }

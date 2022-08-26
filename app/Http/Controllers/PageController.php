@@ -37,6 +37,11 @@ class PageController extends Controller
         return view('about.index', ["statistics" => $statistics]);
     }
 
+    public function marathon(Request $request)
+    {
+        return view('marathon.index');
+    }
+
     public function search(Request $request): \Illuminate\Http\JsonResponse
     {
         $search = $request->input("search_text");

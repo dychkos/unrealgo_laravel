@@ -26,6 +26,7 @@ use App\Http\Controllers\admin;
 
 Route::get('/', [PageController::class,'home'])->name("home");
 Route::get('/about', [PageController::class,'about'])->name("about");
+Route::get('/marathon', [PageController::class,'marathon'])->name("marathon");
 
 
 Route::get('/articles/{category_slug}/{article_slug}',[ArticleController::class,'show'])->name("articles.show");
