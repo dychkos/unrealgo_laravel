@@ -24,9 +24,10 @@ jobs:
       uses: actions/setup-node@v2
       with:
        node-version: 'v16.10.0'
-    - name: 🔨 Build Project
+    - name: 🔨 Install Dependecies
       run: npm install
-          npm run prod
+    - name: 🔨 Build Project
+    - run: npm run prod
 
     - name: Generate key
       run: php artisan key:generate
