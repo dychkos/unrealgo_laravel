@@ -62,7 +62,23 @@
                                 </div>
                             </div>
                         </div>
-                        @if ($article->comments()->where(['status' => 1])->first() == null)
+                    @if(session()->has('commentMsg'))
+                        <div class="alert success">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" viewBox="0 0 28 28" fill="#04AA6D"><path fill="#04AA6D" d="M6.65263 14.0304C6.29251 13.6703 6.29251 13.0864 6.65263 12.7263C7.01276 12.3662 7.59663 12.3662 7.95676 12.7263L11.6602 16.4297L19.438 8.65183C19.7981 8.29171 20.382 8.29171 20.7421 8.65183C21.1023 9.01195 21.1023 9.59583 20.7421 9.95596L12.3667 18.3314C11.9762 18.7219 11.343 18.7219 10.9525 18.3314L6.65263 14.0304Z"/><path clip-rule="evenodd" d="M14 1C6.8203 1 1 6.8203 1 14C1 21.1797 6.8203 27 14 27C21.1797 27 27 21.1797 27 14C27 6.8203 21.1797 1 14 1ZM3 14C3 7.92487 7.92487 3 14 3C20.0751 3 25 7.92487 25 14C25 20.0751 20.0751 25 14 25C7.92487 25 3 20.0751 3 14Z" fill="#04AA6D" fill-rule="evenodd"/></svg>
+                            {{ session()->get('commentMsg') }}
+                            <span class="closebtn success">×</span>
+                        </div>
+                    @endif
+
+                    @if(session()->has('banned'))
+                        <div class="alert warning">
+                            <i style="margin-right: 12px;" class="fa fa-warning"></i>
+                            {{ session()->get('banned') }}
+                            <span class="closebtn warning">×</span>
+                        </div>
+                    @endif
+
+                    @if ($article->comments()->where(['status' => 1])->first() == null)
                             <div class="comments-block__empty p">
                                 Коментарі відсутні. <a
                                     @if(\Illuminate\Support\Facades\Auth::check())
@@ -74,22 +90,6 @@
                             </div>
                         @else
                             <div class="comments-block__comments comments">
-                                @if(session()->has('commentMsg'))
-                                    <div class="alert info">
-                                        <span class="closebtn info">×</span>
-                                        <i style="margin-right: 12px;" class="fa fa-info-circle"></i>
-                                        {{ session()->get('commentMsg') }}
-                                    </div>
-                                @endif
-
-                                @if(session()->has('banned'))
-                                    <div class="alert warning">
-                                        <span class="closebtn warning">×</span>
-                                        <i style="margin-right: 12px;" class="fa fa-warning"></i>
-                                        {{ session()->get('banned') }}
-                                    </div>
-                                @endif
-
                                 @foreach ($article->comments()->whereNull("answered_to")->where(['status' => 1])->orderByDesc("created_at")->get() as $comment)
                                     <div class="comment">
                                         <div class="comment__header with-icon">
@@ -163,6 +163,7 @@
                             </div>
                         @endif
 
+
                         <form
                             class="comments-block__add-comment add-comment"
                             id="add-comment"
@@ -179,14 +180,15 @@
                                 <div class="add-comment__body form-input">
                                     <textarea
                                         placeholder="Введіть текст"
+                                        @class(["required" => $errors->has('body')])
                                         name="body"
                                         rows="4"></textarea>
                                 </div>
                                 @error("body")
                                 <div class="alert danger">
-                                    <span class="closebtn">×</span>
-                                    <i style="margin-right: 12px;" class="fa fa-exclamation"></i>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="-2 -3 24 24" preserveAspectRatio="xMinYMin" class="jam jam-triangle-danger"><path fill="#f44336" d="M12.8 1.613l6.701 11.161c.963 1.603.49 3.712-1.057 4.71a3.213 3.213 0 0 1-1.743.516H3.298C1.477 18 0 16.47 0 14.581c0-.639.173-1.264.498-1.807L7.2 1.613C8.162.01 10.196-.481 11.743.517c.428.276.79.651 1.057 1.096zm-2.22.839a1.077 1.077 0 0 0-1.514.365L2.365 13.98a1.17 1.17 0 0 0-.166.602c0 .63.492 1.14 1.1 1.14H16.7c.206 0 .407-.06.581-.172a1.164 1.164 0 0 0 .353-1.57L10.933 2.817a1.12 1.12 0 0 0-.352-.365zM10 14a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm0-9a1 1 0 0 1 1 1v4a1 1 0 0 1-2 0V6a1 1 0 0 1 1-1z"/></svg>
                                     {{ $message }}
+                                    <span class="closebtn">×</span>
                                 </div>
                                 @enderror
 
@@ -284,7 +286,7 @@
         <script>
             @if(session()->has('commentMsg'))
                 Toastify({
-                    text: "Коментар додано!",
+                    text: "Коментар на розгляді!",
                     backgroundColor: "#04AA6D",
                     duration: 3000,
                     close: true,

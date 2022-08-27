@@ -14,6 +14,7 @@ class CommentController extends AdminController
     public function __construct(MainService $mainService, CommentService $commentService)
     {
         parent::__construct($mainService);
+        $this->modelName = "comments";
         $this->commentService = $commentService;
     }
 
@@ -21,8 +22,8 @@ class CommentController extends AdminController
     {
         $comment = Comment::find($comment_id);
 
-        return view('admin.comments.index', array(
-                "comment" => $comment
+        return $this->proccessView('admin.comments.index', array(
+            "comment" => $comment
         ));
     }
 
