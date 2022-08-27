@@ -266,8 +266,8 @@ textarea{
     &:disabled,
     &[disabled]{
         color: white !important;
-        border-color: #d7d7d7 !important;
-        background-color: #d7d7d7 !important;
+        border-color:$light-gray !important;
+        background-color:$light-gray !important;
         box-shadow: none;
     }
 
@@ -474,13 +474,6 @@ trix-editor {
     min-height: 12em;
     background-color: $secondary;
     border-radius: 4px;
-}
-
-//Inserted body styling
-.body-content {
-    ul {
-        padding: 0 25px;
-    }
 }
 
 

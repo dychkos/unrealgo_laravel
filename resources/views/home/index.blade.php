@@ -64,7 +64,7 @@
                 <div class="col-12 col-lg-6">
                     <div class="row g-3">
                         <div class="h4">Нові публікації</div>
-                        @foreach($randomArticles as $article)
+                        @foreach($newArticles as $article)
                         <div class="col-12 col-sm-6">
                             <div class="article">
                                 <a href="{{route('articles.show', [$article->category->slug, $article->slug])}}">

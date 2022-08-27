@@ -61,18 +61,21 @@
                 </div>
                 <div class="product-page__main">
                     <h2 class="product-page__price h2">
-                        {{$product->currentPrice()}} UAH
+                        {{ $product->currentPrice() }} UAH
                     </h2>
                     @if(isset($product->offer) && $product->offer > 0)
                         <div class="product__discount h6">{{$product->price}} UAH</div>
                     @endif
-                    <div class="product-page__make-order {{$inCart ? "product-page__make-order_ordered" : ""}}" id="add_to_card">
-                        <div class="btn btn_primary">
+                    <div @class([
+                            'product-page__make-order',
+                            'product-page__make-order_ordered' => $inCart,
+                        ]) id="add_to_card">
+                        <button class="btn btn_primary" @disabled(!$product->isAvailable()) >
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M20.94 18.06L19.26 8.31C19.1452 7.47997 18.7404 6.71734 18.1171 6.15725C17.4939 5.59716 16.6925 5.27576 15.855 5.25H15.75C15.75 4.25544 15.3549 3.30161 14.6516 2.59835C13.9484 1.89509 12.9946 1.5 12 1.5C11.0054 1.5 10.0516 1.89509 9.34834 2.59835C8.64508 3.30161 8.24999 4.25544 8.24999 5.25H8.14499C7.30746 5.27576 6.50608 5.59716 5.88285 6.15725C5.25961 6.71734 4.85475 7.47997 4.73999 8.31L3.05999 18.06C2.95681 18.6256 2.97924 19.2071 3.12569 19.7631C3.27215 20.3191 3.53905 20.8361 3.90749 21.2775C4.21794 21.6565 4.60801 21.9625 5.05001 22.1738C5.49201 22.385 5.9751 22.4964 6.46499 22.5H17.535C18.0249 22.4964 18.508 22.385 18.95 22.1738C19.392 21.9625 19.7821 21.6565 20.0925 21.2775C20.4609 20.8361 20.7278 20.3191 20.8743 19.7631C21.0208 19.2071 21.0432 18.6256 20.94 18.06ZM12 3C12.5967 3 13.169 3.23705 13.591 3.65901C14.0129 4.08097 14.25 4.65326 14.25 5.25H9.74999C9.74999 4.65326 9.98705 4.08097 10.409 3.65901C10.831 3.23705 11.4033 3 12 3ZM18.945 20.31C18.7755 20.522 18.5612 20.6938 18.3174 20.8131C18.0736 20.9325 17.8064 20.9963 17.535 21H6.46499C6.1936 20.9963 5.9264 20.9325 5.6826 20.8131C5.43881 20.6938 5.22447 20.522 5.05499 20.31C4.82644 20.0365 4.66146 19.7157 4.57197 19.3707C4.48247 19.0257 4.4707 18.6651 4.53749 18.315L6.21749 8.565C6.27332 8.08382 6.49734 7.63782 6.85001 7.30574C7.20268 6.97365 7.66132 6.77683 8.14499 6.75H15.855C16.3387 6.77683 16.7973 6.97365 17.15 7.30574C17.5026 7.63782 17.7267 8.08382 17.7825 8.565L19.4625 18.315C19.5293 18.6651 19.5175 19.0257 19.428 19.3707C19.3385 19.7157 19.1735 20.0365 18.945 20.31Z" fill="white"/>
                             </svg>
                             {{$inCart ? "Додано до кошику" : "В кошик"}}
-                        </div>
+                        </button>
                     </div>
                 </div>
                 <div class="product-page__error required_alert" style="display: none">
@@ -85,7 +88,7 @@
                    <span id="product_error"></span>
                 </div>
             </div>
-            <div data-product="{{$product->id}}" class="product__like like {{$user !== null && $product->likedBy()->where("user_id", $user->id)->exists() ? "like_liked" : ""}}">
+            <div data-product="{{ $product->id }}" class="product__like like {{$user !== null && $product->likedBy()->where("user_id", $user->id)->exists() ? "like_liked" : ""}}">
                 <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -96,7 +99,7 @@
                 <div class="quick-nav__item quick-nav__item_active" data-nav="description">Опис</div>
                 <div class="quick-nav__item" data-nav="feedbacks">Відгуки</div>
             </div>
-            <div class="product-page__description nav-active body-content" id="description">
+            <div class="product-page__description  published nav-active" id="description">
                {!! $product->description !!}
             </div>
             <div class="product-page__comments-block comments-block" id="feedbacks" style="display: none">
@@ -211,7 +214,7 @@
                     class="comments-block__add-comment add-comment"
                     id="add-comment"
                     method="POST"
-                    action="{{route('comment.store', $product->id)}}"
+                    action="{{ route('comment.store', $product->id) }}"
                 >
                     @csrf
                     @if(\Illuminate\Support\Facades\Auth::check())
@@ -219,7 +222,14 @@
                             Залишити відгук
                         </div>
                         <input type="hidden" value="0" name="answered_to" data-answerFor="" id="answer_for">
-                        <input type="hidden" value="{{$product->id}}" name="product_id" id="product_id">
+                        <input type="hidden" value="{{ $product->id }}" name="product_id" id="product_id">
+                        @if(session()->has('banned'))
+                            <div class="alert warning">
+                                <i style="margin-right: 12px;" class="fa fa-warning"></i>
+                                {{ session()->get('banned') }}
+                                <span class="closebtn warning">×</span>
+                            </div>
+                        @endif
 
                         <div class="add-comment__body form-input">
                                 <textarea
@@ -230,13 +240,13 @@
 
                         @error("body")
                         <div class="alert danger">
-                            <span class="closebtn">×</span>
-                            <i style="margin-right: 12px;" class="fa fa-exclamation"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="-2 -3 24 24" preserveAspectRatio="xMinYMin" class="jam jam-triangle-danger"><path fill="#f44336" d="M12.8 1.613l6.701 11.161c.963 1.603.49 3.712-1.057 4.71a3.213 3.213 0 0 1-1.743.516H3.298C1.477 18 0 16.47 0 14.581c0-.639.173-1.264.498-1.807L7.2 1.613C8.162.01 10.196-.481 11.743.517c.428.276.79.651 1.057 1.096zm-2.22.839a1.077 1.077 0 0 0-1.514.365L2.365 13.98a1.17 1.17 0 0 0-.166.602c0 .63.492 1.14 1.1 1.14H16.7c.206 0 .407-.06.581-.172a1.164 1.164 0 0 0 .353-1.57L10.933 2.817a1.12 1.12 0 0 0-.352-.365zM10 14a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm0-9a1 1 0 0 1 1 1v4a1 1 0 0 1-2 0V6a1 1 0 0 1 1-1z"/></svg>
                             {{ $message }}
+                            <span class="closebtn">×</span>
                         </div>
                         @enderror
 
-                        <button class="add-comment__btn btn btn_primary h6">
+                        <button class="add-comment__btn btn btn_primary h6" type="submit">
                             Залишити відгук
                         </button>
                     @endif

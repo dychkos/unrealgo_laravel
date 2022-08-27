@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TestEmail;
 use App\Models\Article;
 use App\Models\Product;
 use App\Services\MainService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 
 class PageController extends Controller
@@ -20,14 +22,19 @@ class PageController extends Controller
     public function home(Request $request){
 
         $popular = Article::orderByDesc("views")->first();
-        $randomArticles = Article::inRandomOrder()->limit(2)->get();
+        $newArticles = Article::orderByDesc("created_at")->limit(2)->get();
         $popularProducts = Product::orderBy("created_at")->limit(10)->get();
 
         return $this->withUser('home.index', array(
             "popular" => $popular,
-            "randomArticles" => $randomArticles,
+            "newArticles" => $newArticles,
             "popularProducts" => $popularProducts,
         ));
+    }
+
+    public function email() {
+        Mail::to("dychkosergey@gmail.com")->send(new TestEmail());
+        return response()->json("ok");
     }
 
     public function about(Request $request)

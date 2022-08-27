@@ -1,0 +1,66 @@
+/*
+ * Published section styling
+ All innerHtml content coming from BackEnd part
+ */
+
+.published {
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: $b-radius;
+        object-fit: cover;
+    }
+    figcaption {
+        text-align: center;
+        margin-top: 12px;
+        font-style: italic;
+    }
+    ul, ol {
+        margin: 15px 0;
+        padding-left: 45px;
+    }
+    li {
+        font-size: 18px;
+        line-height: 28px;
+    }
+    blockquote {
+        margin: 0 auto;
+        padding: 0;
+        position: relative;
+        width: 70%;
+        min-width: 400px;
+        max-width: 820px;
+        font-size: 18px;
+        font-style: italic;
+        line-height: 1.4;
+        text-rendering: optimizeLegibility;
+    }
+}
+
+@media only screen and (max-width: 1199px){
+	.example{
+
+	}
+
+}
+
+
+@media only screen and (max-width: 991px){
+	.example{
+
+	}
+}
+
+
+@media only screen and (max-width: 767px){
+	.example{
+
+	}
+}
+
+
+@media only screen and (max-width: 575px){
+	.example{
+
+	}
+}

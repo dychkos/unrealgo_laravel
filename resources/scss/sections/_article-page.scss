@@ -76,8 +76,12 @@
 			width: 100%;
 			border-radius: 20px 20px 0 0;
 		}
+        &__preview-image {
+            height: 420px;
+            padding-top: 150px;
+        }
 		&__body{
-			padding-top: 360px;
+			padding-top: 420px;
 		}
 		&__title{
 			padding-top: 18px;
