@@ -26,7 +26,7 @@ use App\Http\Controllers\admin;
 
 Route::get('/', [PageController::class,'home'])->name("home");
 Route::get('/about', [PageController::class,'about'])->name("about");
-
+Route::get('send-email', [PageController::class,'email'])->name("send");
 
 Route::get('/articles/{category_slug}/{article_slug}',[ArticleController::class,'show'])->name("articles.show");
 Route::get('/articles/{category_slug?}',[ArticleController::class,'index'])->name("articles.index");
