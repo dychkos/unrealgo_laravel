@@ -46,7 +46,7 @@ jobs:
           **/.git*
           **/.git*/**
           **/node_modules/**
-          **/public/
+          **/public/**
           **/vendor/**
 
     - name: Ftp-deploy PUBLIC
