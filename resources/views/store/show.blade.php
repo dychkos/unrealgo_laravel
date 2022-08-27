@@ -61,7 +61,7 @@
                 </div>
                 <div class="product-page__main">
                     <h2 class="product-page__price h2">
-                        {{$product->currentPrice()}} UAH
+                        {{ $product->currentPrice() }} UAH
                     </h2>
                     @if(isset($product->offer) && $product->offer > 0)
                         <div class="product__discount h6">{{$product->price}} UAH</div>
@@ -88,7 +88,7 @@
                    <span id="product_error"></span>
                 </div>
             </div>
-            <div data-product="{{$product->id}}" class="product__like like {{$user !== null && $product->likedBy()->where("user_id", $user->id)->exists() ? "like_liked" : ""}}">
+            <div data-product="{{ $product->id }}" class="product__like like {{$user !== null && $product->likedBy()->where("user_id", $user->id)->exists() ? "like_liked" : ""}}">
                 <svg width="24" height="21" viewBox="0 0 24 21"  xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 11C0.75 8 1.5 3.5 5.25 2C9 0.5 11.25 3.5 12 5C12.75 3.5 15.75 0.5 19.5 2C23.25 3.5 23.25 8 21 11C18.75 14 12 20 12 20C12 20 5.25 14 3 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -99,7 +99,7 @@
                 <div class="quick-nav__item quick-nav__item_active" data-nav="description">Опис</div>
                 <div class="quick-nav__item" data-nav="feedbacks">Відгуки</div>
             </div>
-            <div class="product-page__description nav-active body-content" id="description">
+            <div class="product-page__description  published nav-active" id="description">
                {!! $product->description !!}
             </div>
             <div class="product-page__comments-block comments-block" id="feedbacks" style="display: none">

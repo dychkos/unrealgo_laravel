@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TestEmail;
 use App\Models\Article;
 use App\Models\Product;
 use App\Services\MainService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 
 class PageController extends Controller
@@ -28,6 +30,11 @@ class PageController extends Controller
             "newArticles" => $newArticles,
             "popularProducts" => $popularProducts,
         ));
+    }
+
+    public function email() {
+        Mail::to("dychkosergey@gmail.com")->send(new TestEmail());
+        return response()->json("ok");
     }
 
     public function about(Request $request)

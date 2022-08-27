@@ -5,13 +5,13 @@
         <div class="col-12 col-lg-9">
             <div class="big-article">
                 <div class="big-article__preview-image">
-                    <img src="{{$article->image
+                    <img src="{{ $article->image
                         ? asset($article->image->filename)
-                        : asset('app/img/article-error.jpg')}}" alt="Article">
+                        : asset('app/img/article-error.jpg') }}" alt="Article">
                 </div>
                 <div class="big-article__header">
                     <div class="big-article__title h3">
-                        {{$article->title}}
+                        {{ $article->title }}
                     </div>
                     <div class="big-article__info">
                         <div class="big-article__info-item with-icon short-info-1">
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="big-article__body">
-                    <div class="big-article__content body-content">
+                    <div class="big-article__content published">
                         {!! $article->body !!}
                     </div>
                     <div class="big-article__comments-block comments-block">
