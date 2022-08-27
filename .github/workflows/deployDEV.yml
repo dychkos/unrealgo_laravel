@@ -27,7 +27,7 @@ jobs:
     - name: 🔨 Install Dependecies
       run: npm install
     - name: 🔨 Build Project
-    - run: npm run prod
+      run: npm run prod
 
     - name: Generate key
       run: php artisan key:generate
