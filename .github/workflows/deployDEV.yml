@@ -1,13 +1,12 @@
-name: Laravel
+name: SetUP to Development
 
 on:
   push:
-    branches: [ "dev.unreal-go.top" ]
-  pull_request:
-    branches: [ "dev.unreal-go.top" ]
+    branches:
+      - dev.unreal-go.top
 
 jobs:
- prepare:
+ deploying:
     runs-on: ubuntu-latest
     steps:
     - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
@@ -41,7 +40,7 @@ jobs:
         server: ${{secrets.FTP_SERVER}}
         username: ${{secrets.FTP_USERNAME}}
         password: ${{secrets.FTP_PASSWORD}}
-        server-dir: "/home2/unrealgo/projects/dev/"
+        server-dir: "projects/dev/"
         exclude: |
           **/.git*
           **/.git*/**
@@ -56,6 +55,7 @@ jobs:
         username: ${{secrets.FTP_USERNAME}}
         password: ${{secrets.FTP_PASSWORD}}
         local-dir: "./public/"
+        server-dir: "dev.unreal-go.top/"
 
 
 
