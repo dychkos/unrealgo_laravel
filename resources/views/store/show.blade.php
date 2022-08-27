@@ -214,7 +214,7 @@
                     class="comments-block__add-comment add-comment"
                     id="add-comment"
                     method="POST"
-                    action="{{route('comment.store', $product->id)}}"
+                    action="{{ route('comment.store', $product->id) }}"
                 >
                     @csrf
                     @if(\Illuminate\Support\Facades\Auth::check())
@@ -222,7 +222,14 @@
                             Залишити відгук
                         </div>
                         <input type="hidden" value="0" name="answered_to" data-answerFor="" id="answer_for">
-                        <input type="hidden" value="{{$product->id}}" name="product_id" id="product_id">
+                        <input type="hidden" value="{{ $product->id }}" name="product_id" id="product_id">
+                        @if(session()->has('banned'))
+                            <div class="alert warning">
+                                <i style="margin-right: 12px;" class="fa fa-warning"></i>
+                                {{ session()->get('banned') }}
+                                <span class="closebtn warning">×</span>
+                            </div>
+                        @endif
 
                         <div class="add-comment__body form-input">
                                 <textarea
@@ -239,7 +246,7 @@
                         </div>
                         @enderror
 
-                        <button class="add-comment__btn btn btn_primary h6">
+                        <button class="add-comment__btn btn btn_primary h6" type="submit">
                             Залишити відгук
                         </button>
                     @endif

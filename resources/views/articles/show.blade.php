@@ -176,7 +176,7 @@
                                     Напишіть коментар
                                 </div>
                                 <input type="hidden" value="0" name="answered_to" data-answerFor="" id="answer_for">
-                                <input type="hidden" value="{{$article->id}}" name="article_id" id="article_id">
+                                <input type="hidden" value="{{ $article->id }}" name="article_id" id="article_id">
                                 <div class="add-comment__body form-input">
                                     <textarea
                                         placeholder="Введіть текст"

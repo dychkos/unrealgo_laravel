@@ -15,6 +15,7 @@
     }
     .photos__slide{
       margin-bottom: 25px;
+      max-width: 160px;
       img{
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
         width: 100%;
@@ -74,6 +75,7 @@
         display: flex;
       }
       .photos__slide{
+      max-width: unset;
         img{
           border: none;
           opacity: 1;
