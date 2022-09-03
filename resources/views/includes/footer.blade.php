@@ -46,6 +46,9 @@
                 <div class="footer__link">
                     <a href="{{ route('about') }}" class="p">Про нас</a>
                 </div>
+                <div class="footer__link">
+                    <a href="{{ route('policy') }}" class="p">Policy</a>
+                </div>
             </div>
             <div class="footer__col col order-3 order-sm-3 order-lg-3">
                 <div class="footer__social social">

@@ -1,0 +1,38 @@
+/*
+ * Template section styling
+ */
+
+.template {
+    background-color: $background-light;
+    padding: 50px;
+    border-radius: $b-radius;
+    color: $black;
+}
+
+@media only screen and (max-width: 1199px){
+	.template {
+        padding: 45px;
+	}
+
+}
+
+
+@media only screen and (max-width: 991px){
+	.template {
+
+	}
+}
+
+
+@media only screen and (max-width: 767px){
+	.template {
+        padding: 40px;
+	}
+}
+
+
+@media only screen and (max-width: 575px){
+	.template {
+        padding: 30px;
+	}
+}

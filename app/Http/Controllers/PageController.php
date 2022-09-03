@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\TestEmail;
 use App\Models\Article;
+use App\Models\Page;
 use App\Models\Product;
 use App\Services\MainService;
 use Illuminate\Http\Request;
@@ -44,6 +45,13 @@ class PageController extends Controller
         return view('about.index', ["statistics" => $statistics]);
     }
 
+    public function policy(Request $request)
+    {
+        $page = Page::where("slug", "policy")->first();
+        $content = $page->content ?? "";
+        return view('policy.index', compact('content'));
+    }
+
     public function search(Request $request): \Illuminate\Http\JsonResponse
     {
         $search = $request->input("search_text");
@@ -56,6 +64,5 @@ class PageController extends Controller
         }
 
         return $this->sendResponse($result,"Found successful");
-
     }
 }

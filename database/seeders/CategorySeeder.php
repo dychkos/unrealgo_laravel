@@ -21,23 +21,33 @@ class CategorySeeder extends Seeder
 //        ]);
 
         DB::table('categories')->insert([
-            'value' => "Мотивація",
-            'slug' => "motivation",
+            'id' => '1',
+            'value' => "Діяльність",
+            'slug' => "activity",
         ]);
 
         DB::table('categories')->insert([
+            'id' => '2',
             'value' => "Здоров'я",
             'slug' => 'health'
         ]);
 
         DB::table('categories')->insert([
-            'value' => "Психологія",
-            'slug' => 'psychology'
+            'id' => '3',
+            'value' => "Особистість",
+            'slug' => 'personal'
         ]);
 
         DB::table('categories')->insert([
-            'value' => "Стиль життя",
-            'slug' => 'life-style'
+            'id' => '4',
+            'value' => "Відпочинок",
+            'slug' => 'relax'
+        ]);
+
+        DB::table('categories')->insert([
+            'id' => '5',
+            'value' => "Стосунки",
+            'slug' => 'relationships'
         ]);
 
     }

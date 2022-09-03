@@ -17,10 +17,12 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RolesSeeder::class,
             CategorySeeder::class,
-            ArticlesSeeder::class,
             TypesSeeder::class,
             OrderStatusSeeder::class,
-            ProductSeeder::class
+            SizeSeeder::class,
+            PageSeeder::class
+            //ProductSeeder::class
+            //ArticlesSeeder::class,
         ]);
     }
 }
