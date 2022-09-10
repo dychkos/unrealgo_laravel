@@ -110,6 +110,9 @@
 		justify-content: space-between;
 		align-items: center;
 	}
+    &__loader {
+        margin: 0 auto;
+    }
     &__footer {
         margin-top: 24px;
         display: grid;
@@ -128,6 +131,9 @@
 
 	}
     .make-order{
+        &__submit {
+            white-space: unset;
+        }
         &__footer {
             grid-template-columns: 1fr;
         }

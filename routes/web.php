@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\EmailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ArticleController;
@@ -35,6 +36,9 @@ Route::post('/articles/{id}/comment',[CommentController::class,'store'])->name("
 
 //Search
 Route::post("/search", [PageController::class, 'search'])->name("search");
+
+//Mailing
+Route::get('unsubscribe-email', [EmailController::class, 'unsubscribe'])->name("email.unsubscribe");
 
 Route::get('/store/{type_slug?}',[StoreController::class,'index'])->name("store.index");
 Route::get('/store/{type_slug}/{id}',[StoreController::class,'show'])->name("store.show");

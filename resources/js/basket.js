@@ -62,7 +62,7 @@ export default class Basket extends MainController {
 			if (Basket.hasFormError) return;
 
 			$(".make-order__loader").fadeIn();
-			$(".make-order__submit").addClass("disabled");
+			$(".make-order__submit").addClass("disabled").prop( "disabled", true );
 
 			let formData = new FormData(makeOrderForm);
 			formData.append("_token", csrfToken);
@@ -95,10 +95,11 @@ export default class Basket extends MainController {
 				})
 				.catch(error => {
 					console.log(error);
+					$(".required_alert").fadeIn();
 				})
 				.finally( () => {
 					$(".make-order__loader").fadeOut();
-					$(".make-order__submit").removeClass("disabled");
+					$(".make-order__submit").removeClass("disabled").prop( "disabled", false );
 				});
 
 		});

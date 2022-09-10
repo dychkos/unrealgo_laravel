@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Type;
 use App\Services\ApiNovaPoshtaService;
+use App\Services\MailService;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,11 +15,14 @@ use Illuminate\Validation\ValidationException;
 class StoreController extends Controller
 {
     private ProductService $productService;
+    private MailService $mailService;
 
     public function __construct(
         ProductService $productService,
+        MailService $mailService
     ) {
         $this->productService = $productService;
+        $this->mailService = $mailService;
     }
 
     public function index(Request $request) {
@@ -77,7 +81,8 @@ class StoreController extends Controller
 
     }
 
-    public function show (Request $request, $product_slug, $product_id) {
+    public function show(Request $request, $product_slug, $product_id)
+    {
         $product = Product::find($product_id);
         $cart = Session::get('cart');
         $inCart = $this->productService->checkInCart($cart, $product->id);
@@ -161,7 +166,8 @@ class StoreController extends Controller
 
         try {
             $order = $this->productService->makeOrder($data);
-        }catch (ValidationException $exception){
+            $this->mailService->makeOrder($order);
+        } catch (ValidationException $exception){
             $message = $exception->getMessage();
             return $this->sendError($message, $exception->errors(), $exception->status);
         }

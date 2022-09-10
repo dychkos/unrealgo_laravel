@@ -35,7 +35,8 @@ class PageController extends Controller
 
     public function email() {
         Mail::to("dychkosergey@gmail.com")->send(new TestEmail());
-        return response()->json("ok");
+        return view('emails.ordered');
+        //return response()->json("ok");
     }
 
     public function about(Request $request)
