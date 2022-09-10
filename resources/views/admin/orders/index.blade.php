@@ -33,8 +33,8 @@
         @endif
 
         <div class="admin-row">
-            <div class="admin-input form-input">
-                <div class="dropdown">
+            <div class="admin-input form-input form-input_sm">
+                <div class="dropdown dropdown-flex">
                     @error("status_id")
                     <div class="required_alert">{{ $message }}</div>
                     @enderror
@@ -48,6 +48,17 @@
                             @endif
                         @endforeach
                     </select>
+
+                    <label for="invoice_code">Вкажіть номер ТТН: </label>
+                    <input type="text" id="invoice_code"
+                           name="invoice_code"
+                           value="{{ $order->invoice_code ?? "" }}"
+                           class="{{$errors->has('invoice_code') ? 'required' : '' }}"
+                           disabled
+                    >
+                    @error("invoice_code")
+                    <div class="required_alert">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
         </div>

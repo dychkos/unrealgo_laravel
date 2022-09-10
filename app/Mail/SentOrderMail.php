@@ -8,12 +8,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class DeclinedOrderMail extends Mailable
+class SentOrderMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     public Order $order;
-    public bool $needFooter;
 
     /**
      * Create a new message instance.
@@ -23,8 +22,7 @@ class DeclinedOrderMail extends Mailable
     public function __construct(Order $order)
     {
         $this->order = $order;
-        $this->needFooter = false;
-        $subject = "Замовлення [№" . strval($order->id) . "] скасовано!";
+        $subject = "Замовлення [№" . strval($order->id) . "] відправлено!";
         $this->subject($subject);
     }
 
@@ -35,6 +33,6 @@ class DeclinedOrderMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.canceled');
+        return $this->view('emails.sent');
     }
 }

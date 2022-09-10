@@ -2,8 +2,8 @@
 
 @section("content")
     <div class="text" style="padding: 0 2.5em; text-align: center;">
-        <h2>Замовлення скасовано</h2>
-        <p class="text-gray">Номер замовлення: <b>№2342</b></p>
+        <h2>Замовлення скасовано ❌</h2>
+        <p class="text-gray">Номер замовлення: <b>№ {{$order->id}}</b></p>
         <div class="table-responsive"><table>
                 <thead>
                 <tr>
@@ -13,21 +13,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td><a href="#">Футболкаasdsadsadasd sadasdasdas </a></td>
-                    <td>2</td>
-                    <td>7000 UAH</td>
-                </tr>
-                <tr>
-                    <td>Футболка</td>
-                    <td>2</td>
-                    <td>7000 UAH</td>
-                </tr>
-                <tr>
-                    <td>Футболка</td>
-                    <td>2</td>
-                    <td>7000 UAH</td>
-                </tr>
+                @foreach($order->items as $item)
+                    <tr>
+                        <td><a href="{{ route("store.show", [$item->product->type->slug, $item->product->id]) }}">{{$item->product->title }}</a></td>
+                        <td>{{$item->count}}</td>
+                        <td>{{$item->product->currentPrice()}} UAH</td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table></div>
 

@@ -24,18 +24,19 @@ class OrderController extends AdminController
         $order = Order::find($order_id);
         $statuses = OrderStatus::all();
 
-        return $this->proccessView('admin.orders.index', array(
+        return $this->proccessView('admin.orders.index',
+            [
                 "order" => $order,
                 "statuses" => $statuses,
-                )
+            ]
         );
     }
 
     public function updateOrder(Request $request, $order_id)
     {
-        $status_id = $request->input('status_id');
-        $updatedData = ['order_id' => $order_id, 'status_id' => $status_id];
-        $this->productService->changeOrderStatus($updatedData);
+        $this->productService->changeOrderStatus(array_merge(
+            $request->all(), ['order_id' => $order_id]
+        ));
 
         return redirect()->route("user.admin.index", "orders")
             ->with("message", "Зміни збереженні");

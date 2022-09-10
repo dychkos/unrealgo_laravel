@@ -2,7 +2,10 @@
 
 namespace App\Services;
 
+use App\Enums\OrdersStatusesEnum;
+use App\Enums\OrderStatuses;
 use App\Helpers\Helper;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Size;
 use App\Repositories\OrderRepository;
@@ -14,11 +17,17 @@ class ProductService
 {
     private ProductRepository $productRepository;
     private OrderRepository $orderRepository;
+    private MailService $mailService;
 
-    public function __construct(ProductRepository $productRepository, OrderRepository $orderRepository)
+    public function __construct(
+        ProductRepository $productRepository,
+        OrderRepository $orderRepository,
+        MailService $mailService
+    )
     {
         $this->productRepository = $productRepository;
         $this->orderRepository = $orderRepository;
+        $this->mailService = $mailService;
     }
 
     public function store($data)
@@ -124,30 +133,32 @@ class ProductService
         ));
     }
 
-    public function cancelOrder($order_id): bool
+    public function cancelOrder($order_id): Order | bool
     {
-        if(isset($order_id)) {
-            $this->orderRepository->cancelOrder($order_id);
-            return true;
+        if (isset($order_id)) {
+            return $this->orderRepository->cancelOrder($order_id);
         }
-
         return false;
-
     }
 
     public function changeOrderStatus($data)
     {
         $validated = Validator::make($data, [
-            "order_id" => ["required", "integer"],
-            "status_id" => ["required", "integer"],
+            "order_id"     => ["required", "integer"],
+            "status_id"    => ["required", "integer"],
+            "invoice_code" => ["sometimes", "sometimes"]
         ])->validate();
 
-        return $this->orderRepository->changeStatus($validated);
+        $updated = $this->orderRepository->changeStatus($validated);
+        if ($updated->order_status_id == OrdersStatusesEnum::SENT) {
+            $this->mailService->sentOrder($updated);
+        }
+        return $updated;
     }
 
     public function editCount($data) {
         $validated = Validator::make($data, [
-            "index" => ["required", "string"],
+            "index"     => ["required", "string"],
             "decrement" => ["required", "string"],
         ])->validate();
 
@@ -155,7 +166,7 @@ class ProductService
         $cart = Session::get("cart");
 
         if (Helper::stringToBool($validated["decrement"])) {
-            if($cart[$index]["count"] - 1 > 0) {
+            if ($cart[$index]["count"] - 1 > 0) {
                 $cart[$index]["count"] -= 1;
             }
         } else {

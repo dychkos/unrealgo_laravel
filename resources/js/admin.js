@@ -9,6 +9,16 @@ export default class Admin {
 		mainGrid : document.querySelector(".admin-body"),
 		fileInput : document.getElementById("file_input"),
 		productSizeSelect : document.getElementById("sizes"),
+		orderStatusSelect : document.getElementById("status"),
+		invoiceInput : document.getElementById("invoice_code"),
+	};
+
+	static ORDER_STATUSES = {
+		WAITING: 1,
+		SENT: 2,
+		DELIVERED: 3,
+		DONE: 4,
+		CANCELED: 5
 	};
 
 	/*
@@ -74,6 +84,22 @@ export default class Admin {
 				}
 
 			});
+		}
+
+		let orderStatusSelect = Admin.nodes.orderStatusSelect;
+		if (orderStatusSelect) {
+			$(orderStatusSelect).select2({
+				placeholder: "Виберіть із списку",
+			});
+			$(orderStatusSelect).on("select2:select", function (e) {
+				let data = e.params.data;
+				if (+data.id === Admin.ORDER_STATUSES.SENT) {
+					Admin.nodes.invoiceInput.disabled = false;
+					return;
+				}
+				Admin.nodes.invoiceInput.disabled = true;
+			});
+
 		}
 	}
 

@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use App\Enums\OrdersStatusesEnum;
+use App\Enums\OrderStatuses;
 use App\Models\BasketItem;
 use App\Models\Order;
 use App\Models\OrderStatus;
@@ -20,7 +22,6 @@ class OrderRepository
         $this->order = $order;
         $this->basketItem = $basketItem;
     }
-
 
     public function makeOrder($data) {
 
@@ -53,11 +54,21 @@ class OrderRepository
     public function changeStatus($data) {
         $order = Order::find($data['order_id']);
         $order->order_status_id = $data['status_id'];
-        if ($order->order_status_id === OrderStatus::where("value", "canceled")->get()->first()->id) {
-            $this->updateProductsCount($this->order->items, true);
-        }
-        $order->save();
 
+        switch ($order->order_status_id) {
+            case OrdersStatusesEnum::CANCELED: {
+                $this->updateProductsCount($this->order->items, true);
+                break;
+            }
+            case OrdersStatusesEnum::SENT: {
+                $order = $this->setInvoiceCode($data['invoice_code'], $order);
+                break;
+            }
+            default:
+                break;
+        }
+
+        $order->save();
         return $order;
     }
 
@@ -80,6 +91,14 @@ class OrderRepository
                 : $currentCount - $item['count']
             ]);
         }
+    }
+
+    private function setInvoiceCode($invoice, $order)
+    {
+       $order->invoice_code = $invoice;
+       $order->save();
+
+       return $order;
     }
 
 

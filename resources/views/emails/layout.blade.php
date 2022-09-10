@@ -495,11 +495,13 @@
                     </table>
                 </td>
             </tr>
-            <tr>
-                <td class="bg_light" style="text-align: center;">
-                    <p>У вас є можливість <a href="{{ route("email.unsubscribe") }}" style="color: rgba(0,0,0,.8);">відписатись від розсилання</a></p>
-                </td>
-            </tr>
+            @if(isset($needFooter))
+                <tr>
+                    <td class="bg_light" style="text-align: center;">
+                        <p>У вас є можливість <a href="{{ route("email.unsubscribe") }}" style="color: rgba(0,0,0,.8);">відписатись від розсилання</a></p>
+                    </td>
+                </tr>
+            @endif
         </table>
     </div>
 </center>

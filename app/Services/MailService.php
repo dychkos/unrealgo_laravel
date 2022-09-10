@@ -2,8 +2,11 @@
 
 namespace App\Services;
 
+use App\Mail\DeclinedOrderMail;
 use App\Mail\MakeOrderEmail;
+use App\Mail\SentOrderMail;
 use App\Mail\WasRegisteredEmail;
+use App\Models\Order;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -39,6 +42,24 @@ class MailService
             return false;
         }
         Mail::to($order->email)->send(new MakeOrderEmail($order));
+        return true;
+    }
+
+    public function sentOrder($order): bool
+    {
+        if (!isset($order)) {
+            return false;
+        }
+        Mail::to($order->email)->send(new SentOrderMail($order));
+        return true;
+    }
+
+    public function cancelOrder(Order $order): bool
+    {
+        if (!isset($order)) {
+            return false;
+        }
+        Mail::to($order->email)->send(new DeclinedOrderMail($order));
         return true;
     }
 

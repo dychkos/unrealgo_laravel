@@ -111,7 +111,7 @@ class StoreController extends Controller
 
         try {
             $this->productService->like($data);
-        }catch (ValidationException $exception){
+        } catch (ValidationException $exception){
             $message = $exception->getMessage();
             return $this->sendError($message, $exception->errors(), $exception->status);
         }
@@ -134,7 +134,8 @@ class StoreController extends Controller
 
     }
 
-    public function editCount(Request $request) {
+    public function editCount(Request $request)
+    {
         try {
             $result = $this->productService->editCount($request->all());
         } catch (ValidationException $exception){
@@ -156,8 +157,8 @@ class StoreController extends Controller
 
     }
 
-    public function makeOrder(Request $request) {
-
+    public function makeOrder(Request $request)
+    {
         $data = $request->all();
         if (Auth::check()){
             $user_id = Auth::user()->id;
@@ -176,9 +177,12 @@ class StoreController extends Controller
 
     }
 
-    public function cancelOrder(Request $request, $order_id) {
-
-        $this->productService->cancelOrder($order_id);
+    public function cancelOrder(Request $request, $order_id)
+    {
+        $canceled = $this->productService->cancelOrder($order_id);
+        if ($canceled) {
+            $this->mailService->cancelOrder($canceled);
+        }
 
         return redirect()->back();
     }
