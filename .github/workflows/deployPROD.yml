@@ -46,12 +46,4 @@ jobs:
             **/.git*/**
             **/node_modules/**
             **/vendor/**
-      - name: Ftp-deploy PUBLIC
-        uses: SamKirkland/FTP-Deploy-Action@4.3.0
-        with:
-          server: ${{secrets.FTP_SERVER}}
-          username: ${{secrets.FTP_USERNAME}}
-          password: ${{secrets.FTP_PASSWORD}}
-          local-dir: "./public/"
-          server-dir: "public_html/"
 
