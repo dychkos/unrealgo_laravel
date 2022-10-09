@@ -40,10 +40,18 @@ jobs:
           server: ${{secrets.FTP_SERVER}}
           username: ${{secrets.FTP_USERNAME}}
           password: ${{secrets.FTP_PASSWORD}}
-          server-dir: "public_html/"
+          server-dir: "projects/development"
           exclude: |
             **/.git*
             **/.git*/**
             **/node_modules/**
             **/vendor/**
+      - name: Ftp-deploy PUBLIC
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: ${{secrets.FTP_SERVER}}
+          username: ${{secrets.FTP_USERNAME}}
+          password: ${{secrets.FTP_PASSWORD}}
+          local-dir: "./public/"
+          server-dir: "public_html/"
 
