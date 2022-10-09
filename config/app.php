@@ -29,7 +29,7 @@ return [
     */
 
     'env' => env('APP_ENV', 'local'),
-
+    //config('app.env');
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

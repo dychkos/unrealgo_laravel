@@ -91,6 +91,7 @@
         </div>
         @endif
     </section>
+    @if(config('app.env') != 'production')
     <section class="store-pr mt-4">
             <h2 class="store-pr__title page-title h2">
                 Візьми в колекцію
@@ -149,6 +150,7 @@
                 </div>
             @endif
         </section>
+    @endif
 @endsection
 
 @once

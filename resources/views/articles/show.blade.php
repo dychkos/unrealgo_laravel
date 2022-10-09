@@ -205,7 +205,7 @@
         <div class="col-12 col-lg-3">
             <div class="sidebar">
                 <div class="sidebar__title h2">Навігація</div>
-                <div class="sidebar__blog-nav blog-nav row ">
+                <div class="sidebar__blog-nav blog-nav row">
                     @foreach($categories as $category)
                         <div class="blog-nav__category">
                             <div class="blog-nav__main with-icon">
@@ -243,7 +243,8 @@
                         </div>
                     @endforeach
                 </div>
-                <div class="sidebar__title h2">Акціїні пропозиції: </div>
+                @if(config('app.env') != 'production')
+                <div class="sidebar__title h2">Акційні пропозиції: </div>
                 <div class="sidebar__products row row-cols-1 row-cols-sm-2 row-cols-lg-1 g-3">
                     @foreach($stock as $product)
                         <a href="{{route("store.show", [$product->type->slug, $product->id])}}" class="product col">
@@ -276,6 +277,7 @@
                         </a>
                     @endforeach
                 </div>
+                @endif
             </div>
         </div>
     </div>

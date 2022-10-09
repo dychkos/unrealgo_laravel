@@ -14,6 +14,7 @@
             <div class="footer__col col order-1 order-sm-0 order-lg-1">
                 <div class="footer__title h6">Твій аккаунт</div>
                 @if(\Illuminate\Support\Facades\Auth::check())
+                    @if(config('app.env') != 'production')
                     <div class="footer__link">
                         <a class="p" href="{{route('basket')}}">Кошик</a>
                     </div>
@@ -23,6 +24,7 @@
                     <div class="footer__link">
                         <a class="p" href="{{route('user.order-history')}}">Мої замовлення</a>
                     </div>
+                    @endif
                     <div class="footer__link">
                         <a class="p" href="{{route('user.profile')}}">Профіль</a>
                     </div>
@@ -40,9 +42,11 @@
                 <div class="footer__link">
                     <a class="p" href="{{route('articles.index')}}" >Блог</a>
                 </div>
+                @if(config('app.env') != 'production')
                 <div class="footer__link">
                     <a class="p" href="{{route('store.index')}}">Магазин</a>
                 </div>
+                @endif
                 <div class="footer__link">
                     <a href="{{ route('about') }}" class="p">Про нас</a>
                 </div>

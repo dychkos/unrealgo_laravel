@@ -37,7 +37,7 @@ class MainService
      */
     public function doSearch($search): array
     {
-        if(empty($search)) {
+        if (empty($search)) {
             throw ValidationException::withMessages(["message" => "Введіть слово для пошуку"]);
         }
 
@@ -45,7 +45,7 @@ class MainService
 
         return [
             "articles" => ArticleResource::collection($result[0]),
-            "products" => ProductResource::collection($result[1])
+            "products" => config('app.env') != 'production' ? ProductResource::collection($result[1]) : []
         ];
     }
 
