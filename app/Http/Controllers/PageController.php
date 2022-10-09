@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\DeclinedOrderMail;
 use App\Mail\TestEmail;
+use App\Mail\wasRegisteredEmail;
 use App\Models\Article;
 use App\Models\Page;
 use App\Models\Product;
@@ -34,9 +36,9 @@ class PageController extends Controller
     }
 
     public function email() {
-        Mail::to("dychkosergey@gmail.com")->send(new TestEmail());
-        return view('emails.ordered');
-        //return response()->json("ok");
+        Mail::to("dychkosergey@gmail.com")->send(new wasRegisteredEmail());
+        //return view('emails.ordered');
+        return response()->json("ok");
     }
 
     public function about(Request $request)
