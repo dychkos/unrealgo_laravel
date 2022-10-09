@@ -308,6 +308,6 @@
             }).showToast();
             @enderror
         </script>
-        <script src="{{ asset('app/js-min/article.min.js?v=' . random_int(1000, 9999)) }}"></script>
+        <script src="{{ asset('application/js-min/article.min.js?v=' . random_int(1000, 9999)) }}"></script>
     @endpush
 @endonce

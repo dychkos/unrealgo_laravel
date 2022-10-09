@@ -13,9 +13,9 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 
-    <link rel="stylesheet" href="{{asset('app/libs/libs.min.css?v=' . random_int(1000, 9999)) }}">
-    <link rel="stylesheet" href="{{asset('app/css-min/main.min.css?v='. random_int(1000, 9999)) }}">
-    <script src="{{asset('app/libs/libs.min.js')}}"></script>
+    <link rel="stylesheet" href="{{asset('application/libs/libs.min.css?v=' . random_int(1000, 9999)) }}">
+    <link rel="stylesheet" href="{{asset('application/css-min/main.min.css?v='. random_int(1000, 9999)) }}">
+    <script src="{{asset('application/libs/libs.min.js')}}"></script>
 
     <title>
         @if(View::hasSection('title'))

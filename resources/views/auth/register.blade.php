@@ -91,7 +91,7 @@
 
 @once
     @push('js')
-        <script src="{{ asset('app/js-min/auth.min.js?v=' . random_int(1000, 9999)) }}"></script>
+        <script src="{{ asset('application/js-min/auth.min.js?v=' . random_int(1000, 9999)) }}"></script>
     @endpush
 @endonce
 
