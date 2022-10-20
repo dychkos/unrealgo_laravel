@@ -137,6 +137,7 @@ export default class Product extends MainController {
 					this.clearActive(navItems, "quick-nav__item_active");
 					$(`.quick-nav__item[data-nav="${needShow}"]`).addClass("quick-nav__item_active");
 					this.toStep(needShow);
+					document.querySelector(".quick-nav__item_active").scrollIntoView({ behavior: "smooth" });
 				}
 			});
 		});

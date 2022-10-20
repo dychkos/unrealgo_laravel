@@ -53,7 +53,7 @@
                     @enderror
                     <input id="confirm" name="confirm" type="checkbox" value="1">
                     <label for="confirm" class="p-light">
-                        Я згоден з <a href="#" class="link" id="privacy">Угодою користувача</a>
+                        Я згоден з <a href="{{ route('policy') }}" class="link" id="privacy">Угодою користувача</a>
                     </label>
                 </div>
                 <div class="auth-form__item row">

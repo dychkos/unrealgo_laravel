@@ -30,18 +30,18 @@ class AuthRepository
     /**
      * @throws ValidationException
      */
-    public function login($credentials,$remember){
+    public function login($credentials,$remember) {
         $user = $this->user->where('email',$credentials['email'])->first();
-        if($user){
-            if(!auth()->attempt($credentials,$remember)){
-                throw ValidationException::withMessages(['email' => "Неправильный логин или пароль"]);
+        if ($user ){
+            if (!auth()->attempt($credentials,$remember)) {
+                throw ValidationException::withMessages(['email' => "Не вірний логін чи пароль"]);
             }
-            else{
+            else {
                 return $user;
             }
         }
-        else{
-            throw ValidationException::withMessages(['email' => "Пользователь с таким email не существует"]);
+        else {
+            throw ValidationException::withMessages(['email' => "Не вірний логін чи пароль"]);
         }
     }
 

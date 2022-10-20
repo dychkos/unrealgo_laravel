@@ -185,10 +185,12 @@ export default class MainController {
 			$(".header-mobile__wrapper").removeClass("active");
 			$(".header-mobile__col .logo").removeClass("invert");
 			document.body.style.overflow = "auto";
+			document.body.style.position = "initial";
 			$(".search_white").show();
 			return;
 		}
 		document.body.style.overflow = "hidden";
+		document.body.style.position = "fixed";
 		$(burger).addClass("open");
 		$(".header-mobile__col .logo").addClass("invert");
 		$(".header-mobile__wrapper").addClass("active");

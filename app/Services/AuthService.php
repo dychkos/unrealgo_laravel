@@ -88,6 +88,4 @@ class AuthService {
     {
         return $this->authRepository->delete($user_id);
     }
-
-
 }
