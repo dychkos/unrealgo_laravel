@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row g-4 pt-4">
-        <div class="col-12 col-lg-9">
+        <div class="col-12 col-xl-9">
             <div class="big-article">
                 <div class="big-article__preview-image">
                     <img src="{{ $article->image
@@ -202,7 +202,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-3">
+        <div class="col-12 col-xl-3">
             <div class="sidebar">
                 <div class="sidebar__title h2">Навігація</div>
                 <div class="sidebar__blog-nav blog-nav row">

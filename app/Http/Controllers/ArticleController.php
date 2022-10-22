@@ -24,18 +24,17 @@ class ArticleController extends Controller
         $activeCategory = null;
         $allowSorts = Article::getSorts();
 
-        if($categorySlug = $request->route('category_slug')){
+        if ($categorySlug = $request->route('category_slug')) {
             $activeCategory = Category::where('slug', $categorySlug)->first();
             $query = $query->where('category_id', $activeCategory->id);
         }
 
-        if($request->filled("order")){
+        if ($request->filled("order")){
             $orderBy = $request->input("order");
             $query = $this->setupSort($orderBy, $query);
         }
-
+        $query = $this->setupSort('date-new', $query);
         $articles = $query->paginate(4)->appends(request()->query());
-
 
         return view('articles.index', compact("categories", "articles", "activeCategory", "allowSorts"));
     }
@@ -64,16 +63,13 @@ class ArticleController extends Controller
             case "popular":
                 $query->orderByDesc("views");
                 break;
-            case "date-new":
-                $query->orderByDesc("created_at");
-                break;
             case "date-old":
                 $query->orderBy("created_at");
                 break;
             default:
+                $query->orderByDesc("created_at");
                 break;
         }
-
         return $query;
     }
 }

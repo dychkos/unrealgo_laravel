@@ -50,6 +50,7 @@ class Article extends Model
     }
 
     public static function getSorts() {
+        unset(self::$SORTS['date-new']);
         return self::$SORTS;
     }
 

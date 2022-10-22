@@ -66,7 +66,7 @@
                 @foreach($allowSorts as $key => $value)
                     <div class="sort__item h5 {{ request("order", "") === $key
                         ? "sort__item_active"
-                        : ""}}" data-order="{{$key}}">{{$value}}</div>
+                        : ""}}" data-order="{{ $key }}">{{ $value }}</div>
                 @endforeach
                     <div class="sort__item h5 {{ request("order", "") === "" || request("order", "") === "default"
                     ? "sort__item_active"

@@ -96,7 +96,7 @@
       position: absolute;
       box-shadow: $drop-shadow;
       top: 55px;
-      padding: 20px 10px;
+      padding: 20px 10px 10px;
       width: 100%;
       left: 0;
       border-radius:0 0 20px 20px;
@@ -110,7 +110,7 @@
 @media only screen and (max-width: 575px) {
   .navigation {
     position: relative;
-
+    padding: 10px;
     &__categories {
       position: static;
     }
