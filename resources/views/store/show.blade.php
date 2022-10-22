@@ -11,7 +11,9 @@
                         <div id="swiper-wrapper" >
                             @forelse($product->images as $image)
                                 <div class="photos__slide">
-                                    <img src="{{ asset($image->filename )}}" {{$loop->index == 1 ? "photos__previews_chosen" : "" }} data-photo alt="Product">
+                                    <div class="swiper-zoom-container">
+                                        <img src="{{ asset($image->filename )}}" {{$loop->index == 1 ? "photos__previews_chosen" : "" }} data-photo alt="Product">
+                                    </div>
                                 </div>
                             @empty
                                 <img src="{{ asset('app/img/test.png' )}}" data-photo class="photos__previews_chosen" alt="Product">
@@ -20,12 +22,14 @@
                         <div class="swiper-pagination"></div>
                     </div>
                     <div class="photos__big swiper-slide">
-                        <img src="{{$product->images->first() !== null
+                        <div class="swiper-zoom-container">
+                            <img src="{{$product->images->first() !== null
                                 ? asset($product->images->first()->filename)
                                 : asset('app/img/test.png')}}"
-                             data-photo
-                             id="main-photo"
-                             alt="Product">
+                                 data-photo
+                                 id="main-photo"
+                                 alt="Product">
+                        </div>
                     </div>
                 </div>
             </div>
