@@ -24,6 +24,10 @@ class SentOrderMail extends Mailable
         $this->order = $order;
         $subject = "UnReal GO | Замовлення [№" . strval($order->id) . "] відправлено!";
         $this->subject($subject);
+        $this->from = [[
+            'name' => 'UnReal GO',
+            'address'=>'unrgo@unreal-go.top'
+        ]];
     }
 
     /**

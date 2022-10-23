@@ -26,6 +26,11 @@ class DeclinedOrderMail extends Mailable
         $this->needFooter = false;
         $subject = "Замовлення [№" . strval($order->id) . "] скасовано!";
         $this->subject($subject);
+        $this->from = [[
+            'name' => 'UnReal GO',
+            'address'=>'unrgo@unreal-go.top'
+        ]];
+
     }
 
     /**
