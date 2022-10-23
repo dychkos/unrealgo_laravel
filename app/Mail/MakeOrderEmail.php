@@ -22,7 +22,7 @@ class MakeOrderEmail extends Mailable
     public function __construct(Order $order)
     {
         $this->order = $order;
-        $subject = "Замовлення [№" . strval($order->id) . "] прийнято";
+        $subject = "UnReal GO | Замовлення [№" . strval($order->id) . "] прийнято";
         $this->subject($subject);
     }
 

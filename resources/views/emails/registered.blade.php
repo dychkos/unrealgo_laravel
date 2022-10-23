@@ -1,9 +1,15 @@
 @extends("emails.layout")
 
 @section("content")
-    <div class="text" style="padding: 0 2.5em; text-align: center;">
+    <div class="text" style="font-family: 'Rubik', serif; padding: 0 2.5em; text-align: center;">
         <h2>Вітаємо</h2>
         <h3>Ви успішно зареєструвались!</h3>
-        <h4><a href="{{ route('home') }}" class="btn btn-primary">На головну</a></h4>
+        <h4><a href="{{ route('home') }}" style="
+        padding: 10px 25px;
+        display: inline-block;
+        border-radius: 20px;
+        background: #A5A815;
+        color: #ffffff;
+        ">На головну</a></h4>
     </div>
 @endsection

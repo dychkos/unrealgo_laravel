@@ -22,7 +22,7 @@ class SentOrderMail extends Mailable
     public function __construct(Order $order)
     {
         $this->order = $order;
-        $subject = "Замовлення [№" . strval($order->id) . "] відправлено!";
+        $subject = "UnReal GO | Замовлення [№" . strval($order->id) . "] відправлено!";
         $this->subject($subject);
     }
 
