@@ -20,6 +20,6 @@ class AdminRole
         if(Auth::check() && Auth::user()->isAdmin()){
             return $next($request);
         }
-        return redirect()->route("store.index");
+        return redirect()->route("home");
     }
 }

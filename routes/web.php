@@ -13,20 +13,19 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\admin;
 
-//Route::get('/', [PageController::class, 'home'])->name("home");
 
-/* ENTRY POINT */
-Route::get('/{type_slug?}', [StoreController::class,'index'])->name("store.index");
-Route::get('/store/{type_slug}/{id}', [StoreController::class,'show'])->name("store.show");
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
 
-//Store
-Route::post('/store/add-to-cart', [StoreController::class, "addToCart"])->name("store.toCart");
-Route::get('/clear-cart/{id}', [StoreController::class, "removeFromCart"])->name("basket.remove");
-Route::get('/basket', [StoreController::class,'basket'])->name("basket");
-Route::post('/basket/count', [StoreController::class, "editCount"])->name("basket.count");
-Route::post('/make-order', [StoreController::class, "makeOrder"])->name("store.order");
-Route::get('/cancel-order/{id}', [StoreController::class, "cancelOrder"])->name("store.cancel-order");
-
+Route::get('/', [PageController::class, 'home'])->name("home");
 Route::get('/about', [PageController::class, 'about'])->name("about");
 Route::get('/policy', [PageController::class, 'policy'])->name("policy");
 Route::get('send-email', [PageController::class, 'email'])->name("send");
@@ -40,6 +39,18 @@ Route::post("/search", [PageController::class, 'search'])->name("search");
 
 //Mailing
 Route::get('unsubscribe-email', [EmailController::class, 'unsubscribe'])->name("email.unsubscribe");
+
+Route::get('/store/{type_slug?}',[StoreController::class,'index'])->name("store.index");
+Route::get('/store/{type_slug}/{id}',[StoreController::class,'show'])->name("store.show");
+
+//Store
+Route::post('/store/add-to-cart', [StoreController::class, "addToCart"])->name("store.toCart");
+Route::get('/clear-cart/{id}', [StoreController::class, "removeFromCart"])->name("basket.remove");
+Route::get('/basket', [StoreController::class,'basket'])->name("basket");
+Route::post('/basket/count', [StoreController::class, "editCount"])->name("basket.count");
+Route::post('/make-order', [StoreController::class, "makeOrder"])->name("store.order");
+Route::get('/cancel-order/{id}', [StoreController::class, "cancelOrder"])->name("store.cancel-order");
+
 
 Route::redirect('/user','/user/profile');
 

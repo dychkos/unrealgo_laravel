@@ -52,9 +52,9 @@
         const csrfToken = "{{ csrf_token() }}";
 
         {{-- COMMON URLs--}}
-        let baseURL = "{{ url('/') }}";
-        let likeProductURL = "{{ route("user.product.like") }}";
-        let likeUrl = "{{ route('user.comment.like') }}";
+        let baseURL = "{{route("home")}}";
+        let likeProductURL = "{{route("user.product.like")}}";
+        let likeUrl = "{{route('user.comment.like')}}";
 
     </script>
     @stack('js')

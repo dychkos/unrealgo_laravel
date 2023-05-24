@@ -25,18 +25,18 @@ class PageController extends Controller
         $this->mainService = $mainService;
     }
 
-//    public function home(Request $request){
-//
-//        $popular = Article::orderByDesc("views")->first();
-//        $newArticles = Article::orderByDesc("created_at")->limit(2)->get();
-//        $popularProducts = Product::orderBy("created_at")->limit(10)->get();
-//
-//        return $this->withUser('home.index', array(
-//            "popular" => $popular,
-//            "newArticles" => $newArticles,
-//            "popularProducts" => $popularProducts,
-//        ));
-//    }
+    public function home(Request $request){
+
+        $popular = Article::orderByDesc("views")->first();
+        $newArticles = Article::orderByDesc("created_at")->limit(2)->get();
+        $popularProducts = Product::orderBy("created_at")->limit(10)->get();
+
+        return $this->withUser('home.index', array(
+            "popular" => $popular,
+            "newArticles" => $newArticles,
+            "popularProducts" => $popularProducts,
+        ));
+    }
 
     public function email() {
         $order = Order::find(7);

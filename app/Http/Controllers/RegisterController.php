@@ -35,6 +35,6 @@ class RegisterController extends Controller
         Auth::loginUsingId($user->id);
         //$this->mailService->wasRegistered($user->email);
 
-        return redirect()->route("store.index");
+        return redirect()->route("home");
     }
 }

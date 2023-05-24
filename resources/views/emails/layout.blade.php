@@ -394,7 +394,7 @@
                     <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                         <tr>
                             <td style="margin: 0; text-align: center">
-                                <a href="{{ route('store.index') }}">
+                                <a href="{{ route('home') }}">
                                     <img style="height: 50px; width: 50px;" src="{{$message->embed(asset('app/img/unrgo_sm.png'))}}" alt="">
                                 </a>
                             </td>
