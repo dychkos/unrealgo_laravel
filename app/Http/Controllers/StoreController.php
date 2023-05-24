@@ -7,6 +7,8 @@ use App\Models\Type;
 use App\Services\ApiNovaPoshtaService;
 use App\Services\MailService;
 use App\Services\ProductService;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -25,57 +27,47 @@ class StoreController extends Controller
         $this->mailService = $mailService;
     }
 
-    public function index(Request $request) {
-
+    public function home(Request $request): View
+    {
+        $query = Product::query();
         $new = [];
         $popular = [];
-        $activeType = null;
 
-        $allowSorts = Product::getSorts();
-        $types = Type::all();
-        $query = Product::query();
+        $products = $query->paginate(3)->appends(request()->query());
 
-        if($typeSlug = $request->route('type_slug')){
-            $activeType = Type::where('slug', $typeSlug)->first();
-            $query = $query->where('type_id', $activeType->id);
-        }
-
-        if($request->filled("order")){
-
-            $orderBy = $request->input("order");
-
-            switch ($orderBy) {
-                case "price-high-low" : {
-                    $query->orderByDesc("price");
-                    break;
-                }
-                case "price-low-high" : {
-                    $query->orderBy("price");
-                    break;
-                }
-                default:
-                    break;
-            }
-        }
-
-        if (
-            $query->paginate()->currentPage() == 1
-            && !isset($activeType)
-            && !$request->filled("order")
-        ) {
+        if ($query->paginate()->currentPage() === 1) {
             $new = Product::orderBy("created_at")->limit(10)->get();
             $popular = Product::orderBy("created_at")->limit(10)->get();
         }
-
-        $products = $query->paginate(3)->appends(request()->query());
 
         return $this->withUser("store.index", array(
             "new" => $new,
             "popular" => $popular,
             "products" => $products,
+            "activeType" => null,
+            "types" => Type::all(),
+            "allowSorts" =>  Product::getSorts()
+        ));
+
+    }
+
+    public function index(Request $request, $typeSlug = ''): View|RedirectResponse
+    {
+        if (!$typeSlug && !$request->filled("order")) {
+            return redirect()->route('home');
+        }
+
+        $activeType = Type::where('slug', $typeSlug)->first();
+        $query = $this->productService->applyFilterAndSort($activeType, $request->input('order'));
+        $products = $query->paginate(3)->appends(request()->query());
+
+        return $this->withUser("store.index", array(
+            "new" => [],
+            "popular" => [],
+            "products" => $products,
             "activeType" => $activeType,
-            "types" => $types,
-            "allowSorts" => $allowSorts
+            "types" => Type::all(),
+            "allowSorts" => Product::getSorts()
         ));
 
 
@@ -146,7 +138,7 @@ class StoreController extends Controller
         return $this->sendResponse($result,"Success");
     }
 
-    public function removeFromCart(Request $request, $basketItemId): \Illuminate\Http\RedirectResponse
+    public function removeFromCart(Request $request, $basketItemId): RedirectResponse
     {
 
         $cart = Session::get("cart");

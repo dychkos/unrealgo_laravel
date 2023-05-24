@@ -25,7 +25,7 @@ use App\Http\Controllers\admin;
 |
 */
 
-Route::get('/', [PageController::class, 'home'])->name("home");
+Route::get('/', [StoreController::class, 'home'])->name("home");
 Route::get('/about', [PageController::class, 'about'])->name("about");
 Route::get('/policy', [PageController::class, 'policy'])->name("policy");
 Route::get('send-email', [PageController::class, 'email'])->name("send");
