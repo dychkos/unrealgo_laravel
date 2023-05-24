@@ -12,12 +12,14 @@ class Helper
 
         if ($model) {
             $oldImages = $model->image ?? $model->images;
-            self::removeOld($oldImages);
+            if ($oldImages) {
+                self::removeOld($oldImages);
+            }
         }
 
 
         foreach($files as $file){
-            $image_url = Storage::putFile('images',$file,'public');
+            $image_url = Storage::putFile('images', $file,'public');
             array_push($images, ["filename" => $image_url]);
         }
 
