@@ -25,7 +25,7 @@ class StoreController extends Controller
         $this->mailService = $mailService;
     }
 
-    public function index(Request $request) {
+    public function index(Request $request, $typeSlug = '') {
 
         $new = [];
         $popular = [];
@@ -35,13 +35,12 @@ class StoreController extends Controller
         $types = Type::all();
         $query = Product::query();
 
-        if($typeSlug = $request->route('type_slug')){
+        if ($typeSlug) {
             $activeType = Type::where('slug', $typeSlug)->first();
             $query = $query->where('type_id', $activeType->id);
         }
 
-        if($request->filled("order")){
-
+        if ($request->filled("order")) {
             $orderBy = $request->input("order");
 
             switch ($orderBy) {

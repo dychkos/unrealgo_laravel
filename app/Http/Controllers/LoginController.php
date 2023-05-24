@@ -24,7 +24,7 @@ class LoginController extends Controller
         $authService->login($request->all());
         $request->session()->regenerate();
 
-        return redirect()->route('home');
+        return redirect()->route('store.index');
     }
 
     public function logout(Request $request)
@@ -35,7 +35,7 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('home');
+        return redirect()->route('store.index');
     }
 
     public function redirectToGoogle(): \Symfony\Component\HttpFoundation\RedirectResponse|\Illuminate\Http\RedirectResponse
@@ -67,7 +67,7 @@ class LoginController extends Controller
 
             if($finduser) {
                 Auth::login($finduser);
-                return redirect()->route("home");
+                return redirect()->route("store.index");
 
             } else {
 
@@ -79,7 +79,7 @@ class LoginController extends Controller
 
                 ]);
                 Auth::login($newUser);
-                return redirect()->route("home");
+                return redirect()->route("store.index");
             }
         } catch (Exception $e) {
             return redirect()->route($driver."_auth");

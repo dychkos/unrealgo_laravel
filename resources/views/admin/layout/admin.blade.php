@@ -30,8 +30,8 @@
 </head>
 <body>
 <header class="admin-header">
-    <a href="{{route('home')}}" class="url h4">unreal-go.top</a>
-    <a href="{{route('logout')}}" class="link">Вийти</a>
+    <a href="{{ url('/') }}" class="url h4">unreal-go.top</a>
+    <a href="{{ route('logout') }}" class="link">Вийти</a>
 </header>
 <main class="admin-main">
     <nav class="admin-navbar">
