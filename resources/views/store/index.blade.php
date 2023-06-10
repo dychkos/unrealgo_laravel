@@ -8,9 +8,6 @@
 @endphp
 
 @section('content')
-    <div class="page-title h1">
-        Магазин
-    </div>
     <div class="banner mb-5">
         <div class="banner__background photo">
             <img src="{{asset("app/img/banner.png")}}" alt="Banner">
