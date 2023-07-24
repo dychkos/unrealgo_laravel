@@ -11,6 +11,7 @@ use App\Models\Article;
 use App\Models\Order;
 use App\Models\Page;
 use App\Models\Product;
+use App\Models\Type;
 use App\Services\MainService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -26,15 +27,16 @@ class PageController extends Controller
     }
 
     public function home(Request $request){
-
         $popular = Article::orderByDesc("views")->first();
         $newArticles = Article::orderByDesc("created_at")->limit(2)->get();
         $popularProducts = Product::orderBy("created_at")->limit(10)->get();
+        $productCategories = Type::all();
 
         return $this->withUser('home.index', array(
             "popular" => $popular,
             "newArticles" => $newArticles,
             "popularProducts" => $popularProducts,
+            "productCategories" => $productCategories,
         ));
     }
 

@@ -15,25 +15,35 @@ class TypesSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('types')->insert([
+        DB::table('types')->upsert([
             'id' => '1',
             'value' => "Футболки",
-            'slug' => "tshirts"
-        ]);
+            'slug' => "t-shirts",
+            'image_path' => "tshirts.svg"
+        ], 'id');
 
-        DB::table('types')->insert([
+        DB::table('types')->upsert([
             'id' => '2',
-            'value' => "Худі",
-            'slug' => "hoodie"
-        ]);
+            'value' => "Майки",
+            'slug' => "singlet",
+            'image_path' => "singlet.svg"
+        ], 'id');
 
-        DB::table('types')->insert([
+        DB::table('types')->upsert([
             'id' => '3',
+            'value' => "Кофти",
+            'slug' => "hoodie",
+            'image_path' => "hoodie.svg"
+        ], 'id');
+
+        DB::table('types')->upsert([
+            'id' => '4',
             'value' => "Акксесуари",
-            'slug' => "access"
-        ]);
+            'slug' => "access",
+            'image_path' => "notes.svg"
+        ], 'id');
 //
-//        DB::table('types')->insert([
+//        DB::table('types')->upsert([
 //            'value' => "Взуття",
 //            'slug' => "shoes"
 //        ]);
