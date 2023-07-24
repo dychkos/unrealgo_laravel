@@ -17,7 +17,7 @@ class ApiNovaPoshtaService
             'Limit' => 10
         ];
 
-        if($search) {
+        if ($search) {
             $data = array_merge(['FindByString' => $search], $data);
         }
 
