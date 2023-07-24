@@ -1,11 +1,12 @@
 @extends("layouts.base")
 
 @section("content")
+    @if (false)
     <section class="blog-pr">
         <h2 class="blog-pr__title page-title h2">
             Рекомендовано
         </h2>
-        @if(isset($popular))
+        @if (isset($popular))
         <div class="blog-pr__body">
             <div class="row g-5">
                 <div class="col-12 col-lg-6">
@@ -90,6 +91,23 @@
             </div>
         </div>
         @endif
+    </section>
+    @endif
+    <section>
+        <div class="banner"></div>
+        <div class="categories-bar">
+            @foreach($productCategories as $category)
+                <a class="categories-bar__item" href="{{route('store.index', $category->slug)}}">
+                    <img src="{{asset("app/img/" . $category->image_path)}}" alt="{{$category->value}}">
+                    <span class="p-light">{{$category->value}}</span>
+                </a>
+            @endforeach
+
+            <a class="categories-bar__item" href="{{route('articles.index')}}">
+                <img src="{{asset("app/img/author.svg")}}" alt="Go to blog">
+                <span class="p-light">Блог</span>
+            </a>
+        </div>
     </section>
     @if(config('app.env') != 'production')
     <section class="store-pr mt-4">
