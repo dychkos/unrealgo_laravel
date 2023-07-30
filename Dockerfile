@@ -36,8 +36,8 @@ RUN php artisan key:generate
 RUN php artisan config:clear
 
 # Pulling database
-RUN php artisan migrate
-RUN php artisan db:seed
+#RUN php artisan migrate
+#RUN php artisan db:seed
 
 # Set permissions for Laravel directories
 RUN chown -R www-data:www-data \
