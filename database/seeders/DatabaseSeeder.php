@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             TypesSeeder::class,
             OrderStatusSeeder::class,
             SizeSeeder::class,
-            PageSeeder::class
+            PageSeeder::class,
+            UserSeeder::class
             //ProductSeeder::class
             //ArticlesSeeder::class,
         ]);

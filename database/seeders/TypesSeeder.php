@@ -31,7 +31,7 @@ class TypesSeeder extends Seeder
 
         DB::table('types')->upsert([
             'id' => '3',
-            'value' => "Кофти",
+            'value' => "Худі",
             'slug' => "hoodie",
             'image_path' => "hoodie.svg"
         ], 'id');

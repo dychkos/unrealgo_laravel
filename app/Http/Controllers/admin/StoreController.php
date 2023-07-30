@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 /*
  * Describes actions for Products in Admin Panel
  * */
+
 class StoreController extends AdminController
 {
     protected ProductService $productService;
@@ -43,9 +44,9 @@ class StoreController extends AdminController
         $sizes = Size::all();
 
         return $this->proccessView('admin.products.edit', array(
-                "product" => $product,
-                "types" => $types,
-                "sizes" => $sizes,
+            "product" => $product,
+            "types" => $types,
+            "sizes" => $sizes,
         ));
     }
 
@@ -53,8 +54,7 @@ class StoreController extends AdminController
     {
         $images = [];
 
-        if($files = $request->file('image'))
-        {
+        if ($files = $request->file('image')) {
             $images = Helper::upload_image($files);
         }
 
@@ -81,8 +81,7 @@ class StoreController extends AdminController
     {
         $images = [];
 
-        if($files = $request->file('image'))
-        {
+        if ($files = $request->file('image')) {
             $images = Helper::upload_image($files, Product::find($product_id));
         }
 

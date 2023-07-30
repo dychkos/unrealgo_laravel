@@ -19,13 +19,15 @@ class StoreController extends Controller
 
     public function __construct(
         ProductService $productService,
-        MailService $mailService
-    ) {
+        MailService    $mailService
+    )
+    {
         $this->productService = $productService;
         $this->mailService = $mailService;
     }
 
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
 
         $new = [];
         $popular = [];
@@ -35,21 +37,23 @@ class StoreController extends Controller
         $types = Type::all();
         $query = Product::query();
 
-        if($typeSlug = $request->route('type_slug')){
+        if ($typeSlug = $request->route('type_slug')) {
             $activeType = Type::where('slug', $typeSlug)->first();
             $query = $query->where('type_id', $activeType->id);
         }
 
-        if($request->filled("order")){
+        if ($request->filled("order")) {
 
             $orderBy = $request->input("order");
 
             switch ($orderBy) {
-                case "price-high-low" : {
+                case "price-high-low" :
+                {
                     $query->orderByDesc("price");
                     break;
                 }
-                case "price-low-high" : {
+                case "price-low-high" :
+                {
                     $query->orderBy("price");
                     break;
                 }
@@ -77,8 +81,6 @@ class StoreController extends Controller
             "types" => $types,
             "allowSorts" => $allowSorts
         ));
-
-
     }
 
     public function show(Request $request, $product_slug, $product_id)
@@ -103,20 +105,19 @@ class StoreController extends Controller
 
     public function like(Request $request)
     {
-
-        $user_id = ['user_id' => Auth::user()->id];
-        $product_id = ['product_id' => intval($request->input("product_id"))];
-
-        $data = array_merge($product_id, $user_id);
+        $data = [
+            'user_id' => Auth::user()->id,
+            'product_id' => intval($request->input("product_id"))
+        ];
 
         try {
             $this->productService->like($data);
-        } catch (ValidationException $exception){
+        } catch (ValidationException $exception) {
             $message = $exception->getMessage();
             return $this->sendError($message, $exception->errors(), $exception->status);
         }
 
-        return $this->sendResponse(['changed' => "true"],"Success");
+        return $this->sendResponse(['changed' => "true"], "Success");
     }
 
     public function addToCart(Request $request): \Illuminate\Http\JsonResponse
@@ -130,7 +131,7 @@ class StoreController extends Controller
             return $this->sendError($message, $exception->errors(), $exception->status);
         }
 
-        return $this->sendResponse(json_decode($result),"Created successful");
+        return $this->sendResponse(json_decode($result), "Created successful");
 
     }
 
@@ -138,29 +139,27 @@ class StoreController extends Controller
     {
         try {
             $result = $this->productService->editCount($request->all());
-        } catch (ValidationException $exception){
+        } catch (ValidationException $exception) {
             $message = $exception->getMessage();
             return $this->sendError($message, $exception->errors(), $exception->status);
         }
 
-        return $this->sendResponse($result,"Success");
+        return $this->sendResponse($result, "Success");
     }
 
     public function removeFromCart(Request $request, $basketItemId): \Illuminate\Http\RedirectResponse
     {
-
         $cart = Session::get("cart");
-        array_splice($cart, $basketItemId,1);
+        array_splice($cart, $basketItemId, 1);
         Session::put("cart", $cart);
 
         return redirect()->back();
-
     }
 
     public function makeOrder(Request $request)
     {
         $data = $request->all();
-        if (Auth::check()){
+        if (Auth::check()) {
             $user_id = Auth::user()->id;
             $data = array_merge($data, ["user_id" => $user_id]);
         }
@@ -168,12 +167,12 @@ class StoreController extends Controller
         try {
             $order = $this->productService->makeOrder($data);
             $this->mailService->makeOrder($order);
-        } catch (ValidationException $exception){
+        } catch (ValidationException $exception) {
             $message = $exception->getMessage();
             return $this->sendError($message, $exception->errors(), $exception->status);
         }
 
-        return $this->sendResponse($order,"Success");
+        return $this->sendResponse($order, "Success");
 
     }
 
