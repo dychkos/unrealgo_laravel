@@ -8,6 +8,7 @@ use App\Helpers\Helper;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Size;
+use App\Models\Type;
 use App\Repositories\OrderRepository;
 use App\Repositories\ProductRepository;
 use Illuminate\Support\Facades\Session;
@@ -66,6 +67,31 @@ class ProductService
     public function delete($data): int
     {
         return $this->productRepository->delete($data);
+    }
+
+    public function applyFilterAndSort(Type $filterType = null, string $orderBy = null) {
+        $productsQuery = Product::query();
+
+        if ($filterType) {
+            $productsQuery = $productsQuery->where('type_id', $filterType->id);
+        }
+
+        if ($orderBy) {
+            switch ($orderBy) {
+                case "price-high-low" : {
+                    $productsQuery->orderByDesc("price");
+                    break;
+                }
+                case "price-low-high" : {
+                    $productsQuery->orderBy("price");
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+
+        return $productsQuery;
     }
 
     public function like($data)
