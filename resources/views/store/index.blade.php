@@ -17,7 +17,7 @@
         </div>
         <div class="banner__card">
             <div class="banner__title">Зустрічай новую колекцію</div>
-            <div class="banner__text">unrgo 2022</div>
+            <div class="banner__text">unrgo 2023</div>
         </div>
         <div class="glow-wrap">
             <i class="glow"></i>

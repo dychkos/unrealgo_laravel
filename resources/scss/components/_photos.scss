@@ -58,7 +58,7 @@
   }
 }
 
-.swiper-pagination{
+.product-swiper-pagination {
   display: none;
 }
 
@@ -90,12 +90,9 @@
       }
     }
   }
-  .swiper-pagination{
-    bottom: 0!important;
+  .product-swiper-pagination {
+    bottom: 0 !important;
     display: block;
-    &-bullet-active{
-      background-color: $primary;
-    }
   }
 }
 

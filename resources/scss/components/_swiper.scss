@@ -1,80 +1,90 @@
 //SWIPER STYLING
-.slider{
-  position: relative;
-  width: 100%;
+.slider {
+    position: relative;
+    width: 100%;
 }
 
 .swiper {
-  width: 95%;
-  height: 100%;
-  &-button-disabled{
-    display:none;
-  }
-  &-slide {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    margin: 0;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
-  }
+    width: 95%;
+    height: 100%;
 
-  &-slide img {
-    display: block;
-    width: 100px;
-    margin: 0 auto;
-    height: 120px;
-    object-fit: cover;
-  }
-
-  &-button-next, &-button-prev {
-    svg{
-      height: 36px;
-      width: 55px;
+    &-button-disabled {
+        display: none;
     }
-    &:after{
-      display: none;
+
+    &-pagination {
+        &-bullet-active{
+            background-color: $primary;
+        }
     }
-  }
 
-  &-button-next{
-    right: -10px;
-  }
+    &-slide {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        margin: 0;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
 
+    &-slide img {
+        display: block;
+        width: 100px;
+        margin: 0 auto;
+        height: 120px;
+        object-fit: cover;
+    }
 
-  &-button-prev{
-    left: -10px;
-  }
+    &-button-next, &-button-prev {
+        svg {
+            height: 36px;
+            width: 55px;
+        }
 
-  &-button-prev{
-    transform: rotate(180deg);
-  }
+        &:after {
+            display: none;
+        }
+    }
 
-}
-//SWIPER STYLING ENDS
-
-@media only screen and (max-width: 1199px){
-  .swiper {
-    width: 92%;
-  }
-}
-
-@media only screen and (max-width: 575px) {
-  .swiper {
     &-button-next {
-      right: -12px;
+        right: -10px;
+    }
+
+
+    &-button-prev {
+        left: -10px;
     }
 
     &-button-prev {
-      left: -12px;
+        transform: rotate(180deg);
     }
-  }
+
+}
+
+//SWIPER STYLING ENDS
+
+@media only screen and (max-width: 1199px) {
+    .swiper {
+        width: 92%;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .swiper {
+        &-button-next {
+            right: -12px;
+        }
+
+        &-button-prev {
+            left: -12px;
+        }
+    }
 }
 

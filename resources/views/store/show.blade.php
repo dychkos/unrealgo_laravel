@@ -19,7 +19,7 @@
                                 <img src="{{ asset('app/img/test.png' )}}" data-photo class="photos__previews_chosen" alt="Product">
                             @endforelse
                         </div>
-                        <div class="swiper-pagination"></div>
+                        <div class="swiper-pagination product-swiper-pagination"></div>
                     </div>
                     <div class="photos__big swiper-slide">
                         <div class="swiper-zoom-container">
