@@ -33,6 +33,7 @@ RUN composer install --no-scripts --no-interaction
 
 # Generate the application key
 RUN php artisan key:generate
+RUN php artisan config:clear
 
 # Pulling database
 RUN php artisan migrate
