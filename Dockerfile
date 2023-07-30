@@ -20,11 +20,16 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Copy the .env.example file to .env
+COPY .env.example .env
+
 # Copy the application files to the working directory
 COPY . .
 
 # Install Laravel dependencies
 RUN composer install --no-scripts --no-interaction
+
+
 
 # Generate the application key
 RUN php artisan key:generate
