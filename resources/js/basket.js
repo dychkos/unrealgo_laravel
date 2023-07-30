@@ -1,6 +1,6 @@
 import Mask from "./includes/Mask";
-import { yesHTML } from "./includes/innerText";
-import Modal from  "./includes/Modal";
+import {errorBodyHtml, yesHTML} from "./includes/innerText";
+import Modal from "./includes/Modal";
 import MainController from "./main";
 
 
@@ -9,38 +9,40 @@ export default class Basket extends MainController {
 	static modal = new Modal("", ".modal-wrapper");
 
 	static nodes = {
-		countPlusBtns : document.querySelectorAll(".count_plus"),
-		countMinusBtns : document.querySelectorAll(".count_minus"),
-		makeOrderForm : document.getElementById("make-order"),
-		orderCityDropdown : document.getElementById("order_city_dropdown"),
-		orderDepartmentSelect : document.getElementById("order_department"),
-		navigation : document.querySelector(".navigation__active"),
-		phoneInput : document.querySelector("input[name=\"phone\"]"),
+		countPlusBtns: document.querySelectorAll(".count_plus"),
+		countMinusBtns: document.querySelectorAll(".count_minus"),
+		makeOrderForm: document.getElementById("make-order"),
+		orderCityDropdown: document.getElementById("order_city_dropdown"),
+		orderDepartmentSelect: document.getElementById("order_department"),
+		navigation: document.querySelector(".navigation__active"),
+		phoneInput: document.querySelector("input[name=\"phone\"]"),
 	};
 
 	static init() {
 		super.init();
 		let countPlusBtns = Basket.nodes.countPlusBtns;
-		countPlusBtns.forEach( countPlusBtn => {
+		countPlusBtns.forEach(countPlusBtn => {
 			countPlusBtn.addEventListener("click", Basket.countAction);
 		});
 
 		let countMinusBtns = Basket.nodes.countMinusBtns;
-		countMinusBtns.forEach( countMinusBtn => {
-			countMinusBtn.addEventListener("click", (e) => { Basket.countAction(e,true); });
+		countMinusBtns.forEach(countMinusBtn => {
+			countMinusBtn.addEventListener("click", (e) => {
+				Basket.countAction(e, true);
+			});
 		});
 
 		let makeOrderForm = Basket.nodes.makeOrderForm;
 		makeOrderForm.addEventListener("submit", (event) => {
 			event.preventDefault();
 
-			if (Basket.hasFormError){
+			if (Basket.hasFormError) {
 				makeOrderForm.querySelector(".make-order__card").classList.remove("required");
 				$(".required_alert").fadeOut();
 				Basket.hasFormError = false;
 			}
 
-			[...makeOrderForm.elements].forEach( elem => {
+			[...makeOrderForm.elements].forEach(elem => {
 				if (["INPUT", "OPTION", "TEXTAREA"].includes(elem.tagName)) {
 					if (Basket.checkEmptyField(elem)) {
 						makeOrderForm.querySelector(".make-order__card").classList.add("required");
@@ -62,7 +64,7 @@ export default class Basket extends MainController {
 			if (Basket.hasFormError) return;
 
 			$(".make-order__loader").fadeIn();
-			$(".make-order__submit").addClass("disabled").prop( "disabled", true );
+			$(".make-order__submit").addClass("disabled").prop("disabled", true);
 
 			let formData = new FormData(makeOrderForm);
 			formData.append("_token", csrfToken);
@@ -72,9 +74,17 @@ export default class Basket extends MainController {
 				body: formData
 			})
 				.then((response) => {
-					if (!response.ok){
+					if (!response.ok) {
+						if (response.status === 400) {
+							window.location.href = baseURL + "/store";
+						}
 						response.json().then(
 							() => {
+								new Modal().setTitle("Упс!")
+									.setDescription(errorBodyHtml)
+									.setOnClose(() => window.location.href = baseURL + "/store")
+									.init()
+									.onOpen();
 								makeOrderForm.querySelector(".make-order__card").classList.add("required");
 								Basket.hasFormError = true;
 							}
@@ -82,7 +92,7 @@ export default class Basket extends MainController {
 					} else {
 						response.json().then(
 							() => {
-								window.scrollTo({ top: 0, behavior: "smooth" });
+								window.scrollTo({top: 0, behavior: "smooth"});
 								Basket.modal
 									.setTitle("Успішно")
 									.setDescription(yesHTML)
@@ -93,13 +103,20 @@ export default class Basket extends MainController {
 						);
 					}
 				})
-				.catch(error => {
-					console.log(error);
+				.catch(() => {
+					makeOrderForm.querySelector(".make-order__card").classList.add("required");
+					Basket.hasFormError = true;
+					new Modal().setTitle("Упс!")
+						.setDescription(errorBodyHtml)
+						.setOnClose(() => window.location.href = baseURL + "/store")
+						.init()
+						.onOpen();
+
 					$(".required_alert").fadeIn();
 				})
-				.finally( () => {
+				.finally(() => {
 					$(".make-order__loader").fadeOut();
-					$(".make-order__submit").removeClass("disabled").prop( "disabled", false );
+					$(".make-order__submit").removeClass("disabled").prop("disabled", false);
 				});
 
 		});
@@ -148,16 +165,16 @@ export default class Basket extends MainController {
 			formData.append("_token", csrfToken);
 			formData.append("cityRef", cityRef);
 			$("input[name=\"city\"]").val($("#order_city_dropdown option:selected").text());
-			fetch( baseURL + "/get-warehouses", {
+			fetch(baseURL + "/get-warehouses", {
 				method: "POST",
 				body: formData
 			})
 				.then((response) => {
-					if (!response.ok && response.status === 422){
+					if (!response.ok && response.status === 422) {
 						console.log("error", response);
 					} else {
 						response.json().then(
-							( result ) => {
+							(result) => {
 								let data = result.data.map(depart => {
 									return {
 										id: depart.Description,
@@ -194,12 +211,12 @@ export default class Basket extends MainController {
 
 		event.target.classList.add("disabled");
 
-		fetch( baseURL + "/basket/count", {
+		fetch(baseURL + "/basket/count", {
 			method: "POST",
 			body: formData
 		})
 			.then((response) => {
-				if (!response.ok && response.status === 422){
+				if (!response.ok && response.status === 422) {
 					response.json().then(
 						() => {
 							$(".basket__action-error").text("Виникла помилка, спробуйте ще раз!").fadeIn();
@@ -207,7 +224,7 @@ export default class Basket extends MainController {
 					);
 				} else {
 					response.json().then(
-						( result ) => {
+						(result) => {
 							console.log(result);
 							$(elem).find(".order__count").text(result.data.count);
 							$("#total_price").text(result.data.total_price + " UAH");
@@ -220,7 +237,7 @@ export default class Basket extends MainController {
 				console.log(error);
 				$(".basket__action-error").text("Виникла помилка, спробуйте ще раз!");
 			})
-			.finally( () => {
+			.finally(() => {
 				event.target.classList.remove("disabled");
 			});
 

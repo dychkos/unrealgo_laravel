@@ -8,7 +8,10 @@ use App\Mail\SentOrderMail;
 use App\Mail\WasRegisteredEmail;
 use App\Models\Order;
 use App\Repositories\UserRepository;
+use Exception;
+use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class MailService
@@ -18,6 +21,7 @@ class MailService
     public function __construct(UserRepository $userRepository) {
         $this->user = $userRepository;
     }
+
     public function unsubscribe($userId) {
         $dataToUpdate = [
             'id' => $userId,
@@ -32,7 +36,7 @@ class MailService
         if (!$this->checkAuth()) {
             return false;
         }
-        Mail::to($email)->send(new WasRegisteredEmail());
+        $this->sendMail($email, new WasRegisteredEmail());
         return true;
     }
 
@@ -41,7 +45,7 @@ class MailService
         if (!isset($order)) {
             return false;
         }
-        Mail::to($order->email)->send(new MakeOrderEmail($order));
+        $this->sendMail($order->email, new MakeOrderEmail($order));
         return true;
     }
 
@@ -50,7 +54,7 @@ class MailService
         if (!isset($order)) {
             return false;
         }
-        Mail::to($order->email)->send(new SentOrderMail($order));
+        $this->sendMail($order->email, new SentOrderMail($order));
         return true;
     }
 
@@ -59,12 +63,21 @@ class MailService
         if (!isset($order)) {
             return false;
         }
-        Mail::to($order->email)->send(new DeclinedOrderMail($order));
+        $this->sendMail($order->email, new DeclinedOrderMail($order));
         return true;
     }
 
     private function checkAuth(): bool
     {
         return Auth::check();
+    }
+
+    private function sendMail(string $email, Mailable $mailBody): void
+    {
+        try {
+            Mail::to($email)->send($mailBody);
+        } catch (Exception $exception) {
+            Log::error('EMAIL NOT SENT ' . $exception->getMessage());
+        }
     }
 }

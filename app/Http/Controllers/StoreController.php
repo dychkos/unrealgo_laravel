@@ -7,10 +7,13 @@ use App\Models\Type;
 use App\Services\ApiNovaPoshtaService;
 use App\Services\MailService;
 use App\Services\ProductService;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Response as ResponseStatuses;
+use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
 
 class StoreController extends Controller
 {
@@ -159,6 +162,7 @@ class StoreController extends Controller
     public function makeOrder(Request $request)
     {
         $data = $request->all();
+
         if (Auth::check()) {
             $user_id = Auth::user()->id;
             $data = array_merge($data, ["user_id" => $user_id]);
@@ -167,9 +171,13 @@ class StoreController extends Controller
         try {
             $order = $this->productService->makeOrder($data);
             $this->mailService->makeOrder($order);
-        } catch (ValidationException $exception) {
+        } catch (Exception $exception) {
+            $code = ResponseStatuses::HTTP_UNPROCESSABLE_ENTITY;
+            if ($exception instanceof SessionNotFoundException) {
+                $code = ResponseStatuses::HTTP_BAD_REQUEST;
+            }
             $message = $exception->getMessage();
-            return $this->sendError($message, $exception->errors(), $exception->status);
+            return $this->sendError($message, [], $code);
         }
 
         return $this->sendResponse($order, "Success");

@@ -12,6 +12,8 @@ use App\Repositories\OrderRepository;
 use App\Repositories\ProductRepository;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use PHPUnit\Util\Exception;
+use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
 
 class ProductService
 {
@@ -123,6 +125,11 @@ class ProductService
         ])->validate();
 
         $basketItems = Session::get("cart");
+
+        if (!$basketItems) {
+            throw new SessionNotFoundException('Card is empty');
+        }
+
         $totalPrice = $this->getTotalProductPrice($basketItems);
 
         return $this->orderRepository->makeOrder(array_merge($validated,

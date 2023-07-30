@@ -1,5 +1,5 @@
 export default class Modal {
-	constructor(trigger, nodeEl, needFooter) {
+	constructor(trigger = null, nodeEl = ".modal-wrapper", needFooter = true) {
 		this.modalWrapper = nodeEl;
 		this.needFooter = needFooter;
 		this.trigger = trigger;
