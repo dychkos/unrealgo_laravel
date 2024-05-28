@@ -19,3 +19,4 @@ main.min.css
 /.idea
 /.vscode
 /public/app/js-min/
+supervisord.*
